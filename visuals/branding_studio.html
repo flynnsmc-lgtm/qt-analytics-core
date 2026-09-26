@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Branding & UI Button Design Studio — Chi Physics & QT Analytics</title>
+  <meta name="description" content="Interactive design studio for crafting, testing, and exporting production-grade branding buttons, quantum micro-interactions, and tactile UI components.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-void: #030712;
+      --bg-surface: rgba(15, 23, 42, 0.75);
+      --bg-surface-elevated: rgba(30, 41, 59, 0.85);
+      --border-subtle: rgba(255, 255, 255, 0.1);
+      --cyan-bright: #00f0ff;
+      --cyan-glow: rgba(0, 240, 255, 0.35);
+      --amber-bright: #f59e0b;
+      --amber-glow: rgba(245, 158, 11, 0.35);
+      --purple-bright: #c084fc;
+      --purple-glow: rgba(192, 132, 252, 0.35);
+      --emerald-bright: #10b981;
+      --emerald-glow: rgba(16, 185, 129, 0.35);
+      --gold-bright: #fbbf24;
+      --gold-dark: #b45309;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--font-sans);
+      color: var(--text-main);
+      background-color: var(--bg-void);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(0, 240, 255, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(192, 132, 252, 0.08) 0%, transparent 40%),
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+      line-height: 1.5;
+      padding: 40px 24px 80px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      margin-bottom: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 24px;
+    }
+
+    .header-title h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #ffffff 40%, var(--cyan-bright) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+    }
+
+    .header-title p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .badge-bar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      color: var(--cyan-bright);
+    }
+
+    /* Main Grid */
+    .studio-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 32px;
+    }
+
+    @media (max-width: 1024px) {
+      .studio-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Section Card */
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      backdrop-filter: blur(16px);
+      padding: 24px;
+      margin-bottom: 28px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-title span.indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--cyan-bright);
+      box-shadow: 0 0 10px var(--cyan-bright);
+    }
+
+    /* Interactive Showcase Grid */
+    .preset-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .preset-box {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 190px;
+      position: relative;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .preset-box:hover {
+      border-color: rgba(0, 240, 255, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+
+    .preset-box.active {
+      border-color: var(--cyan-bright);
+      background: rgba(0, 240, 255, 0.05);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+    }
+
+    .preset-label {
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 14px;
+    }
+
+    /* ========================================================
+       BUTTON ARCHETYPES
+       ======================================================== */
+
+    /* 1. Quantum Superposition Button */
+    .btn-quantum {
+      position: relative;
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.15), rgba(192, 132, 252, 0.15));
+      border: 1px solid rgba(0, 240, 255, 0.6);
+      color: #ffffff;
+      padding: 12px 28px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.2), inset 0 0 12px rgba(0, 240, 255, 0.1);
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+      user-select: none;
+    }
+
+    .btn-quantum::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 12px;
+      padding: 1px;
+      background: linear-gradient(90deg, #00f0ff, #c084fc, #00f0ff);
+      background-size: 200% 100%;
+      animation: quantumShift 4s linear infinite;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0.8;
+    }
+
+    .btn-quantum:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.45), inset 0 0 16px rgba(0, 240, 255, 0.25);
+    }
+
+    .btn-quantum:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    @keyframes quantumShift {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    /* 2. Obsidian Glass Stealth Button */
+    .btn-obsidian {
+      position: relative;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #f8fafc;
+      padding: 12px 28px;
+      border-radius: 12px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+      transition: all 0.25s ease;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .btn-obsidian::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(60deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+      transform: rotate(30deg);
+      transition: all 0.6s ease;
+      pointer-events: none;
+    }
+
+    .btn-obsidian:hover {
+      border-color: rgba(255, 255, 255, 0.35);
+      background: rgba(30, 41, 59, 0.7);
+      transform: translateY(-2px);
+    }
+
+    .btn-obsidian:hover::after {
+      transform: rotate(30deg) translate(20%, 20%);
+    }
+
+    .btn-obsidian:active {
+      transform: translateY(1px);
+    }
+
+    /* 3. Spring Recoil / Torsion Physics Button */
+    .btn-spring {
+      position: relative;
+      background: #0284c7;
+      background-image: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%);
+      color: #ffffff;
+      padding: 12px 30px;
+      border-radius: 10px;
+      border: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 6px 0 #0369a1, 0 12px 20px rgba(2, 132, 199, 0.35);
+      transition: all 0.12s cubic-bezier(0.34, 1.56, 0.64, 1);
+      user-select: none;
+    }
+
+    .btn-spring:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 0 #0369a1, 0 16px 24px rgba(2, 132, 199, 0.45);
+    }
+
+    .btn-spring:active {
+      transform: translateY(5px);
+      box-shadow: 0 1px 0 #0369a1, 0 4px 10px rgba(2, 132, 199, 0.3);
+    }
+
+    /* 4. Gold Standard Invariant Button */
+    .btn-gold {
+      position: relative;
+      background: linear-gradient(180deg, #1e1b18 0%, #0d0c0a 100%);
+      border: 1px solid transparent;
+      color: #fef08a;
+      padding: 12px 28px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+    }
+
+    .btn-gold::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 12px;
+      padding: 1.5px;
+      background: linear-gradient(135deg, #fef08a, #ca8a04, #78350f, #ca8a04, #fef08a);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(202, 138, 4, 0.35);
+      color: #ffffff;
+    }
+
+    .btn-gold:active {
+      transform: translateY(1px);
+    }
+
+    /* 5. ARKM Cyber Forensics Radar Button */
+    .btn-radar {
+      position: relative;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid #10b981;
+      color: #10b981;
+      font-family: var(--font-mono);
+      padding: 11px 26px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .btn-radar::before {
+      content: '>';
+      font-weight: 700;
+      color: #10b981;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-radar:hover {
+      background: #10b981;
+      color: #030712;
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.5);
+    }
+
+    .btn-radar:hover::before {
+      color: #030712;
+      transform: translateX(3px);
+    }
+
+    .btn-radar:active {
+      transform: scale(0.97);
+    }
+
+    /* 6. Bivector Phase Flux (Cancellation Fence) Button */
+    .btn-bivector {
+      position: relative;
+      background: #090d16;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      padding: 12px 28px;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .btn-bivector .phase-left {
+      color: #38bdf8;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    .btn-bivector .phase-right {
+      color: #f43f5e;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    .btn-bivector::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 4px;
+      height: 100%;
+      background: #38bdf8;
+      transition: width 0.3s ease;
+    }
+
+    .btn-bivector::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 4px;
+      height: 100%;
+      background: #f43f5e;
+      transition: width 0.3s ease;
+    }
+
+    .btn-bivector:hover::before {
+      width: 50%;
+      opacity: 0.15;
+    }
+
+    .btn-bivector:hover::after {
+      width: 50%;
+      opacity: 0.15;
+    }
+
+    .btn-bivector:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    /* Live Workbench Stage */
+    .workbench-stage {
+      background: radial-gradient(circle at center, rgba(15, 23, 42, 0.95), rgba(3, 7, 18, 1));
+      border: 1px dashed rgba(0, 240, 255, 0.3);
+      border-radius: 16px;
+      padding: 60px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 220px;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .workbench-stage .grid-spec {
+      position: absolute;
+      bottom: 12px;
+      right: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    /* Controls Panel */
+    .controls-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .control-group label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .control-input {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .control-input:focus {
+      border-color: var(--cyan-bright);
+    }
+
+    .color-swatches {
+      display: flex;
+      gap: 10px;
+    }
+
+    .color-swatch {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .color-swatch:hover {
+      transform: scale(1.15);
+    }
+
+    .color-swatch.active {
+      border-color: #ffffff;
+      transform: scale(1.15);
+    }
+
+    .range-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .range-row input[type="range"] {
+      flex: 1;
+      accent-color: var(--cyan-bright);
+    }
+
+    .range-val {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--cyan-bright);
+      width: 45px;
+      text-align: right;
+    }
+
+    /* Code Export Box */
+    .code-box {
+      background: #020617;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: #38bdf8;
+      overflow-x: auto;
+      max-height: 240px;
+      position: relative;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: var(--cyan-bright);
+      color: #030712;
+      border-color: var(--cyan-bright);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <header>
+      <div class="header-title">
+        <h1>Branding & UI Button Design Studio</h1>
+        <p>Interactive playground for designing tactile micro-interactions, quantum physics buttons, and exportable CSS components.</p>
+      </div>
+      <div class="badge-bar">
+        <span class="tag">SPRING PHYSICS</span>
+        <span class="tag">CLIFFORD ALGEBRA</span>
+        <span class="tag">CSS COMPONENT EXPORT</span>
+      </div>
+    </header>
+
+    <div class="studio-grid">
+      
+      <!-- Left Column: Showcase & Live Workbench -->
+      <main>
+        
+        <!-- Live Workbench -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title"><span class="indicator"></span> Active Design Workbench</h2>
+            <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim);">LIVE COMPONENT PREVIEW</span>
+          </div>
+          
+          <div class="workbench-stage" id="workbenchStage">
+            <button id="activeBtn" class="btn-quantum" onclick="triggerHarmonicClick()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              <span id="btnLabel">Launch Analytics Module</span>
+            </button>
+            <div class="grid-spec" id="specBadge">ARCHETYPE: QUANTUM SUPERPOSITION</div>
+          </div>
+
+          <!-- Code Export Box -->
+          <div style="position: relative;">
+            <div class="card-header" style="margin-bottom: 8px;">
+              <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">Export Ready CSS / HTML</span>
+            </div>
+            <div class="code-box" id="codeOutput">
+              <button class="copy-btn" onclick="copyCode()">Copy Code</button>
+              <pre><code id="codeText">/* CSS will generate here dynamically */</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 Archetype Gallery -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Select Foundation Archetype</h2>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">CLICK TO LOAD INTO WORKBENCH</span>
+          </div>
+
+          <div class="preset-grid">
+            
+            <!-- Preset 1 -->
+            <div class="preset-box active" onclick="loadArchetype('quantum', this)">
+              <button class="btn-quantum" style="pointer-events: none;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/></svg>
+                Quantum Pulse
+              </button>
+              <span class="preset-label">01. Quantum Superposition</span>
+            </div>
+
+            <!-- Preset 2 -->
+            <div class="preset-box" onclick="loadArchetype('obsidian', this)">
+              <button class="btn-obsidian" style="pointer-events: none;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 9 6 6"/><path d="m15 9-6 6"/></svg>
+                Obsidian Bevel
+              </button>
+              <span class="preset-label">02. Stealth Glassmorphism</span>
+            </div>
+
+            <!-- Preset 3 -->
+            <div class="preset-box" onclick="loadArchetype('spring', this)">
+              <button class="btn-spring" style="pointer-events: none;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                Torsion Recoil
+              </button>
+              <span class="preset-label">03. Spring Theory Recoil</span>
+            </div>
+
+            <!-- Preset 4 -->
+            <div class="preset-box" onclick="loadArchetype('gold', this)">
+              <button class="btn-gold" style="pointer-events: none;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                Gold Standard
+              </button>
+              <span class="preset-label">04. Invariant Brass</span>
+            </div>
+
+            <!-- Preset 5 -->
+            <div class="preset-box" onclick="loadArchetype('radar', this)">
+              <button class="btn-radar" style="pointer-events: none;">SCAN_TARGET</button>
+              <span class="preset-label">05. ARKM Cyber Radar</span>
+            </div>
+
+            <!-- Preset 6 -->
+            <div class="preset-box" onclick="loadArchetype('bivector', this)">
+              <button class="btn-bivector" style="pointer-events: none;">
+                <span class="phase-left">↺ BLUE</span>
+                <span>FLUX</span>
+                <span class="phase-right">RED ↻</span>
+              </button>
+              <span class="preset-label">06. Bivector Dual-Phase</span>
+            </div>
+
+          </div>
+        </div>
+
+      </main>
+
+      <!-- Right Column: Interactive Styling Controls -->
+      <aside>
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Button Customizer</h2>
+          </div>
+
+          <div class="controls-panel">
+            
+            <!-- Label -->
+            <div class="control-group">
+              <label>Button Label</label>
+              <input type="text" id="labelInput" class="control-input" value="Launch Analytics Module" oninput="updateButton()">
+            </div>
+
+            <!-- Corner Radius Slider -->
+            <div class="control-group">
+              <label>Corner Radius</label>
+              <div class="range-row">
+                <input type="range" id="radiusInput" min="0" max="40" value="12" oninput="updateButton()">
+                <span class="range-val" id="radiusVal">12px</span>
+              </div>
+            </div>
+
+            <!-- Glow / Border Width -->
+            <div class="control-group">
+              <label>Border Glow Intensity</label>
+              <div class="range-row">
+                <input type="range" id="glowInput" min="0" max="60" value="20" oninput="updateButton()">
+                <span class="range-val" id="glowVal">20px</span>
+              </div>
+            </div>
+
+            <!-- Font Size -->
+            <div class="control-group">
+              <label>Font Size</label>
+              <div class="range-row">
+                <input type="range" id="fontInput" min="12" max="22" value="15" oninput="updateButton()">
+                <span class="range-val" id="fontVal">15px</span>
+              </div>
+            </div>
+
+            <!-- Accent Color Swatches -->
+            <div class="control-group">
+              <label>Accent Color Tone</label>
+              <div class="color-swatches">
+                <div class="color-swatch active" style="background: #00f0ff;" onclick="setAccent('#00f0ff', this)"></div>
+                <div class="color-swatch" style="background: #f59e0b;" onclick="setAccent('#f59e0b', this)"></div>
+                <div class="color-swatch" style="background: #10b981;" onclick="setAccent('#10b981', this)"></div>
+                <div class="color-swatch" style="background: #c084fc;" onclick="setAccent('#c084fc', this)"></div>
+                <div class="color-swatch" style="background: #f43f5e;" onclick="setAccent('#f43f5e', this)"></div>
+              </div>
+            </div>
+
+            <!-- Spring Physics Sound Toggle -->
+            <div class="control-group" style="padding-top: 10px; border-top: 1px solid var(--border-subtle);">
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <input type="checkbox" id="audioToggle" checked style="accent-color: var(--cyan-bright);">
+                Synthesizer Click (Web Audio)
+              </label>
+            </div>
+
+          </div>
+        </div>
+      </aside>
+
+    </div>
+
+  </div>
+
+  <script>
+    let currentArchetype = 'quantum';
+    let currentAccent = '#00f0ff';
+    let audioCtx = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function triggerHarmonicClick() {
+      const toggle = document.getElementById('audioToggle');
+      if (toggle && toggle.checked) {
+        initAudio();
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        // 432 Hz Pythagorean / Invariant Harmonic
+        osc.frequency.setValueAtTime(432, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(864, audioCtx.currentTime + 0.08);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.09);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.09);
+      }
+    }
+
+    function loadArchetype(archetype, element) {
+      currentArchetype = archetype;
+      document.querySelectorAll('.preset-box').forEach(b => b.classList.remove('active'));
+      if (element) element.classList.add('active');
+
+      const btn = document.getElementById('activeBtn');
+      btn.className = '';
+      btn.classList.add('btn-' + archetype);
+
+      document.getElementById('specBadge').textContent = 'ARCHETYPE: ' + archetype.toUpperCase();
+      updateButton();
+    }
+
+    function setAccent(color, element) {
+      currentAccent = color;
+      document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+      element.classList.add('active');
+      updateButton();
+    }
+
+    function updateButton() {
+      const btn = document.getElementById('activeBtn');
+      const label = document.getElementById('labelInput').value;
+      const radius = document.getElementById('radiusInput').value;
+      const glow = document.getElementById('glowInput').value;
+      const fontSize = document.getElementById('fontInput').value;
+
+      document.getElementById('radiusVal').textContent = radius + 'px';
+      document.getElementById('glowVal').textContent = glow + 'px';
+      document.getElementById('fontVal').textContent = fontSize + 'px';
+
+      document.getElementById('btnLabel').textContent = label;
+      btn.style.borderRadius = radius + 'px';
+      btn.style.fontSize = (fontSize / 16) + 'rem';
+
+      if (currentArchetype === 'quantum') {
+        btn.style.borderColor = currentAccent;
+        btn.style.boxShadow = `0 0 ${glow}px ${currentAccent}66, inset 0 0 12px ${currentAccent}33`;
+      }
+
+      generateCode();
+    }
+
+    function generateCode() {
+      const btn = document.getElementById('activeBtn');
+      const label = document.getElementById('labelInput').value;
+      const radius = document.getElementById('radiusInput').value;
+      const fontSize = document.getElementById('fontInput').value;
+
+      const code = `<!-- HTML Component -->\n<button class="btn-${currentArchetype}">\n  <span>${label}</span>\n</button>\n\n/* Matching CSS */\n.btn-${currentArchetype} {\n  border-radius: ${radius}px;\n  font-size: ${fontSize}px;\n  /* Preset classes defined in visuals/branding_studio.html */\n}`;
+
+      document.getElementById('codeText').textContent = code;
+    }
+
+    function copyCode() {
+      const text = document.getElementById('codeText').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy Code', 2000);
+      });
+    }
+
+    // Initial load
+    updateButton();
+  </script>
+</body>
+</html>

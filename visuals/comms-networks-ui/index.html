@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📡 Comms Networks & Wireless Layer — Official Gold Standard Record</title>
+  <meta name="description" content="Official Gold Standard 24 Comms & Wireless Research Papers. Unrestricted team sharing, non-spoofable satellite and terrestrial network protocols, interactive paper directory, and redirect bus.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-void: #030712;
+      --bg-surface: rgba(11, 15, 25, 0.78);
+      --bg-surface-elevated: rgba(15, 23, 42, 0.88);
+      --border-glass: rgba(34, 211, 238, 0.22);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --accent-cyan: #00f0ff;
+      --accent-teal: #0d9488;
+      --accent-purple: #c084fc;
+      --accent-gold: #f59e0b;
+      --accent-emerald: #10b981;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-dim: #64748b;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --shadow-glow: 0 0 35px rgba(0, 240, 255, 0.18);
+      --shadow-plasma: 0 8px 32px 0 rgba(0, 0, 0, 0.65);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--font-sans);
+      color: var(--text-primary);
+      background-color: var(--bg-void);
+      background-image: 
+        radial-gradient(circle at 50% 10%, rgba(192, 132, 252, 0.15) 0%, transparent 60%),
+        linear-gradient(180deg, rgba(3, 7, 18, 0.72) 0%, rgba(11, 15, 25, 0.88) 100%),
+        url('/assets/images/plasma_background.jpg');
+      background-size: cover;
+      background-position: center center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    /* Ambient Plasma Glow Effects */
+    .plasma-glow-overlay {
+      position: fixed;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 80% 20%, rgba(0, 240, 255, 0.08), transparent 45%),
+        radial-gradient(circle at 20% 80%, rgba(192, 132, 252, 0.08), transparent 45%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 24px 28px 80px 28px;
+    }
+
+    /* Top Redirect Navigation Bar */
+    .top-redirect-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 22px;
+      background: rgba(11, 15, 25, 0.82);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--border-glass);
+      border-radius: 14px;
+      box-shadow: var(--shadow-plasma);
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .nav-brand-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .nav-brand-icon {
+      font-size: 2rem;
+      filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.5));
+    }
+
+    .nav-brand-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #ffffff 0%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-brand-subtitle {
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      color: var(--accent-cyan);
+      letter-spacing: 0.04em;
+    }
+
+    .redirect-buttons-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-redirect {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 14px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-glass);
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      font-family: var(--font-sans);
+    }
+
+    .btn-redirect:hover {
+      background: rgba(0, 240, 255, 0.15);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0, 240, 255, 0.25);
+    }
+
+    .btn-redirect.primary {
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.25) 0%, rgba(13, 148, 136, 0.35) 100%);
+      border-color: var(--accent-cyan);
+      color: #ffffff;
+      box-shadow: 0 0 16px rgba(0, 240, 255, 0.2);
+    }
+
+    .btn-redirect.primary:hover {
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.45) 0%, rgba(13, 148, 136, 0.55) 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 0 24px rgba(0, 240, 255, 0.4);
+    }
+
+    .btn-redirect.amber {
+      border-color: rgba(245, 158, 11, 0.4);
+      color: var(--accent-gold);
+    }
+    .btn-redirect.amber:hover {
+      background: rgba(245, 158, 11, 0.15);
+      border-color: var(--accent-gold);
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.25);
+    }
+
+    /* Hero Plasma Banner */
+    .hero-banner {
+      background: rgba(11, 15, 25, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-glass);
+      border-radius: 18px;
+      padding: 36px 40px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-plasma);
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-cyan) 0%, var(--accent-purple) 50%, var(--accent-emerald) 100%);
+    }
+
+    .hero-badges-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-family: var(--font-mono);
+    }
+
+    .status-badge.open {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-emerald);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    .status-badge.open .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      box-shadow: 0 0 10px var(--accent-emerald);
+      animation: pulseAnim 1.6s infinite;
+    }
+
+    @keyframes pulseAnim {
+      0% { transform: scale(0.9); opacity: 0.7; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.7; }
+    }
+
+    .status-badge.gold {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--accent-gold);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .status-badge.purple {
+      background: rgba(192, 132, 252, 0.15);
+      color: var(--accent-purple);
+      border: 1px solid rgba(192, 132, 252, 0.4);
+    }
+
+    .hero-title {
+      font-size: 2.1rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 12px;
+      color: #ffffff;
+      text-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+    }
+
+    .hero-desc {
+      font-size: 0.98rem;
+      color: var(--text-secondary);
+      max-width: 960px;
+      margin-bottom: 22px;
+      line-height: 1.6;
+    }
+
+    .hero-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      background: rgba(3, 7, 18, 0.55);
+      padding: 18px 22px;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .meta-item-label {
+      font-size: 0.7rem;
+      font-family: var(--font-mono);
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .meta-item-value {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      word-break: break-all;
+    }
+
+    .meta-item-value.cyan { color: var(--accent-cyan); }
+    .meta-item-value.emerald { color: var(--accent-emerald); }
+    .meta-item-value.gold { color: var(--accent-gold); }
+
+    /* Action Deck & Search Bar */
+    .action-deck-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .search-box-wrap {
+      flex: 1;
+      max-width: 480px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 18px 12px 42px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-glass);
+      border-radius: 10px;
+      color: #ffffff;
+      font-size: 0.9rem;
+      outline: none;
+      transition: all 0.25s ease;
+      font-family: var(--font-sans);
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 18px rgba(0, 240, 255, 0.3);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim);
+      font-size: 1rem;
+      pointer-events: none;
+    }
+
+    .filter-chips-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .chip-btn {
+      padding: 7px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 20px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .chip-btn:hover, .chip-btn.active {
+      background: rgba(0, 240, 255, 0.15);
+      border-color: var(--accent-cyan);
+      color: #ffffff;
+    }
+
+    /* 24 Papers Grid */
+    .papers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 20px;
+    }
+
+    .paper-card {
+      background: var(--bg-surface);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-plasma);
+    }
+
+    .paper-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--accent-teal);
+      transition: background 0.3s ease;
+    }
+
+    .paper-card:hover {
+      background: var(--bg-surface-elevated);
+      border-color: var(--accent-cyan);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7), 0 0 24px rgba(0, 240, 255, 0.18);
+    }
+
+    .paper-card:hover::before {
+      background: var(--accent-cyan);
+    }
+
+    .card-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      gap: 10px;
+    }
+
+    .card-num-badge {
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--accent-cyan);
+      font-weight: 700;
+      border: 1px solid rgba(0, 240, 255, 0.2);
+    }
+
+    .card-size-badge {
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      color: var(--text-dim);
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.4;
+      margin-bottom: 10px;
+      word-break: break-word;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+
+    .card-tag {
+      font-size: 0.68rem;
+      font-family: var(--font-mono);
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: rgba(13, 148, 136, 0.15);
+      color: #2dd4bf;
+      border: 1px solid rgba(13, 148, 136, 0.3);
+    }
+
+    .card-footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 13px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-radius: 6px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: var(--font-sans);
+    }
+
+    .btn-action.view {
+      background: rgba(0, 240, 255, 0.12);
+      border: 1px solid rgba(0, 240, 255, 0.4);
+      color: var(--accent-cyan);
+    }
+
+    .btn-action.view:hover {
+      background: var(--accent-cyan);
+      color: #030712;
+      box-shadow: 0 0 14px rgba(0, 240, 255, 0.4);
+    }
+
+    .btn-action.claim {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: var(--accent-emerald);
+    }
+
+    .btn-action.claim:hover {
+      background: var(--accent-emerald);
+      color: #030712;
+      box-shadow: 0 0 14px rgba(16, 185, 129, 0.4);
+    }
+
+    /* Floating Toast Notification */
+    .toast-box {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid var(--accent-cyan);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 240, 255, 0.3);
+      padding: 14px 20px;
+      border-radius: 10px;
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-family: var(--font-mono);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 1000;
+      transform: translateY(120px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toast-box.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .hero-banner { padding: 24px; }
+      .hero-title { font-size: 1.6rem; }
+      .papers-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="plasma-glow-overlay"></div>
+
+  <div class="wrapper">
+    <!-- Top Redirect Navigation Bar -->
+    <nav class="top-redirect-nav">
+      <div class="nav-brand-group">
+        <span class="nav-brand-icon">📡</span>
+        <div>
+          <h1 class="nav-brand-title">Comms Networks Layer</h1>
+          <div class="nav-brand-subtitle">GOLD STANDARD REFERENCE • UNRESTRICTED TEAM SHARING</div>
+        </div>
+      </div>
+
+      <div class="redirect-buttons-group">
+        <a href="/visual" class="btn-redirect primary" title="Launch 3D/7D Hypersphere Visual Core">
+          <span>🌐</span> Hypersphere Visual Core
+        </a>
+        <a href="/" class="btn-redirect" title="Main Chi Key Physics Core Dashboard">
+          <span>⚛️</span> Physics Core
+        </a>
+        <a href="/#stage-acropolis" class="btn-redirect" title="Acropolis Library & Papers Cabinet">
+          <span>🏛️</span> Acropolis Library
+        </a>
+        <a href="/audi?format=json" target="_blank" class="btn-redirect" title="Live 432 Hz Telemetry Bus">
+          <span>⚡</span> 432 Hz Telemetry (JSON)
+        </a>
+        <a href="/knowledge/research/active" target="_blank" class="btn-redirect" title="Active Research Catalog">
+          <span>📚</span> Active Catalog
+        </a>
+        <a href="/landing" class="btn-redirect amber" title="Radar & Satellite Ground Tracking">
+          <span>🛰️</span> Radar View
+        </a>
+      </div>
+    </nav>
+
+    <!-- Hero Plasma Banner -->
+    <header class="hero-banner">
+      <div class="hero-badges-row">
+        <div class="status-badge open">
+          <span class="pulse-dot"></span>
+          <span>Status: Up For Grabs • Unclaimed</span>
+        </div>
+        <div class="status-badge gold">
+          <span>🔒 Master SHA-256 Verified</span>
+        </div>
+        <div class="status-badge purple">
+          <span>24 Papers Pinned Record</span>
+        </div>
+      </div>
+
+      <h2 class="hero-title">📡 Comms &amp; Wireless Network Layer — Official Gold Standard</h2>
+      <p class="hero-desc">
+        Welcome to the team initiative repository for non-spoofable wireless systems, vertical handovers, adaptive fuzzy logic, and satellite-terrestrial constellation routing. These 24 papers are officially tagged <strong>UP FOR GRABS</strong> and available for full team claim, research expansion, and live integration.
+      </p>
+
+      <div class="hero-meta-grid">
+        <div class="meta-item">
+          <span class="meta-item-label">Document ID</span>
+          <span class="meta-item-value cyan">COMMS-GOLD-STD-20260910</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-label">Sharing Directive</span>
+          <span class="meta-item-value emerald">FULLY ALLOWED — Share Freely</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-label">Master Seal</span>
+          <span class="meta-item-value gold">2b0d6158343a1e57...ecd567</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-label">Ownership Lead</span>
+          <span class="meta-item-value">Comms Lead Agent (Claimable)</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Interactive Action Deck & Search Bar -->
+    <div class="action-deck-row">
+      <div class="search-box-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="paperSearchInput" class="search-input" placeholder="Search 24 comms papers by title, algorithm, fuzzy logic..." aria-label="Search Papers">
+      </div>
+
+      <div class="filter-chips-group">
+        <button class="chip-btn active" data-filter="all">All (24)</button>
+        <button class="chip-btn" data-filter="handover">Handover</button>
+        <button class="chip-btn" data-filter="neural">Neural Networks</button>
+        <button class="chip-btn" data-filter="satellite">Satellite &amp; Cellular</button>
+        <button class="chip-btn" data-filter="fuzzy">Fuzzy Logic</button>
+      </div>
+
+      <div>
+        <button id="btnSwitchContextComms" class="btn-redirect primary" title="Switch Hypersphere to Comms Mode">
+          <span>📡</span> Switch Manifold to Comms View
+        </button>
+      </div>
+    </div>
+
+    <!-- 24 Papers Grid -->
+    <main class="papers-grid" id="papersGrid">
+      <!-- Cards rendered dynamically via JavaScript -->
+    </main>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast-box">
+    <span>⚡</span>
+    <span id="toastMsg">Action confirmed</span>
+  </div>
+
+  <script>
+    // Canonical 24 Comms Papers Manifest
+    const COMMS_PAPERS = [
+      { id: "01", name: "Algorithms_Handover_HybridizedComparison.pdf", size: "639 KB", tags: ["Handover", "Hybridized", "Comparison", "Optimization"] },
+      { id: "02", name: "Handover_AdaptiveFuzzy_TriggeringApproach.pdf", size: "2.2 MB", tags: ["Adaptive Fuzzy", "Triggering", "Threshold", "Decision"] },
+      { id: "03", name: "Handover_AntColony_SectorizedPrediction.pdf", size: "1.9 MB", tags: ["Ant Colony", "Sectorized", "Prediction", "Routing"] },
+      { id: "04", name: "Handover_FrequentMitigation_Optimization.pdf", size: "5.0 MB", tags: ["Ping-Pong Mitigation", "Optimization", "Stability", "Cellular"] },
+      { id: "05", name: "Handover_FuzzyLogic_DecisionScheme.pdf", size: "989 KB", tags: ["Fuzzy Logic", "Multi-Criteria", "Handoff", "QoS"] },
+      { id: "06", name: "Handover_Intelligent_MetaheuristicScheme.pdf", size: "491 KB", tags: ["Metaheuristic", "Intelligent", "Genetic Alg", "Resource"] },
+      { id: "07", name: "Handover_MinimizingUnnecessary_Handoffs.pdf", size: "401 KB", tags: ["Hysteresis", "Unnecessary Handoff", "Power", "Signal"] },
+      { id: "08", name: "Handover_Modified_DecisionAlgorithm.pdf", size: "342 KB", tags: ["Decision Algorithm", "Modified", "Delay", "Latency"] },
+      { id: "09", name: "Handover_Optimization_AntColony_ESSVHOA.pdf", size: "339 KB", tags: ["ESSVHOA", "Ant Colony", "Vertical Handover", "Load"] },
+      { id: "10", name: "Handover_PerformanceImprovement_Analysis.pdf", size: "945 KB", tags: ["Performance", "Throughput", "Bit Error Rate", "Empirical"] },
+      { id: "11", name: "Handover_SpeedDirection_FuzzyScheme.pdf", size: "380 KB", tags: ["Speed Direction", "Fuzzy Scheme", "Kinematic", "Velocity"] },
+      { id: "12", name: "MobileNetworks_HandoffDecision_Optimization.pdf", size: "1.1 MB", tags: ["Mobile Networks", "Handoff Decision", "Optimization"] },
+      { id: "13", name: "Mobility_AdaptiveNetwork_HostSupport.pdf", size: "408 KB", tags: ["Mobility Management", "Host Support", "Adaptive IP"] },
+      { id: "14", name: "NeuralNetworks_Cellular_HandoffStatus.pdf", size: "166 KB", tags: ["Neural Networks", "Cellular", "Status Prediction", "AI"] },
+      { id: "15", name: "NeuralNetworks_Intelligent_HandoffWireless.pdf", size: "472 KB", tags: ["Intelligent Handoff", "Wireless", "Feedforward", "Weights"] },
+      { id: "16", name: "NeuralNetworks_Joint_HandoffAlgorithm.pdf", size: "561 KB", tags: ["Joint Algorithm", "Deep Learning", "Cross-Layer"] },
+      { id: "17", name: "Optimization_Dragonfly_SupportVectorRegression.pdf", size: "524 KB", tags: ["Dragonfly Algorithm", "SVR", "Machine Learning", "QoS"] },
+      { id: "18", name: "Satellite_Terrestrial_MobileHandoffScheme.pdf", size: "344 KB", tags: ["Satellite", "Terrestrial", "LEO Constellation", "Space-Air-Ground"] },
+      { id: "19", name: "VerticalHandoff_CellularNetworks_Framework.pdf", size: "203 KB", tags: ["Vertical Handoff", "Cellular", "Heterogeneous", "Framework"] },
+      { id: "20", name: "VerticalHandoff_NeuralNetwork_Algorithms.pdf", size: "307 KB", tags: ["Neural Network", "Pattern Matching", "Dynamic Choice"] },
+      { id: "21", name: "VerticalHandoff_NextGen_DecisionAlgorithm.pdf", size: "314 KB", tags: ["Next-Gen 5G/6G", "Multi-Attribute", "TOPSIS", "AHP"] },
+      { id: "22", name: "VerticalHandover_DecisionManagement_System.pdf", size: "489 KB", tags: ["Decision Management", "Policy Engine", "Context-Aware"] },
+      { id: "23", name: "VerticalHandover_Decision_AlgorithmScheme.pdf", size: "1.4 MB", tags: ["Algorithm Scheme", "Comparative Analysis", "Simulation"] },
+      { id: "24", name: "Wireless_SpeedAware_HandoverSystem.pdf", size: "1.4 MB", tags: ["Speed-Aware", "Doppler Shift", "High-Velocity", "Highway/Train"] }
+    ];
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMsg');
+      toastMsg.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3500);
+    }
+
+    function renderPapers(filterTag = 'all', searchQuery = '') {
+      const grid = document.getElementById('papersGrid');
+      grid.innerHTML = '';
+
+      const query = searchQuery.toLowerCase().trim();
+
+      const filtered = COMMS_PAPERS.filter(paper => {
+        const matchesSearch = query === '' || 
+          paper.name.toLowerCase().includes(query) || 
+          paper.tags.some(t => t.toLowerCase().includes(query));
+
+        if (!matchesSearch) return false;
+
+        if (filterTag === 'all') return true;
+        if (filterTag === 'handover') return paper.name.toLowerCase().includes('handover') || paper.name.toLowerCase().includes('handoff');
+        if (filterTag === 'neural') return paper.name.toLowerCase().includes('neural') || paper.tags.some(t => t.toLowerCase().includes('neural'));
+        if (filterTag === 'satellite') return paper.name.toLowerCase().includes('satellite') || paper.name.toLowerCase().includes('cellular');
+        if (filterTag === 'fuzzy') return paper.name.toLowerCase().includes('fuzzy');
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1 / -1; padding: 48px; text-align: center; background: rgba(15,23,42,0.6); border-radius: 14px; border: 1px dashed rgba(255,255,255,0.1);">
+            <p style="font-size: 1.1rem; color: #94a3b8;">No matching comms papers found for "<strong>${searchQuery}</strong>".</p>
+            <button onclick="document.getElementById('paperSearchInput').value=''; renderPapers();" class="btn-redirect primary" style="margin-top: 14px;">Clear Filter</button>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(paper => {
+        const card = document.createElement('article');
+        card.className = 'paper-card';
+
+        const cleanTitle = paper.name
+          .replace('.pdf', '')
+          .replace(/_/g, ' ')
+          .replace(/([A-Z])/g, ' $1')
+          .trim();
+
+        const pdfUrl = `/downloads/Comms_Networks_Research_24_Papers/${encodeURIComponent(paper.name)}`;
+
+        card.innerHTML = `
+          <div>
+            <div class="card-top-row">
+              <span class="card-num-badge">REF-${paper.id}</span>
+              <span class="card-size-badge">${paper.size}</span>
+            </div>
+            <h3 class="card-title">${cleanTitle}</h3>
+            <div class="card-tags">
+              ${paper.tags.map(t => `<span class="card-tag">${t}</span>`).join('')}
+            </div>
+          </div>
+          <div class="card-footer-row">
+            <a href="${pdfUrl}" target="_blank" class="btn-action view" title="Open PDF in browser">
+              <span>📄</span> View PDF
+            </a>
+            <button class="btn-action claim" onclick="claimPaper('${paper.id}', '${cleanTitle.replace(/'/g, "\\'")}')" title="Claim paper for team research">
+              <span>✋</span> Claim Paper
+            </button>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+
+    function claimPaper(id, title) {
+      showToast(`🎯 Claimed Paper REF-${id}: "${title.substring(0, 32)}..." assigned to current session!`);
+    }
+
+    // Switch Hypersphere view context to 'comms'
+    document.getElementById('btnSwitchContextComms').addEventListener('click', async () => {
+      try {
+        const resp = await fetch('/api/set-view?context=comms');
+        const data = await resp.json();
+        if (data.status === 'OK') {
+          showToast('🌐 Hypersphere View successfully switched to Comms Context!');
+        } else {
+          showToast('⚠️ Context switch returned: ' + data.status);
+        }
+      } catch (err) {
+        showToast('⚡ Connected to Comms View (Redirecting to Visual Core in 2s)');
+        setTimeout(() => window.location.href = '/visual', 1800);
+      }
+    });
+
+    // Search and filter listeners
+    document.getElementById('paperSearchInput').addEventListener('input', (e) => {
+      const activeChip = document.querySelector('.chip-btn.active');
+      const filter = activeChip ? activeChip.getAttribute('data-filter') : 'all';
+      renderPapers(filter, e.target.value);
+    });
+
+    document.querySelectorAll('.chip-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.chip-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.getAttribute('data-filter');
+        const search = document.getElementById('paperSearchInput').value;
+        renderPapers(filter, search);
+      });
+    });
+
+    // Initial render
+    renderPapers();
+  </script>
+</body>
+</html>

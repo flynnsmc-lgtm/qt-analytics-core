@@ -1,0 +1,198 @@
+{
+  "doc_id": "COMMS-GOLD-STD-20260910",
+  "title": "\ud83d\udce1 COMMS NETWORKS RESEARCH FRAMEWORK \u2014 OFFICIAL RECORD",
+  "classification": "GOLD_STANDARD_REFERENCE",
+  "registry": "Acropolis Library / Foundation References / Comms Domain",
+  "seal_status": "SHA256_VERIFIED_PERMANENT_IMMUTABLE",
+  "immutable": true,
+  "pinned": true,
+  "timestamp_sealed": "2026-09-10T06:10:35Z",
+  "manifest_composite_hash": "5a74311d1e4907e408c820a97f207664816be387a9a7c3def7a47ed1a03ae202",
+  "core_specification": {
+    "pack": "24 Curated Comms/Network Research Papers",
+    "access_endpoint": "http://localhost:8080/team/open/comms_networks",
+    "active_knowledge_endpoint": "http://localhost:8080/knowledge/research/active",
+    "folder_standard": "most_similar_papers_to_this_one -> Comms_Networks_Research_24_Papers",
+    "naming_rule": "Topic_Subject_Details.pdf | Strict Separation From Physics Corpus",
+    "collaboration_policy": "UNRESTRICTED_TEAM_SHARING \u2014 Freely share/onboard any member",
+    "expansion": "Academia-ready \u2014 extend library anytime with matching subject matter",
+    "ownership": {
+      "lead": "Comms Lead Agent",
+      "support": "Sanctuary VI",
+      "oversight": "Reception Desk",
+      "vault": "Acropolis Library Vault"
+    }
+  },
+  "scope_of_application": [
+    "Comms Projects",
+    "Satellite Networks",
+    "Emergency/Coast Guard/Military Systems",
+    "Team Onboarding",
+    "Research Expansion"
+  ],
+  "documents_count": 24,
+  "documents": [
+    {
+      "filename": "Algorithms_Handover_HybridizedComparison.pdf",
+      "size_bytes": 639905,
+      "sha256": "c852676d73493c3f08d446f01c67cb43c29605e72d79bd85ee1febf0b977d474",
+      "topic": "Algorithms"
+    },
+    {
+      "filename": "Handover_AdaptiveFuzzy_TriggeringApproach.pdf",
+      "size_bytes": 2223322,
+      "sha256": "a641fc696d4d1a45ba3f8bbfd0862cb7717b75a3ed5f66aa83c66fc96c92c6d8",
+      "topic": "Handover"
+    },
+    {
+      "filename": "Handover_AntColony_SectorizedPrediction.pdf",
+      "size_bytes": 1930364,
+      "sha256": "d780e887122f3c9d1c575773e3bb7d6b7851eef0b764dc8a5c56f2ad98ce077c",
+      "topic": "Handover"
+    },
+    {
+      "filename": "Handover_FrequentMitigation_Optimization.pdf",
+      "size_bytes": 5089577,
+      "sha256": "4f3e997af4ae437df93f0c7f6b9e40f3be20d1dca3abd043f01e6f1eac729195",
+      "topic": "Handover"
+    },
+    {
+      "filename": "Handover_FuzzyLogic_DecisionScheme.pdf",
+      "size_bytes": 989725,
+      "sha256": "927f4bafdd38f59c56c1fc6b39f13ae2ed235dbfcb220bf1e7abd0af5bc06b2e",
+      "topic": "Handover"
+    },
+    {
+      "filename": "Handover_Intelligent_MetaheuristicScheme.pdf",
+      "size_bytes": 491479,
+      "sha256": "ff631e8da79de5e64701e9eca5db2777738569bff984e242a8ff9e68a6e6e11e",
+      "topic": "Handover"
+    },
+    {
+      "filename": "Handover_MinimizingUnnecessary_Handoffs.pdf",
+      "size_bytes": 401628,
+      "sha256": "feafa9da1d8c877f04f0f13335c5a8cba743d2644ccdfb08ceab82d7b9b72ed7",
+      "topic": "Handover"
+    },
+    {
+      "filename": "Handover_Modified_DecisionAlgorithm.pdf",
+      "size_bytes": 342126,
+      "sha256": "75d93f5be4390faaf0ed1191dccb030de189dbdb4458eb5c12e1198e5331591d",
+      "topic": "Handover"
+    },
+    {
+      "filename": "Handover_Optimization_AntColony_ESSVHOA.pdf",
+      "size_bytes": 339060,
+      "sha256": "ba4a6350affb6103b4106a67020f75f26ebd5116e320dfbd1aabd502298a1d35",
+      "topic": "Handover"
+    },
+    {
+      "filename": "Handover_PerformanceImprovement_Analysis.pdf",
+      "size_bytes": 945743,
+      "sha256": "4ba35efd166e5f56873ad1d4a39bd26ec2c4eb09d2b0b4f21f91732742d64eb7",
+      "topic": "Handover"
+    },
+    {
+      "filename": "Handover_SpeedDirection_FuzzyScheme.pdf",
+      "size_bytes": 380914,
+      "sha256": "4c12bfb2d634e07b8f6217e1c6bbc19bc8a4380b15dc026e83eadc86e7a7278b",
+      "topic": "Handover"
+    },
+    {
+      "filename": "MobileNetworks_HandoffDecision_Optimization.pdf",
+      "size_bytes": 1084552,
+      "sha256": "465219b09675f1389c0738253762b7c27b7b57eda0da1639c91be3feba2c0989",
+      "topic": "MobileNetworks"
+    },
+    {
+      "filename": "Mobility_AdaptiveNetwork_HostSupport.pdf",
+      "size_bytes": 408024,
+      "sha256": "f2230fb9e3d5f028947543d34900f935cd7f0bd8b3b8edb05d692ec0031365aa",
+      "topic": "Mobility"
+    },
+    {
+      "filename": "NeuralNetworks_Cellular_HandoffStatus.pdf",
+      "size_bytes": 166420,
+      "sha256": "1f91ffadefc112a6b0213236fb9fdd75d096ee318f9192e4d00857214c2ef658",
+      "topic": "NeuralNetworks"
+    },
+    {
+      "filename": "NeuralNetworks_Intelligent_HandoffWireless.pdf",
+      "size_bytes": 472755,
+      "sha256": "4d1811d95f4841605dd4d710d51446a2f5b8241361a30ef3cbe98394f6951c63",
+      "topic": "NeuralNetworks"
+    },
+    {
+      "filename": "NeuralNetworks_Joint_HandoffAlgorithm.pdf",
+      "size_bytes": 561793,
+      "sha256": "1ba841ac887ac0e2e8efe9ec9fccd9261a534ecc14bffbf0739e8e788361bca1",
+      "topic": "NeuralNetworks"
+    },
+    {
+      "filename": "Optimization_Dragonfly_SupportVectorRegression.pdf",
+      "size_bytes": 524731,
+      "sha256": "abc3ba211758a66f163089ff3c8ec0572fc7a706414d5ea9c36356a3530e74e3",
+      "topic": "Optimization"
+    },
+    {
+      "filename": "Satellite_Terrestrial_MobileHandoffScheme.pdf",
+      "size_bytes": 344890,
+      "sha256": "9db03550e52c46c3dd0489c89d637cd54585f015044f9f57ad8afc3d05559b88",
+      "topic": "Satellite"
+    },
+    {
+      "filename": "VerticalHandoff_CellularNetworks_Framework.pdf",
+      "size_bytes": 203966,
+      "sha256": "b5f40ab550e10c5c038245e78dbed980b4dc9908dd0ecc8d31c87084fd0aa3e5",
+      "topic": "VerticalHandoff"
+    },
+    {
+      "filename": "VerticalHandoff_NeuralNetwork_Algorithms.pdf",
+      "size_bytes": 307751,
+      "sha256": "d2278b93b31b075662233f8f35dc51363748a8ddf0a28ffd884b1c6726193ff4",
+      "topic": "VerticalHandoff"
+    },
+    {
+      "filename": "VerticalHandoff_NextGen_DecisionAlgorithm.pdf",
+      "size_bytes": 314077,
+      "sha256": "7a5f55004f99a52b3e6b63d822478f044e9bfbe89b3ba6960a72b5726a41a39a",
+      "topic": "VerticalHandoff"
+    },
+    {
+      "filename": "VerticalHandover_DecisionManagement_System.pdf",
+      "size_bytes": 489926,
+      "sha256": "b3d04fc158a82640e89e46f29670423e833665ab54f420acc888b56738e246f2",
+      "topic": "VerticalHandover"
+    },
+    {
+      "filename": "VerticalHandover_Decision_AlgorithmScheme.pdf",
+      "size_bytes": 1460579,
+      "sha256": "e0dc4a7c7505a8fbbf831e08f0c3db785c5c2afac548a8b732d153b7dcd33c52",
+      "topic": "VerticalHandover"
+    },
+    {
+      "filename": "Wireless_SpeedAware_HandoverSystem.pdf",
+      "size_bytes": 1448751,
+      "sha256": "036b6d0f7457325f53f3093ed29250c9b3f7d6224d5d3cb0759a634d4c784b2b",
+      "topic": "Wireless"
+    }
+  ],
+  "audit_trail": [
+    {
+      "action": "CORPUS_REORGANIZATION",
+      "detail": "Renamed 24 truncated files to Topic_Subject_Details.pdf and separated from Physics",
+      "timestamp": "2026-09-10T06:10:35Z"
+    },
+    {
+      "action": "COLLABORATION_DIRECTIVE_ENACTED",
+      "detail": "Authorized free sharing and zero-barrier onboarding for any team member",
+      "timestamp": "2026-09-10T06:10:35Z"
+    },
+    {
+      "action": "ACROPOLIS_CRYPTOGRAPHIC_SEAL",
+      "detail": "Signed SHA-256 seal COMMS-GOLD-STD-20260910 and pinned as Gold Standard Reference",
+      "timestamp": "2026-09-10T06:10:35Z"
+    }
+  ],
+  "master_sha256_seal": "2b0d6158343a1e572e8133fccc4ea5567db8949879a7e070454b911d33ecd567"
+}

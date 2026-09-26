@@ -1,0 +1,40 @@
+{
+  "view_name": "original",
+  "title": "Original Hypersphere View (Canonical Baseline)",
+  "version": "1.0.0",
+  "description": "Pure S^3 7D-projected vortex and holographic core with concentric spheres, Hopf fibration tori, and clean cyan-to-purple gradient.",
+  "manifold": {
+    "dimension": "S^3_HYPERSPHERE_7D_PROJECTION",
+    "target_norm": 100.0,
+    "num_tori": 12,
+    "pts_per_ring": 48,
+    "stereographic_dist": 2.5
+  },
+  "palette": {
+    "center": "#00f0ff",
+    "outer": "#c084fc",
+    "ambient": "#38bdf8",
+    "background": "#030712",
+    "contrast": "#f8fafc"
+  },
+  "rotation": {
+    "auto_rotate": true,
+    "speed": 1.0,
+    "axis_xw": [0.707, 0.707, 0.0],
+    "axis_yz": [0.0, 0.577, 0.816]
+  },
+  "harmonics": {
+    "carrier_freq_hz": 432.000,
+    "schumann_lock_hz": 7.83,
+    "geomagnetic_field_nt": 48170,
+    "throat_ratio": 0.370370
+  },
+  "invariants": {
+    "norm": 100.0,
+    "phase_drift_deg": 0.0,
+    "coherence": 0.998,
+    "tensor_gate": [64, 64, 4096],
+    "continuous_manifold": true,
+    "subset_nature": "INFINITE_SMOOTH_SUBSETS_NOT_DISCRETE_2_POW_N"
+  }
+}

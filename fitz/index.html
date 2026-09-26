@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FITZ — Foundation</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Navigation / Routing Bar -->
+    <nav id="navbar">
+      <div class="nav-brand">
+        <span>FITZ</span>
+        <span class="badge-sub">KSOM FOUNDATION</span>
+      </div>
+      <div class="api-blink-container" id="fitz-blink-container" title="Live Port 8080 API Blink Beacon (2.0 Hz)">
+        <span class="api-blink-dot" id="fitz-blink-dot"></span>
+        <span class="api-blink-text" id="fitz-blink-label">API BLINK 2.0 Hz</span>
+        <span class="api-blink-latency" id="fitz-blink-latency">0ms</span>
+      </div>
+      <div class="nav-links">
+        <a href="#dashboard" class="nav-link active">Dashboard</a>
+        <a href="#instrument" class="nav-link">Instrument</a>
+        <a href="#settings" class="nav-link">Settings</a>
+        <a href="/" class="nav-link nav-link-external" title="Return to Chi Physics Core">← Chi Core</a>
+      </div>
+    </nav>
+
+    <!-- Main Content Area — Routing Targets -->
+    <main id="content">
+      <!-- Dashboard View -->
+      <section id="page-dashboard" class="page active">
+        <h1>Dashboard</h1>
+        <div class="panel">
+          <h2>System Controls</h2>
+          
+          <!-- Dropdown Example 1 -->
+          <label for="topology-select">Topology / Map Type</label>
+          <select id="topology-select" class="dropdown">
+            <option value="ksom" selected>KSOM — Kohonen Self-Organizing Map</option>
+            <option value="sevenseg">Seven-Segment Display</option>
+            <option value="vmem">Virtual Memory</option>
+            <option value="custom">Custom</option>
+          </select>
+
+          <!-- Dropdown Example 2 -->
+          <label for="init-select">Initialization Mode</label>
+          <select id="init-select" class="dropdown">
+            <option value="random" selected>Random Weights</option>
+            <option value="linear">Linear Spread</option>
+            <option value="preset">Preset File</option>
+          </select>
+
+          <!-- Dropdown Example 3 -->
+          <label for="neighborhood-select">Neighborhood Function</label>
+          <select id="neighborhood-select" class="dropdown">
+            <option value="bubble" selected>Bubble (Simple)</option>
+            <option value="gaussian">Gaussian</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Instrument / Metrics View -->
+      <section id="page-instrument" class="page">
+        <h1>Instrumentation & Metrics</h1>
+        <div class="panel">
+          <h2>Live Training Monitors</h2>
+          
+          <label for="metric-select">Display Metric</label>
+          <select id="metric-select" class="dropdown">
+            <option value="all" selected>All Metrics</option>
+            <option value="quantization">Quantization Error</option>
+            <option value="topographic">Topographic Error</option>
+            <option value="rate">Learning Rate</option>
+          </select>
+
+          <div id="instrument-readouts">
+            <div class="meter">
+              <span class="label">Quantization Error:</span>
+              <span id="val-qerr" class="value">—</span>
+            </div>
+            <div class="meter">
+              <span class="label">Topo Error:</span>
+              <span id="val-topo" class="value">—</span>
+            </div>
+            <div class="meter">
+              <span class="label">Nodes:</span>
+              <span id="val-nodes" class="value">1510</span>
+            </div>
+            <div class="meter">
+              <span class="label">Status:</span>
+              <span id="val-status" class="value">Ready</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Settings View -->
+      <section id="page-settings" class="page">
+        <h1>Configuration & Routing</h1>
+        <div class="panel">
+          <h2>Network & Routing</h2>
+          <label for="route-select">API / Data Source</label>
+          <select id="route-select" class="dropdown">
+            <option value="local" selected>Local Engine</option>
+            <option value="api">Remote API</option>
+            <option value="stream">Live Stream</option>
+          </select>
+
+          <label for="security-select">Security Mode</label>
+          <select id="security-select" class="dropdown">
+            <option value="strict">Strict / Verified</option>
+            <option value="warm" selected>Warm / Monitoring</option>
+            <option value="permissive">Permissive</option>
+          </select>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

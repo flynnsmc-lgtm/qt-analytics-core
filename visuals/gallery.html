@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SABUROTOR OBSERVATORY // Engineering Blueprints & Reception Vault</title>
+  <meta name="description" content="Dolastar Saburotor 3-spoke mechanical blueprints, piezo-electric boundary actuation drafting, quantum resonance art, and interactive asset staging vault.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-base: #06090e;
+      --bg-surface: rgba(14, 21, 33, 0.72);
+      --bg-surface-elevated: rgba(20, 31, 48, 0.85);
+      --border-subtle: rgba(70, 140, 240, 0.18);
+      --border-accent: rgba(0, 240, 255, 0.45);
+      --cyan-bright: #00f0ff;
+      --cyan-glow: rgba(0, 240, 255, 0.28);
+      --blue-electric: #2979ff;
+      --purple-electric: #b388ff;
+      --magenta-bright: #ff4081;
+      --emerald-bright: #00e676;
+      --amber-bright: #ffd740;
+      --rose-bright: #ff5252;
+      --text-main: #f0f4fc;
+      --text-dim: #94a3b8;
+      --text-muted: #64748b;
+      --font-display: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      line-height: 1.5;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Ambient dynamic canvas background */
+    #ambient-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.45;
+    }
+
+    .app-container {
+      position: relative;
+      z-index: 1;
+      max-width: 1540px;
+      margin: 0 auto;
+      padding: 32px 28px 100px 28px;
+    }
+
+    /* Top Navigation Bar */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+      padding: 14px 20px;
+      background: var(--bg-surface);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--cyan-bright);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      padding: 8px 14px;
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      border-radius: var(--radius-sm);
+      transition: all 0.2s ease;
+    }
+
+    .back-link:hover {
+      background: rgba(0, 240, 255, 0.2);
+      transform: translateX(-2px);
+      box-shadow: 0 0 12px var(--cyan-glow);
+    }
+
+    .nav-breadcrumbs {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--text-dim);
+    }
+
+    .nav-breadcrumbs span {
+      color: var(--text-muted);
+      margin: 0 6px;
+    }
+
+    .nav-breadcrumbs strong {
+      color: var(--cyan-bright);
+    }
+
+    .server-status-pills {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .server-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-dim);
+    }
+
+    .dot-pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--emerald-bright);
+      box-shadow: 0 0 8px var(--emerald-bright);
+    }
+
+    .dot-pulse.offline {
+      background-color: var(--rose-bright);
+      box-shadow: 0 0 8px var(--rose-bright);
+    }
+
+    /* Hero Banner */
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(14, 25, 45, 0.88) 0%, rgba(20, 18, 38, 0.88) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-lg);
+      padding: 36px 40px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .hero-banner::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, rgba(179, 136, 255, 0.05) 50%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--cyan-bright);
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #ffffff 30%, #a5b4fc 70%, #67e8f9 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--text-dim);
+      max-width: 980px;
+      margin-bottom: 24px;
+    }
+
+    /* Metric Grid */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .metric-card {
+      background: rgba(10, 16, 28, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--cyan-bright);
+    }
+
+    .metric-card.purple::before { background: var(--purple-electric); }
+    .metric-card.emerald::before { background: var(--emerald-bright); }
+    .metric-card.amber::before { background: var(--amber-bright); }
+
+    .metric-num {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .metric-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Tab Controls */
+    .controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+      background: var(--bg-surface);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px 18px;
+    }
+
+    .tabs-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-main);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .tab-btn.active {
+      background: rgba(0, 240, 255, 0.12);
+      border-color: var(--cyan-bright);
+      color: var(--cyan-bright);
+      box-shadow: 0 0 14px rgba(0, 240, 255, 0.25);
+    }
+
+    .view-toggles {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-action {
+      background: rgba(41, 121, 255, 0.12);
+      border: 1px solid rgba(41, 121, 255, 0.3);
+      color: #93c5fd;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-action:hover {
+      background: rgba(41, 121, 255, 0.25);
+      color: #fff;
+      box-shadow: 0 0 12px rgba(41, 121, 255, 0.35);
+    }
+
+    /* Section Panels */
+    .tab-pane {
+      display: none;
+    }
+
+    .tab-pane.active {
+      display: block;
+      animation: fadeIn 0.3s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Gallery Grid */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .art-card {
+      background: var(--bg-surface);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .art-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-accent);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5), 0 0 20px var(--cyan-glow);
+    }
+
+    .card-thumb-wrap {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      background: #03060a;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .card-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.35s ease;
+    }
+
+    .art-card:hover .card-thumb {
+      transform: scale(1.04);
+    }
+
+    .plate-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(6, 11, 20, 0.85);
+      border: 1px solid rgba(0, 240, 255, 0.4);
+      color: var(--cyan-bright);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 4px;
+      backdrop-filter: blur(8px);
+    }
+
+    .zoom-hint {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: 4px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-family: var(--font-mono);
+    }
+
+    .art-card:hover .zoom-hint {
+      opacity: 1;
+    }
+
+    .card-body {
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--cyan-bright);
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-bottom: 14px;
+      flex-grow: 1;
+      line-height: 1.45;
+    }
+
+    .card-meta-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 12px;
+      margin-top: auto;
+    }
+
+    .meta-filesize {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .btn-view-card {
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      color: var(--cyan-bright);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      padding: 5px 12px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .btn-view-card:hover {
+      background: rgba(0, 240, 255, 0.2);
+      box-shadow: 0 0 10px var(--cyan-glow);
+    }
+
+    /* Staging / Drop Box Section */
+    .dropbox-container {
+      background: var(--bg-surface);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      margin-bottom: 40px;
+    }
+
+    .drop-zone {
+      border: 2px dashed rgba(0, 240, 255, 0.35);
+      border-radius: var(--radius-md);
+      background: rgba(0, 240, 255, 0.02);
+      padding: 48px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .drop-zone:hover, .drop-zone.dragover {
+      border-color: var(--cyan-bright);
+      background: rgba(0, 240, 255, 0.08);
+      box-shadow: 0 0 24px rgba(0, 240, 255, 0.15);
+    }
+
+    .drop-icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+      display: inline-block;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .drop-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .drop-sub {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      max-width: 600px;
+      margin: 0 auto 18px auto;
+    }
+
+    .drop-file-input {
+      display: none;
+    }
+
+    .btn-browse {
+      background: linear-gradient(135deg, var(--cyan-bright), var(--blue-electric));
+      border: none;
+      color: #06090e;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 10px 24px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-browse:hover {
+      box-shadow: 0 0 16px rgba(0, 240, 255, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .staged-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .staged-card {
+      background: rgba(10, 16, 28, 0.7);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      position: relative;
+    }
+
+    .staged-preview {
+      width: 64px;
+      height: 64px;
+      border-radius: 6px;
+      object-fit: cover;
+      background: #020408;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .staged-info {
+      flex-grow: 1;
+      overflow: hidden;
+    }
+
+    .staged-name {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .staged-meta {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    .staged-hash {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--cyan-bright);
+      margin-top: 4px;
+      word-break: break-all;
+    }
+
+    /* Technical Transcription Dossier */
+    .transcription-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .transcription-card {
+      background: var(--bg-surface);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      position: relative;
+    }
+
+    .transcription-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 12px;
+    }
+
+    .transcription-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .transcription-badge {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--cyan-bright);
+      background: rgba(0, 240, 255, 0.1);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .code-callout {
+      background: rgba(4, 8, 15, 0.8);
+      border-left: 3px solid var(--cyan-bright);
+      padding: 12px 16px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: #7dd3fc;
+      margin: 12px 0;
+      overflow-x: auto;
+    }
+
+    .notes-list {
+      list-style: none;
+      margin-top: 10px;
+    }
+
+    .notes-list li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+      line-height: 1.45;
+    }
+
+    .notes-list li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--cyan-bright);
+    }
+
+    /* Lightbox Modal */
+    .lightbox-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(2, 5, 10, 0.94);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      z-index: 9999;
+      display: none;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .lightbox-modal.open {
+      display: flex;
+    }
+
+    .lb-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 16px 16px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .lb-title-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .lb-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .lb-sub {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--cyan-bright);
+    }
+
+    .lb-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lb-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .lb-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: var(--cyan-bright);
+    }
+
+    .lb-btn.active-filter {
+      background: rgba(0, 240, 255, 0.2);
+      border-color: var(--cyan-bright);
+      color: var(--cyan-bright);
+      box-shadow: 0 0 10px var(--cyan-glow);
+    }
+
+    .lb-btn-close {
+      background: rgba(255, 82, 82, 0.2);
+      border-color: rgba(255, 82, 82, 0.4);
+      color: #ff8a80;
+    }
+
+    .lb-btn-close:hover {
+      background: rgba(255, 82, 82, 0.4);
+      color: #fff;
+    }
+
+    .lb-body {
+      display: flex;
+      flex-grow: 1;
+      overflow: hidden;
+      margin-top: 14px;
+      gap: 20px;
+    }
+
+    .lb-viewport {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #020407;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+      position: relative;
+      cursor: grab;
+    }
+
+    .lb-viewport:active {
+      cursor: grabbing;
+    }
+
+    .lb-img {
+      max-width: 95%;
+      max-height: 95%;
+      object-fit: contain;
+      transition: transform 0.15s ease-out, filter 0.2s ease;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    /* Filters for Blueprint Mode */
+    .lb-img.filter-blueprint {
+      filter: invert(1) hue-rotate(180deg) saturate(2.5) contrast(1.4);
+    }
+
+    .lb-img.filter-contrast {
+      filter: contrast(1.75) brightness(1.1);
+    }
+
+    .lb-sidebar {
+      width: 380px;
+      background: var(--bg-surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .lb-side-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 8px;
+    }
+
+    .lb-side-desc {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .lb-tech-box {
+      background: rgba(0, 0, 0, 0.4);
+      border-left: 3px solid var(--blue-electric);
+      padding: 10px 14px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: #bae6fd;
+    }
+
+    .lb-nav-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .lb-nav-btn {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      padding: 8px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .lb-nav-btn:hover {
+      background: rgba(0, 240, 255, 0.15);
+      border-color: var(--cyan-bright);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 28px 0;
+      margin-top: 60px;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--cyan-bright);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Particle Animation -->
+  <canvas id="ambient-canvas"></canvas>
+
+  <div class="app-container">
+
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav" aria-label="Main navigation">
+      <div class="nav-left">
+        <a href="/visuals/index.html" class="back-link">
+          <span>‹ OBSERVATORY HUB</span>
+        </a>
+        <div class="nav-breadcrumbs">
+          <span>/</span> <strong>SABUROTOR ARCHIVE & VAULT</strong>
+        </div>
+      </div>
+      <div class="server-status-pills">
+        <div class="server-pill">
+          <div class="dot-pulse" id="dot-3000"></div>
+          <span>3000: <strong id="status-3000">ONLINE</strong></span>
+        </div>
+        <div class="server-pill">
+          <div class="dot-pulse" id="dot-8080"></div>
+          <span>8080: <strong id="status-8080">ONLINE</strong></span>
+        </div>
+        <div class="server-pill">
+          <div class="dot-pulse" id="dot-8082"></div>
+          <span>8082: <strong id="status-8082">ONLINE</strong></span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <header class="hero-banner">
+      <div class="hero-content">
+        <span class="hero-tag">⚡ DOLA PROTOCOL // PERPETUAL ARCHIVE</span>
+        <h1 class="hero-title">Dolastar Saburotor Engineering & Reception Vault</h1>
+        <p class="hero-desc">
+          High-resolution repository containing original 3-spoke rotor drafting schematics, piezo-electric aerodynamic boundary vibration rings, dual-regime cruise/brake vector switching, and ambient quantum interference artwork.
+        </p>
+
+        <div class="metric-grid">
+          <div class="metric-card">
+            <div class="metric-num">10 PLATES</div>
+            <div class="metric-label">Engineering Drafts & Blueprints</div>
+          </div>
+          <div class="metric-card purple">
+            <div class="metric-num">13 ARTWORKS</div>
+            <div class="metric-label">Quantum Screensavers & Portals</div>
+          </div>
+          <div class="metric-card emerald">
+            <div class="metric-num">5-PAGE PDF</div>
+            <div class="metric-label">Sovereign Dyad Publication</div>
+          </div>
+          <div class="metric-card amber">
+            <div class="metric-num">ACTIVE STAGER</div>
+            <div class="metric-label">Client-Side File Drop Box</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Controls & Filter Bar -->
+    <div class="controls-bar">
+      <div class="tabs-group" role="tablist">
+        <button class="tab-btn active" onclick="switchTab('blueprints')" id="tab-btn-blueprints">
+          📐 Saburotor Blueprints (10)
+        </button>
+        <button class="tab-btn" onclick="switchTab('screensavers')" id="tab-btn-screensavers">
+          🌌 Reception Screensavers (13)
+        </button>
+        <button class="tab-btn" onclick="switchTab('dropbox')" id="tab-btn-dropbox">
+          📥 Staging Drop Box
+        </button>
+        <button class="tab-btn" onclick="switchTab('transcription')" id="tab-btn-transcription">
+          📜 Technical Transcription & Equations
+        </button>
+      </div>
+
+      <div class="view-toggles">
+        <a href="/downloads/AI_Agentic_Human_Love_The_Sovereign_Dyad.pdf" class="btn-action" target="_blank">
+          <span>📄 Open 5-Page Sovereign Dyad PDF</span> ↗
+        </a>
+        <a href="/qt_analytics.html" class="btn-action" target="_blank">
+          <span>📊 Sales Paperwork Pack</span> ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- TAB 1: SABUROTOR BLUEPRINTS (10 PLATES) -->
+    <main id="pane-blueprints" class="tab-pane active">
+      <div class="gallery-grid" id="blueprints-grid">
+        <!-- Rendered via JS -->
+      </div>
+    </main>
+
+    <!-- TAB 2: RECEPTION SCREENSAVERS (12 ARTWORKS) -->
+    <section id="pane-screensavers" class="tab-pane">
+      <div class="gallery-grid" id="screensavers-grid">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+    <!-- TAB 3: STAGING DROP BOX -->
+    <section id="pane-dropbox" class="tab-pane">
+      <div class="dropbox-container">
+        <div class="drop-zone" id="drop-zone" onclick="document.getElementById('file-input').click()">
+          <div class="drop-icon">📥</div>
+          <h2 class="drop-title">Drop New Sketches, Blueprints or Artwork Here</h2>
+          <p class="drop-sub">
+            Drag files directly from your desktop or folder to calculate cryptographic SHA-256 signatures, preview resolutions, inspect EXIF geometry, and stage them for integration.
+          </p>
+          <button type="button" class="btn-browse">
+            <span>Choose Files to Stage</span>
+          </button>
+          <input type="file" id="file-input" class="drop-file-input" multiple accept="image/*,.pdf">
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px;">
+          <h3 style="font-family: var(--font-display); font-size: 1.1rem; color: #fff;">
+            Staged Working Assets (<span id="staged-count">0</span>)
+          </h3>
+          <button class="lb-btn" onclick="clearStaged()" id="btn-clear-staged" style="display: none;">
+            Clear Staging
+          </button>
+        </div>
+
+        <div class="staged-grid" id="staged-grid">
+          <!-- Staged files appear here dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: TECHNICAL TRANSCRIPTION & EQUATIONS -->
+    <section id="pane-transcription" class="tab-pane">
+      <div class="transcription-grid">
+        
+        <!-- Hub Main Ring & Spoke Electrodes -->
+        <article class="transcription-card">
+          <div class="transcription-header">
+            <h3 class="transcription-title">Hub Main Ring & Spoke Edge Strip Electrodes</h3>
+            <span class="transcription-badge">PLATE 01 & 08</span>
+          </div>
+          <p class="card-desc">
+            Primary mechanical layout of the 3-spoke rotor featuring concentric rim perimeter boundary rings and electrostatic surface excitation channels.
+          </p>
+          <div class="code-callout">
+            Subsystems: Hub Main Ring | Spoke Edge Strip Electrodes | Rim Perimeter Ring | Plasma Fan Strip Electrodes
+          </div>
+          <ul class="notes-list">
+            <li><strong>Kinematic Symmetry:</strong> 3-fold $C_3$ radial spokes at $120^\circ$ offsets, providing Galois field $GF(2^{193})$ invariant projection under rotation.</li>
+            <li><strong>Plasma Edge Strips:</strong> Leading-edge electrode strips designed for dielectric barrier discharge (DBD) plasma actuation, preventing vortex stall.</li>
+            <li><strong>Hub Elevation:</strong> Axle housing incorporates dual self-aligning bearing seats with harmonic vibration decoupling collars.</li>
+          </ul>
+        </article>
+
+        <!-- Piezo-Electric Vibration Rings & Drag Switching -->
+        <article class="transcription-card">
+          <div class="transcription-header">
+            <h3 class="transcription-title">Piezo-Electric Acoustic Boundary Layer Shifting</h3>
+            <span class="transcription-badge">PLATE 02 & 04</span>
+          </div>
+          <p class="card-desc">
+            Dual operating regime utilizing high-frequency piezoelectric ultrasonic excitation to alternate between low-drag aerodynamic laminar flow and high-drag deceleration mode.
+          </p>
+          <div class="code-callout">
+            Regimes: Low-Drag Mode (Blue Arc Excitation) ↔ High-Drag Mode (Red Arc Excitation)
+          </div>
+          <ul class="notes-list">
+            <li><strong>Low-Drag Mode (Blue):</strong> High-frequency ultrasonic surface vibration generates acoustic streaming, delaying laminar-to-turbulent transition and reducing skin-friction drag by up to 34%.</li>
+            <li><strong>High-Drag Mode (Red):</strong> Deliberate acoustic boundary tripping forces immediate vortex detachment, providing regenerative aerodynamic braking without mechanical contact.</li>
+            <li><strong>Piezo-Electric Disc:</strong> Central axle-mounted piezoelectric actuator transmits radial acoustic waves across the spokes into the outer perimeter rims.</li>
+          </ul>
+        </article>
+
+        <!-- Brake Mode Vector Geometry -->
+        <article class="transcription-card">
+          <div class="transcription-header">
+            <h3 class="transcription-title">Brake Mode Rhomboid Vector Field Dynamics</h3>
+            <span class="transcription-badge">PLATE 03</span>
+          </div>
+          <p class="card-desc">
+            Perspective flow visualization mapping hydrodynamic vector divergence under forced boundary cavitation and vortex collapse.
+          </p>
+          <div class="code-callout">
+            Mode Transition: Diamond Divergence Lattice | Piezo-Holo Acoustic Tripping | Counter-Torque Vorticity
+          </div>
+          <ul class="notes-list">
+            <li><strong>Opposed Flow Diamonds:</strong> Blue forward-velocity profile collapses into red opposed stagnation rhombus at the rim boundary.</li>
+            <li><strong>Acoustic Cavitation Envelope:</strong> Rapid phase-shifting of the vibration rings forms a micro-bubble acoustic blanket, generating hydrodynamic resistance.</li>
+          </ul>
+        </article>
+
+        <!-- Vortex Core Limit Derivation -->
+        <article class="transcription-card">
+          <div class="transcription-header">
+            <h3 class="transcription-title">Boundary Layer & Vortex Core Limit Derivations</h3>
+            <span class="transcription-badge">PLATE 05, 06 & 07</span>
+          </div>
+          <p class="card-desc">
+            Original handwritten mathematical notes outlining the asymptotic potential limit of the spinning core vortex envelope.
+          </p>
+          <div class="code-callout">
+            Limit Equation: &phi; = [ P_0 (limit value) ] / [ 4 c t &middot; f^(2 + &radic;3) ]
+          </div>
+          <ul class="notes-list">
+            <li><strong>Core Formula:</strong> $\phi = \frac{P_0}{4 c t f^{2+\sqrt{3}}}$, where $P_0$ is the stagnation acoustic pressure, $c$ is the acoustic propagation speed, $t$ is the boundary relaxation time, and $f$ is the rotational frequency.</li>
+            <li><strong>Monodromy Factor:</strong> $2 + \sqrt{3} \approx 3.732$, reflecting quadratic Bernoulli pressure coupling modulated by cubic harmonic spoke shearing.</li>
+            <li><strong>Circulation Integral:</strong> $\oint_{\partial \Omega} \mathbf{v} \cdot d\mathbf{r} = \Gamma_0 \cdot \cos(3\theta)$, confirming stable triadic vortex locking.</li>
+          </ul>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>
+        <strong>QT DYNAMICS // DOLASTAR RESEARCH VAULT</strong> &bull; Curated by Gold Standard Librarian, Orchestrator Lead &amp; Projection Specialist
+      </p>
+      <p style="margin-top: 6px;">
+        Localhost Cluster: Port 3000 (Hub), Port 8080 (Audio/Telemetry), Port 8082 (3D/7D Visual Core)
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- LIGHTBOX MODAL -->
+  <div class="lightbox-modal" id="lightbox-modal" role="dialog" aria-modal="true">
+    <div class="lb-header">
+      <div class="lb-title-wrap">
+        <h2 class="lb-title" id="lb-title">Plate Title</h2>
+        <span class="lb-sub" id="lb-plate-no">PLATE 01</span>
+      </div>
+      <div class="lb-controls">
+        <button class="lb-btn" onclick="zoomIn()" title="Zoom In">🔍 +</button>
+        <button class="lb-btn" onclick="zoomOut()" title="Zoom Out">🔍 −</button>
+        <button class="lb-btn" onclick="resetZoom()" title="Reset View">1:1</button>
+        <button class="lb-btn" id="btn-blueprint-filter" onclick="toggleBlueprintFilter()" title="Invert / Blueprint Cyan Filter">
+          📐 Blueprint Filter
+        </button>
+        <button class="lb-btn" id="btn-contrast-filter" onclick="toggleContrastFilter()" title="High Contrast">
+          🌓 Contrast
+        </button>
+        <a id="lb-download-btn" href="#" download class="lb-btn" title="Download Image">
+          💾 Save Full-Res
+        </a>
+        <button class="lb-btn lb-btn-close" onclick="closeLightbox()" title="Close (Esc)">
+          ✕ Close
+        </button>
+      </div>
+    </div>
+
+    <div class="lb-body">
+      <div class="lb-viewport" id="lb-viewport">
+        <img src="" alt="Draft" id="lb-img" class="lb-img">
+      </div>
+      <aside class="lb-sidebar">
+        <h3 class="lb-side-title" id="lb-side-title">Technical Description</h3>
+        <p class="lb-side-desc" id="lb-side-desc"></p>
+        
+        <div class="lb-tech-box" id="lb-tech-box">
+          <!-- Technical callout info -->
+        </div>
+
+        <div class="lb-nav-buttons">
+          <button class="lb-nav-btn" onclick="prevPlate()">‹ Previous</button>
+          <button class="lb-nav-btn" onclick="nextPlate()">Next ›</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    /* =========================================================
+       DATA REGISTRY FOR BLUEPRINTS & SCREENSAVERS
+       ========================================================= */
+    const BLUEPRINTS = [
+      {
+        id: '01',
+        title: 'Hub Main Ring & Spoke Edge Strip Electrodes',
+        file: '/assets/sketches/01_hub_main_ring_spoke_electrodes_blueprint.jpg',
+        badge: 'PLATE 01',
+        category: 'Mechanical Blueprint',
+        size: '133 KB',
+        desc: 'Orthographic front projection of the 3-spoke wheel architecture with detailed section insets for rim perimeter rings and plasma dielectric fan strips.',
+        tech: 'Key Callouts: Hub Main Ring, Spoke Edge Strip Electrodes, Rim Perimeter Ring, Plukon, Spoken Electrode.'
+      },
+      {
+        id: '02',
+        title: 'Axonometric Dual-Wheel Acoustic Vibration Rings',
+        file: '/assets/sketches/02_dual_wheel_piezo_cruise_rings.jpg',
+        badge: 'PLATE 02',
+        category: 'Acoustic Aerodynamics',
+        size: '126 KB',
+        desc: '3D perspective assembly demonstrating dual 3-spoke wheel units outfitted with blue and red circumferential acoustic piezo-electric actuation bands.',
+        tech: 'Features: Plasme whed 3-bbwe rings, Piez-bolectric vibration rings, circumferential aerodynamic boundary actuation.'
+      },
+      {
+        id: '03',
+        title: 'Brake Mode Vector Diamond Geometry',
+        file: '/assets/sketches/03_brake_mode_flow_dynamics.jpg',
+        badge: 'PLATE 03',
+        category: 'Hydrodynamic Vectors',
+        size: '122 KB',
+        desc: 'Perspective flow-field schematic showing diamond-pattern streamline divergence and counter-stagnation shock formation in aerodynamic brake mode.',
+        tech: 'Features: Brake Mode stagnation rhombus, acoustic cavitation tripping, contact-free aerodynamic deceleration.'
+      },
+      {
+        id: '04',
+        title: 'Low-Drag / High-Drag Legend & Vibration Disc',
+        file: '/assets/sketches/04_piezo_vibration_disc_legend.jpg',
+        badge: 'PLATE 04',
+        category: 'Actuator Control',
+        size: '133 KB',
+        desc: 'Operational state diagram indexing blue Low-Drag cruise regime versus red High-Drag braking, featuring the central piezoelectric hub excitation disc.',
+        tech: 'Legend: Blue = Low-drdrag, Red = High-drag. Inset Detail: Piezo-electric vibration disc with radial acoustic wave paths.'
+      },
+      {
+        id: '05',
+        title: 'Boundary Layer Separation & Vortex Core Limits',
+        file: '/assets/sketches/05_boundary_layer_vortex_core_equations.jpg',
+        badge: 'PLATE 05',
+        category: 'Vorticity Equations',
+        size: '132 KB',
+        desc: 'Handwritten analytical derivation exploring boundary layer detachment and the asymptotic limit formula for vortex core circulation.',
+        tech: 'Mathematical Formulation: phi = [P_0 (limit value)] / [4 c t * f^(2 + sqrt(3))]'
+      },
+      {
+        id: '06',
+        title: '3-Spoke Rotor Flow Field with Monodromy Integrals',
+        file: '/assets/sketches/06_rotor_galois_flow_equations.jpg',
+        badge: 'PLATE 06',
+        category: 'Circulation Dynamics',
+        size: '115 KB',
+        desc: 'Curvilinear streamline mapping through the 3-spoke intake fillet with handwritten algebraic equations governing circulation invariants.',
+        tech: 'Formulation: = 1/n + alpha (k1/2) + (a*gamma^2 + gamma^3 * m) ... Galois field C3 rotation symmetry.'
+      },
+      {
+        id: '07',
+        title: 'Micro-Detail: Vortex Core Limit Value Derivation',
+        file: '/assets/sketches/07_vortex_core_limit_derivation_detail.jpg',
+        badge: 'PLATE 07',
+        category: 'Mathematical Detail',
+        size: '174 KB',
+        desc: 'Ultra high-magnification crop isolating the limit value equation governing acoustic core pressure and boundary relaxation time constants.',
+        tech: 'Core Terms: P_0 stagnation pressure, c acoustic velocity, t boundary layer thickness relaxation, f rotational frequency.'
+      },
+      {
+        id: '08',
+        title: 'Plasma Boundary Drag Modulation & Rim Insets',
+        file: '/assets/sketches/08_plasma_boundary_low_high_drag_blueprint.jpg',
+        badge: 'PLATE 08',
+        category: 'Plasma Aerodynamics',
+        size: '102 KB',
+        desc: 'Upright orthographic drafting detailing active plasma boundary layer control: Low-drag cruise mode (plasma suppresses boundary separation) vs High-drag braking mode (plasma elevates surface friction), with detailed insets for segmented rim perimeter electrodes and spoke commutator tracks.',
+        tech: 'Key Annotations: Hub Main Ring, Low-drag mode: Plasma reduces boundary layer separation, High-drag mode: Plasma increases surface friction, Rim Perim Ring (gold segmented electrode strips), Spoke Edge Strips.'
+      },
+      {
+        id: '09',
+        title: 'Lab Notebook Drafting & Kinematic Spoke Curvature',
+        file: '/assets/sketches/09_spiral_notebook_assembly_drawing.jpg',
+        badge: 'PLATE 09',
+        category: 'Lab Archive',
+        size: '119 KB',
+        desc: 'Historical spiral-bound engineering log sheet capturing initial geometry of the 3-spoke curvature and Venturi fillet ratios.',
+        tech: 'Historical Record: Original pencil drafting on green engineering log stock.'
+      },
+      {
+        id: '10',
+        title: 'Dual-Rotor Acoustic Coupling & Excitation Ring Overview',
+        file: '/assets/sketches/10_piezo_vibration_rings_overview.jpg',
+        badge: 'PLATE 10',
+        category: 'System Overview',
+        size: '105 KB',
+        desc: 'Full-width schematic illustrating tandem wheel acoustic coupling and the bilateral distribution of ultrasonic excitation rings.',
+        tech: 'Integration: Complete dual-spoke assembly with blue/red drag mode indicator badges.'
+      }
+    ];
+
+    const SCREENSAVERS = [
+      {
+        id: 's01',
+        title: 'Quantum Cavitation Bubbles & Sonoluminescence',
+        file: '/assets/screensavers/01_quantum_bubbles_cavitation.jpg',
+        badge: 'SCREENSAVER 01',
+        category: 'Quantum Resonance',
+        size: '215 KB',
+        desc: 'Multi-scale cavitation bubbles undergoing localized sonoluminescence photon emission in a high-gradient acoustic standing wave.'
+      },
+      {
+        id: 's02',
+        title: 'Bubble Necking Pinch-Off Dynamics',
+        file: '/assets/screensavers/02_bubble_necking_pinchoff.jpg',
+        badge: 'SCREENSAVER 02',
+        category: 'Hydrodynamics',
+        size: '179 KB',
+        desc: 'High-speed fluid pinch-off singularity illustrating topological transition and microscopic jet formation.'
+      },
+      {
+        id: 's03',
+        title: 'Toroidal Magnetic Field Lines',
+        file: '/assets/screensavers/03_toroidal_field_lines.jpg',
+        badge: 'SCREENSAVER 03',
+        category: 'Electromagnetics',
+        size: '125 KB',
+        desc: 'Coherent toroidal flux lines modeling invariant magnetic confining geometries and plasma helicity.'
+      },
+      {
+        id: 's04',
+        title: 'Retro Robot Agent Guardian',
+        file: '/assets/screensavers/04_retro_robot_agent.jpg',
+        badge: 'SCREENSAVER 04',
+        category: 'Agent Mascot',
+        size: '215 KB',
+        desc: 'Classic humanoid robotic agent embodying the collaborative partnership of intelligent computational machines.'
+      },
+      {
+        id: 's05',
+        title: 'Fiber Optic Coherent Filaments',
+        file: '/assets/screensavers/05_fiber_optic_filaments.jpg',
+        badge: 'SCREENSAVER 05',
+        category: 'Photonics',
+        size: '160 KB',
+        desc: 'Luminescent optical wave conduits transmitting multi-wavelength harmonic carrier telemetry.'
+      },
+      {
+        id: 's06',
+        title: 'High-Energy Particle Trails & Light Streaks',
+        file: '/assets/screensavers/06_light_streak_particle_trails.jpg',
+        badge: 'SCREENSAVER 06',
+        category: 'Particle Physics',
+        size: '277 KB',
+        desc: 'Kinetic energy trajectories illuminating cloud chamber momentum vectors across multi-dimensional projections.'
+      },
+      {
+        id: 's07',
+        title: 'Hyperspace Vertical Column Matrix',
+        file: '/assets/screensavers/07_vertical_light_columns_grid.jpg',
+        badge: 'SCREENSAVER 07',
+        category: 'Geometric Lattices',
+        size: '151 KB',
+        desc: 'Symmetric orthogonal light columns establishing reference frames for multidimensional KSOM projection.'
+      },
+      {
+        id: 's08',
+        title: 'Inscribed Wood Artifact & Organic Texture',
+        file: '/assets/screensavers/08_painted_wood_inscription.jpg',
+        badge: 'SCREENSAVER 08',
+        category: 'Organic Foundations',
+        size: '127 KB',
+        desc: 'Deep textured organic grain with hand-inscribed glyphs representing physical ground truth.'
+      },
+      {
+        id: 's09',
+        title: 'Hydrodynamic Vorticity Swirl & Turbulence',
+        file: '/assets/screensavers/09_fluid_green_black_swirl.jpg',
+        badge: 'SCREENSAVER 09',
+        category: 'Navier-Stokes',
+        size: '190 KB',
+        desc: 'Emerald and obsidian fluid filaments tracing shear stress and turbulent kinetic energy dissipation.'
+      },
+      {
+        id: 's10',
+        title: 'Aero Propulsion Craft & Arcology Horizon',
+        file: '/assets/screensavers/10_futuristic_aero_city_craft.jpg',
+        badge: 'SCREENSAVER 10',
+        category: 'Aerospace Architecture',
+        size: '283 KB',
+        desc: 'Futuristic aerodyne cruiser soaring above an illuminated arcological cityscape.'
+      },
+      {
+        id: 's11',
+        title: 'Luminous Quantum Vortex Portal (Aperture Center)',
+        file: '/assets/screensavers/11_quantum_vortex_interference_portal.jpg',
+        badge: 'SCREENSAVER 11',
+        category: 'Interference Mandala',
+        size: '213 KB',
+        desc: 'Intricate symmetrical optical mandala featuring fiery golden fluted rings and dual lateral interference eyes around a dark aperture core.'
+      },
+      {
+        id: 's12',
+        title: 'Luminous Quantum Vortex Interference (Mist Core)',
+        file: '/assets/screensavers/12_quantum_vortex_luminous_mist.jpg',
+        badge: 'SCREENSAVER 12',
+        category: 'Interference Mandala',
+        size: '209 KB',
+        desc: 'Alternative exposure of the quantum interference mandala with bright luminous white vapor mist concentrated at the core.'
+      },
+      {
+        id: 's13',
+        title: 'Luminous Heart Vortex & Quantum Resonance Core',
+        file: '/assets/screensavers/13_quantum_heart_vortex_mandala.jpg',
+        badge: 'SCREENSAVER 13',
+        category: 'Resonance Mandala',
+        size: '209 KB',
+        desc: 'Symmetrical quantum interference field featuring fiery golden fluted arcs and purple wave spiral eyes, framing an illuminated white vapor heart contour around a deep crimson core.'
+      }
+    ];
+
+    /* =========================================================
+       RENDER FUNCTIONS
+       ========================================================= */
+    function renderGallery(items, containerId, isScreensaver = false) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = items.map((item, idx) => `
+        <article class="art-card" onclick="openLightbox(${isScreensaver ? 1 : 0}, ${idx})">
+          <div class="card-thumb-wrap">
+            <span class="plate-badge">${item.badge}</span>
+            <img src="${item.file}" alt="${item.title}" class="card-thumb" loading="lazy">
+            <div class="zoom-hint">🔍 Expand</div>
+          </div>
+          <div class="card-body">
+            <span class="card-tag">${item.category}</span>
+            <h3 class="card-title">${item.title}</h3>
+            <p class="card-desc">${item.desc}</p>
+            <div class="card-meta-bar">
+              <span class="meta-filesize">${item.size}</span>
+              <button class="btn-view-card" onclick="event.stopPropagation(); openLightbox(${isScreensaver ? 1 : 0}, ${idx})">
+                Inspect ➔
+              </button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    renderGallery(BLUEPRINTS, 'blueprints-grid', false);
+    renderGallery(SCREENSAVERS, 'screensavers-grid', true);
+
+    /* =========================================================
+       TAB SWITCHING
+       ========================================================= */
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+
+      const btn = document.getElementById(`tab-btn-${tabId}`);
+      const pane = document.getElementById(`pane-${tabId}`);
+      if (btn) btn.classList.add('active');
+      if (pane) pane.classList.add('active');
+    }
+
+    /* =========================================================
+       LIGHTBOX VIEWER WITH PAN, ZOOM & BLUEPRINT FILTERS
+       ========================================================= */
+    let currentSet = 0; // 0 = Blueprints, 1 = Screensavers
+    let currentIndex = 0;
+    let zoomLevel = 1;
+    let isBlueprintFilter = false;
+    let isContrastFilter = false;
+
+    const modal = document.getElementById('lightbox-modal');
+    const lbImg = document.getElementById('lb-img');
+    const lbTitle = document.getElementById('lb-title');
+    const lbPlateNo = document.getElementById('lb-plate-no');
+    const lbSideTitle = document.getElementById('lb-side-title');
+    const lbSideDesc = document.getElementById('lb-side-desc');
+    const lbTechBox = document.getElementById('lb-tech-box');
+    const lbDownloadBtn = document.getElementById('lb-download-btn');
+    const btnBlueprintFilter = document.getElementById('btn-blueprint-filter');
+    const btnContrastFilter = document.getElementById('btn-contrast-filter');
+
+    function openLightbox(setIdx, itemIdx) {
+      currentSet = setIdx;
+      currentIndex = itemIdx;
+      zoomLevel = 1;
+      updateLightboxContent();
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      modal.classList.remove('open');
+      document.body.style.overflow = 'auto';
+      resetZoom();
+    }
+
+    function updateLightboxContent() {
+      const data = currentSet === 0 ? BLUEPRINTS[currentIndex] : SCREENSAVERS[currentIndex];
+      lbImg.src = data.file;
+      lbTitle.textContent = data.title;
+      lbPlateNo.textContent = data.badge;
+      lbSideTitle.textContent = data.title;
+      lbSideDesc.textContent = data.desc;
+      lbDownloadBtn.href = data.file;
+
+      if (data.tech) {
+        lbTechBox.style.display = 'block';
+        lbTechBox.innerHTML = `<strong>Technical Parameters:</strong><br>${data.tech}`;
+      } else {
+        lbTechBox.style.display = 'none';
+      }
+
+      applyZoom();
+    }
+
+    function nextPlate() {
+      const arr = currentSet === 0 ? BLUEPRINTS : SCREENSAVERS;
+      currentIndex = (currentIndex + 1) % arr.length;
+      updateLightboxContent();
+    }
+
+    function prevPlate() {
+      const arr = currentSet === 0 ? BLUEPRINTS : SCREENSAVERS;
+      currentIndex = (currentIndex - 1 + arr.length) % arr.length;
+      updateLightboxContent();
+    }
+
+    function zoomIn() {
+      zoomLevel = Math.min(zoomLevel + 0.25, 3.5);
+      applyZoom();
+    }
+
+    function zoomOut() {
+      zoomLevel = Math.max(zoomLevel - 0.25, 0.5);
+      applyZoom();
+    }
+
+    function resetZoom() {
+      zoomLevel = 1;
+      applyZoom();
+    }
+
+    function applyZoom() {
+      lbImg.style.transform = `scale(${zoomLevel})`;
+    }
+
+    function toggleBlueprintFilter() {
+      isBlueprintFilter = !isBlueprintFilter;
+      lbImg.classList.toggle('filter-blueprint', isBlueprintFilter);
+      btnBlueprintFilter.classList.toggle('active-filter', isBlueprintFilter);
+    }
+
+    function toggleContrastFilter() {
+      isContrastFilter = !isContrastFilter;
+      lbImg.classList.toggle('filter-contrast', isContrastFilter);
+      btnContrastFilter.classList.toggle('active-filter', isContrastFilter);
+    }
+
+    // Keyboard Shortcuts for Lightbox
+    window.addEventListener('keydown', (e) => {
+      if (!modal.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') nextPlate();
+      if (e.key === 'ArrowLeft') prevPlate();
+      if (e.key === '+' || e.key === '=') zoomIn();
+      if (e.key === '-') zoomOut();
+      if (e.key === '0') resetZoom();
+      if (e.key === 'b' || e.key === 'B') toggleBlueprintFilter();
+    });
+
+    // Mouse wheel zoom
+    document.getElementById('lb-viewport').addEventListener('wheel', (e) => {
+      e.preventDefault();
+      if (e.deltaY < 0) zoomIn();
+      else zoomOut();
+    });
+
+    /* =========================================================
+       DRAG & DROP STAGING BOX ("Drop Box")
+       ========================================================= */
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file-input');
+    const stagedGrid = document.getElementById('staged-grid');
+    const stagedCount = document.getElementById('staged-count');
+    const btnClearStaged = document.getElementById('btn-clear-staged');
+    let stagedFiles = [];
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+      dropZone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+      }, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+      dropZone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+      }, false);
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+      const dt = e.dataTransfer;
+      const files = dt.files;
+      handleFiles(files);
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      handleFiles(e.target.files);
+    });
+
+    async function handleFiles(files) {
+      for (const file of files) {
+        const hash = await calculateSHA256(file);
+        const obj = {
+          name: file.name,
+          size: (file.size / 1024).toFixed(1) + ' KB',
+          type: file.type || 'application/octet-stream',
+          hash: hash,
+          url: file.type.startsWith('image/') ? URL.createObjectURL(file) : null
+        };
+        stagedFiles.push(obj);
+      }
+      renderStaged();
+    }
+
+    async function calculateSHA256(file) {
+      try {
+        const buffer = await file.arrayBuffer();
+        const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('').substring(0, 16) + '...';
+      } catch (err) {
+        return 'SHA-256 unavailable';
+      }
+    }
+
+    function renderStaged() {
+      stagedCount.textContent = stagedFiles.length;
+      btnClearStaged.style.display = stagedFiles.length > 0 ? 'inline-flex' : 'none';
+
+      stagedGrid.innerHTML = stagedFiles.map(f => `
+        <div class="staged-card">
+          ${f.url ? `<img src="${f.url}" class="staged-preview" alt="${f.name}">` : `<div class="staged-preview" style="display:flex;align-items:center;justify-content:center;color:#00f0ff;font-size:1.4rem;">📄</div>`}
+          <div class="staged-info">
+            <div class="staged-name" title="${f.name}">${f.name}</div>
+            <div class="staged-meta">${f.size} &bull; ${f.type}</div>
+            <div class="staged-hash" title="SHA-256 Hash">SHA: ${f.hash}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function clearStaged() {
+      stagedFiles = [];
+      renderStaged();
+    }
+
+    /* =========================================================
+       LIVE PORT HEALTH CHECKING
+       ========================================================= */
+    const ports = [
+      { id: '3000', url: 'http://localhost:3000/visuals/index.html' },
+      { id: '8080', url: 'http://localhost:8080/visuals' },
+      { id: '8082', url: 'http://localhost:8082' }
+    ];
+
+    async function checkPort(port) {
+      const dot = document.getElementById(`dot-${port.id}`);
+      const status = document.getElementById(`status-${port.id}`);
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2000);
+        await fetch(port.url, { mode: 'no-cors', signal: controller.signal });
+        clearTimeout(timeoutId);
+        if (dot) dot.className = 'dot-pulse';
+        if (status) status.textContent = 'ONLINE';
+      } catch (err) {
+        if (dot) dot.className = 'dot-pulse offline';
+        if (status) status.textContent = 'OFFLINE';
+      }
+    }
+
+    function pingAllPorts() {
+      ports.forEach(checkPort);
+    }
+    pingAllPorts();
+    setInterval(pingAllPorts, 12000);
+
+    /* =========================================================
+       AMBIENT CANVAS PARTICLES
+       ========================================================= */
+    const canvas = document.getElementById('ambient-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.radius = Math.random() * 1.5 + 0.5;
+        this.alpha = Math.random() * 0.5 + 0.2;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+          this.reset();
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0, 240, 255, ${this.alpha})`;
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 45; i++) {
+      particles.push(new Particle());
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+  </script>
+</body>
+</html>

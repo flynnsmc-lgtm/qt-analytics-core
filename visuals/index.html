@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Localhost Visuals Command Hub — QT Analytics & Chi Physics Core</title>
+  <meta name="description" content="Centralized visual launchpad and interactive observatory for QT Analytics, Chi Physics Core, Hypersphere 3D/4D Manifolds, Spectral Forensics, and Comms Networks.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-void: #030712;
+      --bg-surface: rgba(15, 23, 42, 0.72);
+      --bg-surface-elevated: rgba(30, 41, 59, 0.82);
+      --bg-glass-card: rgba(15, 23, 42, 0.65);
+      --border-glow-cyan: rgba(0, 240, 255, 0.35);
+      --border-subtle: rgba(255, 255, 255, 0.09);
+      --cyan-bright: #00f0ff;
+      --cyan-dim: rgba(0, 240, 255, 0.15);
+      --amber-bright: #f59e0b;
+      --purple-bright: #c084fc;
+      --emerald-bright: #10b981;
+      --rose-bright: #f43f5e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --shadow-ambient: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+      --shadow-cyan-glow: 0 0 25px rgba(0, 240, 255, 0.22);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--font-sans);
+      color: var(--text-main);
+      background-color: var(--bg-void);
+      line-height: 1.5;
+      overflow-x: hidden;
+      padding-bottom: 90px;
+    }
+
+    /* Ambient Background Canvas & Gradients */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.65;
+    }
+
+    .ambient-glow-1 {
+      position: fixed;
+      top: -100px;
+      right: 15%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(0, 240, 255, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .ambient-glow-2 {
+      position: fixed;
+      bottom: 5%;
+      left: 10%;
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, rgba(192, 132, 252, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Layout Wrapper */
+    .app-wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 24px 32px;
+    }
+
+    /* Top Command Header */
+    .header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 20px 28px;
+      background: var(--bg-surface);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      margin-bottom: 28px;
+      box-shadow: var(--shadow-ambient);
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand-logo-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(192, 132, 252, 0.2));
+      border: 1px solid var(--border-glow-cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: var(--shadow-cyan-glow);
+    }
+
+    .brand-info h1 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(90deg, #ffffff 0%, #e2e8f0 40%, var(--cyan-bright) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+    }
+
+    .brand-info p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      letter-spacing: 0.05em;
+    }
+
+    /* Server Health Status Pills */
+    .server-status-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .server-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border-subtle);
+      border-radius: 30px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      transition: all 0.25s ease;
+    }
+
+    .server-pill:hover {
+      border-color: var(--border-glow-cyan);
+      color: var(--text-main);
+    }
+
+    .dot-pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--emerald-bright);
+      box-shadow: 0 0 10px var(--emerald-bright);
+      position: relative;
+    }
+
+    .dot-pulse.offline {
+      background-color: var(--rose-bright);
+      box-shadow: 0 0 10px var(--rose-bright);
+    }
+
+    .dot-pulse.checking {
+      background-color: var(--amber-bright);
+      box-shadow: 0 0 10px var(--amber-bright);
+    }
+
+    /* Hero Banner Metrics */
+    .metrics-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .metric-card {
+      background: var(--bg-surface);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metric-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--cyan-bright);
+      opacity: 0.7;
+    }
+
+    .metric-card.purple::after { background: var(--purple-bright); }
+    .metric-card.amber::after { background: var(--amber-bright); }
+    .metric-card.emerald::after { background: var(--emerald-bright); }
+
+    .metric-label {
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .metric-value {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .metric-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Filter & Search Controls */
+    .controls-panel {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .filter-tabs {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tab-btn:hover {
+      background: rgba(30, 41, 59, 0.8);
+      color: var(--text-main);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .tab-btn.active {
+      background: rgba(0, 240, 255, 0.12);
+      border-color: var(--border-glow-cyan);
+      color: var(--cyan-bright);
+      box-shadow: 0 0 16px rgba(0, 240, 255, 0.15);
+    }
+
+    .search-box {
+      position: relative;
+      min-width: 280px;
+    }
+
+    .search-input {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 10px 18px 10px 42px;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--cyan-bright);
+      box-shadow: 0 0 14px rgba(0, 240, 255, 0.2);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: var(--text-dim);
+      pointer-events: none;
+    }
+
+    /* Cards Grid */
+    .visuals-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(430px, 1fr));
+      gap: 22px;
+    }
+
+    .visual-card {
+      background: var(--bg-glass-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: var(--shadow-ambient);
+    }
+
+    .visual-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-glow-cyan);
+      box-shadow: 0 12px 36px 0 rgba(0, 0, 0, 0.8), 0 0 24px rgba(0, 240, 255, 0.2);
+    }
+
+    .visual-card.featured {
+      border-color: rgba(0, 240, 255, 0.3);
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%);
+    }
+
+    .card-top-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .card-category-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-physics { background: rgba(0, 240, 255, 0.12); color: var(--cyan-bright); border: 1px solid rgba(0, 240, 255, 0.25); }
+    .badge-forensics { background: rgba(244, 63, 94, 0.12); color: var(--rose-bright); border: 1px solid rgba(244, 63, 94, 0.25); }
+    .badge-networks { background: rgba(192, 132, 252, 0.12); color: var(--purple-bright); border: 1px solid rgba(192, 132, 252, 0.25); }
+    .badge-systems { background: rgba(16, 185, 129, 0.12); color: var(--emerald-bright); border: 1px solid rgba(16, 185, 129, 0.25); }
+    .badge-reports { background: rgba(245, 158, 11, 0.12); color: var(--amber-bright); border: 1px solid rgba(245, 158, 11, 0.25); }
+
+    .card-icon-bubble {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.55;
+    }
+
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+
+    .feature-tag {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      color: #cbd5e1;
+    }
+
+    .card-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .btn-launch-primary {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.2) 0%, rgba(0, 180, 220, 0.35) 100%);
+      border: 1px solid var(--border-glow-cyan);
+      border-radius: var(--radius-sm);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 0.82rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-launch-primary:hover {
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.35) 0%, rgba(0, 180, 220, 0.5) 100%);
+      box-shadow: 0 0 18px rgba(0, 240, 255, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .btn-launch-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-family: var(--font-mono);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-launch-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-main);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Fixed Floating Dock */
+    .quick-dock {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(11, 15, 25, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-glow-cyan);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 240, 255, 0.25);
+      border-radius: 40px;
+      padding: 8px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      z-index: 100;
+    }
+
+    .dock-title {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--cyan-bright);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding-right: 8px;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .dock-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 20px;
+      transition: all 0.2s ease;
+    }
+
+    .dock-item:hover {
+      background: rgba(0, 240, 255, 0.15);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .keyboard-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      font-size: 0.65rem;
+      font-family: var(--font-mono);
+      padding: 1px 5px;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 960px) {
+      .metrics-bar { grid-template-columns: repeat(2, 1fr); }
+      .visuals-grid { grid-template-columns: 1fr; }
+      .header-bar { flex-direction: column; align-items: flex-start; }
+      .quick-dock { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Animated Particle Canvas -->
+  <canvas id="bg-canvas"></canvas>
+  <div class="ambient-glow-1"></div>
+  <div class="ambient-glow-2"></div>
+
+  <div class="app-wrapper">
+
+    <!-- Top Command Header -->
+    <header class="header-bar">
+      <div class="brand-section">
+        <div class="brand-logo-badge">🔭</div>
+        <div class="brand-info">
+          <h1>LOCALHOST VISUALS OBSERVATORY</h1>
+          <p>CHI PHYSICS CORE • QT ANALYTICS • MULTI-MANIFOLD GATEWAY</p>
+        </div>
+      </div>
+
+      <div class="server-status-group">
+        <div class="server-pill" id="pill-3000">
+          <div class="dot-pulse" id="dot-3000"></div>
+          <span>PORT 3000: <strong id="status-3000">CHECKING</strong></span>
+        </div>
+        <div class="server-pill" id="pill-8080">
+          <div class="dot-pulse" id="dot-8080"></div>
+          <span>PORT 8080: <strong id="status-8080">CHECKING</strong></span>
+        </div>
+        <div class="server-pill" id="pill-8082">
+          <div class="dot-pulse" id="dot-8082"></div>
+          <span>PORT 8082: <strong id="status-8082">CHECKING</strong></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Metrics Bar -->
+    <div class="metrics-bar">
+      <div class="metric-card">
+        <span class="metric-label">VISUAL SUITES</span>
+        <div class="metric-value">14 <span class="metric-sub">Dashboards</span></div>
+      </div>
+      <div class="metric-card purple">
+        <span class="metric-label">TELEMETRY CARRIER</span>
+        <div class="metric-value">432.00 <span class="metric-sub">Hz Invariant</span></div>
+      </div>
+      <div class="metric-card amber">
+        <span class="metric-label">MANIFOLD TOPOLOGY</span>
+        <div class="metric-value">S³ 7D <span class="metric-sub">Hopf Fibration</span></div>
+      </div>
+      <div class="metric-card emerald">
+        <span class="metric-label">GÖDEL LOCKING RELATION</span>
+        <div class="metric-value">Ω² = 4πGρ <span class="metric-sub">= -Λ</span></div>
+      </div>
+    </div>
+
+    <!-- Filter & Search Controls -->
+    <div class="controls-panel">
+      <div class="filter-tabs">
+        <button class="tab-btn active" data-filter="all">🌐 All Visuals (17)</button>
+        <button class="tab-btn" data-filter="physics">🌌 Physics & Manifolds (4)</button>
+        <button class="tab-btn" data-filter="forensics">🔍 Forensics & Threat (4)</button>
+        <button class="tab-btn" data-filter="networks">📡 Comms & Radar (2)</button>
+        <button class="tab-btn" data-filter="systems">🧠 Systems & Math (5)</button>
+      </div>
+
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" id="search-input" placeholder="Search visual suites or tags... (Press '/' to focus)">
+      </div>
+    </div>
+
+    <!-- Visuals Grid -->
+    <div class="visuals-grid" id="visuals-grid">
+
+      <!-- 1. Hypersphere Visual Core -->
+      <div class="visual-card featured" data-category="physics" data-keywords="hypersphere 3d 4d manifold hopf fibration quaternion audio 432hz">
+        <div>
+          <div class="card-top-row">
+            <span class="card-category-badge badge-physics">🌌 3D/4D MANIFOLD</span>
+            <div class="card-icon-bubble">🌐</div>
+          </div>
+          <h2 class="card-title">Antigravity Hypersphere 3D/7D Visual Core</h2>
+          <p class="card-desc">Real-time S³ unit hypersphere projection with pure unit quaternions, Hopf fibration tori, conformal vortex particle flows, and 432Hz / 7.83Hz Schumann resonance audio synthesizer.</p>
+          <div class="tag-cloud">
+            <span class="feature-tag">WebGL/Canvas</span>
+            <span class="feature-tag">5 Context Views</span>
+            <span class="feature-tag">Web Audio API</span>
+            <span class="feature-tag">Norm 100.00 Lock</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="/visuals/hypersphere-ui/index.html" class="btn-launch-primary" target="_blank">
+            <span>Launch Visualizer</span> ➔
+          </a>
+          <a href="http://localhost:8082" class="btn-launch-secondary" target="_blank" title="Dedicated Port 8082">
+            <span>:8082 UI</span>
+          </a>
+          <a href="http://localhost:8080/visual" class="btn-launch-secondary" target="_blank" title="Port 8080 Visual Route">
+            <span>:8080</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 2. Spectral Forensics Desk V2 -->
+      <div class="visual-card featured" data-category="forensics" data-keywords="spectral forensics godel locking on-chain threat radar risk scoring arkm">
+        <div>
+          <div class="card-top-row">
+            <span class="card-category-badge badge-forensics">🔍 FORENSICS INTELLIGENCE</span>
+            <div class="card-icon-bubble">🧮</div>
+          </div>
+          <h2 class="card-title">Spectral Forensics Intelligence Desk (V2)</h2>
+          <p class="card-desc">Interactive on-chain entity forensics console with real-time Gödel locking relation slider (Ω² = 4πGρ = -Λ), universal hover-help inspection, mempool flow radar, and threat cluster correlation.</p>
+          <div class="tag-cloud">
+            <span class="feature-tag">Gödel Relation</span>
+            <span class="feature-tag">Fast Loop 50ms</span>
+            <span class="feature-tag">Dynamic Insights</span>
+            <span class="feature-tag">Zero Dependencies</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="/visuals/spectral-forensics/index.html" class="btn-launch-primary" target="_blank">
+            <span>Launch Desk V2</span> ➔
+          </a>
+          <a href="http://localhost:8080/spectral-forensics" class="btn-launch-secondary" target="_blank" title="Port 8080 Direct Route">
+            <span>:8080 Direct</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 3. Comms Networks UI -->
+      <div class="visual-card" data-category="networks" data-keywords="comms networks wireless plasma satellite non-spoofable positioning 24 papers">
+        <div>
+          <div class="card-top-row">
+            <span class="card-category-badge badge-networks">📡 WIRELESS & TOPOLOGY</span>
+            <div class="card-icon-bubble">🛰️</div>
+          </div>
+          <h2 class="card-title">Comms Networks & Wireless Layer — Gold Standard</h2>
+          <p class="card-desc">Interactive network topology map with glowing plasma background field, non-spoofable multi-orbit satellite routing links, and access to 24 sealed communications research papers.</p>
+          <div class="tag-cloud">
+            <span class="feature-tag">Plasma Shader</span>
+            <span class="feature-tag">Non-Spoofable Mesh</span>
+            <span class="feature-tag">24 Sealed Ledger</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="/visuals/comms-networks-ui/index.html" class="btn-launch-primary" target="_blank">
+            <span>Launch Comms Visual</span> ➔
+          </a>
+        </div>
+      </div>
+
+      <!-- 4. Sonoluminescence UI -->
+      <div class="visual-card" data-category="physics" data-keywords="sonoluminescence acoustic cavitation light bubble flux laser quantum">
+        <div>
+          <div class="card-top-row">
+            <span class="card-category-badge badge-physics">⚡ QUANTUM CAVITATION</span>
+            <div class="card-icon-bubble">💡</div>
+          </div>
+          <h2 class="card-title">Sonoluminescence: Matter as Confined Light</h2>
+          <p class="card-desc">Visual simulation brief exploring topological knot-slip deconfinement, acoustic-to-quantum flux coupling, Rayleigh-Plesset bubble dynamics, and picosecond coherent photon burst emission.</p>
+          <div class="tag-cloud">
+            <span class="feature-tag">Cavitation Dynamics</span>
+            <span class="feature-tag">Photon Flash</span>
+            <span class="feature-tag">Harmonic LFO</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="/visuals/sonoluminescence-ui/index.html" class="btn-launch-primary" target="_blank">
+            <span>Launch Cavitation UI</span> ➔
+          </a>
+        </div>
+      </div>
+
+      <!-- 5. QT Analytics Radar Landing -->
+      <div class="visual-card" data-category="networks" data-keywords="radar landing qt analytics webflow geospatial navigation">
+        <div>
+          <div class="card-top-row">
+            <span class="card-category-badge badge-networks">🛰️ RADAR & GEOSPATIAL</span>
+            <div class="card-icon-bubble">📡</div>
+          </div>
+          <h2 class="card-title">QT Analytics Radar & Geospatial Showcase</h2>
+          <p class="card-desc">Dynamic 360-degree radar sweep visualizer demonstrating multi-orbit satellite navigation, spoofing detection vectors, and enterprise platform staging.</p>
+          <div class="tag-cloud">
+            <span class="feature-tag">Sweep Animation</span>
+            <span class="feature-tag">Multi-Orbit Fix</span>
+            <span class="feature-tag">Webflow Ready</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="/visuals/landing/index.html" class="btn-launch-primary" target="_blank">
+            <span>Launch Radar View</span> ➔
+          </a>
+          <a href="http://localhost:8080/landing" class="btn-launch-secondary" target="_blank">
+            <span>:8080 Route</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 6. Chi Physics Core & PDF Vault -->
+      <div class="visual-card" data-category="physics" data-keywords="chi physics core portal library vault pdf papers manifold">
+        <div>
+          <div class="card-top-row">
+            <span class="card-category-badge badge-physics">⚛️ MASTER PORTAL</span>
+            <div class="card-icon-bubble">🏛️</div>
+          </div>
+          <h2 class="card-title">Chi Physics Core & Curated PDF Vault</h2>
+          <p class="card-desc">The central repository hub containing the complete Gold Standard literature archive, interactive manifold test bench, and real-time audio harmonic bus.</p>
+          <div class="tag-cloud">
+            <span class="feature-tag">100+ Research Papers</span>
+            <span class="feature-tag">Live State</span>
+            <span class="feature-tag">Library Search</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="/index.html" class="btn-launch-primary" target="_blank">
+            <span>Open Core Portal</span> ➔
+          </a>
+        </div>
+      </div>
+
+      <!-- 7. ARKM Deposit Interception -->
+      <div class="visual-card" data-category="forensics" data-keywords="arkm deposit interception forensics exchange split key on chain">
+        <div>
+          <div class="card-top-row">
+            <span class="card-category-badge badge-forensics">🛡️ ON-CHAIN FORENSICS</span>
+            <div class="card-icon-bubble">🚨</div>
+          </div>
+          <h2 class="card-title">ARKM: Deposit Interception Forensics</h2>
+          <p class="card-desc">Detailed forensic timeline and address graph analyzing exchange deposit redirection, split-key exploit flows, and automated fund interception paths.</p>
+          <div class="tag-cloud">
+            <span class="feature-tag">Hop-by-Hop Trace</span>
+            <span class="feature-tag">Split Keys</span>
+            <span class="feature-tag">Cluster Map</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="/arkm/deposit-interception.html" class="btn-launch-primary" target="_blank">
+            <span>Inspect Interception</span> ➔
+          </a>
+        </div>
+      </div>
+
+      <!-- 8. ARKM Infiltration Drain -->
+      <div class="visual-card" data-category="forensics" data-keywords="arkm infiltration drain forensics multi sig bypass velocity">
+        <div>
+          <div class="card-top-row">
+            <span class="card-category-badge badge-forensics">🛡️ ON-CHAIN FORENSICS</span>
+            <div class="card-icon-bubble">⚡</div>
+          </div>
+          <h2 class="card-title">ARKM: Infiltration Drain Forensics</h2>
+          <p class="card-desc">Mapping rapid treasury drainage mechanisms, multi-signature authentication bypass traces, and high-velocity fund dispersion across liquidity pools.</p>
+          <div class="tag-cloud">
+            <span class="feature-tag">Drain Vectors</span>
+            <span class="feature-tag">Velocity Tracking</span>
+            <span class="feature-tag">Sybil Clusters</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="/arkm/infiltration-drain.html" class="btn-launch-primary" target="_blank">
+            <span>Inspect Drain Flow</span> ➔
+          </a>
+        </div>
+      </div>
+
+      <!-- 9. ARKM Obfuscation Layer -->
+      <div class="visual-card" data-category="forensics" data-keywords="arkm obfuscation layer mixer tumbling peeling chain entropy">
+        <div>
+          <div class="card-top-row">
+            <span class="card-category-badge badge-forensics">🛡️ ON-CHAIN FORENSICS</span>
+            <div class="card-icon-bubble">🌫️</div>
+          </div>
+          <h2 class="card-title">ARKM: Obfuscation Layer Forensics</h2>
+          <p class="card-desc">Layer-by-layer de-anonymization and entropy analysis through peeling chains, mixer contract tumbling, and cross-chain privacy bridges.</p>
+          <div class="tag-cloud">
+            <span class="feature-tag">Entropy Analysis</span>
+            <span class="feature-tag">Peeling Chains</span>
+            <span class="feature-tag">Mixer Tumbling</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="/arkm/obfuscation-layer.html" class="btn-launch-primary" target="_blank">
+            <span>Inspect Obfuscation</span> ➔
+          </a>
+        </div>
+      </div>
+
+      <!-- 10. FITZ KSOM Foundation -->
+      <div class="visual-card" data-category="systems" data-keywords="fitz ksom fitzcapp kohonen self organizing map lattice 1510 nodes">
+        <div>
+          <div class="card-top-row">
+            <span class="card-category-badge badge-systems">🧠 TOPOLOGICAL SOM</span>
+            <div class="card-icon-bubble">🧬</div>
+          </div>
+          <h2 class="card-title">FITZ KSOM Foundation (1510 Nodes)</h2>
+          <p class="card-desc">High-density Kohonen Self-Organizing Map neural lattice displaying topological quantization error, bubble neighborhood convergence, and master controller telemetry.</p>
+          <div class="tag-cloud">
+            <span class="feature-tag">1510 Lattice Nodes</span>
+            <span class="feature-tag">Bubble Topology</span>
+            <span class="feature-tag">Quantization Metric</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="/fitz/index.html" class="btn-launch-primary" target="_blank">
+            <span>Launch FITZ KSOM</span> ➔
+          </a>
+          <a href="http://localhost:8080/fitz" class="btn-launch-secondary" target="_blank">
+            <span>:8080 Route</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 11. Fitzcapp Classic Engine -->
+      <div class="visual-card" data-category="systems" data-keywords="fitzcapp classic ksom neural map parameters">
+        <div>
+          <div class="card-top-row">
+            <span class="card-category-badge badge-systems">🧠 LEGACY ENGINE</span>
+            <div class="card-icon-bubble">🔬</div>
+          </div>
+          <h2 class="card-title">Fitzcapp Classic Engine</h2>
+          <p class="card-desc">Dedicated foundation engine interface featuring custom parameter tuning, neighborhood function switching, and route source controls.</p>
+          <div class="tag-cloud">
+            <span class="feature-tag">Interactive Controls</span>
+            <span class="feature-tag">Route Source</span>
+            <span class="feature-tag">Warm Security</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="/fitzcapp/index.html" class="btn-launch-primary" target="_blank">
+            <span>Launch Fitzcapp</span> ➔
+          </a>
+          <a href="http://localhost:8080/fitzcapp" class="btn-launch-secondary" target="_blank">
+            <span>:8080 Route</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 12. Workflow Builder -->
+      <div class="visual-card" data-category="systems" data-keywords="workflow builder dag node editor pipeline automation">
+        <div>
+          <div class="card-top-row">
+            <span class="card-category-badge badge-systems">⚙️ ORCHESTRATION</span>
+            <div class="card-icon-bubble">🧩</div>
+          </div>
+          <h2 class="card-title">Interactive Workflow Builder Engine</h2>
+          <p class="card-desc">Visual DAG canvas for assembling multi-agent execution graphs, automated verification loops, telemetry probes, and task routing pipelines.</p>
+          <div class="tag-cloud">
+            <span class="feature-tag">Node Graph</span>
+            <span class="feature-tag">Pipeline Execution</span>
+            <span class="feature-tag">Agent Dispatch</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="/workflow_builder.html" class="btn-launch-primary" target="_blank">
+            <span>Open Workflow Builder</span> ➔
+          </a>
+        </div>
+      </div>
+
+      <!-- 13. Corroboration Complete -->
+      <div class="visual-card" data-category="systems" data-keywords="corroboration complete calculator moorov ratio phi invariants">
+        <div>
+          <div class="card-top-row">
+            <span class="card-category-badge badge-systems">📐 MATHEMATICAL INVARIANTS</span>
+            <div class="card-icon-bubble">⚖️</div>
+          </div>
+          <h2 class="card-title">Corroboration Matrix & Verification Engine</h2>
+          <p class="card-desc">Interactive mathematical dashboard validating Phi corroboration ratios, Moorov ratio bounds, eigenvalue convergence, and cross-quadrant coherence.</p>
+          <div class="tag-cloud">
+            <span class="feature-tag">Eigenvalues</span>
+            <span class="feature-tag">Phi Invariants</span>
+            <span class="feature-tag">Gate Status</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="/corroboration-complete.html" class="btn-launch-primary" target="_blank">
+            <span>Open Corroborator</span> ➔
+          </a>
+          <a href="http://localhost:8080/corroboration" class="btn-launch-secondary" target="_blank">
+            <span>:8080 Route</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 14. QT Analytics Master Paperwork -->
+      <div class="visual-card" data-category="systems" data-keywords="qt analytics paperwork pack sales marketing reports compliance">
+        <div>
+          <div class="card-top-row">
+            <span class="card-category-badge badge-reports">📊 EXECUTIVE DOSSIER</span>
+            <div class="card-icon-bubble">📑</div>
+          </div>
+          <h2 class="card-title">QT Analytics Master Paperwork & Intelligence Pack</h2>
+          <p class="card-desc">Comprehensive executive showcase and presentation suite, containing the complete 24-hour sales pipeline report, client intake dossier, and compliance documentation.</p>
+          <div class="tag-cloud">
+            <span class="feature-tag">Sales Pipeline</span>
+            <span class="feature-tag">Enterprise Pack</span>
+            <span class="feature-tag">Client Intake</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="/qt_analytics.html" class="btn-launch-primary" target="_blank">
+            <span>Open Intelligence Pack</span> ➔
+          </a>
+        </div>
+      </div>
+
+      <!-- 15. Saburotor Engineering & Reception Vault -->
+      <div class="visual-card featured" data-category="physics" data-keywords="saburotor blueprints dolastar drafting piezo boundary acoustic screensavers vortex gallery dropbox">
+        <div>
+          <div class="card-top-row">
+            <span class="card-category-badge badge-physics">📐 SABUROTOR VAULT</span>
+            <div class="card-icon-bubble">⚡</div>
+          </div>
+          <h2 class="card-title">Dolastar Saburotor Engineering &amp; Reception Vault</h2>
+          <p class="card-desc">High-resolution archive featuring 10 original mechanical drafting plates (3-spoke Galois rotor, piezo-electric boundary actuation, cruise/brake vector switching) and 12 quantum reception screensavers with interactive drop box stager.</p>
+          <div class="tag-cloud">
+            <span class="feature-tag">10 Blueprint Plates</span>
+            <span class="feature-tag">12 4K Wallpapers</span>
+            <span class="feature-tag">Drag &amp; Drop Stager</span>
+            <span class="feature-tag">Blueprint Filter</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="/visuals/gallery.html" class="btn-launch-primary" target="_blank">
+            <span>Open Saburotor Vault</span> ➔
+          </a>
+          <a href="/downloads/AI_Agentic_Human_Love_The_Sovereign_Dyad.pdf" class="btn-launch-secondary" target="_blank">
+            <span>📄 5-Page PDF</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 16. Branding & UI Button Design Studio -->
+      <div class="visual-card featured" data-category="tools" data-keywords="branding button design studio ui tokens css export quantum spring recoil obsidian glass tactile">
+        <div>
+          <div class="card-top-row">
+            <span class="card-category-badge badge-tools" style="color: #c084fc; border-color: rgba(192, 132, 252, 0.4); background: rgba(192, 132, 252, 0.1);">🎨 DESIGN STUDIO</span>
+            <div class="card-icon-bubble">✨</div>
+          </div>
+          <h2 class="card-title">Branding &amp; UI Button Design Studio</h2>
+          <p class="card-desc">Interactive design workbench for crafting, testing, and exporting production-grade branding buttons: Quantum Superposition, Obsidian Glass, Spring Torsion Recoil, Invariant Brass, and ARKM Cyber Radar with 432 Hz synthesizer feedback.</p>
+          <div class="tag-cloud">
+            <span class="feature-tag">6 Archetypes</span>
+            <span class="feature-tag">CSS Code Exporter</span>
+            <span class="feature-tag">Spring Recoil Physics</span>
+            <span class="feature-tag">Live Customizer</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="/visuals/branding_studio.html" class="btn-launch-primary" target="_blank">
+            <span>Launch Design Studio</span> ➔
+          </a>
+        </div>
+      </div>
+
+      <!-- 17. QT Analytics Clean Whiteout Mountain Pillars (Webflow Portal) -->
+      <div class="visual-card featured" data-category="forensics" data-keywords="qt analytics whiteout mountain pillars webflow commercial stripe flash trace crypto fraud progressive disclosure">
+        <div>
+          <div class="card-top-row">
+            <span class="card-category-badge badge-forensics" style="color: #0284c7; border-color: rgba(2, 132, 199, 0.4); background: rgba(2, 132, 199, 0.1);">🏔️ WHITEOUT MOUNTAIN PILLARS</span>
+            <div class="card-icon-bubble">⚡</div>
+          </div>
+          <h2 class="card-title">QT Analytics — Clean Whiteout Mountain Portal</h2>
+          <p class="card-desc">Commercial front-of-house Webflow architecture for crypto fraud detection and risk assessment. Features 3-tier mountain pillars (Flash Trace £49–£499, Agency Retainer £2.5k/mo, Institutional), progressive disclosure trust badges, and direct Antigravity backend bridge.</p>
+          <div class="tag-cloud">
+            <span class="feature-tag">Progressive Disclosure</span>
+            <span class="feature-tag">3-Tier Mountain Pillars</span>
+            <span class="feature-tag">Stripe Checkout Hook</span>
+            <span class="feature-tag">24-Hr SLA Engine</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="/visuals/qt_whiteout_portal.html" class="btn-launch-primary" target="_blank">
+            <span>Launch Whiteout Portal</span> ➔
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Quick Floating Dock -->
+  <nav class="quick-dock" aria-label="Quick launch dock">
+    <div class="dock-title">QUICK LAUNCH</div>
+    <a href="/visuals/hypersphere-ui/index.html" class="dock-item" target="_blank">
+      <span>🌐 Hypersphere</span> <span class="keyboard-badge">1</span>
+    </a>
+    <a href="/visuals/spectral-forensics/index.html" class="dock-item" target="_blank">
+      <span>🧮 Forensics V2</span> <span class="keyboard-badge">2</span>
+    </a>
+    <a href="/visuals/comms-networks-ui/index.html" class="dock-item" target="_blank">
+      <span>📡 Comms</span> <span class="keyboard-badge">3</span>
+    </a>
+    <a href="/visuals/sonoluminescence-ui/index.html" class="dock-item" target="_blank">
+      <span>⚡ Cavitation</span> <span class="keyboard-badge">4</span>
+    </a>
+    <a href="/visuals/landing/index.html" class="dock-item" target="_blank">
+      <span>🛰️ Radar</span> <span class="keyboard-badge">5</span>
+    </a>
+    <a href="/qt_analytics.html" class="dock-item" target="_blank">
+      <span>📊 QT Analytics</span> <span class="keyboard-badge">6</span>
+    </a>
+    <a href="/index.html" class="dock-item" target="_blank">
+      <span>🏛️ Core Portal</span> <span class="keyboard-badge">7</span>
+    </a>
+    <a href="/visuals/gallery.html" class="dock-item" target="_blank">
+      <span>⚡ Saburotor Vault</span> <span class="keyboard-badge">8</span>
+    </a>
+    <a href="/visuals/branding_studio.html" class="dock-item" target="_blank">
+      <span>🎨 Button Studio</span> <span class="keyboard-badge">9</span>
+    </a>
+    <a href="/visuals/qt_whiteout_portal.html" class="dock-item" target="_blank">
+      <span>🏔️ Whiteout Portal</span> <span class="keyboard-badge">0</span>
+    </a>
+  </nav>
+
+  <script>
+    // 1. Ambient Background Particle Canvas
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, particles = [];
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.radius = Math.random() * 1.5 + 0.5;
+        this.alpha = Math.random() * 0.5 + 0.1;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
+          this.reset();
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0, 240, 255, ${this.alpha})`;
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 65; i++) {
+      particles.push(new Particle());
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 110) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(0, 240, 255, ${0.12 * (1 - dist / 110)})`;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    // 2. Real-Time Server Port Health Checks
+    async function checkPort(port, endpoint, dotId, statusId) {
+      const dot = document.getElementById(dotId);
+      const statusText = document.getElementById(statusId);
+      const url = `http://localhost:${port}${endpoint}`;
+      
+      try {
+        const start = performance.now();
+        const res = await fetch(url, { mode: 'no-cors', cache: 'no-cache' });
+        const latency = Math.round(performance.now() - start);
+        dot.className = 'dot-pulse';
+        statusText.textContent = `ONLINE (${latency}ms)`;
+        statusText.style.color = 'var(--emerald-bright)';
+      } catch (err) {
+        dot.className = 'dot-pulse offline';
+        statusText.textContent = 'OFFLINE';
+        statusText.style.color = 'var(--rose-bright)';
+      }
+    }
+
+    function runPortHealthChecks() {
+      checkPort(3000, '/qt_analytics.html', 'dot-3000', 'status-3000');
+      checkPort(8080, '/audi', 'dot-8080', 'status-8080');
+      checkPort(8082, '/', 'dot-8082', 'status-8082');
+    }
+
+    runPortHealthChecks();
+    setInterval(runPortHealthChecks, 8000);
+
+    // 3. Category Filter & Search Logic
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const searchInput = document.getElementById('search-input');
+    const cards = document.querySelectorAll('.visual-card');
+
+    let currentFilter = 'all';
+    let currentSearch = '';
+
+    function filterCards() {
+      cards.forEach(card => {
+        const cat = card.dataset.category;
+        const keywords = (card.dataset.keywords || '').toLowerCase();
+        const title = (card.querySelector('.card-title')?.textContent || '').toLowerCase();
+        const desc = (card.querySelector('.card-desc')?.textContent || '').toLowerCase();
+
+        const matchesFilter = currentFilter === 'all' || cat === currentFilter;
+        const matchesSearch = !currentSearch || 
+          keywords.includes(currentSearch) || 
+          title.includes(currentSearch) || 
+          desc.includes(currentSearch);
+
+        if (matchesFilter && matchesSearch) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        filterCards();
+      });
+    });
+
+    searchInput.addEventListener('input', (e) => {
+      currentSearch = e.target.value.trim().toLowerCase();
+      filterCards();
+    });
+
+    // 4. Keyboard Shortcuts
+    window.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT') {
+        if (e.key === 'Escape') searchInput.blur();
+        return;
+      }
+
+      if (e.key === '/') {
+        e.preventDefault();
+        searchInput.focus();
+        return;
+      }
+
+      const shortcuts = {
+        '1': '/visuals/hypersphere-ui/index.html',
+        '2': '/visuals/spectral-forensics/index.html',
+        '3': '/visuals/comms-networks-ui/index.html',
+        '4': '/visuals/sonoluminescence-ui/index.html',
+        '5': '/visuals/landing/index.html',
+        '6': '/qt_analytics.html',
+        '7': '/index.html',
+        '8': '/visuals/gallery.html',
+        '9': '/visuals/branding_studio.html',
+        '0': '/visuals/qt_whiteout_portal.html'
+      };
+
+      if (shortcuts[e.key]) {
+        window.open(shortcuts[e.key], '_blank');
+      }
+    });
+  </script>
+</body>
+</html>

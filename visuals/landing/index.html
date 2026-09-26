@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QT Analytics — Precision • Geospatial • Connected</title>
+  <meta name="description" content="QT Analytics delivers satellite-grade navigation, non-spoofable positioning, and resilient network communications powered by deep physical intelligence.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==================================================================== -->
+  <!-- NAVIGATION BAR                                                       -->
+  <!-- ==================================================================== -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#hero" class="brand-link">
+        <img src="../../assets/images/webflow/logo-main-light.svg" alt="QT Analytics Logo" class="brand-logo-img">
+      </a>
+      <ul class="nav-menu">
+        <li><a href="#hero">Overview</a></li>
+        <li><a href="#capabilities">Technology</a></li>
+        <li><a href="#offerings">Offerings & Access</a></li>
+        <li><a href="#contact">Work With Us</a></li>
+        <li><a href="/" style="color: var(--cyan-bright); font-weight: 600;">⚡ Chi Core Platform</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="/visual" class="btn btn-secondary" id="btn-nav-visualizer">3D Visualizer</a>
+        <a href="/fitz" class="btn btn-primary" id="btn-nav-launch">Launch Platform (FITZ) ➔</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================================================================== -->
+  <!-- SECTION 1 — HERO: 2-COLUMN SPLIT (CONTENT LEFT | RADAR RIGHT)        -->
+  <!-- ==================================================================== -->
+  <section class="hero-section" id="hero">
+    <div class="container hero-split-container">
+      
+      <!-- Left Column: Content (Heading, Sub, Badges, CTAs, Telemetry Pill) -->
+      <div class="hero-content-col">
+        <div class="hero-badge">
+          <span class="pulse-dot-cyan"></span>
+          RADAR INTELLIGENCE • NON-SPOOFABLE GEOSPATIAL
+        </div>
+
+        <h1 class="hero-title">
+          QT Analytics — Precision • Geospatial • Connected
+        </h1>
+
+        <p class="hero-sub">
+          Satellite-grade navigation, non-spoofable positioning, and intelligent communication systems engineered for resilient multi-orbit verification.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#capabilities" class="btn btn-secondary btn-lg" id="btn-hero-explore">
+            EXPLORE CAPABILITIES ↓
+          </a>
+          <a href="/" class="btn btn-primary btn-lg" id="btn-hero-launch">
+            LAUNCH CHI CORE ➔
+          </a>
+        </div>
+
+        <!-- Throttled Real-time Sweep Telemetry Pill -->
+        <div class="hero-telemetry-pill">
+          <div class="telemetry-pill-head">
+            <span class="pulse-dot-green"></span>
+            <span class="telemetry-pill-title">SWEEP-LOCKED TELEMETRY</span>
+            <span class="telemetry-pill-tag">PERIODIC (THROTTLED)</span>
+          </div>
+          <div class="telemetry-metrics-row">
+            <span class="t-item">Azimuth: <strong id="readout-azimuth">0.0°</strong></span>
+            <span class="t-item">Sweep Cycle: <strong id="readout-cycle">#1</strong></span>
+            <span class="t-item">Tracked Nodes: <strong id="readout-tracked">5 Active</strong></span>
+            <span class="t-item">Rate: <strong id="readout-fps">24 Hz Synced</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Dedicated Radar Visual (No Overlap) -->
+      <div class="hero-visual-col">
+        <div class="radar-visual-frame">
+          <canvas id="radar-canvas"></canvas>
+          <div class="radar-hud-overlay">
+            <span class="hud-bracket tl"></span>
+            <span class="hud-bracket tr"></span>
+            <span class="hud-bracket bl"></span>
+            <span class="hud-bracket br"></span>
+            <div class="radar-hud-status">
+              <span class="pulse-dot-cyan"></span>
+              <span>60 FPS GLIDE • SYNC LOCKED</span>
+            </div>
+            <div class="radar-hud-bearing" id="hud-bearing-display">
+              BEARING: 000.0° TRUE
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Smooth Scroll Down Indicator -->
+    <a href="#capabilities" class="scroll-hint" aria-label="Scroll down to capabilities">
+      <span>Scroll to explore</span>
+      <span class="scroll-arrow">↓</span>
+    </a>
+  </section>
+
+  <!-- ==================================================================== -->
+  <!-- SECTION 2 — PRODUCTS / OUR TECHNOLOGY (SPACIOUS & BIG BUTTONS)       -->
+  <!-- ==================================================================== -->
+  <section class="section-spacing" id="capabilities">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag text-cyan">OUR TECHNOLOGY</span>
+        <h2 class="section-title">Core Infrastructure & Solutions</h2>
+        <p>
+          Six integrated capability pillars spanning satellite navigation, resilient communications, frontier physics, adaptive intelligence, energy confinement, and holographic visualization — engineered as one unified system.
+        </p>
+      </div>
+
+      <div class="products-grid">
+        <!-- Product 1: GeoSatNav Systems -->
+        <div class="product-card" id="card-geosatnav">
+          <div>
+            <div class="product-icon-wrap">
+              <img src="../../assets/images/webflow/icon-geosatnav.svg" alt="GeoSatNav Icon">
+            </div>
+            <h3 class="product-title">🛰️ GeoSatNav Systems</h3>
+            <p class="product-desc">
+              High-precision orbit and terrestrial positioning resilient against spoofing, jamming, and signal distortion across dynamic environments.
+            </p>
+            <ul class="product-features">
+              <li><span>✓</span> Non-spoofable clock & carrier synchronization</li>
+              <li><span>✓</span> Multi-constellation LEO / MEO / GEO tracking</li>
+              <li><span>✓</span> Decimeter-level location verification</li>
+            </ul>
+          </div>
+          <div class="product-actions-group">
+            <a href="/visual" class="btn btn-secondary product-btn" id="btn-explore-geosatnav">
+              Explore GeoSatNav ➔
+            </a>
+            <button type="button" class="btn-quick-specs" onclick="openDetailsModal('geosatnav')">
+              Quick Specs & Invariants
+            </button>
+          </div>
+        </div>
+
+        <!-- Product 2: Secure Comms & Networks -->
+        <div class="product-card" id="card-securecomms">
+          <div>
+            <div class="product-icon-wrap">
+              <img src="../../assets/images/webflow/icon-securecomms.svg" alt="Secure Comms Icon">
+            </div>
+            <h3 class="product-title">🌐 Secure Comms & Networks</h3>
+            <p class="product-desc">
+              Tamper-resistant mesh networks built on continuous phase-locked verification and adaptive topological handover routing.
+            </p>
+            <ul class="product-features">
+              <li><span>✓</span> End-to-end cryptographic handshake</li>
+              <li><span>✓</span> Dynamic multi-hop channel re-routing</li>
+              <li><span>✓</span> Zero-trust spatial link authentication</li>
+            </ul>
+          </div>
+          <div class="product-actions-group">
+            <a href="/team/open/comms_networks" class="btn btn-secondary product-btn" id="btn-explore-securecomms">
+              Explore Secure Comms ➔
+            </a>
+            <button type="button" class="btn-quick-specs" onclick="openDetailsModal('securecomms')">
+              Quick Specs & Invariants
+            </button>
+          </div>
+        </div>
+
+        <!-- Product 3: Physics & Hypersphere Core -->
+        <div class="product-card" id="card-physicscore">
+          <div>
+            <div class="product-icon-wrap">
+              <img src="../../assets/images/webflow/icon-physics-core.svg" alt="Physics Core Icon">
+            </div>
+            <h3 class="product-title">⚛️ Physics & Hypersphere Core</h3>
+            <p class="product-desc">
+              Continuous manifold computation anchoring invariant mass gap bounds and 432 Hz harmonic phase stabilization across 7D projections.
+            </p>
+            <ul class="product-features">
+              <li><span>✓</span> Invariant mass gap ($\Delta > 0$) guarantee</li>
+              <li><span>✓</span> High-coherence 7D tensor gatekeeper</li>
+              <li><span>✓</span> Continuous manifold topology</li>
+            </ul>
+          </div>
+          <div class="product-actions-group">
+            <a href="/?stage=stage-equations" class="btn btn-secondary product-btn" id="btn-explore-physicscore">
+              Explore Physics Core ➔
+            </a>
+            <button type="button" class="btn-quick-specs" onclick="openDetailsModal('physics')">
+              Quick Specs & Invariants
+            </button>
+          </div>
+        </div>
+
+        <!-- Product 4: Analytics & Intelligence -->
+        <div class="product-card" id="card-analytics">
+          <div>
+            <div class="product-icon-wrap">
+              <img src="../../assets/images/webflow/icon-analytics.svg" alt="Analytics Icon">
+            </div>
+            <h3 class="product-title">📊 Analytics & Intelligence</h3>
+            <p class="product-desc">
+              Multi-source signal fusion correlating high-frequency sensor streams into audit-ready operational telemetry and predictive insights.
+            </p>
+            <ul class="product-features">
+              <li><span>✓</span> Real-time drift detection & anomaly alerting</li>
+              <li><span>✓</span> Quadruple neutrosophic balance logic</li>
+              <li><span>✓</span> Automated reporting & performance dashboards</li>
+            </ul>
+          </div>
+          <div class="product-actions-group">
+            <a href="/fitz" class="btn btn-secondary product-btn" id="btn-explore-analytics">
+              Explore Analytics ➔
+            </a>
+            <button type="button" class="btn-quick-specs" onclick="openDetailsModal('analytics')">
+              Quick Specs & Invariants
+            </button>
+          </div>
+        </div>
+
+        <!-- Product 5: Energy & Dynamic Confinement -->
+        <div class="product-card accent-energy" id="card-energy">
+          <div>
+            <div class="product-icon-wrap">
+              <img src="../../assets/images/webflow/icon-energy.svg" alt="Energy & Confinement Icon">
+            </div>
+            <h3 class="product-title">⚡ Energy &amp; Dynamic Confinement</h3>
+            <p class="product-desc">
+              Topological confinement physics translating the "matter as trapped light" framework into compact extreme-energy generation, coherent field control, and harmonic resonance systems.
+            </p>
+            <ul class="product-features">
+              <li><span>✓</span> Coherent energy storage &amp; topological confinement</li>
+              <li><span>✓</span> Non-thermal emission control &amp; harmonic resonance</li>
+              <li><span>✓</span> High-gradient field management for extreme environments</li>
+            </ul>
+          </div>
+          <div class="product-actions-group">
+            <a href="/research/sonoluminescence" class="btn btn-secondary product-btn" id="btn-explore-energy">
+              Explore Energy Core ➔
+            </a>
+            <button type="button" class="btn-quick-specs" onclick="openDetailsModal('energy')">
+              Quick Specs & Invariants
+            </button>
+          </div>
+        </div>
+
+        <!-- Product 6: Holographic Systems & Visualization -->
+        <div class="product-card accent-holo" id="card-holographic">
+          <div>
+            <div class="product-icon-wrap">
+              <img src="../../assets/images/webflow/icon-holographic.svg" alt="Holographic Systems Icon">
+            </div>
+            <h3 class="product-title">🌀 Holographic Systems &amp; Visualization</h3>
+            <p class="product-desc">
+              Real-time multidimensional rendering turning abstract tensor field data, hypersphere manifolds, and radar telemetry into perceptually intuitive spatial interfaces.
+            </p>
+            <ul class="product-features">
+              <li><span>✓</span> Holographic manifold &amp; tensor-field visualization</li>
+              <li><span>✓</span> Low-latency radar &amp; telemetry spatial overlay</li>
+              <li><span>✓</span> Cross-dimension projection &amp; invariant geometry rendering</li>
+            </ul>
+          </div>
+          <div class="product-actions-group">
+            <a href="/visual" class="btn btn-secondary product-btn" id="btn-explore-holographic">
+              Explore Holographic ➔
+            </a>
+            <button type="button" class="btn-quick-specs" onclick="openDetailsModal('holographic')">
+              Quick Specs & Invariants
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================================== -->
+  <!-- SECTION 3 — OFFERINGS & PAYWALL FRAMEWORK (ARKHAM & BOUNTY)          -->
+  <!-- ==================================================================== -->
+  <section class="section-spacing" id="offerings" style="background: rgba(6, 10, 20, 0.5);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag text-purple">TIER ARCHITECTURE</span>
+        <h2 class="section-title">Offerings & Access Models</h2>
+        <p>
+          Clear, transparent access tiers. Public explorer verification paired with dedicated professional and research subscription tiers.
+        </p>
+      </div>
+
+      <div class="paywalls-container">
+        <!-- TIER CARD 1: ARKHAM -->
+        <div class="tier-pillar-card featured">
+          <span class="tier-badge cyan">TRACE & LEDGER LAYER</span>
+          <h3 class="tier-title">🔒 ARKHAM</h3>
+          <p class="tier-subtitle">
+            Cryptographic trust, immutable trace verification, and historical audit ledger.
+          </p>
+
+          <div class="tier-breakdown">
+            <!-- Free Tier -->
+            <div class="tier-level-box">
+              <div class="tier-level-header">
+                <span class="level-name">Public Explorer</span>
+                <span class="level-price">FREE</span>
+              </div>
+              <ul class="level-bullets">
+                <li><span>●</span> Basic integrity verification</li>
+                <li><span>●</span> Real-time public ledger view</li>
+                <li><span>●</span> Standard block hash lookup</li>
+              </ul>
+            </div>
+
+            <!-- Pro Tier -->
+            <div class="tier-level-box" style="border-color: var(--border-bright);">
+              <div class="tier-level-header">
+                <span class="level-name text-cyan">Arkham Pro</span>
+                <span class="level-price text-cyan">VERIFIED PRO</span>
+              </div>
+              <ul class="level-bullets">
+                <li><span>●</span> Full historical trace ledger & archive</li>
+                <li><span>●</span> Automated JSON / CSV bulk export</li>
+                <li><span>●</span> High-throughput REST & WebSocket API</li>
+                <li><span>●</span> Deep cryptographic audit reports</li>
+              </ul>
+            </div>
+          </div>
+
+          <a href="/?stage=stage-observatory" class="btn btn-primary tier-action-btn" id="btn-upgrade-arkham">
+            Launch Arkham Intelligence & Ledger ➔
+          </a>
+        </div>
+
+        <!-- TIER CARD 2: BOUNTY -->
+        <div class="tier-pillar-card">
+          <span class="tier-badge purple">RESEARCH & DATA VAULT</span>
+          <h3 class="tier-title">💰 BOUNTY</h3>
+          <p class="tier-subtitle">
+            Scientific literature, curated physical datasets, and deep intelligence resources.
+          </p>
+
+          <div class="tier-breakdown">
+            <!-- Free Tier -->
+            <div class="tier-level-box">
+              <div class="tier-level-header">
+                <span class="level-name">Research Preview</span>
+                <span class="level-price">FREE</span>
+              </div>
+              <ul class="level-bullets">
+                <li><span>●</span> Abstract & executive summaries</li>
+                <li><span>●</span> Document citation previews</li>
+                <li><span>●</span> Limited catalog keyword search</li>
+              </ul>
+            </div>
+
+            <!-- Unlock Tier -->
+            <div class="tier-level-box" style="border-color: rgba(168, 85, 247, 0.4);">
+              <div class="tier-level-header">
+                <span class="level-name text-purple">Research Subscriber</span>
+                <span class="level-price text-purple">FULL ACCESS</span>
+              </div>
+              <ul class="level-bullets">
+                <li><span>●</span> Complete scientific papers (Full PDFs)</li>
+                <li><span>●</span> Uncompressed sensor & telemetry datasets</li>
+                <li><span>●</span> Direct bulk download capabilities</li>
+                <li><span>●</span> Expanded library access (350+ papers)</li>
+                <li><span>●</span> Early-access research preprints</li>
+              </ul>
+            </div>
+          </div>
+
+          <a href="/team/open/comms_networks" class="btn btn-secondary tier-action-btn" id="btn-unlock-bounty">
+            Access 24-Paper Research Vault ➔
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================================== -->
+  <!-- SECTION 4 — FINAL CTA / WORK WITH US                                 -->
+  <!-- ==================================================================== -->
+  <section class="section-spacing cta-section" id="contact">
+    <div class="container cta-box">
+      <span class="section-tag text-cyan">WORK WITH US</span>
+      <h2 class="cta-title">Work With QT Analytics</h2>
+      <p class="cta-sub">
+        Partner with our team to implement resilient positioning, secure communications, and physical intelligence across your infrastructure.
+      </p>
+
+      <div class="cta-buttons-row">
+        <a href="/fitz" class="btn btn-primary btn-lg" id="btn-cta-get-started">
+          Get Started (FITZ KSOM) ➔
+        </a>
+        <a href="/team/open/comms_networks" class="btn btn-secondary btn-lg" id="btn-cta-contact">
+          Team Collaboration Vault ➔
+        </a>
+        <a href="/downloads/The_21_Pillar_Unified_Master_Framework.pdf" target="_blank" class="btn btn-ghost btn-lg" id="btn-cta-docs">
+          Documentation (Master Framework PDF) ➔
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================================== -->
+  <!-- FOOTER                                                               -->
+  <!-- ==================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <img src="../../assets/images/webflow/logo-main-light.svg" alt="QT Analytics Logo" style="height: 32px; width: auto; margin-bottom: 0.8rem;">
+          <p style="font-size: 0.88rem; color: var(--text-muted); max-width: 360px;">
+            Precision geospatial systems, resilient communications, and physical intelligence infrastructure.
+          </p>
+        </div>
+        <ul class="footer-nav">
+          <li><a href="/">Chi Core Platform</a></li>
+          <li><a href="/fitz">FITZ KSOM</a></li>
+          <li><a href="/visual">3D Visualizer</a></li>
+          <li><a href="/team/open/comms_networks">Comms Vault</a></li>
+          <li><a href="/research/sonoluminescence">Sonoluminescence</a></li>
+          <li><a href="/downloads/The_21_Pillar_Unified_Master_Framework.pdf" target="_blank">Documentation</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 QT Analytics. All rights reserved. Precision • Geospatial • Connected.
+        </div>
+        <div class="system-status-indicator">
+          <span class="status-dot-green"></span>
+          <span>Core Telemetry: Operational • 432 Hz Phase Locked</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Capability Detail Modal (Lightweight Interaction) -->
+  <div class="modal-backdrop" id="details-modal" onclick="closeDetailsModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <button class="modal-close-btn" onclick="closeDetailsModal()">&times;</button>
+      <div id="modal-content">
+        <!-- Populated via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="radar.js"></script>
+  <script>
+    const modalData = {
+      geosatnav: {
+        title: '🛰️ GeoSatNav Systems',
+        fullPageUrl: '/visual',
+        actionLabel: 'Launch GeoSatNav Viewport (Full Page) ➔',
+        desc: 'Advanced orbital and terrestrial navigation framework providing non-spoofable positioning, precision carrier tracking, and resilient reference clocks.',
+        features: [
+          'LEO/MEO/GEO Constellation Ingestion',
+          'Anti-Spoof Carrier Phase Verification',
+          'Position-Verified Handover Routing',
+          'Sub-meter Precision Across Mobile Nodes'
+        ]
+      },
+      securecomms: {
+        title: '🌐 Secure Comms & Networks',
+        fullPageUrl: '/team/open/comms_networks',
+        actionLabel: 'Launch Comms Gold Standard Vault (Full Page) ➔',
+        desc: 'Decentralized, non-spoofable wireless communication topology ensuring continuous phase-locked verification and zero-trust handover across mesh networks.',
+        features: [
+          'End-to-End Handshake Cryptography',
+          'Autonomous Path & Frequency Hopping',
+          'Distributed Relay Health Verification',
+          'Low Latency Telemetry Backhauling'
+        ]
+      },
+      physics: {
+        title: '⚛️ Physics & Hypersphere Core',
+        fullPageUrl: '/?stage=stage-equations',
+        actionLabel: 'Launch Chi Key Physics Core (Full Page) ➔',
+        desc: 'Continuous Riemannian manifold and 7D hypersphere projection maintaining the non-Abelian mass gap invariant and harmonic Schumann resonance anchor.',
+        features: [
+          'Strict Mass Gap Invariant (Δ > 0)',
+          'Schumann 7.83 Hz / 432.000 Hz Carrier Lock',
+          'Continuous Manifold Smooth Subsets',
+          'Tensor Invariant Ratio = 1.000'
+        ]
+      },
+      analytics: {
+        title: '📊 Analytics & Intelligence',
+        fullPageUrl: '/fitz',
+        actionLabel: 'Launch FITZ KSOM Platform (Full Page) ➔',
+        desc: 'High-frequency telemetry analysis engine providing real-time drift estimation, quadruple neutrosophic balance, and automated operational synthesis.',
+        features: [
+          'Neutrosophic T / I / N / F Logic Engine',
+          'Multi-Stream Sensor Drift Detection',
+          'Automated Research Gap Identification',
+          'Audit-Ready Telemetry Certification'
+        ]
+      },
+      energy: {
+        title: '⚡ Energy & Dynamic Confinement',
+        fullPageUrl: '/research/sonoluminescence',
+        actionLabel: 'Launch Sonoluminescence Research Brief (Full Page) ➔',
+        desc: 'Physics-first framework for compact energy generation and control — grounded in the topological deconfinement model where matter is fundamentally confined light. Applies directly from sonoluminescence to advanced energy applications.',
+        features: [
+          'Topological Knot-Slip Confinement Control',
+          'Non-Thermal Coherent Emission Management',
+          'Harmonic Schumann / 432 Hz Resonance Anchoring',
+          'High-Gradient Boundary Geometry Shaping',
+          'Riemannian Manifold Field-Line Tracking'
+        ]
+      },
+      holographic: {
+        title: '🌀 Holographic Systems & Visualization',
+        fullPageUrl: '/visual',
+        actionLabel: 'Launch Hypersphere 7D Visualizer (Full Page) ➔',
+        desc: 'Real-time multi-dimensional rendering engine transforming 7D hypersphere projections, geospatial radar sweeps, and live telemetry streams into intuitive spatial holographic interfaces.',
+        features: [
+          'Live Tensor-Field Manifold Projection',
+          'Low-Latency Radar Sweep Overlay (60 FPS Glide)',
+          'Cross-Dimensional Invariant Geometry Rendering',
+          'Spatial Telemetry Heads-Up Display (HUD)',
+          'Unified Physics + Geospatial Data Compositor'
+        ]
+      }
+    };
+
+    function openDetailsModal(key) {
+      const item = modalData[key];
+      if (!item) return;
+      const content = document.getElementById('modal-content');
+      content.innerHTML = `
+        <h3 style="font-size: 1.6rem; margin-bottom: 0.8rem; color: #fff;">${item.title}</h3>
+        <p style="margin-bottom: 1.5rem; color: var(--text-secondary); line-height: 1.6;">${item.desc}</p>
+        <h4 style="font-size: 1rem; color: var(--cyan-bright); margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">Key Capabilities & Invariants</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 2rem;">
+          ${item.features.map(f => `<li style="display: flex; align-items: center; gap: 0.6rem; color: #cbd5e1;"><span style="color: var(--cyan-bright);">✓</span> ${f}</li>`).join('')}
+        </ul>
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <a href="${item.fullPageUrl}" class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center; text-decoration: none;">
+            ${item.actionLabel}
+          </a>
+          <button class="btn btn-ghost" style="width: 100%;" onclick="closeDetailsModal()">Close Preview</button>
+        </div>
+      `;
+      document.getElementById('details-modal').classList.add('open');
+    }
+
+    function closeDetailsModal(event) {
+      if (event && event.target !== event.currentTarget && !event.target.classList.contains('modal-close-btn')) return;
+      document.getElementById('details-modal').classList.remove('open');
+    }
+
+    function triggerAction(action) {
+      if (action === 'onboarding') window.location.href = '/fitz';
+      else if (action === 'contact') window.location.href = '/team/open/comms_networks';
+      else if (action === 'docs') window.location.href = '/downloads/The_21_Pillar_Unified_Master_Framework.pdf';
+      else window.location.href = '/';
+    }
+  </script>
+</body>
+</html>

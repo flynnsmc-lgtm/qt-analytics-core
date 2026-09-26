@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⚡ Sonoluminescence: Matter as Confined Light — Research Brief</title>
+  <meta name="description" content="Executive Team Brief & Unified Simulation Roadmap: Topological knot-slip deconfinement, acoustic-to-quantum flux coupling, and picosecond coherent emission.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-void: #030712;
+      --bg-surface: rgba(11, 15, 25, 0.85);
+      --bg-card: rgba(15, 23, 42, 0.75);
+      --border-cyan: rgba(0, 240, 255, 0.25);
+      --border-amber: rgba(255, 124, 58, 0.35);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --cyan-bright: #00f0ff;
+      --amber-bright: #ff7c3a;
+      --purple-bright: #c084fc;
+      --emerald-bright: #10b981;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--font-sans);
+      color: var(--text-primary);
+      background-color: var(--bg-void);
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(255, 124, 58, 0.12) 0%, transparent 55%),
+        radial-gradient(circle at 80% 60%, rgba(0, 240, 255, 0.08) 0%, transparent 45%),
+        linear-gradient(180deg, #030712 0%, #080d1a 100%);
+      line-height: 1.6;
+      padding: 0 1.5rem 4rem 1.5rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Top Navigation Header */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 2.5rem;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-brand span {
+      color: var(--amber-bright);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.2rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-amber {
+      background: linear-gradient(135deg, #ff7c3a, #e65100);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(255, 124, 58, 0.35);
+    }
+    .btn-amber:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255, 124, 58, 0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(15, 23, 42, 0.8);
+      border-color: var(--border-subtle);
+      color: var(--text-primary);
+    }
+    .btn-secondary:hover {
+      border-color: var(--cyan-bright);
+      color: var(--cyan-bright);
+      transform: translateY(-2px);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      background: rgba(255, 124, 58, 0.12);
+      color: var(--amber-bright);
+      border: 1px solid var(--border-amber);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--amber-bright);
+      box-shadow: 0 0 10px var(--amber-bright);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #ffffff 40%, #ff9d66 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .lead-text {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 2rem;
+      max-width: 860px;
+    }
+
+    /* Meta Details Strip */
+    .meta-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding: 1.2rem 1.5rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 3rem;
+    }
+
+    .meta-strip strong {
+      color: var(--text-primary);
+    }
+
+    /* Section Cards */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(12px);
+    }
+
+    .card h2 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .postulate-box {
+      background: rgba(255, 124, 58, 0.08);
+      border-left: 4px solid var(--amber-bright);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 10px 10px 0;
+      margin: 1.5rem 0;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: #f1f5f9;
+    }
+
+    /* Research Pillars Grid */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .pillar-card {
+      background: rgba(11, 19, 41, 0.7);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 1.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .pillar-card:hover {
+      border-color: var(--border-amber);
+      transform: translateY(-3px);
+    }
+
+    .pillar-card h3 {
+      font-size: 1rem;
+      color: var(--amber-bright);
+      margin-bottom: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .pillar-card p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+    }
+
+    /* Simulation Tracks */
+    .sim-tracks {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .sim-track {
+      background: rgba(8, 14, 28, 0.85);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+
+    .sim-track.accent {
+      border-color: var(--border-amber);
+    }
+
+    .sim-track h4 {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--cyan-bright);
+      margin-bottom: 0.8rem;
+    }
+
+    .sim-track.accent h4 {
+      color: var(--amber-bright);
+    }
+
+    .sim-track ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .sim-track ul li::before {
+      content: "• ";
+      color: var(--cyan-bright);
+    }
+
+    .sim-track.accent ul li::before {
+      color: var(--amber-bright);
+    }
+
+    /* Action Deck */
+    .action-deck {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <!-- Top Navigation Bar -->
+    <header class="top-bar">
+      <a href="/landing" class="nav-brand">
+        <span>⚡</span> QT ANALYTICS / RESEARCH
+      </a>
+      <div class="nav-links">
+        <a href="/landing" class="btn btn-secondary">← Landing Page</a>
+        <a href="/" class="btn btn-secondary">⚡ Chi Core Engine</a>
+        <a href="/visual" class="btn btn-secondary">🌀 3D Visualizer</a>
+        <a href="/downloads/Sonoluminescence_Foundational_Insight_and_Research_Roadmap.pdf" download class="btn btn-amber">
+          Download PDF (6.2 KB) ➔
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Header -->
+    <main>
+      <div class="badge">
+        <span class="pulse-dot"></span>
+        ACTIVE CORE RESEARCH • TOPOLOGICAL DECONFINEMENT
+      </div>
+
+      <h1>⚡ Sonoluminescence: Matter as Confined Light & Topological Untangling</h1>
+      <p class="lead-text">
+        Sonoluminescence sits at the apex of extreme physics: ultrasonic standing waves drive micrometer-scale bubble collapse, achieving peak core temperatures exceeding <strong>48,000 °F (~27,000 °C)</strong> and generating coherent, sub-200-picosecond optical emission bursts.
+      </p>
+
+      <div class="meta-strip">
+        <span>Doc ID: <strong>CK-BRIEF-SONO-20260910</strong></span>
+        <span>Registry: <strong>Acropolis Library / Foundation References</strong></span>
+        <span>Carrier Frequency: <strong>432.000 Hz / 7.83 Hz Lock</strong></span>
+        <span>Pulse Width: <strong>&lt;50 to 200 ps</strong></span>
+        <span>Peak Power: <strong>&gt;100 mW Coherent</strong></span>
+      </div>
+
+      <!-- Section 1: Guiding Insight -->
+      <article class="card">
+        <h2>🔬 The Guiding Insight: Matter as Trapped Light</h2>
+        <p>
+          Classical hydrodynamics and standard thermal bremsstrahlung fail to explain the observed picosecond pulse duration and continuous ultraviolet slope. Our framework resolves this through topological deconfinement:
+        </p>
+        <div class="postulate-box">
+          "Matter is not inert substance. Particles are localized, topologically knotted configurations of trapped light and field lines stabilized by geometric gauge boundary conditions. Under extreme, symmetric acoustic collapse, light emission is the direct liberation of pre-confined light as structural topological knots are sheared and untangled."
+        </div>
+        <p>
+          Bubble boundary acceleration reaches ~10<sup>11</sup> m/s<sup>2</sup>, shearing local metric manifolds at speeds far exceeding local equilibration:
+          <span style="font-family: var(--font-mono); color: var(--amber-bright); margin-left: 0.5rem;">τ_collapse &lt;&lt; τ_thermal</span>.
+        </p>
+      </article>
+
+      <!-- Section 2: Four Strategic Research Pillars -->
+      <article class="card">
+        <h2>🏛️ Strategic Research Pillars</h2>
+        <div class="pillars-grid">
+          <div class="pillar-card">
+            <h3>Pillar A: Metric Shearing</h3>
+            <p>Treats bubble wall as dynamic 2-sphere boundary S<sup>2</sup> ⊂ S<sup>3</sup>, tracking field-line helicity untying rates.</p>
+          </div>
+          <div class="pillar-card">
+            <h3>Pillar B: Flux Coupling</h3>
+            <p>Bridges macroscopic acoustic drive pressures (~1.5 bar) to quantum boundary layer surface tension (σ ≥ 1.02 GeV/fm).</p>
+          </div>
+          <div class="pillar-card">
+            <h3>Pillar C: Non-Thermal Radiance</h3>
+            <p>Derives non-Planckian spectral signatures of untangling topological strings to quantitatively match observed UV rise.</p>
+          </div>
+          <div class="pillar-card">
+            <h3>Pillar D: 21-Pillar Anchoring</h3>
+            <p>Directly connects bubble collapse to Yang-Mills mass gap (Δ &gt; 0) and 7D quaternion rotation geometry.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Section 3: Numerical Simulation Roadmap -->
+      <article class="card">
+        <h2>⚙️ Numerical &amp; Geometrical Simulation Roadmap</h2>
+        <div class="sim-tracks">
+          <div class="sim-track">
+            <h4>TRACK 1: COMPRESSIBLE SHOCK</h4>
+            <ul>
+              <li>High-order adaptive mesh refinement</li>
+              <li>Real-gas Van der Waals / SESAME EOS</li>
+              <li>Supersonic bubble wall collapse</li>
+              <li>Shock focusing turnaround dynamics</li>
+            </ul>
+          </div>
+          <div class="sim-track accent">
+            <h4>TRACK 2: RIEMANNIAN MANIFOLD</h4>
+            <ul>
+              <li>Dynamic metric curvature tensor</li>
+              <li>Knot invariant tracking (Jones polynomial)</li>
+              <li>Flux-line fiber unknotting rate</li>
+              <li>Critical shear velocity threshold</li>
+            </ul>
+          </div>
+          <div class="sim-track">
+            <h4>TRACK 3: MULTI-PHYSICS DECONFINEMENT</h4>
+            <ul>
+              <li>Direct energy transfer from flux unknotting</li>
+              <li>Picosecond optical pulse synthesis</li>
+              <li>Synthetic vs. experimental spectra validation</li>
+              <li>Zero-trust photon field conservation</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="action-deck">
+          <a href="/downloads/Sonoluminescence_Foundational_Insight_and_Research_Roadmap.pdf" download class="btn btn-amber">
+            Download Publication Roadmap (PDF) ➔
+          </a>
+          <a href="/visual" class="btn btn-secondary">
+            Launch 3D/7D Visualizer Viewport ➔
+          </a>
+          <a href="/team/open/comms_networks" class="btn btn-secondary">
+            Comms &amp; Networks Research Vault ➔
+          </a>
+          <a href="/" class="btn btn-secondary">
+            Chi Key Physics Core Platform ➔
+          </a>
+        </div>
+      </article>
+    </main>
+  </div>
+</body>
+</html>

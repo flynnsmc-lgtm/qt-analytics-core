@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="sat-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f0ff" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+  </defs>
+  <!-- Orbiting Satellite & Coordinates -->
+  <circle cx="32" cy="32" r="28" fill="#0f172a" stroke="rgba(0, 240, 255, 0.3)" stroke-width="1.5" />
+  <circle cx="32" cy="32" r="16" fill="none" stroke="rgba(0, 240, 255, 0.2)" stroke-dasharray="3,3" />
+  <ellipse cx="32" cy="32" rx="24" ry="9" fill="none" stroke="url(#sat-grad)" stroke-width="2" transform="rotate(-30 32 32)" />
+  <!-- Earth / Base Sphere -->
+  <circle cx="32" cy="32" r="8" fill="#0284c7" opacity="0.8" />
+  <circle cx="32" cy="32" r="4" fill="#00f0ff" />
+  <!-- Satellite Body -->
+  <rect x="46" y="16" width="6" height="8" rx="1.5" fill="#38bdf8" transform="rotate(35 49 20)" />
+  <line x1="43" y1="18" x2="55" y2="22" stroke="#00f0ff" stroke-width="2" />
+</svg>

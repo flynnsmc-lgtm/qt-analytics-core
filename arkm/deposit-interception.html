@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deposit Interception — Exchange &amp; Gateway | ARKM Forensics | QT Analytics</title>
+  <meta name="description" content="Stage 3 of ARKM Full Flow Reconstruction: Exchange gateway mapping (Binance, Coinbase, Kraken), UK banking liaisons, KYC cluster alerting, and >88% asset recovery methodology.">
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Webflow PSL Cookie Rescoping Migration Script -->
+  <script>
+    function getCookieNames() {
+      return document.cookie.split(';').map(c => c.trim().split('=')[0]);
+    }
+    const COOKIES_TO_UPDATE = ['_ga', '_fbp'];
+    (function() {
+      const psl = '_psl';
+      function getCookie(cname) {
+        const decodedCookie = decodeURIComponent(document.cookie);
+        const name = cname + '=';
+        const ca = decodedCookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') { c = c.substring(1); }
+          if (c.indexOf(name) == 0) { return c.substring(name.length, c.length); }
+        }
+        return '';
+      }
+      const pslValue = getCookie(psl);
+      if (pslValue != '' && pslValue != null) { return; }
+      function setCookie(name, value, days) {
+        const d = new Date();
+        d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+        const expires = 'expires=' + d.toUTCString();
+        document.cookie = name + '=' + value + ';' + expires + ';path=/';
+      }
+      function resetCookieToSubdomain(name) {
+        const value = getCookie(name);
+        if (value != '') { setCookie(name, value, 365); }
+      }
+      COOKIES_TO_UPDATE.forEach(resetCookieToSubdomain);
+      setCookie(psl, '1', 365);
+    })();
+  </script>
+
+  <style>
+    :root {
+      --bg-core: #07090e;
+      --bg-surface: rgba(15, 23, 42, 0.75);
+      --bg-card: rgba(22, 30, 48, 0.55);
+      --bg-card-hover: rgba(30, 41, 65, 0.75);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-bright: rgba(0, 242, 254, 0.35);
+      --border-emerald: rgba(0, 230, 118, 0.35);
+
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+
+      --accent-cyan: #00f2fe;
+      --accent-blue: #4facfe;
+      --accent-emerald: #00e676;
+      --accent-purple: #a855f7;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+
+      --font-display: 'Outfit', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-core);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(0, 230, 118, 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(0, 242, 254, 0.05) 0%, transparent 45%),
+        radial-gradient(circle at 50% 10%, rgba(168, 85, 247, 0.03) 0%, transparent 50%);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Site Header */
+    header.site-header {
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(7, 9, 14, 0.85);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 72px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent-emerald), var(--accent-cyan));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 800;
+      color: #07090e;
+      font-size: 19px;
+      box-shadow: 0 0 16px rgba(0, 230, 118, 0.35);
+    }
+
+    .brand-text {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #fff;
+    }
+
+    .brand-text span {
+      color: var(--accent-emerald);
+    }
+
+    .main-nav {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .main-nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .main-nav a:hover, .main-nav a.active {
+      color: var(--accent-cyan);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .sla-pill {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(0, 230, 118, 0.1);
+      border: 1px solid rgba(0, 230, 118, 0.25);
+      color: var(--accent-emerald);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      box-shadow: 0 0 8px var(--accent-emerald);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-emerald) 0%, #00b0ff 100%);
+      color: #07090e;
+      box-shadow: 0 4px 14px rgba(0, 230, 118, 0.3);
+      font-weight: 700;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 20px rgba(0, 230, 118, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: rgba(22, 30, 48, 0.8);
+      border-color: var(--border-subtle);
+      color: #fff;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(30, 41, 65, 0.9);
+      border-color: var(--accent-emerald);
+      color: var(--accent-emerald);
+    }
+
+    .btn-sm {
+      padding: 6px 14px;
+      font-size: 12.5px;
+    }
+
+    /* Subpage Sub-Navigation / Breadcrumb Bar */
+    .subpage-bar {
+      background: rgba(12, 17, 28, 0.9);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 14px 0;
+    }
+
+    .subpage-bar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 13.5px;
+    }
+
+    .nav-breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-breadcrumbs a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+
+    .nav-breadcrumbs a:hover {
+      color: var(--accent-cyan);
+    }
+
+    .stage-indicator {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      padding: 3px 10px;
+      border-radius: 4px;
+      background: rgba(0, 230, 118, 0.12);
+      border: 1px solid rgba(0, 230, 118, 0.3);
+      color: var(--accent-emerald);
+      font-weight: 700;
+    }
+
+    .stage-switch-links {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .stage-switch-links a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .stage-switch-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* Hero Banner */
+    .deepdive-hero {
+      padding: 60px 0 40px;
+    }
+
+    .eyebrow-tag {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--accent-emerald);
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    h1.hero-title {
+      font-family: var(--font-display);
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #ffffff 30%, #a7f3d0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p.hero-lead {
+      font-size: 17px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      max-width: 900px;
+      margin-bottom: 28px;
+    }
+
+    .action-button-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    /* Section Cards & Grids */
+    section.content-section {
+      padding: 30px 0;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 24px;
+      background: var(--accent-emerald);
+      border-radius: 2px;
+    }
+
+    .capabilities-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 800px) {
+      .capabilities-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .cap-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 24px;
+      transition: all 0.25s ease;
+    }
+
+    .cap-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent-emerald);
+      transform: translateY(-2px);
+    }
+
+    .cap-icon {
+      font-size: 26px;
+      margin-bottom: 12px;
+    }
+
+    .cap-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .cap-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Liaison Desk & Recovery Benchmark Card */
+    .recovery-benchmark-card {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(7, 18, 24, 0.98) 100%);
+      border: 1px solid var(--border-emerald);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 40px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 230, 118, 0.15);
+    }
+
+    .benchmark-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 24px;
+    }
+
+    .metric-spotlight {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .metric-val {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--accent-emerald);
+      line-height: 1;
+    }
+
+    .metric-label {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+    }
+
+    .liaison-desks-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    @media (max-width: 900px) {
+      .liaison-desks-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 500px) {
+      .liaison-desks-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .desk-chip {
+      background: rgba(7, 9, 14, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .desk-name {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .desk-type {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-cyan);
+    }
+
+    /* Verified Integration List */
+    .integration-box {
+      background: rgba(22, 30, 48, 0.4);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 28px;
+      margin-bottom: 40px;
+    }
+
+    .integration-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .integration-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14.5px;
+      color: #e2e8f0;
+    }
+
+    .check-icon {
+      color: var(--accent-emerald);
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    /* Bottom CTA Box */
+    .cta-banner {
+      background: linear-gradient(135deg, rgba(22, 30, 48, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
+      border: 1px solid var(--border-bright);
+      border-radius: 18px;
+      padding: 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 60px;
+      box-shadow: 0 10px 40px rgba(0, 230, 118, 0.15);
+    }
+
+    /* Footer */
+    footer.site-footer {
+      border-top: 1px solid var(--border-subtle);
+      background: rgba(5, 7, 10, 0.95);
+      padding: 48px 0 32px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Site Navigation Header -->
+  <header class="site-header">
+    <div class="container nav-inner">
+      <a href="../qt_analytics.html" class="brand-logo">
+        <div class="brand-mark">QT</div>
+        <div class="brand-text">QT <span>ANALYTICS</span></div>
+      </a>
+
+      <nav class="main-nav">
+        <a href="../qt_analytics.html#reports">Reports Archive</a>
+        <a href="../qt_analytics.html#telemetry-addendum">Verified Telemetry</a>
+        <a href="../qt_analytics.html#arkm-tracer" class="active">ARKM Forensic Tracer</a>
+        <a href="../qt_analytics.html#pricing">Pricing &amp; Tiers</a>
+        <a href="../index.html">Chi Physics Core</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="sla-pill" title="Standard Guaranteed SLA">
+          <span class="pulse-dot"></span> &le;&pound;500 / 24-HR GUARANTEE
+        </div>
+        <a href="../qt_analytics.html#order-desk" class="btn btn-primary btn-sm">Order Report</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Subpage Navigation / Breadcrumb Bar -->
+  <div class="subpage-bar">
+    <div class="container subpage-bar-inner">
+      <div class="nav-breadcrumbs">
+        <a href="../qt_analytics.html#arkm-tracer">&larr; Back to ARKM Visualizer</a>
+        <span style="color: var(--text-muted);">&bull;</span>
+        <span class="stage-indicator">STAGE 3 OF 3</span>
+      </div>
+      <div class="stage-switch-links">
+        <a href="./obfuscation-layer.html">&larr; Previous: Obfuscation Layer</a>
+        <span style="color: var(--text-muted);">&bull;</span>
+        <a href="../qt_analytics.html#arkm-tracer">Back to ARKM Overview &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- Hero Header -->
+    <div class="deepdive-hero">
+      <span class="eyebrow-tag">&bull; STAGE 3: GATEWAY MAPPING &amp; RECOVERY DESKS</span>
+      <h1 class="hero-title">Deposit Interception — Exchange &amp; Gateway</h1>
+      <p class="hero-lead">
+        This is the final and most critical stage: identifying where funds exit the blockchain and enter real-world financial systems. We map exchange gateways, trigger alerts at deposit points, and connect on-chain intelligence directly to verified institutional and banking liaison channels.
+      </p>
+
+      <div class="action-button-row">
+        <a href="../qt_analytics.html#arkm-tracer" class="btn btn-secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+          Inspect ARKM Flow
+        </a>
+        <a href="../qt_analytics.html#telemetry-addendum" class="btn btn-secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          Inspect Invariant Seal (432 Hz)
+        </a>
+        <a href="../qt_analytics.html#order-desk" class="btn btn-primary">
+          Request Instant Forensic Dossier &rarr;
+        </a>
+      </div>
+    </div>
+
+    <!-- Core Capabilities Section -->
+    <section class="content-section">
+      <h2 class="section-title">Core Capabilities &amp; Interception Protocols</h2>
+
+      <div class="capabilities-grid">
+        <div class="cap-card">
+          <div class="cap-icon">🏦</div>
+          <div class="cap-title">Exchange Gateway Mapping</div>
+          <div class="cap-text">
+            We maintain verified gateway mappings for major exchanges including Binance, Coinbase, and Kraken alongside UK banking fraud desk integrations.
+          </div>
+        </div>
+
+        <div class="cap-card">
+          <div class="cap-icon">🚨</div>
+          <div class="cap-title">KYC Cluster Alerting</div>
+          <div class="cap-text">
+            We trigger KYC cluster alerts when tagged or flagged entities enter deposit streams, enabling rapid early intervention before off-ramping completes.
+          </div>
+        </div>
+
+        <div class="cap-card">
+          <div class="cap-icon">📈</div>
+          <div class="cap-title">Asset Recovery Probability Scoring</div>
+          <div class="cap-text">
+            We calculate asset recovery probability scoring, with verified empirical benchmarks exceeding 88% for well-documented and rapidly notified cases.
+          </div>
+        </div>
+
+        <div class="cap-card">
+          <div class="cap-icon">📄</div>
+          <div class="cap-title">Compliant Evidence Packaging</div>
+          <div class="cap-text">
+            We produce fully compliant evidence packages including hash trees, visual flow diagrams, and verified SAR-compliant legal statements ready for court submission.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recovery Benchmark Spotlight Card -->
+    <section class="content-section">
+      <h2 class="section-title">Verified Liaison Desks &bull; Recovery Benchmark</h2>
+
+      <div class="recovery-benchmark-card">
+        <div class="benchmark-header">
+          <div class="metric-spotlight">
+            <span class="metric-val">&gt;88%</span>
+            <span class="metric-label">HISTORICAL ASSET RECOVERY POTENTIAL BENCHMARK</span>
+          </div>
+          <div style="font-family: var(--font-mono); font-size: 12.5px; color: var(--accent-emerald);">
+            STATUS: ACTIVE MONITORING DESK
+          </div>
+        </div>
+
+        <p style="font-size: 14.5px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">
+          When an illicit outflow is identified within 2 hours of deposit entry, ARKM's direct liaison feeds allow legal counsel and compliance leads to transmit cryptographically verified freeze packages directly to designated exchange law enforcement points of contact.
+        </p>
+
+        <div class="liaison-desks-grid">
+          <div class="desk-chip">
+            <div class="desk-name">Binance LEA</div>
+            <div class="desk-type">Direct Desk &bull; PAIROQ CRM</div>
+          </div>
+          <div class="desk-chip">
+            <div class="desk-name">Coinbase Global</div>
+            <div class="desk-type">Subpoena &amp; Freeze Queue</div>
+          </div>
+          <div class="desk-chip">
+            <div class="desk-name">Kraken Security</div>
+            <div class="desk-type">KYC Asset Hold Endpoint</div>
+          </div>
+          <div class="desk-chip">
+            <div class="desk-name">UK Banking Fraud</div>
+            <div class="desk-type">Barclays / NatWest / NCA</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Verified Integration Section -->
+    <section class="content-section">
+      <h2 class="section-title">Verified Integration &amp; Compliance Standards</h2>
+
+      <div class="integration-box">
+        <ul class="integration-list">
+          <li>
+            <span class="check-icon">✓</span>
+            <div>
+              <strong>Verified Liaison Endpoints:</strong> Our system is integrated with verified UK banking and cryptocurrency exchange liaison endpoints (Barclays, NatWest, Lloyds, NCA/UK-NCCU, Binance, Coinbase, Kraken).
+            </div>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <div>
+              <strong>Regulatory Standards Compliance:</strong> All reports are formatted to meet financial investigation and anti-money laundering documentation standards (SAR / JMLIT guidelines).
+            </div>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <div>
+              <strong>Secure Institutional Payment &amp; Delivery:</strong> We support secure payment and delivery pathways including Gumroad, Stripe, and proforma bank wire for institutional enterprise clients.
+            </div>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <div>
+              <strong>24-Hour Rapid Response SLA:</strong> Our 24-hour intelligence desk ensures rapid turnaround when time is critical for asset preservation and emergency injunctions.
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Call to Action Banner -->
+    <div class="cta-banner">
+      <div>
+        <div style="font-family: var(--font-display); font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 6px;">
+          Ready to Submit an Asset Interception Request?
+        </div>
+        <div style="color: var(--text-secondary); font-size: 14.5px;">
+          Deploy our financial desk against target exchange deposits immediately. Standard &le;&pound;500 reports delivered within 24 hours guaranteed.
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+        <a href="../qt_analytics.html#arkm-tracer" class="btn btn-secondary">
+          &larr; Return to ARKM Overview
+        </a>
+        <a href="../qt_analytics.html#order-desk" class="btn btn-primary">
+          Submit Case to Financial Desk
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <div style="font-family: var(--font-display); font-weight: 700; font-size: 18px; color: #fff; margin-bottom: 4px;">
+          QT ANALYTICS &bull; ARKM FLOW VISUALIZER
+        </div>
+        <div>Stage 3: Deposit Interception &bull; Exchange &amp; Gateway Deep-Dive</div>
+        <div style="font-size: 12px; margin-top: 4px; color: var(--text-muted);">
+          Document Reference: <code>QT-ARKM-STAGE-03</code> &bull; Standard &le; &pound;500 / 24-Hour Guarantee
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 20px; font-size: 13px;">
+        <a href="./infiltration-drain.html" style="color: var(--text-secondary); text-decoration: none;">Stage 1 (Infiltration)</a>
+        <a href="./obfuscation-layer.html" style="color: var(--text-secondary); text-decoration: none;">Stage 2 (Obfuscation)</a>
+        <a href="../qt_analytics.html" style="color: var(--accent-cyan); text-decoration: none;">Commercial Portal</a>
+        <a href="../index.html" style="color: var(--text-secondary); text-decoration: none;">Chi Physics Core</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

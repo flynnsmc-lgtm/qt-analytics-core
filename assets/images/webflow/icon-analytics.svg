@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="ana-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#818cf8" />
+    </linearGradient>
+  </defs>
+  <!-- Analytics Chart & Tensor Insights -->
+  <circle cx="32" cy="32" r="28" fill="#0f172a" stroke="rgba(56, 189, 248, 0.3)" stroke-width="1.5" />
+  <rect x="18" y="36" width="6" height="14" rx="2" fill="#0284c7" />
+  <rect x="28" y="26" width="6" height="24" rx="2" fill="#00f0ff" />
+  <rect x="38" y="20" width="6" height="30" rx="2" fill="#38bdf8" />
+  <rect x="48" y="14" width="6" height="36" rx="2" fill="url(#ana-grad)" />
+  <polyline points="21 33 31 23 41 17 51 11" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" />
+  <circle cx="51" cy="11" r="3" fill="#fbbf24" />
+</svg>

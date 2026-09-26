@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hypersphere 3D/7D Visual Core — Antigravity Observatory</title>
+  <meta name="description" content="Interactive 3D/4D S^3 continuous manifold hypersphere projection with pure unit quaternions, Hopf fibration tori, and 432Hz invariant telemetry.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="ambient-glow-1"></div>
+  <div class="ambient-glow-2"></div>
+
+  <!-- Top Navigation Header -->
+  <header class="top-nav">
+    <div class="nav-brand">
+      <span class="brand-icon">🌐</span>
+      <div>
+        <h1 class="brand-title">HYPERSPHERE VISUAL CORE</h1>
+        <span class="brand-sub">S³ CONTINUOUS MANIFOLD • 7D PROJECTION • UNIT QUATERNIONS</span>
+      </div>
+    </div>
+
+    <div class="nav-badges">
+      <div class="badge badge-live">
+        <div class="badge-pulse-dot" id="hud-status-dot"></div>
+        <span id="hud-status-text">LOCKED • ONLINE</span>
+      </div>
+      <div class="badge badge-norm">
+        <span>TARGET NORM: 100.00</span>
+      </div>
+      <div class="badge badge-lock">
+        <span>QUIZ AGENT GATE</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Safe Locked Workflow Ribbon -->
+  <div class="lock-workflow-ribbon">
+    <div class="workflow-steps">
+      <div class="workflow-step complete">
+        <span>🔒 STEP 1: SYSTEM LOCK (BLOCKED)</span>
+      </div>
+      <span class="workflow-arrow">→</span>
+      <div class="workflow-step complete">
+        <span>⚡ STEP 2: FIX & RESTART (AUDI 8080)</span>
+      </div>
+      <span class="workflow-arrow">→</span>
+      <div class="workflow-step active">
+        <span>✅ STEP 3: GREEN LIGHT (VISUAL ACTIVE)</span>
+      </div>
+      <span class="workflow-arrow">→</span>
+      <div class="workflow-step">
+        <span>🧠 STEP 4: QUIZ AGENT EVALUATION</span>
+      </div>
+    </div>
+    <div>
+      <a href="http://localhost:8080/team/open/comms_networks" target="_blank" class="workflow-action-link">
+        <span>📡 24 Comms Networks (Up For Grabs)</span> ↗
+      </a>
+    </div>
+  </div>
+
+  <!-- Context Switcher Toolbar -->
+  <nav class="context-switcher-bar">
+    <div class="switcher-heading">
+      <span>🎛️ CONTEXT VIEW:</span>
+    </div>
+    <div class="context-button-group" id="context-switcher-buttons">
+      <button class="btn-context active" data-context="original" id="btn-ctx-original" title="Pure S³ 7D-projected manifold geometry (Canonical Baseline)">
+        <span class="ctx-icon">🌐</span>
+        <span class="ctx-name">Original Hypersphere</span>
+        <span class="ctx-tag">Default</span>
+      </button>
+      <button class="btn-context" data-context="physics" id="btn-ctx-physics" title="Field lines, flux density & 432Hz resonance shells">
+        <span class="ctx-icon">⚡</span>
+        <span class="ctx-name">Physics / Field Dynamics</span>
+        <span class="ctx-tag">Flux & 432Hz</span>
+      </button>
+      <button class="btn-context" data-context="comms" id="btn-ctx-comms" title="Satellite constellations & 24 claimable comms docs">
+        <span class="ctx-icon">📡</span>
+        <span class="ctx-name">Comms / Network</span>
+        <span class="ctx-tag">24 Docs Up For Grabs</span>
+      </button>
+      <button class="btn-context" data-context="knowledge" id="btn-ctx-knowledge" title="220 research papers & competency mirror bridges">
+        <span class="ctx-icon">📚</span>
+        <span class="ctx-name">Knowledge / Data Map</span>
+        <span class="ctx-tag">220 Papers</span>
+      </button>
+      <button class="btn-context" data-context="quiz" id="btn-ctx-quiz" title="Continuous manifold vs discrete gates & candidate status">
+        <span class="ctx-icon">🧠</span>
+        <span class="ctx-name">Quiz / Assessment</span>
+        <span class="ctx-tag">Rule #0 Invariants</span>
+      </button>
+    </div>
+    <div class="context-dropdown-wrap">
+      <select id="select-hypersphere-context" class="context-dropdown" aria-label="Select Hypersphere Context View">
+        <option value="original">1️⃣ Original Hypersphere (Baseline)</option>
+        <option value="physics">2️⃣ Physics / Field Dynamics</option>
+        <option value="comms">3️⃣ Comms / Network Context</option>
+        <option value="knowledge">4️⃣ Knowledge / Data Map</option>
+        <option value="quiz">5️⃣ Quiz / Assessment View</option>
+      </select>
+    </div>
+  </nav>
+
+  <!-- Active Context Details Banner -->
+  <div class="active-context-banner" id="active-context-banner">
+    <div class="context-banner-content">
+      <span class="context-badge" id="ctx-badge">CANONICAL BASELINE</span>
+      <strong id="ctx-title">S³ 7D-Projected Holographic Vortex</strong>
+      <span class="context-desc" id="ctx-desc">Pure differential geometry, stereographic Hopf fibration tori, and tensor symmetry. Preserved exactly as default baseline in view_original.json.</span>
+    </div>
+    <div class="context-banner-status">
+      <span class="pulse-ring"></span>
+      <span id="ctx-status-text">SYNC'D TO LOCALHOST:8080/AUDI</span>
+    </div>
+  </div>
+
+  <!-- Main Viewport Section -->
+  <main class="main-viewport">
+    <!-- Center Stage: 3D/4D Canvas Viewport -->
+    <section class="visualizer-stage-card">
+      <div class="stage-header">
+        <div class="stage-title-wrap">
+          <h2 class="stage-title" id="viewport-stage-title">Hyperspheric Geometry Viewport</h2>
+          <span class="stage-subtitle" id="viewport-stage-subtitle">HOPF FIBRATION • STEREOGRAPHIC TORUS RINGS</span>
+        </div>
+        <div class="stage-actions">
+          <button id="btn-toggle-mode" class="btn-pill active" title="Switch geometric projection">
+            🌐 View: 4D Hopf Rings
+          </button>
+          <button id="btn-toggle-rotation" class="btn-pill active" title="Pause or resume auto orbit">
+            ⏸️ Pause Orbit
+          </button>
+          <button id="btn-reset-view" class="btn-pill" title="Reset quaternion orientation">
+            🎯 Reset View
+          </button>
+        </div>
+      </div>
+
+      <!-- Canvas Box with Floating HUD -->
+      <div class="canvas-container">
+        <canvas id="hypersphere-canvas"></canvas>
+
+        <!-- 🎛️ HYPERSPHERE CONTEXT SWITCHER — DROPDOWN CONTROL -->
+        <div id="hypersphere-context-dropdown-widget" class="ui-panel context-switcher">
+          <label for="contextSelector" style="color: #fff; font-size: 13.5px; font-weight: 600; margin-right: 6px; text-shadow: 0 0 8px rgba(0,0,0,0.5);">
+            🌐 View:
+          </label>
+          <select id="contextSelector" aria-label="Select View Context">
+            <option value="original">✅ Original Hypersphere</option>
+            <option value="physics">⚛️ Physics / Field Dynamics</option>
+            <option value="comms">🛰️ Comms / Satellite Network</option>
+            <option value="knowledge">📚 Knowledge / Data Map</option>
+            <option value="quiz">🧠 Quiz / Assessment Mode</option>
+          </select>
+          <span id="contextStatus">✅ Connected to /audi</span>
+          <div id="viewStatus" style="
+            margin-top: 4px;
+            font-size: 11.5px;
+            color: #a0e0ff;
+            text-shadow: 0 0 4px rgba(0,150,255,0.6);
+            width: 100%;
+          ">
+            Current: Original Geometry View
+          </div>
+        </div>
+
+        <!-- Floating HUD Top Left -->
+        <div class="canvas-hud-top-left">
+          <div class="hud-metric-pill">
+            <span>CORE NORM:</span> <strong id="tel-norm">100.0 / 100.0</strong>
+          </div>
+          <div class="hud-metric-pill">
+            <span>PHASE DRIFT:</span> <strong id="tel-phase">0.00° (Zero Drift)</strong>
+          </div>
+          <div class="hud-metric-pill">
+            <span>COHERENCE:</span> <strong id="tel-coherence">0.998</strong>
+          </div>
+        </div>
+
+        <!-- Floating HUD Bottom Left: Quaternion Coordinates -->
+        <div class="canvas-hud-bottom-left">
+          <div class="hud-coordinates">
+            <div>ORIENTATION QUATERNION: q = w + xi + yj + zk</div>
+            <div class="coord-row">
+              <div>w: <span id="coord-w">1.0000</span></div>
+              <div>x: <span id="coord-x">0.0000</span></div>
+              <div>y: <span id="coord-y">0.0000</span></div>
+              <div>z: <span id="coord-z">0.0000</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating HUD Bottom Right: 180° Antipode Status -->
+        <div class="canvas-hud-bottom-right">
+          <div class="hud-metric-pill" id="hud-antipode-pill" style="border-color: rgba(16, 185, 129, 0.4); color: var(--accent-green);">
+            180° ANTIPODE: UNLOCKED (SOFT CROSSING)
+          </div>
+        </div>
+
+        <!-- Floating Context Layer Overlay Legend -->
+        <div class="context-canvas-overlay" id="context-canvas-overlay">
+          <div class="overlay-title" id="overlay-title">
+            <span>🌐</span> <span>ORIGINAL GEOMETRY</span>
+          </div>
+          <div id="overlay-items-list">
+            <div class="overlay-item">
+              <div class="overlay-dot" style="background: #00f0ff;"></div>
+              <span>Hopf Fibration S³ Fibers</span>
+            </div>
+            <div class="overlay-item">
+              <div class="overlay-dot" style="background: #c084fc;"></div>
+              <span>Stereographic Concentric Tori</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage Bottom Deck Controls -->
+      <div class="stage-footer">
+        <div class="footer-controls">
+          <div class="control-group">
+            <span>ORBIT SPEED:</span>
+            <input type="range" id="slider-rotation-speed" class="slider-custom" min="0.1" max="3.0" step="0.1" value="1.0">
+          </div>
+          <div class="control-group">
+            <button id="btn-toggle-audio" class="btn-pill" title="Toggle 432Hz sine carrier and 7.83Hz Schumann LFO">
+              🔇 Sound: 432Hz Muted
+            </button>
+          </div>
+        </div>
+
+        <div class="footer-controls">
+          <button id="btn-toggle-json" class="btn-pill" title="Inspect raw JSON state from localhost:8080/audi">
+            📊 Toggle Raw JSON
+          </button>
+          <a href="http://localhost:8080/audi?format=json" target="_blank" class="btn-pill" style="text-decoration: none;">
+            🔗 Direct JSON Endpoint
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Column: Control & Invariant Telemetry Deck -->
+    <aside class="telemetry-deck">
+      <!-- Invariant Telemetry HUD Panel -->
+      <div class="hud-panel">
+        <div class="panel-header">
+          <h3 class="panel-title"><span>📡</span> Invariant Telemetry</h3>
+          <span class="panel-title-badge">LIVE SEED</span>
+        </div>
+
+        <div class="telemetry-grid">
+          <div class="telemetry-cell">
+            <div class="cell-label">Carrier Frequency</div>
+            <div class="cell-value highlight-cyan" id="tel-carrier">432.000 Hz</div>
+          </div>
+          <div class="telemetry-cell">
+            <div class="cell-label">Schumann Lock</div>
+            <div class="cell-value highlight-green" id="tel-schumann">7.83 Hz</div>
+          </div>
+          <div class="telemetry-cell">
+            <div class="cell-label">Geomagnetic Field</div>
+            <div class="cell-value" id="tel-field">48170 nT</div>
+          </div>
+          <div class="telemetry-cell">
+            <div class="cell-label">Tensor Gate</div>
+            <div class="cell-value highlight-purple" id="tel-gate">[64, 64, 4096]</div>
+          </div>
+        </div>
+
+        <!-- Carrier Wave Canvas -->
+        <canvas id="carrier-wave-canvas" class="carrier-wave-canvas"></canvas>
+
+        <!-- Physics Manifold Insight Card -->
+        <div class="physics-insight-box">
+          <div class="insight-header">
+            <span>🧠</span> KEY GEOMETRIC INSIGHT (RULE #0)
+          </div>
+          <div class="insight-body">
+            <strong>Continuous Manifold: TRUE</strong><br>
+            Hypersphere states represent an infinite, smooth continuous manifold S³ / R⁷, not discrete combinatoric counting (2ⁿ). Validated for Quiz Agent candidate selection.
+          </div>
+        </div>
+      </div>
+
+      <!-- Access Policy & Gatekeeper Panel -->
+      <div class="hud-panel">
+        <div class="panel-header">
+          <h3 class="panel-title"><span>🛡️</span> Security & Gatekeeper</h3>
+          <span class="panel-title-badge" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-green);">LOCKED</span>
+        </div>
+
+        <div class="telemetry-cell" style="margin-bottom: 12px;">
+          <div class="cell-label">Access Policy</div>
+          <div class="cell-value highlight-purple" id="tel-policy" style="font-size: 11px;">
+            LOCKED_QUIZ_AGENT_VERIFIED_ONLY
+          </div>
+        </div>
+
+        <p style="font-size: 11px; color: var(--text-dim); line-height: 1.4; margin-bottom: 12px;">
+          Unchecked agent access is strictly prohibited while core is unverified. Only Quiz Agent is authorized to probe and allocate candidate roles.
+        </p>
+
+        <a href="http://localhost:8080/team/open/comms_networks" target="_blank" class="btn-block-action" style="text-decoration: none;">
+          <span>📋 View 24 Claimable Comms Docs</span>
+        </a>
+      </div>
+
+      <!-- Collapsible Raw JSON Card -->
+      <div class="hud-panel raw-json-panel" id="raw-json-card" style="display: none;">
+        <div class="panel-header">
+          <h3 class="panel-title"><span>📟</span> Live JSON Stream (/audi)</h3>
+          <span class="panel-title-badge">AUTO-REFRESH</span>
+        </div>
+        <div class="json-pre-wrap">
+          <pre id="json-stream-output">Connecting to http://localhost:8080/audi...</pre>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Load JavaScript Modules -->
+  <script src="hypersphere.js"></script>
+  <script src="renderer.js"></script>
+
+  <!-- 🔌 CONTEXT LOGIC — CONNECTS TO YOUR RENDERER / BACKEND -->
+  <script>
+  const HypersphereContext = (() => {
+    // Define every view's properties
+    const viewConfigs = {
+      original: {
+        label: "Original Geometry View",
+        mode: "geometry",
+        theme: "cyan-lavender",
+        overlays: [],
+        backend: (window.location.port === "8080" ? "/audi" : "http://localhost:8080/audi")
+      },
+      physics: {
+        label: "Physics / Field Dynamics",
+        mode: "field",
+        theme: "energy-heatmap",
+        overlays: ["curvature", "flux", "tensor-gates", "schumann-anchor"],
+        backend: (window.location.port === "8080" ? "/audi" : "http://localhost:8080/audi")
+      },
+      comms: {
+        label: "Comms / Satellite Network",
+        mode: "network",
+        theme: "signal-security",
+        overlays: ["sat-constellations", "geotags", "non-spoof-zones", "endpoints"],
+        backend: (window.location.port === "8080" ? "/audi" : "http://localhost:8080/audi")
+      },
+      knowledge: {
+        label: "Knowledge / Data Map",
+        mode: "data",
+        theme: "domain-colors",
+        overlays: ["agent-bridges", "physics-set", "comms-set", "data-flow"],
+        backend: (window.location.port === "8080" ? "/audi" : "http://localhost:8080/audi")
+      },
+      quiz: {
+        label: "Quiz / Assessment Mode",
+        mode: "evaluation",
+        theme: "status-highlight",
+        overlays: ["invariants", "boundaries", "access-locks", "coherence-markers"],
+        backend: (window.location.port === "8080" ? "/audi" : "http://localhost:8080/audi")
+      }
+    };
+
+    // Elements
+    const selector = document.getElementById("contextSelector");
+    const statusDisplay = document.getElementById("viewStatus");
+
+    // Switch logic — call your existing renderer here
+    async function applyContext(viewKey) {
+      const config = viewConfigs[viewKey];
+      if (!config) return;
+      if (statusDisplay) {
+        statusDisplay.textContent = `Current: ${config.label}`;
+        statusDisplay.style.color = "#a0e0ff";
+      }
+
+      const contextStatus = document.getElementById("contextStatus");
+      if (contextStatus) {
+        contextStatus.textContent = "✅ Connected to /audi";
+      }
+
+      // ✅ THIS IS WHERE YOU UPDATE YOUR HYPERSPHERE RENDER:
+      if (window.__hypersphereRenderer) {
+        window.__hypersphereRenderer.setMode(config.mode);
+        window.__hypersphereRenderer.setTheme(config.theme);
+        window.__hypersphereRenderer.setOverlays(config.overlays);
+        console.log(`[Hypersphere] Switched to: ${config.label}`, config);
+      } else {
+        console.warn("[Hypersphere] Renderer not yet initialized — config stored:", config);
+      }
+
+      // Sync active view to backend /api/set-view endpoint
+      try {
+        const setViewUrl = (window.location.port === "8080" ? "/api/set-view?context=" : "http://localhost:8080/api/set-view?context=") + encodeURIComponent(viewKey);
+        fetch(setViewUrl).then(r => r.ok ? console.log("✅ Backend view set to:", viewKey) : console.warn("⚠️ View set warning"));
+      } catch (e) {
+        console.warn("View set fetch error:", e);
+      }
+
+      // Optional: Sync state from backend
+      try {
+        const res = await fetch(config.backend + (config.backend.includes('?') ? '&' : '?') + 'format=json');
+        const state = await res.json();
+        console.log("✅ Backend state aligned:", state.status, state.dimension);
+      } catch (e) {
+        console.error("⚠️ Backend sync issue:", e);
+      }
+    }
+
+    // Bind dropdown event
+    if (selector) {
+      selector.addEventListener("change", (e) => {
+        applyContext(e.target.value);
+      });
+    }
+
+    // Aliased viewContext support
+    const viewContextEl = document.getElementById("viewContext");
+    if (viewContextEl && viewContextEl !== selector) {
+      viewContextEl.addEventListener("change", (e) => {
+        if (selector) selector.value = e.target.value;
+        applyContext(e.target.value);
+      });
+    }
+
+    // Init on load
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => {
+        applyContext("original");
+      });
+    } else {
+      applyContext("original");
+    }
+
+    // Public API
+    return {
+      getCurrent: () => selector ? selector.value : "original",
+      switchTo: (key) => {
+        if (selector) selector.value = key;
+        const vc = document.getElementById("viewContext");
+        if (vc) vc.value = key;
+        return applyContext(key);
+      },
+      getAll: () => Object.keys(viewConfigs)
+    };
+  })();
+
+  window.HypersphereContext = HypersphereContext;
+  </script>
+</body>
+</html>

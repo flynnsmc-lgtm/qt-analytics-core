@@ -1,0 +1,116 @@
+{
+  "system": "ANTIGRAVITY_HYPERSPHERE_CORE",
+  "version": "3.4.0",
+  "hash": "#CK-AG-HYPERSPHERE-PHASE3-4",
+  "geometry": {
+    "norm_target": 100.0,
+    "manifold": "S^3_IN_R^4",
+    "normalization_tolerance": 1e-14,
+    "sub_planckian_fence_rad": 0.002,
+    "throat_constriction_ratio": 0.37037037037037035
+  },
+  "resonance": {
+    "schumann_hz": 7.83,
+    "carrier_hz": 432.0,
+    "harmonic_ratio": 55.172413793103445,
+    "phase_guard_active": true
+  },
+  "canonical_quaternions": {
+    "identity": {
+      "w": 1.0,
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0
+    },
+    "schumann_gate": {
+      "w": 0.9238795325112867,
+      "x": 0.0,
+      "y": 0.3826834323650898,
+      "z": 0.0
+    },
+    "throat_constriction": {
+      "w": 0.8354878114129365,
+      "x": 0.549508978070806,
+      "y": 0.0,
+      "z": 0.0
+    }
+  },
+  "orthogonal_matrices": {
+    "identity": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "schumann_gate": [
+      [
+        0.7071067811865475,
+        0.0,
+        0.7071067811865476
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        -0.7071067811865476,
+        0.0,
+        0.7071067811865475
+      ]
+    ],
+    "throat_constriction": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.39607976603915684,
+        -0.918216106880274
+      ],
+      [
+        0.0,
+        0.918216106880274,
+        0.39607976603915684
+      ]
+    ]
+  },
+  "horizons": {
+    "horizon_1h": {
+      "name": "Schumann Phase Slip Guard",
+      "status": "ACTIVE",
+      "tolerance_rad": 0.002
+    },
+    "horizon_24h": {
+      "name": "Intel Bounty Sink",
+      "status": "ARMED",
+      "capacity": "UNLIMITED"
+    },
+    "horizon_7d": {
+      "name": "Liquidity Re-center",
+      "status": "ACTIVE",
+      "range": [
+        2.25,
+        2.88
+      ]
+    },
+    "horizon_30d": {
+      "name": "Macro Floor Defense",
+      "status": "STANDBY",
+      "floor_ratio": 0.37037037037037035
+    }
+  }
+}

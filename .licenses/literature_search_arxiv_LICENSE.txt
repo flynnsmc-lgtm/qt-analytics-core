@@ -1,0 +1,6 @@
+arXiv Terms of Use and Licensing Notice
+Recorded Timestamp: 2026-09-10T07:28:30Z
+Notice:
+Users must check the terms at https://info.arxiv.org/help/api/index.html and always check the license of the papers retrieved by the literature-search-arxiv skill for any restrictions.
+All requests respect the polite rate limit (max 1 request every 3 seconds).
+Paper licenses are subject to individual author/arXiv open access terms.

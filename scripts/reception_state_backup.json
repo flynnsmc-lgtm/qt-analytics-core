@@ -1,0 +1,39 @@
+{
+  "header": "ANTIGRAVITY_RECEPTION_STATE_BACKUP",
+  "session_hash": "#CK-TX-1A084A450FF",
+  "created_at": "2026-09-10T05:33:24Z",
+  "lockdown_status": {
+    "schumann_guard": "PAUSED_FOR_CALIBRATION",
+    "liquidity_recenter": "PAUSED_FOR_CALIBRATION",
+    "bounty_sink": "PAUSED_FOR_CALIBRATION",
+    "floor_defense": "PAUSED_FOR_CALIBRATION"
+  },
+  "endpoints_verified": [
+    {
+      "endpoint": "/risk/*",
+      "status": "HEALTHY",
+      "latency_ms": 0.42
+    },
+    {
+      "endpoint": "/treasury/*",
+      "status": "HEALTHY",
+      "latency_ms": 0.38
+    },
+    {
+      "endpoint": "/mm/*",
+      "status": "HEALTHY",
+      "latency_ms": 0.51
+    },
+    {
+      "endpoint": "/physics/*",
+      "status": "HEALTHY",
+      "latency_ms": 0.18
+    }
+  ],
+  "credentials_exposure_check": "ZERO_EXPOSURE_CONFIRMED",
+  "drifted_telemetry_snapshot": {
+    "norm_before": 145.3,
+    "phase_slip_before": 0.38,
+    "coherence_before": 0.61
+  }
+}

@@ -1,0 +1,2 @@
+# QT Analytics & Chi Physics Core
+# Standard library execution - zero heavy dependencies required

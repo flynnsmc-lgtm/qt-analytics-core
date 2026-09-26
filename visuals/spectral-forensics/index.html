@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QT Analytics — Spectral Forensics Intelligence Desk</title>
+  <meta name="description" content="Single-page interactive, connected, and self-documenting spectral intelligence desk for on-chain entity forensics, risk scoring, and Gödel locking relation physics.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="desk-viewport spectral-desk-container">
+
+    <!-- ==================================================================== -->
+    <!-- 1. HEADER & GLOBAL CONTROLS                                         -->
+    <!-- ==================================================================== -->
+    <header class="desk-header">
+      <div class="brand-group">
+        <div class="brand-logo-hex">🧮</div>
+        <div class="brand-text">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <h1>QT ANALYTICS — SPECTRAL FORENSICS INTELLIGENCE DESK</h1>
+            <span class="desk-id-badge" id="desk-id-badge" style="font-family: var(--font-mono); font-size: 0.65rem; background: rgba(0, 240, 255, 0.12); color: var(--cyan-primary); border: 1px solid var(--border-glow); padding: 2px 8px; border-radius: 4px; letter-spacing: 0.08em;">QT-SF-V2-ANTIGRAVITY</span>
+          </div>
+          <div class="brand-sub">Active Liaison • Quick Loop Verification • Unified Invariant Gate</div>
+        </div>
+      </div>
+
+      <div class="header-controls-row">
+        <!-- Quick Loop Verification Status -->
+        <div class="control-pill" id="loop-verification-status" 
+             data-tooltip-title="Quick Loop Verification" 
+             data-tooltip-desc="Continuous multi-frequency invariant loop checking mempool coherence, fraud tags, and contract states."
+             data-insight-key="fast-loop-action">
+          <span class="pulse-dot" style="background-color: var(--cyan-primary);"></span>
+          <span>QUICK LOOP: SYNCHRONIZED</span>
+        </div>
+
+        <!-- Active Liaison Pill -->
+
+        <div class="control-pill" id="pill-active-liaison" 
+             data-tooltip-title="Active Liaison Desk" 
+             data-tooltip-desc="Real-time human-in-the-loop operator correlation and intervention hub."
+             data-insight-key="active-liaison">
+          <span class="pulse-dot"></span>
+          <span>LIAISON: ACTIVE (4 CLUSTERS SYNCED)</span>
+        </div>
+
+        <!-- Fast Loop Action Toggle -->
+        <button class="btn-fast-loop active" id="btn-global-fast-loop"
+                data-tooltip-title="Fast Loop Action" 
+                data-tooltip-desc="High-frequency 50ms verification cycle prioritizing live monitoring speed over block depth."
+                data-insight-key="fast-loop-action">
+          <span>⚡</span>
+          <span id="fast-loop-text">FAST LOOP: ARMED (50ms)</span>
+        </button>
+
+        <!-- Network Refresh Button -->
+        <button class="btn-network-refresh" id="btn-global-refresh"
+                data-tooltip-title="Network Refresh" 
+                data-tooltip-desc="Re-synchronizes state, invalidates stale local caches, and recalibrates Bayesian risk models."
+                data-insight-key="network-refresh">
+          <svg class="icon-refresh" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <polyline points="1 20 1 14 7 14"></polyline>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+          <span>NETWORK REFRESH</span>
+        </button>
+
+        <!-- Latency Indicator -->
+        <div class="control-pill"
+             data-tooltip-title="RPC Quorum Latency" 
+             data-tooltip-desc="Live sub-second round-trip time across primary RPC validation nodes.">
+          <span>LATENCY:</span>
+          <strong id="readout-latency-val" style="color: var(--cyan-primary);">42 ms</strong>
+        </div>
+      </div>
+    </header>
+
+    <!-- ==================================================================== -->
+    <!-- 2. THREE-COLUMN INTELLIGENCE DESK GRID                               -->
+    <!-- ==================================================================== -->
+    <main class="desk-main-grid">
+
+      <!-- COLUMN 1: SMART CONTEXTUAL DROPDOWNS -->
+      <section class="desk-panel">
+        <div class="panel-title-bar">
+          <span class="panel-title">
+            <span>⚙️</span> PARAMETER & CONTROL DESK
+          </span>
+          <span class="panel-tag">IN-PLACE EXPAND</span>
+        </div>
+
+        <div class="dropdown-accordion-group">
+          
+          <!-- Dropdown 1: Network & Cache Controls -->
+          <div class="smart-dropdown open" data-insight-key="network-refresh">
+            <button class="dropdown-toggle-btn"
+                    data-tooltip-title="Network Controls"
+                    data-tooltip-desc="Manage synchronization scope, cache eviction policies, and RPC node failover.">
+              <div class="toggle-title-group">
+                <span class="toggle-icon">📡</span>
+                <span>Network & Cache Controls</span>
+              </div>
+              <span class="chevron-icon">▼</span>
+            </button>
+            <div class="dropdown-drawer">
+              <div class="drawer-content-stack">
+                <div class="param-row" data-insight-key="network-refresh">
+                  <span class="param-key">Sync Scope:</span>
+                  <span class="param-val">FULL (All 4 Clusters)</span>
+                </div>
+                <div class="param-row" data-insight-key="network-refresh">
+                  <span class="param-key">Cache Policy:</span>
+                  <span class="param-val">SLIDING_TTL_300S</span>
+                </div>
+                <div class="param-row" data-insight-key="network-refresh">
+                  <span class="param-key">RPC Failover Quorum:</span>
+                  <span class="param-val">3/3 Nodes Active</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dropdown 2: Quick Loop Verification -->
+          <div class="smart-dropdown open" data-insight-key="fast-loop-action">
+            <button class="dropdown-toggle-btn"
+                    data-tooltip-title="Loop Config"
+                    data-tooltip-desc="Toggle between 50ms Fast Loop throughput and 1.2s Deep Audit verification.">
+              <div class="toggle-title-group">
+                <span class="toggle-icon">🔄</span>
+                <span>Quick Loop Verification</span>
+              </div>
+              <span class="chevron-icon">▼</span>
+            </button>
+            <div class="dropdown-drawer">
+              <div class="drawer-content-stack">
+                <div class="param-row" data-insight-key="fast-loop-action">
+                  <span class="param-key">Loop Frequency:</span>
+                  <span class="param-val">50ms (High-Frequency)</span>
+                </div>
+                <div class="param-row" data-insight-key="fast-loop-action">
+                  <span class="param-key">Resource Overhead:</span>
+                  <span class="param-val">3.2x CPU Load</span>
+                </div>
+                <div class="param-row" data-insight-key="fast-loop-action">
+                  <span class="param-key">Trigger Threshold:</span>
+                  <span class="param-val">&gt; 0.65 Fraud Score</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dropdown 3: Fraud Risk Metrics -->
+          <div class="smart-dropdown open" data-insight-key="fraud-risk-tag">
+            <button class="dropdown-toggle-btn"
+                    data-tooltip-title="Risk Scoring Metrics"
+                    data-tooltip-desc="Composite algorithm weights combining address provenance, loop variance, and clustering.">
+              <div class="toggle-title-group">
+                <span class="toggle-icon">🛡️</span>
+                <span>Fraud Risk Scoring Engine</span>
+              </div>
+              <span class="chevron-icon">▼</span>
+            </button>
+            <div class="dropdown-drawer">
+              <div class="drawer-content-stack">
+                <div class="param-row" data-insight-key="fraud-risk-tag">
+                  <span class="param-key">Address Provenance:</span>
+                  <span class="param-val">35% Weight</span>
+                </div>
+                <div class="param-row" data-insight-key="fraud-risk-tag">
+                  <span class="param-key">Loop Latency Consistency:</span>
+                  <span class="param-val">25% Weight</span>
+                </div>
+                <div class="param-row" data-insight-key="fraud-risk-tag">
+                  <span class="param-key">Graph Clustering Anomaly:</span>
+                  <span class="param-val">25% Weight</span>
+                </div>
+                <div class="param-row" data-insight-key="fraud-risk-tag">
+                  <span class="param-key">Sybil Fan-out Entropy:</span>
+                  <span class="param-val">15% Weight</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dropdown 4: Physics & Space-Memory Coupling -->
+          <div class="smart-dropdown" data-insight-key="godel-locking-relation">
+            <button class="dropdown-toggle-btn"
+                    data-tooltip-title="Physics Invariant"
+                    data-tooltip-desc="Universal Gödel locking relation connecting cosmic rotation, matter density, and space memory.">
+              <div class="toggle-title-group">
+                <span class="toggle-icon">📐</span>
+                <span>Gödel Locking Invariant</span>
+              </div>
+              <span class="chevron-icon">▼</span>
+            </button>
+            <div class="dropdown-drawer">
+              <div class="drawer-content-stack">
+                <div class="param-row" data-insight-key="godel-locking-relation">
+                  <span class="param-key">Equation:</span>
+                  <span class="param-val">Ω² = 4πGρ = -Λ</span>
+                </div>
+                <div class="param-row" data-insight-key="godel-locking-relation">
+                  <span class="param-key">Time Geometry:</span>
+                  <span class="param-val">Closed Timelike Curves</span>
+                </div>
+                <div class="param-row" data-insight-key="godel-locking-relation">
+                  <span class="param-key">Inward Binding:</span>
+                  <span class="param-val">Negative Λ Equilibrium</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- COLUMN 2: LIVE ENTITY MATRIX & VISUAL CONNECTION LAYER -->
+      <section class="desk-panel">
+        <div class="panel-title-bar">
+          <span class="panel-title">
+            <span>📊</span> LIVE FORENSIC ENTITY MATRIX (4 CLUSTERS)
+          </span>
+          <span class="panel-tag">CLICK ROW TO CONNECT</span>
+        </div>
+
+        <!-- Interactive Entity Table -->
+        <div class="entity-table-container">
+          <table class="spectral-table">
+            <thead>
+              <tr>
+                <th>Address & Identity</th>
+                <th>Fraud Risk Tag</th>
+                <th>Verification Loop</th>
+                <th>System Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              <!-- Cluster A -->
+              <tr class="entity-row active-selection" data-entity-key="entity-cluster-a"
+                  data-tooltip-title="Cluster A: Genesis Liquidity Root"
+                  data-tooltip-desc="Treasury anchor holding foundational multi-chain reserves with 100% verified compliance.">
+                <td>
+                  <div class="cell-address">
+                    <span class="addr-hex">0x7a3F...b6A4</span>
+                    <span class="addr-label">Genesis Liquidity Root</span>
+                  </div>
+                </td>
+                <td>
+                  <span class="risk-tag verified"
+                        data-tooltip-title="Risk Tag: VERIFIED (0.03)"
+                        data-tooltip-desc="Zero-risk baseline anchor; multi-sig authenticated with 1,420 days clean provenance.">
+                    <span>✓</span> VERIFIED (0.03)
+                  </span>
+                </td>
+                <td>
+                  <span class="loop-chip"
+                        data-tooltip-title="Verification Loop"
+                        data-tooltip-desc="Sub-50ms Fast Loop verification confirming steady, predictable liquidity depth.">
+                    Fast Loop (42ms)
+                  </span>
+                </td>
+                <td>
+                  <span class="status-pill-badge live"
+                        data-tooltip-title="Status: LIVE"
+                        data-tooltip-desc="Peer quorum verified; state stream online with 0 anomalies.">
+                    <span class="pulse-dot"></span> LIVE
+                  </span>
+                </td>
+              </tr>
+
+              <!-- Cluster B -->
+              <tr class="entity-row" data-entity-key="entity-cluster-b"
+                  data-tooltip-title="Cluster B: Flash-Loan Arbitrageur"
+                  data-tooltip-desc="High-frequency MEV bot extracting cross-pool price spreads within single atomic blocks.">
+                <td>
+                  <div class="cell-address">
+                    <span class="addr-hex">0x19B8...81E3</span>
+                    <span class="addr-label">Flash-Loan Arbitrageur</span>
+                  </div>
+                </td>
+                <td>
+                  <span class="risk-tag low"
+                        data-tooltip-title="Risk Tag: LOW (0.14)"
+                        data-tooltip-desc="High transaction frequency but zero net capital retention across block boundaries.">
+                    LOW (0.14)
+                  </span>
+                </td>
+                <td>
+                  <span class="loop-chip"
+                        data-tooltip-title="Verification Loop"
+                        data-tooltip-desc="Stable verification loop monitoring flash-loan borrow/repay invariants.">
+                    Stable Loop (58ms)
+                  </span>
+                </td>
+                <td>
+                  <span class="status-pill-badge syncing"
+                        data-tooltip-title="Status: SYNCING"
+                        data-tooltip-desc="Propagating pending bundle transactions through local validator relays.">
+                    SYNCING
+                  </span>
+                </td>
+              </tr>
+
+              <!-- Cluster C -->
+              <tr class="entity-row" data-entity-key="entity-cluster-c"
+                  data-tooltip-title="Cluster C: Cross-Chain Escrow Vault"
+                  data-tooltip-desc="Lock-and-mint bridge custody address with 480% surge in recent withdrawal velocity.">
+                <td>
+                  <div class="cell-address">
+                    <span class="addr-hex">0x94E2...F05d</span>
+                    <span class="addr-label">Cross-Chain Escrow Vault</span>
+                  </div>
+                </td>
+                <td>
+                  <span class="risk-tag elevated"
+                        data-tooltip-title="Risk Tag: ELEVATED (0.68)"
+                        data-tooltip-desc="Elevated score triggered by sudden outflow velocity and relayer attestation lag.">
+                    ⚠️ ELEVATED (0.68)
+                  </span>
+                </td>
+                <td>
+                  <span class="loop-chip"
+                        data-tooltip-title="Verification Loop"
+                        data-tooltip-desc="Accelerated 18ms loop monitoring multi-sig signers and relay bridge headers.">
+                    High-Freq (18ms)
+                  </span>
+                </td>
+                <td>
+                  <span class="status-pill-badge attention"
+                        data-tooltip-title="Status: ATTENTION"
+                        data-tooltip-desc="Liaison Desk monitoring escrow rebalancing; manual override standing by.">
+                    ATTENTION
+                  </span>
+                </td>
+              </tr>
+
+              <!-- Cluster D -->
+              <tr class="entity-row" data-entity-key="entity-cluster-d"
+                  data-tooltip-title="Cluster D: Dark-Pool Mixer Node"
+                  data-tooltip-desc="Critical alert: Obfuscated peel-chain relay exhibiting 16 fan-out hops within 3 blocks.">
+                <td>
+                  <div class="cell-address">
+                    <span class="addr-hex" style="color: #fca5a5;">0x42C0...73aB</span>
+                    <span class="addr-label">Dark-Pool Mixer Node</span>
+                  </div>
+                </td>
+                <td>
+                  <span class="risk-tag critical"
+                        data-tooltip-title="Risk Tag: CRITICAL (0.94)"
+                        data-tooltip-desc="Critical heuristic match to sanctioned transaction laundry protocols; quarantine armed.">
+                    🚨 CRITICAL (0.94)
+                  </span>
+                </td>
+                <td>
+                  <span class="loop-chip anomalous"
+                        data-tooltip-title="Verification Loop: Anomalous"
+                        data-tooltip-desc="Loop throttled due to anomalous peeling patterns and non-standard contract execution.">
+                    Anomalous (110ms)
+                  </span>
+                </td>
+                <td>
+                  <span class="status-pill-badge alert"
+                        data-tooltip-title="Status: CRITICAL ALERT"
+                        data-tooltip-desc="Quarantine hold active; onward routing blacklisted across connected DEX bridges.">
+                    CRITICAL ALERT
+                  </span>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Dynamic Cluster Connection Visualizer -->
+        <div class="visual-connection-canvas-box">
+          <div class="canvas-header-strip">
+            <span>MEMPOOL FLOW TOPOLOGY & ENTITY CONNECTION GRAPH</span>
+            <span>2D SPECTRAL PROJECTION</span>
+          </div>
+          <canvas id="spectral-cluster-canvas"></canvas>
+        </div>
+      </section>
+
+      <!-- COLUMN 3: UNIFIED DYNAMIC INSIGHT / EXPLANATION BOX -->
+      <aside class="desk-panel insight-box" id="unified-insight-box">
+        <div class="insight-header">
+          <div class="insight-title-group">
+            <h3 id="insight-title">Genesis Liquidity Root (Cluster A)</h3>
+            <span class="insight-category-pill" id="insight-category">Treasury & Base Liquidity</span>
+          </div>
+        </div>
+
+        <!-- Definition Card -->
+        <div class="insight-definition-card">
+          <div class="definition-label">Plain-English Definition:</div>
+          <div class="definition-text" id="insight-definition">
+            0x7a3F9e12...b6A4 — Foundation liquidity treasury and protocol reserve anchor.
+          </div>
+        </div>
+
+        <!-- Operational Function -->
+        <div class="bullet-item">
+          <span class="bullet-head cyan">⚡ Operational Function:</span>
+          <p class="bullet-body" id="insight-function">
+            Supplies foundational liquidity across verified automated market maker pairs with multi-sig authorization.
+          </p>
+        </div>
+
+        <!-- Explicit Connection Map Trail -->
+        <div class="connection-map-trail">
+          <div class="trail-title">Connected Architecture Chain:</div>
+          <div class="trail-chain" id="insight-trail-chain">
+            <span class="trail-node active">Address: 0x7a3F...</span>
+            <span class="trail-arrow">➔</span>
+            <span class="trail-node">Risk: VERIFIED (0.03)</span>
+            <span class="trail-arrow">➔</span>
+            <span class="trail-node">Loop: Fast Loop (42ms)</span>
+            <span class="trail-arrow">➔</span>
+            <span class="trail-node">Status: LIVE</span>
+          </div>
+        </div>
+
+        <!-- Why It Matters & What To Watch -->
+        <div class="insight-bullets-stack">
+          <div class="bullet-item">
+            <span class="bullet-head gold">🎯 Why This Matters:</span>
+            <p class="bullet-body" id="insight-why">
+              Represents the zero-risk baseline anchor against which all local network flow velocities are calibrated.
+            </p>
+          </div>
+
+          <div class="bullet-item">
+            <span class="bullet-head alert">🔍 What To Watch For:</span>
+            <p class="bullet-body" id="insight-watch">
+              Deviation in standard withdrawal interval or unrecognized signer addresses.
+            </p>
+          </div>
+
+          <div class="bullet-item">
+            <span class="bullet-head">💡 System Nuance & Recommendation:</span>
+            <p class="bullet-body" id="insight-extra">
+              Historical provenance traces back 1,420 days with 100% compliance record.
+            </p>
+          </div>
+        </div>
+      </aside>
+
+    </main>
+
+    <!-- ==================================================================== -->
+    <!-- 3. FOUNDATION: GÖDEL LOCKING RELATION (Ω² = 4πGρ = -Λ)               -->
+    <!-- ==================================================================== -->
+    <section class="godel-foundation-card" id="godel-foundation-card">
+      <div class="godel-header-row">
+        <div class="godel-title-group">
+          <h2>THE GÖDEL LOCKING RELATION: FOUNDATIONAL PHYSICS</h2>
+          <span class="brand-sub">Exact Einstein Field Solution • Universal Rotation • Inward Space-Memory Bound</span>
+        </div>
+        <span class="panel-tag" style="background: rgba(168, 85, 247, 0.15); border-color: var(--purple-primary); color: #e9d5ff;">
+          COSMIC EQUILIBRIUM
+        </span>
+      </div>
+
+      <!-- Hero Formula Display -->
+      <div class="godel-formula-hero">
+        <span class="formula-part omega">Ω² (Rotation)</span>
+        <span>=</span>
+        <span class="formula-part rho">4πGρ (Density)</span>
+        <span>=</span>
+        <span class="formula-part lambda">−Λ (Inward Bound)</span>
+      </div>
+
+      <!-- Interactive Balance Simulator -->
+      <div style="background: rgba(0,0,0,0.3); padding: 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: 10px;">
+        <div style="font-family: var(--font-mono); font-size: 0.76rem; color: var(--cyan-primary); font-weight: 700;">
+          INTERACTIVE GÖDEL EQUILIBRIUM CALCULATOR
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div>
+            <label style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 4px;">
+              Angular Velocity (Ω): <strong id="godel-val-omega" style="color: #38bdf8;">1.00 rad/s</strong>
+            </label>
+            <input type="range" id="godel-slider-omega" min="0.1" max="5.0" step="0.05" value="1.0" style="width: 100%;">
+          </div>
+          <div>
+            <label style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 4px;">
+              Information Density (ρ): <strong id="godel-val-rho" style="color: #fde047;">1.00 g/cm³</strong>
+            </label>
+            <input type="range" id="godel-slider-rho" min="0.1" max="5.0" step="0.05" value="1.0" style="width: 100%;">
+          </div>
+        </div>
+        <div style="font-family: var(--font-mono); font-size: 0.74rem; color: #c084fc; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 6px;" id="godel-val-lambda">
+          Λ = -1.000 (Inward Vacuum Bound Locked)
+        </div>
+      </div>
+
+      <!-- 4 Pillars of the Gödel Solution -->
+      <div class="godel-pillars-grid">
+        <div class="godel-pillar">
+          <h4 style="color: #38bdf8;">1. Universal Spin (Ω²)</h4>
+          <p>The universe rotates as an interconnected whole. Rotation generates global harmonic resonance, matching the vortex geometry of the Mandala and the Hypersphere.</p>
+        </div>
+        <div class="godel-pillar">
+          <h4 style="color: #fde047;">2. Information Mass (4πGρ)</h4>
+          <p>Matter and quantum information density are coupled directly to spacetime curvature. Higher information coherence creates stronger local gravitational and topological coupling.</p>
+        </div>
+        <div class="godel-pillar">
+          <h4 style="color: #c084fc;">3. Inward Binding (−Λ)</h4>
+          <p>A negative cosmological constant acts as an inward-holding centering force, preventing entropy dispersion and giving space its physical capacity to remember (Space-Memory).</p>
+        </div>
+        <div class="godel-pillar">
+          <h4 style="color: #34d399;">4. Closed Timelike Curves</h4>
+          <p>Time in Gödel’s metric is non-linear and circular. Retrocausal correlations, anticipatory biological effects, and non-local entanglement operate naturally across folded temporal loops.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- 4. FOOTER & LEGEND                                                  -->
+    <!-- ==================================================================== -->
+    <footer style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; font-size: 0.74rem; color: var(--text-dim); font-family: var(--font-mono);">
+      <div style="display: flex; gap: 18px; align-items: center;">
+        <span>LEGEND:</span>
+        <span style="color: #34d399;">● Green = Verified</span>
+        <span style="color: #fbbf24;">● Amber = Attention</span>
+        <span style="color: #f87171;">● Red = Critical Alert</span>
+        <span style="border: 1px solid #a855f7; padding: 1px 6px; border-radius: 3px; color: #d8b4fe;">Solid Loop = Active</span>
+        <span style="border: 1px dashed #ef4444; padding: 1px 6px; border-radius: 3px; color: #fca5a5;">Dashed Loop = Throttled</span>
+      </div>
+      <div>
+        <a href="/" style="color: var(--cyan-primary); text-decoration: none; font-weight: 600;">← Return to Chi Core Platform</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="spectral_forensics.js"></script>
+</body>
+</html>

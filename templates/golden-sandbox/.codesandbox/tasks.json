@@ -1,0 +1,48 @@
+{
+  "$schema": "https://codesandbox.io/schemas/tasks.json",
+  "setupTasks": [
+    {
+      "name": "Verify Runtimes",
+      "command": "node -v && python3 --version"
+    },
+    {
+      "name": "Install Node Packages",
+      "command": "npm install"
+    },
+    {
+      "name": "Verify Python Requirements",
+      "command": "python3 -m pip install -q -r requirements.txt 2>/dev/null || true"
+    }
+  ],
+  "tasks": {
+    "portal-3000": {
+      "name": "Chi-Physics Live Portal (Port 3000)",
+      "command": "python3 scripts/serve_live.py --port 3000",
+      "preview": {
+        "port": 3000
+      },
+      "runAtStart": true
+    },
+    "telemetry-8080": {
+      "name": "Hypersphere Telemetry & DSP Backend (Port 8080)",
+      "command": "python3 scripts/hypersphere_audi_service.py",
+      "preview": {
+        "port": 8080
+      },
+      "runAtStart": true
+    },
+    "vite-5173": {
+      "name": "Vite UI Studio & Visualizer (Port 5173)",
+      "command": "npm run dev -- --host 0.0.0.0 --port 5173",
+      "preview": {
+        "port": 5173
+      },
+      "runAtStart": true
+    },
+    "watcher-deps": {
+      "name": "Auto-Install on Lockfile Change",
+      "command": "npx chokidar \"package-lock.json\" -c \"npm install\"",
+      "runAtStart": true
+    }
+  }
+}
