@@ -360,6 +360,163 @@
       background: var(--accent-emerald);
     }
 
+    /* Engine Stage Badges */
+    .node-stage-badge.engine-1 {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+    }
+    .node-stage-badge.engine-2 {
+      background: rgba(192, 132, 252, 0.15);
+      color: #c084fc;
+      border: 1px solid rgba(192, 132, 252, 0.35);
+    }
+    .node-stage-badge.engine-3 {
+      background: rgba(251, 191, 36, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(251, 191, 36, 0.35);
+    }
+    .node-stage-badge.engine-4 {
+      background: rgba(52, 211, 153, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(52, 211, 153, 0.35);
+    }
+
+    /* Modal Overlay: AI Studio API Explorer */
+    .api-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 8, 16, 0.85);
+      backdrop-filter: blur(14px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .api-modal-backdrop.open {
+      display: flex;
+      opacity: 1;
+    }
+    .api-modal-container {
+      background: #0b1120;
+      border: 1px solid rgba(0, 242, 254, 0.25);
+      border-radius: 14px;
+      width: 100%;
+      max-width: 1180px;
+      max-height: 88vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(0, 242, 254, 0.15);
+      padding: 28px;
+      position: relative;
+    }
+    .api-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+    }
+    .api-modal-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .api-modal-sub {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 5px;
+    }
+    .btn-modal-close {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      font-size: 20px;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .btn-modal-close:hover {
+      color: #fff;
+      border-color: var(--accent-rose);
+      background: rgba(244, 63, 94, 0.15);
+    }
+    .api-matrix-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 16px;
+    }
+    .api-suite-card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 16px;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .api-suite-card:hover {
+      border-color: rgba(0, 242, 254, 0.4);
+      background: rgba(22, 33, 62, 0.85);
+      transform: translateY(-2px);
+    }
+    .api-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .api-card-name {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .api-engine-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 7px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+    .api-engine-tag.e1 { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+    .api-engine-tag.e2 { background: rgba(192, 132, 252, 0.15); color: #c084fc; border: 1px solid rgba(192, 132, 252, 0.3); }
+    .api-engine-tag.e3 { background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
+    .api-engine-tag.e4 { background: rgba(52, 211, 153, 0.15); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3); }
+    .api-card-endpoint {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-cyan);
+      margin-bottom: 8px;
+    }
+    .api-card-desc {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      line-height: 1.45;
+      margin-bottom: 12px;
+    }
+    .api-card-utility {
+      font-size: 11px;
+      color: var(--accent-emerald);
+      border-top: 1px dashed rgba(255, 255, 255, 0.08);
+      padding-top: 8px;
+      font-family: var(--font-mono);
+    }
+
     /* Instructions / Help Overlay */
     .help-pill {
       position: fixed;
@@ -395,12 +552,20 @@
         + Add Step
       </button>
 
+      <button class="btn-tool" id="btn-load-quad" style="border-color: rgba(0, 242, 254, 0.45); color: var(--accent-cyan); background: rgba(0, 242, 254, 0.12); font-weight: 700;">
+        ⚡ 4-Engine Solicitor Pipeline
+      </button>
+
       <button class="btn-tool" id="btn-load-arkm">
-        Template: ARKM Forensics
+        ARKM Forensics
       </button>
 
       <button class="btn-tool" id="btn-load-agents">
-        Template: AI Studio Pipeline
+        AI Studio Pipeline
+      </button>
+
+      <button class="btn-tool" id="btn-open-api-modal" style="border-color: rgba(251, 191, 36, 0.4); color: #fbbf24;">
+        📚 AI Studio APIs (<span id="api-count-badge">12</span>)
       </button>
 
       <button class="btn-tool" id="btn-toggle-gaps">
@@ -417,11 +582,212 @@
     </div>
 
     <div class="stats-pill-group">
+      <div class="stat-pill">Pipeline: <span class="stat-val" id="val-current-preset" style="color: #38bdf8;">4-Engine Quad</span></div>
       <div class="stat-pill">Steps: <span class="stat-val" id="val-total-steps">0</span></div>
       <div class="stat-pill">Links: <span class="stat-val" id="val-total-links">0</span></div>
-      <div class="stat-pill">Identified Gaps: <span class="stat-val amber" id="val-total-gaps">0</span></div>
+      <div class="stat-pill">Gaps: <span class="stat-val amber" id="val-total-gaps">0</span></div>
     </div>
   </header>
+
+  <!-- Modal: Google AI Studio Frontier API Suite & Architecture Matrix -->
+  <div class="api-modal-backdrop" id="api-modal">
+    <div class="api-modal-container">
+      <div class="api-modal-header">
+        <div>
+          <div class="api-modal-title">
+            <span>⚡ Google AI Studio Frontier API Suite & Architecture Matrix</span>
+            <span class="api-engine-tag e3">12 Capability Families • 30+ Endpoints</span>
+          </div>
+          <p class="api-modal-sub">
+            Complete inventory of Google Frontier AI Studio APIs and their exact operational integration into the 4-Engine Legal/Forensic Sovereign Harness.
+          </p>
+        </div>
+        <button class="btn-modal-close" id="btn-close-modal" title="Close Matrix">&times;</button>
+      </div>
+
+      <div class="api-matrix-grid">
+        <!-- Card 1 -->
+        <div class="api-suite-card">
+          <div>
+            <div class="api-card-top">
+              <span class="api-card-name">1. Multimodal Content Generation</span>
+              <span class="api-engine-tag e3">Engine 3: Synthesis</span>
+            </div>
+            <div class="api-card-endpoint">POST /v1beta/models/{model}:generateContent</div>
+            <div class="api-card-desc">
+              Powers 2M token long-context ingestion. Ingests full bank statements, WhatsApp scam transcripts, and statutory texts (POCA 2002) in a single prompt without chunking loss.
+            </div>
+          </div>
+          <div class="api-card-utility">✓ Ingestion of 500-page victim bank & chat archives</div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="api-suite-card">
+          <div>
+            <div class="api-card-top">
+              <span class="api-card-name">2. Structured Outputs & Schema</span>
+              <span class="api-engine-tag e3">Engine 3: Synthesis</span>
+            </div>
+            <div class="api-card-endpoint">generationConfig.response_schema (Pydantic / JSON)</div>
+            <div class="api-card-desc">
+              Forces 100% deterministic JSON output conforming to UK Civil Procedure Rules (CPR Part 32) and NCA SAR filing schemas. Completely eliminates hallucinations.
+            </div>
+          </div>
+          <div class="api-card-utility">✓ Court-admissible witness statements & SAR payloads</div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="api-suite-card">
+          <div>
+            <div class="api-card-top">
+              <span class="api-card-name">3. Function Calling & Tool Calling</span>
+              <span class="api-engine-tag e1">Engine 1 & 2</span>
+            </div>
+            <div class="api-card-endpoint">tools: [{functionDeclarations: [...]}]</div>
+            <div class="api-card-desc">
+              Allows Gemini to autonomously query the Arkham Intelligence API, Etherscan RPCs, UK Companies House REST API, and FCA Warning List during investigative reasoning.
+            </div>
+          </div>
+          <div class="api-card-utility">✓ Autonomous multi-hop trace & regulatory lookups</div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="api-suite-card">
+          <div>
+            <div class="api-card-top">
+              <span class="api-card-name">4. Dynamic Python Code Execution</span>
+              <span class="api-engine-tag e1">Engine 1: Forensics</span>
+            </div>
+            <div class="api-card-endpoint">tools: [{codeExecution: {}}]</div>
+            <div class="api-card-desc">
+              Enables Gemini to write and run Python in a sandboxed runtime to verify cryptographic SHA-256 digests, compute exact fiat-crypto conversions, and calculate hop velocities.
+            </div>
+          </div>
+          <div class="api-card-utility">✓ Exact mathematical proofs & checksum verifications</div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="api-suite-card">
+          <div>
+            <div class="api-card-top">
+              <span class="api-card-name">5. Multimodal Live API (Bidirectional)</span>
+              <span class="api-engine-tag e4">Engine 4: Sales/Intake</span>
+            </div>
+            <div class="api-card-endpoint">WebSocket /v1alpha/models/...:bidiGenerateContent</div>
+            <div class="api-card-desc">
+              Sub-second latency voice-to-voice and video streaming. Provides live intake interview triage for UK fraud victims and real-time voice briefing for litigation partners.
+            </div>
+          </div>
+          <div class="api-card-utility">✓ Real-time voice triage & phone scam intake</div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="api-suite-card">
+          <div>
+            <div class="api-card-top">
+              <span class="api-card-name">6. Google Search Grounding</span>
+              <span class="api-engine-tag e2">Engine 2: Regulatory</span>
+            </div>
+            <div class="api-card-endpoint">tools: [{googleSearch: {}}]</div>
+            <div class="api-card-desc">
+              Grounds analysis with real-time web retrieval to identify newly surfaced clone investment platforms, fresh FCA warning bulletins, and offshore boiler-room registries.
+            </div>
+          </div>
+          <div class="api-card-utility">✓ Real-time intelligence on zero-day scam websites</div>
+        </div>
+
+        <!-- Card 7 -->
+        <div class="api-suite-card">
+          <div>
+            <div class="api-card-top">
+              <span class="api-card-name">7. Context Caching API</span>
+              <span class="api-engine-tag e3">Engine 3: Synthesis</span>
+            </div>
+            <div class="api-card-endpoint">POST /v1beta/cachedContents</div>
+            <div class="api-card-desc">
+              Pre-loads entire UK case law repositories (Philipp v Barclays, POCA 2002, PSR guidelines) in memory. Drops repeat query token costs by 75% and slashes latency.
+            </div>
+          </div>
+          <div class="api-card-utility">✓ 75% cost reduction on high-volume solicitor batches</div>
+        </div>
+
+        <!-- Card 8 -->
+        <div class="api-suite-card">
+          <div>
+            <div class="api-card-top">
+              <span class="api-card-name">8. Large Files API</span>
+              <span class="api-engine-tag e1">Engine 1 & 3</span>
+            </div>
+            <div class="api-card-endpoint">POST /upload/v1beta/files</div>
+            <div class="api-card-desc">
+              Accepts up to 2GB legal document bundles, high-resolution forensic transaction graphs, and multi-hour scam phone audio recordings directly into model context.
+            </div>
+          </div>
+          <div class="api-card-utility">✓ Direct upload of gigabyte-scale legal bundles</div>
+        </div>
+
+        <!-- Card 9 -->
+        <div class="api-suite-card">
+          <div>
+            <div class="api-card-top">
+              <span class="api-card-name">9. Embeddings API</span>
+              <span class="api-engine-tag e2">Engine 2 & 4</span>
+            </div>
+            <div class="api-card-endpoint">POST /v1beta/models/text-embedding-004:embedContent</div>
+            <div class="api-card-desc">
+              Generates 768-dimensional semantic embeddings for past FOS (Financial Ombudsman Service) uphold decisions to predict compensation recovery probability.
+            </div>
+          </div>
+          <div class="api-card-utility">✓ FOS compensation precedent similarity matching</div>
+        </div>
+
+        <!-- Card 10 -->
+        <div class="api-suite-card">
+          <div>
+            <div class="api-card-top">
+              <span class="api-card-name">10. Token Counting API</span>
+              <span class="api-engine-tag e3">Engine 3: Management</span>
+            </div>
+            <div class="api-card-endpoint">POST /v1beta/models/{model}:countTokens</div>
+            <div class="api-card-desc">
+              Accurately budgets context usage across massive transaction ledgers and dynamically switches between Flash (rapid triage) and Pro (court-grade synthesis).
+            </div>
+          </div>
+          <div class="api-card-utility">✓ Dynamic cost routing & context window budgeting</div>
+        </div>
+
+        <!-- Card 11 -->
+        <div class="api-suite-card">
+          <div>
+            <div class="api-card-top">
+              <span class="api-card-name">11. Batch Prediction API</span>
+              <span class="api-engine-tag e4">Engine 4: Production</span>
+            </div>
+            <div class="api-card-endpoint">POST /v1beta/batches</div>
+            <div class="api-card-desc">
+              Runs overnight or asynchronous bulk processing of hundreds of historical bank scam transactions for litigation funding firms at 50% discount.
+            </div>
+          </div>
+          <div class="api-card-utility">✓ High-throughput wholesale litigation portfolio audits</div>
+        </div>
+
+        <!-- Card 12 -->
+        <div class="api-suite-card">
+          <div>
+            <div class="api-card-top">
+              <span class="api-card-name">12. Supervised Model Tuning API</span>
+              <span class="api-engine-tag e3">Engine 3: Customization</span>
+            </div>
+            <div class="api-card-endpoint">POST /v1beta/tunedModels</div>
+            <div class="api-card-desc">
+              Fine-tunes lightweight Gemini models specifically on high-standard UK High Court Chancery Division judgments, SAR filings, and Bankers Trust summonses.
+            </div>
+          </div>
+          <div class="api-card-utility">✓ Custom proprietary legal domain model adaptation</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Interactive Canvas -->
   <div class="canvas-container" id="canvas">
@@ -567,6 +933,127 @@
       { from: 'agent-3', to: 'agent-4' }
     ];
 
+    // Preset 3: 4-Engine Solicitor & Crypto Fraud Compensation Pipeline
+    const PRESET_QUAD_ENGINE = [
+      // ENGINE 1: ON-CHAIN INTELLIGENCE
+      {
+        id: 'node-e1-1',
+        x: 40,
+        y: 80,
+        badge: 'ENGINE 1: ARKM RPC',
+        engineClass: 'engine-1',
+        isGap: false,
+        title: 'Victim Ingest & TX Hash',
+        subtitle: 'Multi-Chain RPC Intake',
+        desc: 'Ingests stolen TX hash, victim wallet address, and loss timestamp across Ethereum, Tron, and Bitcoin networks.'
+      },
+      {
+        id: 'node-e1-2',
+        x: 40,
+        y: 310,
+        badge: 'ENGINE 1: CLUSTERING',
+        engineClass: 'engine-1',
+        isGap: false,
+        title: 'Peel-Chain & CEX Intercept',
+        subtitle: 'Arkham Intelligence API',
+        desc: 'Detects micro-peel chains, mixer proximity (Tornado), and isolates destination CEX deposit tags (Binance/Kraken).'
+      },
+      // ENGINE 2: UK REGULATORY & GROUNDING
+      {
+        id: 'node-e2-1',
+        x: 390,
+        y: 80,
+        badge: 'ENGINE 2: FCA REGISTER',
+        engineClass: 'engine-2',
+        isGap: false,
+        title: 'FCA Warning List & Breaches',
+        subtitle: 'FCA Open Data API',
+        desc: 'Queries unauthorized broker register. Flags Quincecare & PSR APP fraud breach if UK bank cleared transfer to warning-listed entity.'
+      },
+      {
+        id: 'node-e2-2',
+        x: 390,
+        y: 310,
+        badge: 'ENGINE 2: REGISTRAR',
+        engineClass: 'engine-2',
+        isGap: false,
+        title: 'Companies House Registry',
+        subtitle: 'gov.uk REST API v1',
+        desc: 'Extracts officers, PSC register, active vs dissolved status, and registered office for fraudulent UK entities.'
+      },
+      // ENGINE 3: GOOGLE FRONTIER SYNTHESIS
+      {
+        id: 'node-e3-1',
+        x: 740,
+        y: 80,
+        badge: 'ENGINE 3: GEMINI FRONTIER',
+        engineClass: 'engine-3',
+        isGap: false,
+        title: 'Long-Context Ingestion',
+        subtitle: '2M Token Multi-Document Vault',
+        desc: 'Ingests full bank statements, WhatsApp scam transcripts, and POCA 2002 statutory text simultaneously without retrieval loss.'
+      },
+      {
+        id: 'node-e3-2',
+        x: 740,
+        y: 310,
+        badge: 'ENGINE 3: STRUCTURED JSON',
+        engineClass: 'engine-3',
+        isGap: false,
+        title: 'SAR & Affidavit Synthesizer',
+        subtitle: 'Pydantic / CPR Part 32 Schema',
+        desc: 'Emits deterministic legal JSON: Witness Statement, NCA SAR narrative, and Norwich Pharmacal freezing application pack.'
+      },
+      // ENGINE 4: AUTONOMOUS PRODUCTION & LEGAL SALES DISPATCH
+      {
+        id: 'node-e4-1',
+        x: 1090,
+        y: 80,
+        badge: 'ENGINE 4: PDF VAULT',
+        engineClass: 'engine-4',
+        isGap: false,
+        title: 'Court-Ready Evidence Pack',
+        subtitle: 'ReportLab Invariant Engine',
+        desc: 'Compiles signed PDF dossier with QT-QSH-* cryptographic stamps, transaction DAG visualizer, and bank liability breakdown (£499-£1,500).'
+      },
+      {
+        id: 'node-e4-2',
+        x: 1090,
+        y: 310,
+        badge: 'ENGINE 4: SALES AGENT',
+        engineClass: 'engine-4',
+        isGap: false,
+        title: 'Solicitor B2B Sales Dispatch',
+        subtitle: 'pairoq_crm_contacts.json',
+        desc: 'Automates outbound executive pitch to UK litigation partners, insolvency practitioners, and bank fraud escalation desks with 24h SLA.'
+      },
+      // OPERATIONAL GAP NODE: FAST-LOOP FREEZE
+      {
+        id: 'node-gap-freeze',
+        x: 740,
+        y: 530,
+        badge: '⚠️ CRITICAL GAP',
+        engineClass: 'gap',
+        isGap: true,
+        title: 'Exchange Emergency Freeze SLA',
+        subtitle: '30-Min CEX Window',
+        desc: 'GAP: Automate direct webhook delivery to Binance/Kraken LERS before perpetrator off-ramps crypto into fiat.'
+      }
+    ];
+
+    const CONNECTIONS_QUAD_ENGINE = [
+      { from: 'node-e1-1', to: 'node-e1-2' },
+      { from: 'node-e1-1', to: 'node-e2-1' },
+      { from: 'node-e1-2', to: 'node-e3-1' },
+      { from: 'node-e2-1', to: 'node-e2-2' },
+      { from: 'node-e2-2', to: 'node-e3-1' },
+      { from: 'node-e3-1', to: 'node-e3-2' },
+      { from: 'node-e3-2', to: 'node-e4-1' },
+      { from: 'node-e4-1', to: 'node-e4-2' },
+      { from: 'node-e1-2', to: 'node-gap-freeze' },
+      { from: 'node-gap-freeze', to: 'node-e4-2' }
+    ];
+
     function renderCanvas() {
       // Clear existing node DOM elements (keep SVG)
       document.querySelectorAll('.workflow-node').forEach(n => n.remove());
@@ -578,9 +1065,11 @@
         div.style.left = `${node.x}px`;
         div.style.top = `${node.y}px`;
 
+        const badgeClass = node.isGap ? 'gap' : (node.engineClass || 'verified');
+
         div.innerHTML = `
           <div class="node-header">
-            <span class="node-stage-badge ${node.isGap ? 'gap' : 'verified'}">${node.badge}</span>
+            <span class="node-stage-badge ${badgeClass}">${node.badge}</span>
             <button class="node-delete-btn" title="Delete Step" onclick="deleteNode('${node.id}')">&times;</button>
           </div>
           <div class="node-title" contenteditable="true">${node.title}</div>
@@ -710,6 +1199,8 @@
     }
 
     function updateStats() {
+      const presetEl = document.getElementById('val-current-preset');
+      if (presetEl) presetEl.innerText = currentPresetName;
       document.getElementById('val-total-steps').innerText = nodes.length;
       document.getElementById('val-total-links').innerText = connections.length;
       const gaps = nodes.filter(n => n.isGap).length;
@@ -724,6 +1215,7 @@
         x: 100 + Math.random() * 200,
         y: 120 + Math.random() * 200,
         badge: 'NEW STEP',
+        engineClass: 'verified',
         isGap: false,
         title: 'New Process Step',
         subtitle: 'Subsystem / Agent',
@@ -732,16 +1224,42 @@
       renderCanvas();
     });
 
+    document.getElementById('btn-load-quad').addEventListener('click', () => {
+      currentPresetName = "4-Engine Solicitor Pipeline";
+      nodes = JSON.parse(JSON.stringify(PRESET_QUAD_ENGINE));
+      connections = JSON.parse(JSON.stringify(CONNECTIONS_QUAD_ENGINE));
+      renderCanvas();
+    });
+
     document.getElementById('btn-load-arkm').addEventListener('click', () => {
+      currentPresetName = "ARKM Forensics";
       nodes = JSON.parse(JSON.stringify(PRESET_ARKM));
       connections = JSON.parse(JSON.stringify(CONNECTIONS_ARKM));
       renderCanvas();
     });
 
     document.getElementById('btn-load-agents').addEventListener('click', () => {
+      currentPresetName = "AI Studio Multi-Agent";
       nodes = JSON.parse(JSON.stringify(PRESET_AGENTS));
       connections = JSON.parse(JSON.stringify(CONNECTIONS_AGENTS));
       renderCanvas();
+    });
+
+    // API Modal Dialog Handlers
+    const apiModal = document.getElementById('api-modal');
+    document.getElementById('btn-open-api-modal').addEventListener('click', () => {
+      apiModal.classList.add('open');
+    });
+    document.getElementById('btn-close-modal').addEventListener('click', () => {
+      apiModal.classList.remove('open');
+    });
+    apiModal.addEventListener('click', (e) => {
+      if (e.target === apiModal) apiModal.classList.remove('open');
+    });
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && apiModal.classList.contains('open')) {
+        apiModal.classList.remove('open');
+      }
     });
 
     document.getElementById('btn-toggle-gaps').addEventListener('click', (e) => {
@@ -751,13 +1269,14 @@
     });
 
     document.getElementById('btn-clear').addEventListener('click', () => {
+      currentPresetName = "Custom Canvas";
       nodes = [];
       connections = [];
       renderCanvas();
     });
 
     document.getElementById('btn-export-json').addEventListener('click', () => {
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({ nodes, connections }, null, 2));
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({ preset: currentPresetName, nodes, connections }, null, 2));
       const downloadAnchor = document.createElement('a');
       downloadAnchor.setAttribute("href", dataStr);
       downloadAnchor.setAttribute("download", `qt_workflow_${Date.now()}.json`);
@@ -766,9 +1285,9 @@
       downloadAnchor.remove();
     });
 
-    // Initial Load: Load ARKM pipeline by default
-    nodes = JSON.parse(JSON.stringify(PRESET_ARKM));
-    connections = JSON.parse(JSON.stringify(CONNECTIONS_ARKM));
+    // Initial Load: Default to the 4-Engine Solicitor Pipeline
+    nodes = JSON.parse(JSON.stringify(PRESET_QUAD_ENGINE));
+    connections = JSON.parse(JSON.stringify(CONNECTIONS_QUAD_ENGINE));
     renderCanvas();
   </script>
 </body>
