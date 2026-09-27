@@ -534,9 +534,82 @@
       gap: 12px;
       z-index: 1000;
     }
+
+    /* Universal Info Float-Over Hover Tooltip */
+    .qt-info-float {
+      position: fixed;
+      z-index: 100000;
+      max-width: 320px;
+      background: rgba(11, 17, 32, 0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 242, 254, 0.45);
+      border-radius: 10px;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.75), 0 0 20px rgba(0, 242, 254, 0.2);
+      padding: 12px 14px;
+      pointer-events: none;
+      opacity: 0;
+      transform: scale(0.96);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      font-family: var(--font-body);
+    }
+    .qt-info-float.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .float-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 6px;
+    }
+    .float-agent-pill {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .float-status-badge {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .status-update-needed {
+      background: rgba(245, 158, 11, 0.18);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+    .status-live {
+      background: rgba(16, 185, 129, 0.18);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+    .float-tip {
+      font-size: 12px;
+      color: #e2e8f0;
+      line-height: 1.45;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Universal Info Float-Over Hover Tooltip -->
+  <div id="qt-info-float" class="qt-info-float">
+    <div class="float-header">
+      <div class="float-agent-pill" id="float-agent">🤖 Agent Protocol</div>
+      <div class="float-status-badge status-live" id="float-status">LIVE</div>
+    </div>
+    <div class="float-tip" id="float-tip"></div>
+  </div>
 
   <!-- Top Bar -->
   <header class="top-bar">
@@ -1067,6 +1140,29 @@
 
         const badgeClass = node.isGap ? 'gap' : (node.engineClass || 'verified');
 
+        let agentName = 'Truth Sentinel';
+        let tipText = node.desc || 'Forensic step in pipeline.';
+        if (node.engineClass === 'engine-1') {
+          agentName = 'ARKM Forensic Tracer';
+          tipText = 'Identifies genesis stolen TX, traces peel-chain hop velocity, and tags destination CEX deposit accounts.';
+        } else if (node.engineClass === 'engine-2') {
+          agentName = 'Librarian (Gold Standard)';
+          tipText = 'Audits FCA Warning List and Companies House registers; computes bank Quincecare & PSR APP fraud liability.';
+        } else if (node.engineClass === 'engine-3') {
+          agentName = 'Statutory Legal Drafter';
+          tipText = 'Drafts CPR Part 32 Statement of Truth, factual hop chronology, and CEX injunction intercept vector.';
+        } else if (node.engineClass === 'engine-4') {
+          agentName = 'B2B Sales Liaison';
+          tipText = 'Dispatches 1-page executive recovery brief stating quantum (£) and recovery probability (%) for litigation partners.';
+        } else if (node.isGap) {
+          agentName = 'Truth Sentinel (Gap Auditor)';
+          tipText = 'Critical operational bottleneck: missing automated CEX freeze webhook; requires manual legal intervention.';
+        }
+
+        div.setAttribute('data-agent', agentName);
+        div.setAttribute('data-status', node.isGap ? '⚠️ OPERATIONAL GAP' : '✅ LIVE ENGINE STEP');
+        div.setAttribute('data-tip', tipText);
+
         div.innerHTML = `
           <div class="node-header">
             <span class="node-stage-badge ${badgeClass}">${node.badge}</span>
@@ -1106,6 +1202,7 @@
 
       updateLines();
       updateStats();
+      bindCanvasTooltips();
     }
 
     function setupDraggable(element, node) {
@@ -1284,6 +1381,69 @@
       downloadAnchor.click();
       downloadAnchor.remove();
     });
+
+    // ========================================================
+    // Info Float-Over Hover Tooltip Controller
+    // ========================================================
+    const infoFloat = document.getElementById('qt-info-float');
+    const floatAgent = document.getElementById('float-agent');
+    const floatStatus = document.getElementById('float-status');
+    const floatTip = document.getElementById('float-tip');
+
+    function bindCanvasTooltips() {
+      const tooltipTargets = document.querySelectorAll('[data-tip], [data-agent], [data-status]');
+      
+      tooltipTargets.forEach(el => {
+        el.addEventListener('mouseenter', (e) => {
+          const agent = el.getAttribute('data-agent') || 'Autonomous Agent Desk';
+          const status = el.getAttribute('data-status') || 'ACTIVE';
+          const tip = el.getAttribute('data-tip') || 'Operational workflow node.';
+
+          if (floatAgent) floatAgent.innerHTML = `🤖 ${agent}`;
+          if (floatStatus) {
+            floatStatus.innerText = status;
+            if (status.includes('GAP') || status.includes('UPDATE')) {
+              floatStatus.className = 'float-status-badge status-update-needed';
+            } else {
+              floatStatus.className = 'float-status-badge status-live';
+            }
+          }
+          if (floatTip) floatTip.innerHTML = tip;
+
+          positionFloat(e);
+          if (infoFloat) infoFloat.classList.add('visible');
+        });
+
+        el.addEventListener('mousemove', (e) => {
+          positionFloat(e);
+        });
+
+        el.addEventListener('mouseleave', () => {
+          if (infoFloat) infoFloat.classList.remove('visible');
+        });
+      });
+    }
+
+    function positionFloat(e) {
+      if (!infoFloat) return;
+      const offset = 16;
+      let x = e.clientX + offset;
+      let y = e.clientY + offset;
+
+      const rect = infoFloat.getBoundingClientRect();
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+
+      if (x + rect.width > viewportWidth - 20) {
+        x = e.clientX - rect.width - offset;
+      }
+      if (y + rect.height > viewportHeight - 20) {
+        y = e.clientY - rect.height - offset;
+      }
+
+      infoFloat.style.left = `${Math.max(10, x)}px`;
+      infoFloat.style.top = `${Math.max(10, y)}px`;
+    }
 
     // Initial Load: Default to the 4-Engine Solicitor Pipeline
     nodes = JSON.parse(JSON.stringify(PRESET_QUAD_ENGINE));
