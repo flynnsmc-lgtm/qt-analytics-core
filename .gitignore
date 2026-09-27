@@ -32,3 +32,10 @@ Thumbs.db
 node_modules/
 .npm
 npm-debug.log*
+
+# Secrets & Environment variables
+.env
+*.env
+*.env.local
+.env.*
+api_keys/
