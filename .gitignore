@@ -38,4 +38,5 @@ npm-debug.log*
 *.env
 *.env.local
 .env.*
+!.env.example
 api_keys/
