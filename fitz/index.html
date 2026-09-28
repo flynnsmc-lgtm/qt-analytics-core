@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FITZ — Foundation</title>
+  <title>FITZ — Foundation &amp; Fitzcapp Topological Neural Canvas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -11,6 +14,7 @@
     <!-- Navigation / Routing Bar -->
     <nav id="navbar">
       <div class="nav-brand">
+        <span class="brand-glyph">✦</span>
         <span>FITZ</span>
         <span class="badge-sub">KSOM FOUNDATION</span>
       </div>
@@ -20,77 +24,189 @@
         <span class="api-blink-latency" id="fitz-blink-latency">0ms</span>
       </div>
       <div class="nav-links">
-        <a href="#dashboard" class="nav-link active">Dashboard</a>
-        <a href="#instrument" class="nav-link">Instrument</a>
-        <a href="#settings" class="nav-link">Settings</a>
-        <a href="/" class="nav-link nav-link-external" title="Return to Chi Physics Core">← Chi Core</a>
+        <a href="#dashboard" class="nav-link active">Topological Canvas</a>
+        <a href="#instrument" class="nav-link">Instrument Readouts</a>
+        <a href="#settings" class="nav-link">Settings &amp; Routing</a>
+        <a href="/qt_analytics.html" class="nav-link nav-link-external" title="Go to QT Analytics Commercial Portal">Commercial Portal →</a>
+        <a href="/resonance_chamber.html" class="nav-link nav-link-external" title="Go to 432 Hz Resonance Chamber">💎 432 Hz Chamber</a>
       </div>
     </nav>
 
-    <!-- Main Content Area — Routing Targets -->
+    <!-- Main Content Area -->
     <main id="content">
-      <!-- Dashboard View -->
+
+      <!-- Dashboard View: Interactive Neural Canvas & System Controls -->
       <section id="page-dashboard" class="page active">
-        <h1>Dashboard</h1>
-        <div class="panel">
-          <h2>System Controls</h2>
+        
+        <div class="dashboard-hero">
+          <div class="hero-tag">🌌 TOPOLOGICAL NEURAL MATRIX • 1,510 SOVEREIGN NODES</div>
+          <h1>KSOM Self-Organizing Neural Canvas</h1>
+          <p class="subtitle">
+            Interactive 2D topological mapping with spinning geometric waves, 432 Hz cymatic harmonics, 
+            and real-time Kohonen self-organization. Click anywhere to inject learning vectors or hover to inspect node telemetry.
+          </p>
+        </div>
+
+        <!-- Master Canvas Stage Panel -->
+        <div class="canvas-container-panel">
           
-          <!-- Dropdown Example 1 -->
-          <label for="topology-select">Topology / Map Type</label>
-          <select id="topology-select" class="dropdown">
-            <option value="ksom" selected>KSOM — Kohonen Self-Organizing Map</option>
-            <option value="sevenseg">Seven-Segment Display</option>
-            <option value="vmem">Virtual Memory</option>
-            <option value="custom">Custom</option>
-          </select>
+          <!-- Features Toggle Menu Bar -->
+          <div class="canvas-toolbar">
+            <div class="toolbar-group">
+              <span class="toolbar-label">Features &amp; Layers:</span>
+              <button type="button" class="btn-toggle active" id="toggle-nodes" data-layer="nodes" title="Toggle 1,510 neural node points">
+                <span>✨</span> Nodes (1,510)
+              </button>
+              <button type="button" class="btn-toggle active" id="toggle-lattice" data-layer="lattice" title="Toggle interlocking Delaunay/hexagonal mesh links">
+                <span>🕸️</span> Interlocking Mesh
+              </button>
+              <button type="button" class="btn-toggle active" id="toggle-waves" data-layer="waves" title="Toggle spinning geometric wave propagation">
+                <span>🌀</span> Spinning Waves
+              </button>
+              <button type="button" class="btn-toggle active" id="toggle-cymatics" data-layer="cymatics" title="Toggle 432 Hz concentric cymatic interference rings">
+                <span>🎵</span> 432 Hz Cymatics
+              </button>
+              <button type="button" class="btn-toggle" id="toggle-vortex" data-layer="vortex" title="Toggle rotational toroidal vortex flow">
+                <span>🌪️</span> Vortex Flow
+              </button>
+            </div>
 
-          <!-- Dropdown Example 2 -->
-          <label for="init-select">Initialization Mode</label>
-          <select id="init-select" class="dropdown">
-            <option value="random" selected>Random Weights</option>
-            <option value="linear">Linear Spread</option>
-            <option value="preset">Preset File</option>
-          </select>
+            <div class="toolbar-actions">
+              <button type="button" class="btn-action primary" id="btn-train-pulse" title="Trigger a self-organizing learning cycle">
+                <span>⚡</span> Pulse Epoch
+              </button>
+              <button type="button" class="btn-action secondary" id="btn-reseed" title="Re-seed node distribution">
+                <span>🔄</span> Reseed Lattice
+              </button>
+            </div>
+          </div>
 
-          <!-- Dropdown Example 3 -->
-          <label for="neighborhood-select">Neighborhood Function</label>
-          <select id="neighborhood-select" class="dropdown">
-            <option value="bubble" selected>Bubble (Simple)</option>
-            <option value="gaussian">Gaussian</option>
-          </select>
+          <!-- Canvas Display Stage -->
+          <div class="canvas-stage-wrapper" id="canvas-stage">
+            <canvas id="ksom-canvas" width="1120" height="540"></canvas>
+
+            <!-- Floating Info Tooltip Card (Reveals on Hover) -->
+            <div id="floating-info-card" class="floating-info-card" style="display: none;">
+              <div class="card-header-row">
+                <span class="card-badge" id="info-node-id">#KSOM-0742</span>
+                <span class="card-cluster-pill" id="info-cluster-tag">PEEL-CHAIN CLUSTER</span>
+              </div>
+              <div class="card-name" id="info-cluster-name">Centralized Exchange Gateway</div>
+              
+              <div class="card-meta-grid">
+                <div class="meta-item">
+                  <span class="meta-label">Position:</span>
+                  <span class="meta-val" id="info-pos">x: 0.542, y: 0.388</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">432 Hz Phase:</span>
+                  <span class="meta-val" id="info-phase">142.8° (In-Phase)</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Weights:</span>
+                  <span class="meta-val" id="info-weights">[0.84, 0.12, 0.95]</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Quant. Error:</span>
+                  <span class="meta-val" id="info-qerr">0.008</span>
+                </div>
+              </div>
+
+              <div class="card-coherence-row">
+                <span class="coherence-label">Phase Coherence:</span>
+                <span class="coherence-pct" id="info-coherence-val">98.4%</span>
+              </div>
+              <div class="coherence-bar-bg">
+                <div class="coherence-bar-fill" id="info-coherence-bar" style="width: 98.4%;"></div>
+              </div>
+            </div>
+
+            <!-- Canvas HUD Overlay (Top-Left Readouts) -->
+            <div class="canvas-hud">
+              <div class="hud-pill"><span class="hud-dot"></span> <span class="hud-label">FPS:</span> <strong id="hud-fps">60</strong></div>
+              <div class="hud-pill"><span class="hud-label">Active Nodes:</span> <strong>1,510</strong></div>
+              <div class="hud-pill"><span class="hud-label">Carrier:</span> <strong style="color: var(--accent-cyan);">432.000 Hz</strong></div>
+              <div class="hud-pill"><span class="hud-label">Schumann:</span> <strong style="color: var(--accent-emerald);">7.830 Hz</strong></div>
+              <div class="hud-pill"><span class="hud-label">Coherence:</span> <strong id="hud-coherence" style="color: var(--accent);">99.4%</strong></div>
+            </div>
+
+            <!-- Canvas Instruction Hint -->
+            <div class="canvas-hint">
+              <span>💡 Move mouse to stir geometric wave fields • Hover nodes for telemetry • Click to inject learning vector</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- System Controls Panel -->
+        <div class="panel">
+          <h2>Topology &amp; Neural Parameters</h2>
+          
+          <div class="controls-grid">
+            <div class="control-box">
+              <label for="topology-select">Topology / Map Type</label>
+              <select id="topology-select" class="dropdown">
+                <option value="ksom" selected>KSOM — Kohonen Self-Organizing Map (1,510 Nodes)</option>
+                <option value="sevenseg">Seven-Segment Optical Lattice</option>
+                <option value="vmem">Virtual Memory Hypercube</option>
+                <option value="custom">Harmonic Torus Custom Projection</option>
+              </select>
+            </div>
+
+            <div class="control-box">
+              <label for="init-select">Initialization Mode</label>
+              <select id="init-select" class="dropdown">
+                <option value="random" selected>Randomized Gaussian Weights</option>
+                <option value="linear">Linear Eigenvector Spread</option>
+                <option value="preset">Preset Manifold (432 Hz S³)</option>
+              </select>
+            </div>
+
+            <div class="control-box">
+              <label for="neighborhood-select">Neighborhood Function</label>
+              <select id="neighborhood-select" class="dropdown">
+                <option value="bubble" selected>Bubble Metric (Elastic Radius)</option>
+                <option value="gaussian">Gaussian Diffusion Bell</option>
+              </select>
+            </div>
+          </div>
         </div>
       </section>
 
       <!-- Instrument / Metrics View -->
       <section id="page-instrument" class="page">
-        <h1>Instrumentation & Metrics</h1>
+        <h1>Instrumentation &amp; Telemetry</h1>
         <div class="panel">
-          <h2>Live Training Monitors</h2>
+          <h2>Live Training &amp; Convergence Monitors</h2>
           
-          <label for="metric-select">Display Metric</label>
+          <label for="metric-select">Display Metric Set</label>
           <select id="metric-select" class="dropdown">
-            <option value="all" selected>All Metrics</option>
-            <option value="quantization">Quantization Error</option>
-            <option value="topographic">Topographic Error</option>
-            <option value="rate">Learning Rate</option>
+            <option value="all" selected>All Metrics &amp; Spectral Invariants</option>
+            <option value="quantization">Quantization Error (Q-Error)</option>
+            <option value="topographic">Topographic Error (Topology Preservation)</option>
+            <option value="rate">Learning Rate Decay (η)</option>
           </select>
 
           <div id="instrument-readouts">
             <div class="meter">
               <span class="label">Quantization Error:</span>
-              <span id="val-qerr" class="value">—</span>
+              <span id="val-qerr" class="value">0.014</span>
             </div>
             <div class="meter">
-              <span class="label">Topo Error:</span>
-              <span id="val-topo" class="value">—</span>
+              <span class="label">Topographic Error:</span>
+              <span id="val-topo" class="value">0.124</span>
             </div>
             <div class="meter">
-              <span class="label">Nodes:</span>
+              <span class="label">Total Active Nodes:</span>
               <span id="val-nodes" class="value">1510</span>
             </div>
             <div class="meter">
-              <span class="label">Status:</span>
-              <span id="val-status" class="value">Ready</span>
+              <span class="label">Harmonic Carrier Stability:</span>
+              <span id="val-carrier" class="value" style="color: var(--accent-cyan);">432.000 Hz (Lock: 1.0000)</span>
+            </div>
+            <div class="meter">
+              <span class="label">System State:</span>
+              <span id="val-status" class="value">Converged / Ready</span>
             </div>
           </div>
         </div>
@@ -98,25 +214,38 @@
 
       <!-- Settings View -->
       <section id="page-settings" class="page">
-        <h1>Configuration & Routing</h1>
+        <h1>Configuration &amp; Network Routing</h1>
         <div class="panel">
-          <h2>Network & Routing</h2>
-          <label for="route-select">API / Data Source</label>
-          <select id="route-select" class="dropdown">
-            <option value="local" selected>Local Engine</option>
-            <option value="api">Remote API</option>
-            <option value="stream">Live Stream</option>
-          </select>
+          <h2>Data Routing &amp; Security Boundary</h2>
+          
+          <div class="controls-grid">
+            <div class="control-box">
+              <label for="route-select">API / Data Ingress Source</label>
+              <select id="route-select" class="dropdown">
+                <option value="local" selected>Local Engine (Port 8080 Deterministic)</option>
+                <option value="api">Remote API Bridge</option>
+                <option value="stream">Live WebSocket / Pulse Stream</option>
+              </select>
+            </div>
 
-          <label for="security-select">Security Mode</label>
-          <select id="security-select" class="dropdown">
-            <option value="strict">Strict / Verified</option>
-            <option value="warm" selected>Warm / Monitoring</option>
-            <option value="permissive">Permissive</option>
-          </select>
+            <div class="control-box">
+              <label for="security-select">Security Mode</label>
+              <select id="security-select" class="dropdown">
+                <option value="strict">Strict (Zero-Config / Verified Invariants)</option>
+                <option value="warm" selected>Warm (Active Monitoring &amp; Logging)</option>
+                <option value="permissive">Permissive (Synthetic Testing)</option>
+              </select>
+            </div>
+          </div>
         </div>
       </section>
+
     </main>
+
+    <!-- Footer -->
+    <footer class="fitz-footer">
+      <span>FITZCAPP Master Controller • KSOM Engine v1.0 • Pure Geometric Topography</span>
+    </footer>
   </div>
 
   <script src="app.js"></script>
