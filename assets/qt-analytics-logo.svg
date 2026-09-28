@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 80" width="100%" height="100%">
+  <defs>
+    <!-- Cyan to Violet Electric Gradient -->
+    <linearGradient id="qtCyanViolet" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f0ff" />
+      <stop offset="60%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+    
+    <!-- Outer Glow Filter -->
+    <filter id="glowFilter" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- BACKGROUND ICON SHIELD -->
+  <g transform="translate(10, 10)">
+    <!-- Rounded Outer Shield Box -->
+    <rect x="0" y="0" width="60" height="60" rx="14" fill="#0f172a" stroke="#00f0ff" stroke-width="1.5" stroke-opacity="0.5" />
+    
+    <!-- Rotating Ambient Rings (Hopf Fiber) -->
+    <ellipse cx="30" cy="30" rx="22" ry="9" fill="none" stroke="#8b5cf6" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.75" transform="rotate(35 30 30)" />
+    <ellipse cx="30" cy="30" rx="22" ry="9" fill="none" stroke="#00f0ff" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.75" transform="rotate(-35 30 30)" />
+    
+    <!-- Central Omega Gyro Core -->
+    <path d="M 20 40 L 25 40 A 10 10 0 1 1 35 40 L 40 40" fill="none" stroke="url(#qtCyanViolet)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" filter="url(#glowFilter)" />
+    
+    <!-- Central Quantum Singularity Point -->
+    <circle cx="30" cy="27" r="2.2" fill="#ffffff" />
+  </g>
+
+  <!-- TYPOGRAPHY GROUP -->
+  <!-- Brand Wordmark: QT ANALYTICS -->
+  <text x="88" y="44" font-family="'Inter', -apple-system, sans-serif" font-weight="800" font-size="28" letter-spacing="1.5" fill="#ffffff">
+    QT <tspan fill="url(#qtCyanViolet)">ANALYTICS</tspan>
+  </text>
+  
+  <!-- Sub-label: Domain & Invariant Foundation -->
+  <text x="89" y="62" font-family="'JetBrains Mono', monospace" font-weight="600" font-size="10.5" letter-spacing="2" fill="#00f0ff" opacity="0.9">
+    qtanalytics.co.uk  <tspan fill="#64748b">•</tspan>  UNIFIED INVARIANT PHYSICS
+  </text>
+</svg>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AUDI α-LOCATE — Satellite-Free Hypersphere GPS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/apps/audi-gps/style.css">
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <header id="header">
+        <div class="brand">
+            <div class="brand-icon">Ω</div>
+            <div>
+                <div class="brand-title">AUDI α-LOCATE GPS</div>
+                <div style="font-size: 0.72rem; color: var(--cyan-glow); font-family: var(--font-mono);">
+                    POWERED BY 6-AGENT GEOMETRIC INFRASTRUCTURE
+                </div>
+            </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+            <!-- AI Studios Live Sync Lock Pill -->
+            <div class="sync-lock-pill" id="sync-lock-pill" title="Synchronized to AI Studios Live Feed in lockstep">
+                <span class="sync-dot pulse-cyan"></span>
+                <span id="sync-lock-text">AI STUDIOS: LOCKED ● [FRAME #1000]</span>
+            </div>
+
+            <!-- Multiplicative Closure Invariant Pill -->
+            <div class="closure-pill" id="closure-pill" title="N₁ × N₂ = N₃ Multiplicative Closure Rule (Matrix-Like Holographic Continuum)">
+                <span>N₁×N₂=N₃: CLOSED (κ=1.000)</span>
+            </div>
+
+            <!-- Sync Controls -->
+            <div class="sync-controls-group">
+                <button id="btn-toggle-master" class="btn-sync-action" title="Toggle Master/Slave control between pages">
+                    <span id="lbl-master-state">🔄 Master: GPS</span>
+                </button>
+                <button id="btn-toggle-pause" class="btn-sync-action" title="Pause/Resume shared live feed">
+                    <span id="lbl-pause-state">⏸️ Pause</span>
+                </button>
+                <button id="btn-align-sync" class="btn-sync-action" title="Calibrate drift and align frame timing">
+                    <span>⚡ Align</span>
+                </button>
+            </div>
+
+            <a href="/audios" style="text-decoration: none; padding: 6px 12px; border-radius: 20px; background: rgba(0, 229, 255, 0.15); border: 1px solid var(--cyan-glow); color: var(--cyan-glow); font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s ease;">
+                <span>🛰️ Audios Sync</span>
+            </a>
+            <div class="status-pill" id="agent-status-pill">
+                <span class="status-dot"></span>
+                <span id="agent-status-text">TRUTH AGENT: VERIFIED</span>
+            </div>
+        </div>
+    </header>
+
+    <div id="three-container"></div>
+
+    <div class="hud-left">
+        <!-- Dynamic Local Topology Pulse Panel -->
+        <div class="hud-panel">
+            <div class="hud-title">
+                <span>🌊 Local Topology Pulse (1000-Mile Radius)</span>
+                <span class="hud-val verified" id="hud-pulse-state">RESONANCE LOCKED</span>
+            </div>
+            <div class="hud-row">
+                <span class="hud-label">Pulse Radius</span>
+                <span class="hud-val highlight">1000 mi (~1609 km)</span>
+            </div>
+            <div class="hud-row">
+                <span class="hud-label">Edge Attenuation</span>
+                <span class="hud-val">Exponential Fade (e⁻ʳ/ᴿ)</span>
+            </div>
+            <div class="hud-row">
+                <span class="hud-label">Hypersphere Carrier</span>
+                <span class="hud-val highlight" id="hud-pulse-carrier">432.0 Hz (1.0x)</span>
+            </div>
+            <div class="hud-row">
+                <span class="hud-label">Terrain Map Status</span>
+                <span class="hud-val verified">NOT REQUIRED (Coastline + Peaks)</span>
+            </div>
+        </div>
+
+        <div class="hud-panel">
+            <div class="hud-title">
+                <span>🛰️ Geodetic Fix (London Anchor)</span>
+                <span class="hud-val verified" id="hud-fix-state">UNSPOOFABLE</span>
+            </div>
+            <div class="hud-row">
+                <span class="hud-label">Latitude</span>
+                <span class="hud-val highlight" id="hud-lat">51.50740° N</span>
+            </div>
+            <div class="hud-row">
+                <span class="hud-label">Longitude</span>
+                <span class="hud-val highlight" id="hud-lon">-0.12780° W</span>
+            </div>
+            <div class="hud-row">
+                <span class="hud-label">Altitude MSL</span>
+                <span class="hud-val" id="hud-alt">18.0 m</span>
+            </div>
+            <div class="hud-row">
+                <span class="hud-label">Orchestrator Pipeline</span>
+                <span class="hud-val highlight" id="hud-pipeline">ORCHESTRATOR_DISPATCH</span>
+            </div>
+        </div>
+
+        <div class="hud-panel">
+            <div class="hud-title">
+                <span>📐 N-Dim Shell Invariant (||x|| = r)</span>
+                <span class="hud-val highlight">16-DIM MANIFOLD</span>
+            </div>
+            <div class="hud-row">
+                <span class="hud-label">Shell Norm ||x||</span>
+                <span class="hud-val verified" id="hud-shell-norm">1.000000 r</span>
+            </div>
+            <div class="hud-row">
+                <span class="hud-label">Deviation Error Δ</span>
+                <span class="hud-val verified" id="hud-shell-delta">&lt; 10⁻⁶ (EXACT)</span>
+            </div>
+            <div class="hud-row">
+                <span class="hud-label">√N SNR Amplification</span>
+                <span class="hud-val highlight">4.000× Precision</span>
+            </div>
+            <div class="hud-row">
+                <span class="hud-label">Truth Agent Confidence</span>
+                <span class="hud-val verified" id="hud-confidence">98.2%</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="hud-right">
+        <!-- High Elevation Anchor Points & Planetary Mesh Panel -->
+        <div class="hud-panel">
+            <div class="hud-title">
+                <span id="hud-peaks-title">🌐 Planetary Topology Mesh</span>
+                <span class="hud-val highlight" id="hud-peaks-badge">GLOBAL MESH ACTIVE</span>
+            </div>
+            <div class="hud-row" id="hud-row-1">
+                <span class="hud-label" id="hud-label-1">Topological Structure</span>
+                <span class="hud-val highlight" id="hud-val-1">Geodesic Icosahedron Freq-3</span>
+            </div>
+            <div class="hud-row" id="hud-row-2">
+                <span class="hud-label" id="hud-label-2">Coordinate Resolution</span>
+                <span class="hud-val highlight" id="hud-val-2">48 × 36 Geodetic Lattice</span>
+            </div>
+            <div class="hud-row" id="hud-row-3">
+                <span class="hud-label" id="hud-label-3">Harmonic Modulation</span>
+                <span class="hud-val highlight" id="hud-val-3">432.0 Hz Planetary Carrier</span>
+            </div>
+            <div class="hud-row" id="hud-row-4">
+                <span class="hud-label" id="hud-label-4">Mesh Topology Status</span>
+                <span class="hud-val verified" id="hud-peaks-desc">Full Planetary Enclosure (Default)</span>
+            </div>
+        </div>
+
+        <div class="hud-panel">
+            <div class="hud-title">
+                <span>🧭 Tri-Fold Natural Field Anchor</span>
+                <span class="hud-val verified">LOCKED</span>
+            </div>
+            <div class="hud-row">
+                <span class="hud-label">Telluric Magnetic B(x)</span>
+                <span class="hud-val highlight">47,120.5 nT</span>
+            </div>
+            <div class="hud-row">
+                <span class="hud-label">Gravity Anomaly ∇²Φ</span>
+                <span class="hud-val">-14.20 mGal</span>
+            </div>
+            <div class="hud-row">
+                <span class="hud-label">Schumann Cavity (7.83 Hz)</span>
+                <span class="hud-val verified">Coherence 0.985</span>
+            </div>
+
+            <div class="hud-title" style="margin-top: 14px;">
+                <span>🌀 Hopf Fibration (S³ → S²)</span>
+                <span class="hud-val highlight">UNIT FIBER</span>
+            </div>
+            <div class="hud-row">
+                <span class="hud-label">Hopf Coordinates (z₀, z₁)</span>
+                <span class="hud-val">[0.7071, 0.7071]</span>
+            </div>
+            <div class="hud-row">
+                <span class="hud-label">Base S² Embedding</span>
+                <span class="hud-val verified">Locked on Earth Geoid</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hypersphere Downlight Brightness, Warmth Glow & Mesh Arrangement Dock -->
+    <div class="lighting-dock" id="lighting-dock">
+        <div class="light-ctrl-item">
+            <span class="light-ctrl-label">☀️ Downlight</span>
+            <input type="range" id="slider-downlight" min="0.05" max="1.20" step="0.02" value="0.38" class="light-slider" title="Calibrate overhead downlight brightness (clearly visible, soft & non-obscuring)">
+            <span id="val-downlight" class="light-val">0.38x</span>
+        </div>
+
+        <div class="light-ctrl-item">
+            <span class="light-ctrl-label">✨ Warm Glow</span>
+            <input type="range" id="slider-warmth" min="0.00" max="1.50" step="0.05" value="0.65" class="light-slider" title="Adjust atmospheric warm Fresnel halo glow">
+            <span id="val-warmth" class="light-val">0.65x</span>
+        </div>
+
+        <div class="preset-group">
+            <button class="btn-preset active" id="btn-preset-solar" title="Balanced Soft Solar">☀️ Solar</button>
+            <button class="btn-preset" id="btn-preset-twilight" title="Warm Twilight Corona">🌅 Twilight</button>
+            <button class="btn-preset" id="btn-preset-ethereal" title="Soft Amber Silhouette">✨ Soft Amber</button>
+        </div>
+
+        <!-- Mesh Arrangement Options Dropdown -->
+        <div class="light-ctrl-item mesh-ctrl-item">
+            <span class="light-ctrl-label">🌐 Mesh Layout</span>
+            <select id="select-mesh-arrangement" class="mesh-select" title="Choose topology mesh arrangement around location">
+                <option value="planet_geodesic" selected>🌐 Global Planet Mesh (Default)</option>
+                <option value="local_wave">📍 Local 1000mi Topology Wave</option>
+                <option value="local_peaks">⛰️ Local Mountains & Peaks (8 Anchors)</option>
+                <option value="hybrid_lattice">✨ Unified Global + Local Lattice</option>
+                <option value="geoid_smooth">🪐 Smooth Geoid (Unmeshed)</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="bottom-bar">
+        <button class="btn-ctrl" id="btn-toggle-stars">✨ Star Catalog (HYG)</button>
+        
+        <button class="btn-ctrl" id="btn-toggle-pulse">🌊 Topology Pulse</button>
+        <button class="btn-ctrl" id="btn-toggle-glow">✨ Atmosphere Glow</button>
+        <button class="btn-ctrl" id="btn-recenter">📍 Recenter</button>
+        <button class="btn-ctrl danger-btn" id="btn-simulate-spoof">⚠️ Simulate GPS Spoof Attack</button>
+    </div>
+
+    <script type="module" src="/apps/audi-gps/app.js"></script>
+</body>
+</html>
