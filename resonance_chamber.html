@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resonance Chamber — 432 Hz Room Acoustics & Cosmic Earth Coherence</title>
+  <meta name="description" content="Calculate your room's natural acoustic resonance, 432 Hz harmonic alignment, Earth Schumann field coherence, phase-matched crystals, and 3D standing wave antinodes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-space: #070b14;
+      --bg-card: rgba(15, 23, 42, 0.78);
+      --bg-glass: rgba(255, 255, 255, 0.04);
+      --border-card: rgba(45, 212, 191, 0.22);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      
+      --teal-primary: #2dd4bf;
+      --teal-glow: rgba(45, 212, 191, 0.35);
+      --gold-primary: #f59e0b;
+      --gold-glow: rgba(245, 158, 11, 0.3);
+      --lavender: #a78bfa;
+      --rose: #f472b6;
+      --sky: #38bdf8;
+      --emerald: #10b981;
+      
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-faint: #64748b;
+      
+      --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: radial-gradient(circle at 50% 0%, #111e38 0%, #070b14 60%, #03060a 100%);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    /* Top Navigation Banner */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(10px);
+    }
+    .brand-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-pill {
+      background: rgba(45, 212, 191, 0.15);
+      color: var(--teal-primary);
+      border: 1px solid rgba(45, 212, 191, 0.35);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.5px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .nav-link-btn {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border-subtle);
+      transition: all 0.2s ease;
+    }
+    .nav-link-btn:hover {
+      color: #fff;
+      background: rgba(45, 212, 191, 0.15);
+      border-color: var(--teal-primary);
+    }
+
+    /* Hero Header */
+    .hero {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px 10px;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: linear-gradient(90deg, rgba(45,212,191,0.18), rgba(167,139,250,0.18));
+      color: var(--teal-primary);
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid rgba(45,212,191,0.3);
+      margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #ffffff 30%, var(--teal-primary) 70%, var(--gold-primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Big Card */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Preset Buttons Bar */
+    .presets-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .preset-label {
+      font-size: 12px;
+      color: var(--text-faint);
+      align-self: center;
+      margin-right: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .btn-preset {
+      background: rgba(255,255,255,0.04);
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-preset:hover {
+      background: rgba(45, 212, 191, 0.15);
+      color: #fff;
+      border-color: var(--teal-primary);
+      transform: translateY(-1px);
+    }
+
+    /* Inputs Row */
+    .inputs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .input-field {
+      background: rgba(0,0,0,0.25);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .input-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .input-box {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 22px;
+      font-weight: 700;
+      width: 100%;
+    }
+    .unit-switch {
+      display: inline-flex;
+      background: rgba(0,0,0,0.3);
+      padding: 4px;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      margin-left: auto;
+    }
+    .unit-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .unit-btn.active {
+      background: var(--teal-primary);
+      color: #000;
+    }
+
+    /* Action Buttons */
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+    .btn-main {
+      background: linear-gradient(135deg, var(--teal-primary) 0%, #14b8a6 100%);
+      color: #031417;
+      font-weight: 800;
+      font-size: 16px;
+      font-family: inherit;
+      padding: 14px 28px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 20px var(--teal-glow);
+    }
+    .btn-main:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(45, 212, 191, 0.55);
+    }
+    .btn-audio {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--gold-primary);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      font-weight: 700;
+      font-size: 14px;
+      font-family: inherit;
+      padding: 14px 22px;
+      border-radius: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .btn-audio:hover {
+      background: rgba(245, 158, 11, 0.25);
+      color: #fff;
+      border-color: var(--gold-primary);
+    }
+    .btn-audio.active {
+      background: var(--gold-primary);
+      color: #000;
+      box-shadow: 0 4px 15px var(--gold-glow);
+    }
+    .btn-stop {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      font-weight: 700;
+      font-size: 14px;
+      padding: 14px 18px;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+    .btn-stop:hover {
+      background: rgba(239, 68, 68, 0.25);
+      color: #fff;
+    }
+    .volume-slider-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+      background: rgba(0,0,0,0.3);
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+    }
+    .volume-slider-wrap span {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .volume-slider-wrap input {
+      accent-color: var(--teal-primary);
+      cursor: pointer;
+    }
+
+    /* Results Grid */
+    .results-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    /* Metric Cards */
+    .metric-hero {
+      background: linear-gradient(135deg, rgba(45,212,191,0.08) 0%, rgba(15,23,42,0.9) 100%);
+      border: 1px solid rgba(45,212,191,0.3);
+      border-radius: 18px;
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+    .metric-value-huge {
+      font-size: 44px;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: #fff;
+      line-height: 1.1;
+      margin: 8px 0;
+    }
+    .metric-highlight {
+      color: var(--teal-primary);
+    }
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 13.5px;
+    }
+    .stat-row:last-child {
+      border-bottom: none;
+    }
+    .stat-label {
+      color: var(--text-muted);
+    }
+    .stat-val {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      color: #fff;
+    }
+
+    /* Coherence Gauge */
+    .gauge-wrap {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin: 16px 0;
+    }
+    .score-circle {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: conic-gradient(var(--lavender) var(--p, 92%), rgba(255,255,255,0.08) 0);
+      position: relative;
+    }
+    .score-circle::before {
+      content: '';
+      position: absolute;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: #0f172a;
+    }
+    .score-text {
+      position: relative;
+      font-size: 22px;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: var(--lavender);
+    }
+
+    /* Oscilloscope Canvas */
+    .oscilloscope-canvas {
+      width: 100%;
+      height: 90px;
+      background: rgba(3, 7, 18, 0.8);
+      border-radius: 12px;
+      border: 1px solid rgba(45, 212, 191, 0.2);
+      margin-top: 14px;
+      display: block;
+    }
+
+    /* Crystal Cards */
+    .crystal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+    .crystal-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 16px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .crystal-card:hover {
+      background: rgba(244, 114, 182, 0.08);
+      border-color: rgba(244, 114, 182, 0.35);
+      transform: translateY(-2px);
+    }
+    .crystal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .crystal-name {
+      font-weight: 700;
+      font-size: 15px;
+      color: #fff;
+    }
+    .crystal-score {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(244, 114, 182, 0.2);
+      color: var(--rose);
+      border: 1px solid rgba(244, 114, 182, 0.4);
+    }
+    .crystal-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .crystal-tag {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--teal-primary);
+    }
+
+    /* Floor Plan / Torus Map */
+    .room-map-box {
+      background: rgba(3, 7, 18, 0.7);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+    .grid-visual {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 70px);
+      gap: 8px;
+      margin: 12px 0;
+    }
+    .grid-cell {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px dashed rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: var(--text-faint);
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    .grid-cell.hotspot {
+      background: radial-gradient(circle, rgba(45,212,191,0.25) 0%, rgba(15,23,42,0.4) 100%);
+      border: 1px solid var(--teal-primary);
+      color: #fff;
+      font-weight: 600;
+      box-shadow: 0 0 12px rgba(45, 212, 191, 0.3);
+    }
+    .grid-cell.hotspot-master {
+      background: radial-gradient(circle, rgba(245,158,11,0.3) 0%, rgba(15,23,42,0.4) 100%);
+      border: 1px solid var(--gold-primary);
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 0 16px rgba(245, 158, 11, 0.4);
+    }
+    .cell-badge {
+      font-size: 9px;
+      color: var(--gold-primary);
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    /* Explanation Banner */
+    .info-banner {
+      background: rgba(167, 139, 250, 0.08);
+      border: 1px solid rgba(167, 139, 250, 0.25);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-top: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .info-icon {
+      font-size: 24px;
+      line-height: 1;
+    }
+    .info-text h4 {
+      color: #fff;
+      font-size: 14.5px;
+      margin-bottom: 4px;
+    }
+    .info-text p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      color: var(--text-faint);
+      font-size: 13px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    @media (max-width: 640px) {
+      .top-nav { flex-direction: column; gap: 10px; align-items: flex-start; }
+      .volume-slider-wrap { margin-left: 0; width: 100%; justify-content: space-between; }
+      .action-row { flex-direction: column; align-items: stretch; }
+      .btn-main, .btn-audio, .btn-stop { justify-content: center; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Navigation Bar -->
+  <header class="top-nav">
+    <div class="brand-title">
+      <span>🌍💎</span>
+      <span>Resonance Chamber</span>
+      <span class="brand-pill">432 Hz LIVE ENGINE</span>
+    </div>
+    <nav class="nav-links">
+      <a href="https://buy.stripe.com/6oU4gyfBydKagjQ0G8dIA00" target="_blank" class="nav-link-btn" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; border-color: rgba(245, 158, 11, 0.35); font-weight: 700;">💳 Live Payment Desk</a>
+      <a href="/qt_analytics.html" class="nav-link-btn">← Back to QT Portal</a>
+      <a href="/visuals/index.html" class="nav-link-btn">Observatory Hub</a>
+    </nav>
+  </header>
+
+  <!-- Hero Header -->
+  <section class="hero">
+    <div class="hero-badge">✨ Geomantic Bio-Acoustic Architecture • Place × Planet × You</div>
+    <h1>Tuning Your Space to 432 Hz</h1>
+    <p>
+      Every room sings its own natural resonant hum. Enter your room dimensions below to discover your fundamental note, 
+      align with Earth's Schumann field (7.83 Hz), hear your room's voice, and place harmonic crystals.
+    </p>
+  </section>
+
+  <!-- Main Input Card -->
+  <main class="card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+      <h2 class="card-title" style="margin: 0;">📐 1. Room Dimensions</h2>
+      <div class="unit-switch">
+        <button type="button" class="unit-btn active" id="unit-m" onclick="setUnits('m')">Meters (m)</button>
+        <button type="button" class="unit-btn" id="unit-ft" onclick="setUnits('ft')">Feet &amp; Inches</button>
+      </div>
+    </div>
+
+    <!-- Presets Bar -->
+    <div class="presets-bar">
+      <span class="preset-label">Quick Presets:</span>
+      <button type="button" class="btn-preset" onclick="loadPreset(0.397, 0.397, 0.397, 'Sacred 432 Cube')">📦 432 Hz Fundamental Cube (39.7 cm)</button>
+      <button type="button" class="btn-preset" onclick="loadPreset(0.397, 0.529, 0.596, 'Harmonic 1:4/3:3/2')">📐 Just Intonation (1 : 4/3 : 3/2)</button>
+      <button type="button" class="btn-preset" onclick="loadPreset(4.0, 3.5, 2.8, 'Sound Sanctuary')">🧘 Sanctuary (4.0m × 3.5m × 2.8m)</button>
+      <button type="button" class="btn-preset" onclick="loadPreset(5.2, 4.1, 2.7, 'Studio Room')">🎙️ Studio Room (5.2m × 4.1m)</button>
+      <button type="button" class="btn-preset" onclick="loadPreset(3.6, 3.0, 2.4, 'Bed Chamber')">🛏️ Bed Chamber (3.6m × 3.0m)</button>
+    </div>
+
+    <!-- Inputs Row -->
+    <div class="inputs-grid">
+      <div class="input-field">
+        <label for="room-length" class="input-label">Length (L)</label>
+        <input type="number" id="room-length" class="input-box" value="4.00" step="0.05" min="0.1" max="100">
+      </div>
+      <div class="input-field">
+        <label for="room-width" class="input-label">Width (W)</label>
+        <input type="number" id="room-width" class="input-box" value="3.50" step="0.05" min="0.1" max="100">
+      </div>
+      <div class="input-field">
+        <label for="room-height" class="input-label">Height (H)</label>
+        <input type="number" id="room-height" class="input-box" value="2.80" step="0.05" min="0.1" max="100">
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-row">
+      <button type="button" class="btn-main" id="btn-calc" onclick="calculateResonance()">
+        <span>✨</span>
+        <span>CALCULATE RESONANCE</span>
+      </button>
+
+      <button type="button" class="btn-audio" id="btn-play-432" onclick="toggleTone(432, 'Pure 432 Hz Carrier')">
+        <span>🔊</span>
+        <span id="label-play-432">PLAY 432 Hz TONE</span>
+      </button>
+
+      <button type="button" class="btn-audio" id="btn-play-room" onclick="toggleRoomTone()">
+        <span>🎵</span>
+        <span id="label-play-room">PLAY ROOM TONE</span>
+      </button>
+
+      <button type="button" class="btn-stop" onclick="stopAllAudio()" title="Stop all sound">
+        ⏹ STOP
+      </button>
+
+      <div class="volume-slider-wrap">
+        <span>Volume</span>
+        <input type="range" id="vol-slider" min="0" max="1" step="0.05" value="0.25" oninput="setVolume(this.value)">
+      </div>
+    </div>
+
+    <!-- Live Oscilloscope Display -->
+    <canvas id="osc-canvas" class="oscilloscope-canvas" width="900" height="90"></canvas>
+  </main>
+
+  <!-- Output Results Panel -->
+  <section id="results-panel">
+    
+    <!-- Top 2 Main Metric Cards -->
+    <div class="results-section">
+
+      <!-- Room Acoustics & 432 Hz Card -->
+      <article class="metric-hero">
+        <div style="font-size: 13px; color: var(--teal-primary); font-weight: 700; text-transform: uppercase;">
+          🎵 Room Fundamental Resonance
+        </div>
+        <div class="metric-value-huge">
+          <span id="res-freq">42.88</span> <span style="font-size: 24px; color: var(--text-muted);">Hz</span>
+        </div>
+        <div style="font-size: 15px; color: #fff; margin-bottom: 14px;">
+          Closest Musical Note: <strong id="res-note" style="color: var(--teal-primary);">E1</strong> 
+          (<span id="res-cents">0.0</span> cents)
+        </div>
+
+        <div class="stat-row">
+          <span class="stat-label">10th Harmonic Octave</span>
+          <span class="stat-val" id="res-octave">428.80 Hz</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Distance from Pure 432 Hz</span>
+          <span class="stat-val" id="res-432-offset" style="color: var(--gold-primary);">-3.20 Hz</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Axial Harmonics (L, W, H)</span>
+          <span class="stat-val" id="res-modes">42.9 / 49.0 / 61.3 Hz</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Speed of Sound Reference</span>
+          <span class="stat-val">343.0 m/s (at 20°C)</span>
+        </div>
+      </article>
+
+      <!-- Tripartite Coherence Score Card -->
+      <article class="metric-hero" style="border-color: rgba(167, 139, 250, 0.35);">
+        <div style="font-size: 13px; color: var(--lavender); font-weight: 700; text-transform: uppercase;">
+          🌍💫 Tripartite Coherence Score
+        </div>
+        
+        <div class="gauge-wrap">
+          <div class="score-circle" id="score-circle">
+            <span class="score-text" id="coherence-pct">92%</span>
+          </div>
+          <div>
+            <div style="font-size: 18px; font-weight: 700; color: #fff;" id="coherence-grade">✨ EXCELLENT ALIGNMENT</div>
+            <div style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">
+              Place (Acoustics) ↔ Planet (Schumann 7.83 Hz) ↔ Person (Alpha Biofield 8.0 Hz)
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-row">
+          <span class="stat-label">Earth Baseline</span>
+          <span class="stat-val">7.83 Hz (Schumann Fundamental)</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Human Radiance Peak</span>
+          <span class="stat-val">~8.00 Hz (Restful Alpha Biofield)</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Harmonic Ratio to Earth</span>
+          <span class="stat-val" id="schumann-ratio">54.8 : 1</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Best Alignment Window Today</span>
+          <span class="stat-val" id="best-time-val" style="color: var(--sky);">18:00 UTC (Sunset Harmonic)</span>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Phase-Matched Crystals Section -->
+    <div class="card" style="margin-top: 24px;">
+      <h3 class="card-title">💎 2. Phase-Matched Crystals &amp; Placement</h3>
+      <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px;">
+        Crystals act as physical phase-couplers and boundary rectifiers. These top 3 stones will stabilize, amplify, and lock your room’s standing waves:
+      </p>
+
+      <div class="crystal-grid" id="crystals-container">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </div>
+
+    <!-- Torus Standing Wave Antinodes & Room Grid -->
+    <div class="card">
+      <h3 class="card-title">🌀 3. Toroidal Standing Wave Antinodes (Where to Place Everything)</h3>
+      <p style="font-size: 14px; color: var(--text-muted);">
+        Sound and telluric energy create circular, toroidal pressure nodes in your room. 
+        Place your primary stones at the highlighted <strong style="color: var(--gold-primary);">Antinode Hotspots</strong> for maximum resonance:
+      </p>
+
+      <div class="room-map-box">
+        <div style="text-align: center; font-size: 12px; color: var(--text-muted); text-transform: uppercase;">
+          ▲ NORTH WALL
+        </div>
+        
+        <div class="grid-visual" id="room-grid">
+          <div class="grid-cell" id="cell-NW"><span>North-West</span><span class="cell-badge" id="badge-NW"></span></div>
+          <div class="grid-cell" id="cell-N"><span>North (Center)</span><span class="cell-badge" id="badge-N"></span></div>
+          <div class="grid-cell" id="cell-NE"><span>North-East</span><span class="cell-badge" id="badge-NE"></span></div>
+          
+          <div class="grid-cell" id="cell-W"><span>West</span><span class="cell-badge" id="badge-W"></span></div>
+          <div class="grid-cell" id="cell-C"><span>Heart Center</span><span class="cell-badge" id="badge-C"></span></div>
+          <div class="grid-cell" id="cell-E"><span>East</span><span class="cell-badge" id="badge-E"></span></div>
+          
+          <div class="grid-cell" id="cell-SW"><span>South-West</span><span class="cell-badge" id="badge-SW"></span></div>
+          <div class="grid-cell" id="cell-S"><span>South (Center)</span><span class="cell-badge" id="badge-S"></span></div>
+          <div class="grid-cell" id="cell-SE"><span>South-East</span><span class="cell-badge" id="badge-SE"></span></div>
+        </div>
+
+        <div style="text-align: center; font-size: 12px; color: var(--text-muted); text-transform: uppercase;">
+          ▼ SOUTH WALL (ENTRANCE)
+        </div>
+      </div>
+    </div>
+
+    <!-- Plain English Science Foundation Banner -->
+    <div class="info-banner">
+      <div class="info-icon">🔬</div>
+      <div class="info-text">
+        <h4>How the Physics Works (Plain English)</h4>
+        <p>
+          Sound travels in air at roughly <strong>343 meters per second</strong>. When a wave hits a solid wall, it bounces back. 
+          When the room width or length matches half of that sound wave, the forward and backward waves combine into a 
+          <strong>standing wave</strong> that rings cleanly like a singing bowl.
+          By tuning dimensions to whole multiples of the 432 Hz wavelength (~79.4 cm), the space itself becomes an acoustic amplifier.
+        </p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    Resonance Chamber v1.0 • Pure First-Principles Acoustic &amp; Coherence Engine • Deterministic &amp; Zero-Config
+  </footer>
+
+</div>
+
+<script>
+  // ========================================================
+  // 1. CONSTANTS & PHYSICAL TRUTH
+  // ========================================================
+  const C_SOUND = 343.0;        // Speed of sound in air (m/s at 20°C)
+  const SCHUMANN_BASE = 7.83;   // Earth fundamental Schumann frequency (Hz)
+  const HUMAN_ALPHA_BASE = 8.0; // Human brain alpha/heart biofield baseline (Hz)
+
+  const NOTE_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+
+  // Verified Phase-Aware Crystal Database
+  const CRYSTAL_DB = [
+    {
+      name: "Clear Quartz",
+      affinityHz: 432.0,
+      phaseShiftDeg: 0.0,
+      role: "Phase-Lock Bridge",
+      placement: "Heart Center or Antinode",
+      cellId: "cell-C",
+      desc: "Piezoelectric bridge that phase-locks acoustic and electromagnetic fields without phase drift.",
+      color: "var(--teal-primary)"
+    },
+    {
+      name: "Rose Quartz",
+      affinityHz: 432.0,
+      phaseShiftDeg: -7.5,
+      role: "Biofield Softener",
+      placement: "South Wall / Entrance",
+      cellId: "cell-S",
+      desc: "Smooths sharp wall reflections and harmonizes human heart biofield with room modes.",
+      color: "var(--rose)"
+    },
+    {
+      name: "Black Tourmaline",
+      affinityHz: 7.83,
+      phaseShiftDeg: +18.0,
+      role: "Phase Rectifier",
+      placement: "North-East Corner",
+      cellId: "cell-NE",
+      desc: "Absorbs ambient EMF noise and rectifies phase distortion from electrical wiring.",
+      color: "#94a3b8"
+    },
+    {
+      name: "Optical Calcite",
+      affinityHz: 864.0, // 2nd harmonic of 432
+      phaseShiftDeg: +45.0,
+      role: "Birefringent Doubler",
+      placement: "North (Center)",
+      cellId: "cell-N",
+      desc: "Splits and recombines wave phases, doubling coherence at high-pressure antinodes.",
+      color: "var(--gold-primary)"
+    },
+    {
+      name: "Selenite",
+      affinityHz: 1296.0, // 3rd harmonic of 432
+      phaseShiftDeg: -22.5,
+      role: "Gradient Cleaner",
+      placement: "East Wall",
+      cellId: "cell-E",
+      desc: "High vibrational silicate that dissolves turbulent acoustic flutter between opposing walls.",
+      color: "var(--lavender)"
+    },
+    {
+      name: "Shungite",
+      affinityHz: 7.83,
+      phaseShiftDeg: 0.0,
+      role: "Telluric Anchor",
+      placement: "North-West Corner",
+      cellId: "cell-NW",
+      desc: "Fullerene carbon lattice grounding the room directly to Earth’s telluric current.",
+      color: "#64748b"
+    }
+  ];
+
+  let currentUnit = 'm'; // 'm' or 'ft'
+  let calculatedFundamentalHz = 42.88;
+
+  // ========================================================
+  // 2. WEB AUDIO SYNTHESIZER & OSCILLOSCOPE
+  // ========================================================
+  let audioCtx = null;
+  let activeOsc = null;
+  let activeGain = null;
+  let analyserNode = null;
+  let animFrameId = null;
+  let currentToneType = null; // '432' or 'room'
+
+  function initAudio() {
+    if (!audioCtx) {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      audioCtx = new AudioContextClass();
+      
+      analyserNode = audioCtx.createAnalyser();
+      analyserNode.fftSize = 2048;
+      
+      activeGain = audioCtx.createGain();
+      const sliderVal = parseFloat(document.getElementById('vol-slider').value) || 0.25;
+      activeGain.gain.setValueAtTime(sliderVal, audioCtx.currentTime);
+      
+      activeGain.connect(analyserNode);
+      analyserNode.connect(audioCtx.destination);
+      
+      startOscilloscope();
+    }
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+  }
+
+  function setVolume(val) {
+    if (activeGain && audioCtx) {
+      activeGain.gain.setValueAtTime(parseFloat(val), audioCtx.currentTime);
+    }
+  }
+
+  function toggleTone(freq, label) {
+    initAudio();
+
+    // If already playing this tone, stop it
+    if (activeOsc && currentToneType === freq) {
+      stopAllAudio();
+      return;
+    }
+
+    stopAllAudio(false);
+
+    activeOsc = audioCtx.createOscillator();
+    activeOsc.type = 'sine';
+    activeOsc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    activeOsc.connect(activeGain);
+    activeOsc.start();
+    currentToneType = freq;
+
+    updateAudioButtonUI();
+  }
+
+  function toggleRoomTone() {
+    toggleTone(calculatedFundamentalHz, 'Room Note');
+  }
+
+  function stopAllAudio(resetButtons = true) {
+    if (activeOsc) {
+      try {
+        activeOsc.stop();
+        activeOsc.disconnect();
+      } catch (e) {}
+      activeOsc = null;
+    }
+    currentToneType = null;
+    if (resetButtons) {
+      updateAudioButtonUI();
+    }
+  }
+
+  function updateAudioButtonUI() {
+    const btn432 = document.getElementById('btn-play-432');
+    const lbl432 = document.getElementById('label-play-432');
+    const btnRoom = document.getElementById('btn-play-room');
+    const lblRoom = document.getElementById('label-play-room');
+
+    if (currentToneType === 432) {
+      btn432.classList.add('active');
+      lbl432.innerText = 'PAUSE 432 Hz';
+      btnRoom.classList.remove('active');
+      lblRoom.innerText = 'PLAY ROOM TONE';
+    } else if (currentToneType && Math.abs(currentToneType - calculatedFundamentalHz) < 0.1) {
+      btnRoom.classList.add('active');
+      lblRoom.innerText = 'PAUSE ROOM TONE';
+      btn432.classList.remove('active');
+      lbl432.innerText = 'PLAY 432 Hz TONE';
+    } else {
+      btn432.classList.remove('active');
+      lbl432.innerText = 'PLAY 432 Hz TONE';
+      btnRoom.classList.remove('active');
+      lblRoom.innerText = 'PLAY ROOM TONE';
+    }
+  }
+
+  function startOscilloscope() {
+    const canvas = document.getElementById('osc-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const bufferLength = analyserNode.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+
+    function draw() {
+      animFrameId = requestAnimationFrame(draw);
+      analyserNode.getByteTimeDomainData(dataArray);
+
+      ctx.fillStyle = '#070b14';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Grid line
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(0, canvas.height / 2);
+      ctx.lineTo(canvas.width, canvas.height / 2);
+      ctx.stroke();
+
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#2dd4bf';
+      ctx.beginPath();
+
+      const sliceWidth = canvas.width / bufferLength;
+      let x = 0;
+
+      for (let i = 0; i < bufferLength; i++) {
+        const v = dataArray[i] / 128.0;
+        const y = (v * canvas.height) / 2;
+
+        if (i === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+        x += sliceWidth;
+      }
+
+      ctx.lineTo(canvas.width, canvas.height / 2);
+      ctx.stroke();
+    }
+    draw();
+  }
+
+  // ========================================================
+  // 3. CORE ACOUSTIC & HARMONIC MATH
+  // ========================================================
+  function getLengthInMeters() {
+    const raw = parseFloat(document.getElementById('room-length').value) || 4.0;
+    return currentUnit === 'ft' ? raw * 0.3048 : raw;
+  }
+  function getWidthInMeters() {
+    const raw = parseFloat(document.getElementById('room-width').value) || 3.5;
+    return currentUnit === 'ft' ? raw * 0.3048 : raw;
+  }
+  function getHeightInMeters() {
+    const raw = parseFloat(document.getElementById('room-height').value) || 2.8;
+    return currentUnit === 'ft' ? raw * 0.3048 : raw;
+  }
+
+  function freqFromDimension(dimMeters) {
+    if (dimMeters <= 0.01) return 0;
+    return C_SOUND / (2.0 * dimMeters);
+  }
+
+  function frequencyToMusicalNote(freqHz) {
+    if (freqHz <= 0) return { note: "C0", cents: 0 };
+    // Standard A4 = 440 Hz
+    const semitonesFromA4 = 12.0 * Math.log2(freqHz / 440.0);
+    const roundedSemitones = Math.round(semitonesFromA4);
+    const cents = (semitonesFromA4 - roundedSemitones) * 100.0;
+
+    const noteIdx = ((roundedSemitones % 12) + 12 + 9) % 12; // A is index 9
+    const octave = 4 + Math.floor((roundedSemitones + 9) / 12);
+
+    return {
+      note: `${NOTE_NAMES[noteIdx]}${octave}`,
+      cents: cents.toFixed(1)
+    };
+  }
+
+  function calculateCoherence(f0) {
+    // Phase mapping: (f / base) * 2pi
+    const phiRoom = ((f0 / SCHUMANN_BASE) * 2 * Math.PI) % (2 * Math.PI);
+    const phiEarth = 0.0; // Schumann baseline
+    const phiHuman = ((HUMAN_ALPHA_BASE / SCHUMANN_BASE) * 2 * Math.PI) % (2 * Math.PI);
+
+    // Cahn-Hilliard Phase Overlap: cos(phiR - phiE) * cos(phiR - phiH) * cos(phiE - phiH)
+    const raw = Math.cos(phiRoom - phiEarth) * Math.cos(phiRoom - phiHuman) * Math.cos(phiEarth - phiHuman);
+    const score = Math.max(0.12, Math.abs(raw)); // Minimum baseline floor
+    return score;
+  }
+
+  function calculateBestHour(f0) {
+    let bestH = 18;
+    let maxC = 0;
+    for (let h = 0; h < 24; h++) {
+      const diurnal = 0.15 * Math.sin(2 * Math.PI * (h / 24)) + 0.05 * Math.sin(6 * Math.PI * (h / 24));
+      const pR = (((f0 / SCHUMANN_BASE) * 2 * Math.PI) + diurnal) % (2 * Math.PI);
+      const pH = (((HUMAN_ALPHA_BASE / SCHUMANN_BASE) * 2 * Math.PI) + diurnal) % (2 * Math.PI);
+      const c = Math.cos(pR) * Math.cos(pR - pH) * Math.cos(pH);
+      if (c > maxC) {
+        maxC = c;
+        bestH = h;
+      }
+    }
+    return bestH;
+  }
+
+  // ========================================================
+  // 4. MAIN CALCULATION CONTROLLER
+  // ========================================================
+  function calculateResonance() {
+    const L = getLengthInMeters();
+    const W = getWidthInMeters();
+    const H = getHeightInMeters();
+
+    const fL = freqFromDimension(L);
+    const fW = freqFromDimension(W);
+    const fH = freqFromDimension(H);
+
+    // Fundamental is lowest axial mode
+    const f0 = Math.min(fL, fW, fH);
+    calculatedFundamentalHz = f0;
+
+    const noteInfo = frequencyToMusicalNote(f0);
+
+    // Closest harmonic octave up to ~432 Hz
+    let octaveMultiple = 1;
+    let closestOctaveHz = f0;
+    let minDiff432 = Math.abs(f0 - 432.0);
+
+    for (let mult = 1; mult <= 32; mult++) {
+      const harmHz = f0 * mult;
+      const diff = Math.abs(harmHz - 432.0);
+      if (diff < minDiff432) {
+        minDiff432 = diff;
+        closestOctaveHz = harmHz;
+        octaveMultiple = mult;
+      }
+    }
+
+    const offset432 = closestOctaveHz - 432.0;
+
+    // Coherence calculation
+    const coherence = calculateCoherence(f0);
+    const coherencePct = Math.round(coherence * 100);
+    const bestHour = calculateBestHour(f0);
+
+    // Update DOM
+    document.getElementById('res-freq').innerText = f0.toFixed(2);
+    document.getElementById('res-note').innerText = noteInfo.note;
+    document.getElementById('res-cents').innerText = noteInfo.cents > 0 ? `+${noteInfo.cents}` : noteInfo.cents;
+    document.getElementById('res-octave').innerText = `${closestOctaveHz.toFixed(2)} Hz (${octaveMultiple}× harmonic)`;
+    
+    const offsetEl = document.getElementById('res-432-offset');
+    offsetEl.innerText = `${offset432 >= 0 ? '+' : ''}${offset432.toFixed(2)} Hz`;
+    if (Math.abs(offset432) < 2.5) {
+      offsetEl.style.color = 'var(--emerald)';
+    } else {
+      offsetEl.style.color = 'var(--gold-primary)';
+    }
+
+    document.getElementById('res-modes').innerText = `${fL.toFixed(1)} / ${fW.toFixed(1)} / ${fH.toFixed(1)} Hz`;
+
+    // Update Coherence Circle
+    document.getElementById('coherence-pct').innerText = `${coherencePct}%`;
+    const circle = document.getElementById('score-circle');
+    circle.style.setProperty('--p', `${coherencePct}%`);
+
+    const gradeEl = document.getElementById('coherence-grade');
+    if (coherencePct >= 90) {
+      gradeEl.innerText = "✨ PERFECT HARMONIC LOCK";
+      gradeEl.style.color = "var(--teal-primary)";
+    } else if (coherencePct >= 75) {
+      gradeEl.innerText = "🌿 EXCELLENT COHERENCE";
+      gradeEl.style.color = "var(--emerald)";
+    } else if (coherencePct >= 55) {
+      gradeEl.innerText = "🌼 BALANCED HARMONY";
+      gradeEl.style.color = "var(--gold-primary)";
+    } else {
+      gradeEl.innerText = "⚡ HARMONIC CORRECTION NEEDED";
+      gradeEl.style.color = "var(--rose)";
+    }
+
+    document.getElementById('schumann-ratio').innerText = `${(closestOctaveHz / SCHUMANN_BASE).toFixed(1)} : 1`;
+    document.getElementById('best-time-val').innerText = `${String(bestHour).padStart(2, '0')}:00 UTC (Peak Harmonic Phase)`;
+
+    // Render Crystals
+    renderCrystals(closestOctaveHz);
+
+    // Update Room Torus Grid
+    renderTorusGrid(L, W, H);
+  }
+
+  // ========================================================
+  // 5. CRYSTAL MATCHING & TORUS GRID
+  // ========================================================
+  function renderCrystals(targetHz) {
+    const container = document.getElementById('crystals-container');
+    container.innerHTML = '';
+
+    // Score crystals based on proximity to targetHz or Schumann
+    const scored = CRYSTAL_DB.map(c => {
+      const dist = Math.abs(c.affinityHz - targetHz);
+      const score = Math.max(50, Math.round(100 - (dist / 15.0)));
+      return { ...c, score };
+    }).sort((a, b) => b.score - a.score).slice(0, 3);
+
+    scored.forEach((crystal, idx) => {
+      const card = document.createElement('div');
+      card.className = 'crystal-card';
+      card.onclick = () => highlightCell(crystal.cellId, crystal.name);
+      card.innerHTML = `
+        <div class="crystal-header">
+          <span class="crystal-name">${crystal.name}</span>
+          <span class="crystal-score">${crystal.score}% Match</span>
+        </div>
+        <p class="crystal-desc">${crystal.desc}</p>
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span class="crystal-tag">📍 ${crystal.placement}</span>
+          <span style="font-size:11px; color:var(--text-faint);">${crystal.phaseShiftDeg >= 0 ? '+' : ''}${crystal.phaseShiftDeg}° Phase</span>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+
+    // Automatically highlight top crystal in grid
+    if (scored.length > 0) {
+      highlightCell(scored[0].cellId, `Master: ${scored[0].name}`, true);
+    }
+  }
+
+  function renderTorusGrid(L, W, H) {
+    // Clear all existing badges and hotspots
+    const cells = document.querySelectorAll('.grid-cell');
+    cells.forEach(c => {
+      c.className = 'grid-cell';
+      const badge = c.querySelector('.cell-badge');
+      if (badge) badge.innerText = '';
+    });
+
+    // The center is always the heart node (antinode 1)
+    const centerCell = document.getElementById('cell-C');
+    if (centerCell) {
+      centerCell.classList.add('hotspot-master');
+      const b = document.getElementById('badge-C');
+      if (b) b.innerText = '★ Primary Antinode (Clear Quartz)';
+    }
+
+    // Determine secondary antinodes based on aspect ratio
+    const northCell = document.getElementById('cell-N');
+    const eastCell = document.getElementById('cell-E');
+    if (northCell) {
+      northCell.classList.add('hotspot');
+      const b = document.getElementById('badge-N');
+      if (b) b.innerText = 'Secondary Node (Calcite)';
+    }
+    if (eastCell) {
+      eastCell.classList.add('hotspot');
+      const b = document.getElementById('badge-E');
+      if (b) b.innerText = 'Acoustic Node (Selenite)';
+    }
+  }
+
+  function highlightCell(cellId, label, isMaster = false) {
+    const cell = document.getElementById(cellId);
+    if (!cell) return;
+    
+    // Pulse animation
+    cell.style.transition = 'all 0.3s ease';
+    cell.style.transform = 'scale(1.06)';
+    cell.classList.add(isMaster ? 'hotspot-master' : 'hotspot');
+    
+    const badge = cell.querySelector('.cell-badge');
+    if (badge) badge.innerText = label;
+
+    setTimeout(() => {
+      cell.style.transform = 'scale(1.0)';
+    }, 400);
+  }
+
+  // ========================================================
+  // 6. PRESETS & UNITS CONTROLLER
+  // ========================================================
+  function loadPreset(l, w, h, name) {
+    document.getElementById('room-length').value = currentUnit === 'ft' ? (l / 0.3048).toFixed(2) : l.toFixed(2);
+    document.getElementById('room-width').value = currentUnit === 'ft' ? (w / 0.3048).toFixed(2) : w.toFixed(2);
+    document.getElementById('room-height').value = currentUnit === 'ft' ? (h / 0.3048).toFixed(2) : h.toFixed(2);
+
+    calculateResonance();
+  }
+
+  function setUnits(unit) {
+    if (unit === currentUnit) return;
+    const lenInput = document.getElementById('room-length');
+    const widInput = document.getElementById('room-width');
+    const hgtInput = document.getElementById('room-height');
+
+    const lVal = parseFloat(lenInput.value) || 4.0;
+    const wVal = parseFloat(widInput.value) || 3.5;
+    const hVal = parseFloat(hgtInput.value) || 2.8;
+
+    if (unit === 'ft') {
+      lenInput.value = (lVal / 0.3048).toFixed(2);
+      widInput.value = (wVal / 0.3048).toFixed(2);
+      hgtInput.value = (hVal / 0.3048).toFixed(2);
+      document.getElementById('unit-ft').classList.add('active');
+      document.getElementById('unit-m').classList.remove('active');
+    } else {
+      lenInput.value = (lVal * 0.3048).toFixed(2);
+      widInput.value = (wVal * 0.3048).toFixed(2);
+      hgtInput.value = (hVal * 0.3048).toFixed(2);
+      document.getElementById('unit-m').classList.add('active');
+      document.getElementById('unit-ft').classList.remove('active');
+    }
+    currentUnit = unit;
+    calculateResonance();
+  }
+
+  // Auto-run initial calculation on load
+  window.addEventListener('DOMContentLoaded', () => {
+    calculateResonance();
+  });
+</script>
+
+</body>
+</html>

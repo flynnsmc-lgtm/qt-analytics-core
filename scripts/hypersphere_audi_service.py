@@ -900,10 +900,34 @@ class HypersphereAudiHandler(SimpleHTTPRequestHandler):
         else:
             self.send_error(404, "corroboration-complete.html not found")
 
+    def serve_resonance_page(self):
+        chamber_index = os.path.join(BASE_DIR, "resonance_chamber.html")
+        if os.path.exists(chamber_index):
+            with open(chamber_index, 'r', encoding='utf-8') as f:
+                content = f.read()
+            data = content.encode('utf-8')
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/html; charset=utf-8')
+            self.send_header('Content-Length', str(len(data)))
+            self.end_headers()
+            self.wfile.write(data)
+            self.wfile.flush()
+        else:
+            self.send_error(404, "resonance_chamber.html not found")
+
     def do_GET(self):
         global CURRENT_VIEW
         parsed = urllib.parse.urlparse(self.path)
         path = parsed.path.rstrip('/')
+
+        # 0. Resonance Chamber 432 Hz & Pairoq VST3 Endpoints
+        if path in ['/resonance', '/chamber', '/resonance_chamber', '/432', '/resonance-chamber', '/resonance_chamber.html']:
+            self.serve_resonance_page()
+            return
+
+        if path in ['/pairoq/vst3', '/pairoq', '/pairoq/synth-harmonic-vst3', '/apps/pairoq/vst3_harmonic.html']:
+            self.serve_corroboration_page()
+            return
 
         # 1a-0. Live NMEA Stream & 5D Hypersphere Anti-Spoofing status
         if path in ['/api/nmea', '/api/nmea/status', '/nmea', '/telemetry/gps', '/api/gps']:
