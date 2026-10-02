@@ -307,7 +307,7 @@
       const degrees = ((sweepAngle * (180 / Math.PI)) % 360).toFixed(1);
       const paddedDeg = degrees.padStart(5, '0');
 
-      if (readoutAzimuth) readoutAzimuth.textContent = `${degrees}°`;
+      if (readoutAzimuth) readoutAzimuth.textContent = `${paddedDeg}°`;
       if (readoutCycle) readoutCycle.textContent = `#${sweepCycleCount}`;
       if (hudBearing) hudBearing.textContent = `BEARING: ${paddedDeg}° TRUE`;
     }

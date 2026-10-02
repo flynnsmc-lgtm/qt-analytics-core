@@ -223,7 +223,9 @@
       padding: 12px 18px;
       box-shadow: var(--shadow-sm);
       width: 100%;
-      max-width: 520px;
+      max-width: 540px;
+      box-sizing: border-box;
+      min-height: 76px;
     }
 
     .telemetry-pill-head {
@@ -247,17 +249,34 @@
     }
 
     .telemetry-metrics-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      font-size: 0.82rem;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr 1.05fr 1.1fr;
+      gap: 8px;
+      font-size: 0.78rem;
       color: var(--text-muted);
       font-family: var(--font-mono);
-      flex-wrap: wrap;
+      align-items: center;
+      white-space: nowrap;
+    }
+
+    .telemetry-metrics-row .t-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+      overflow: hidden;
     }
 
     .telemetry-metrics-row strong {
       color: var(--text-heading);
+      font-variant-numeric: tabular-nums;
+      display: inline-block;
+    }
+
+    #readout-azimuth {
+      min-width: 44px;
+      display: inline-block;
+      text-align: right;
     }
 
     /* Right Column: Dedicated Radar Visual */
