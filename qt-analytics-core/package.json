@@ -1,0 +1,13 @@
+{
+  "name": "qt-analytics-core",
+  "version": "1.0.0",
+  "description": "Core MOIRA / 4D Invariant Physics Engine Backend",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^4.22.3"
+  }
+}

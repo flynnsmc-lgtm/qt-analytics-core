@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QT Analytics | Core Framework Dashboard</title>
+    <meta name="description" content="Immutable topological fluid dynamics and agentic desk telemetry.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-grid"></div>
+    <div class="glow-orb top-left"></div>
+    <div class="glow-orb bottom-right"></div>
+
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span class="logo-mark">QT</span>
+                <span class="logo-text">Core Engine</span>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item active" onclick="switchTab('ingestion')">
+                    <span class="icon">⬡</span> Manual Ingestion
+                </li>
+                <li class="nav-item" onclick="switchTab('hypersphere')">
+                    <span class="icon">🌀</span> 5D Hypersphere
+                </li>
+                <li class="nav-item" onclick="switchTab('vst3')">
+                    <span class="icon">🎛️</span> VST3 Physics Engine
+                </li>
+                <li class="nav-item" onclick="switchTab('telemetry')">
+                    <span class="icon">📡</span> Desk Telemetry
+                </li>
+                <li class="nav-item" onclick="switchTab('agents')">
+                    <span class="icon">🤖</span> Agent Operations
+                </li>
+                <li class="nav-item disabled">
+                    <span class="icon">🔗</span> AI Studios API (Locked)
+                </li>
+            </ul>
+
+            <div class="system-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span> Demo Week Active
+                </div>
+                <div class="uptime mono">Uptime: 99.99%</div>
+            </div>
+        </nav>
+
+        <!-- Main Workspace -->
+        <main class="workspace">
+            <header class="header">
+                <h2>System Overview</h2>
+                <div class="network-badge">Pairoq Settlement Network Connected</div>
+            </header>
+
+            <!-- 1. Manual Ingestion View (Active) -->
+            <section id="view-ingestion" class="view-panel active-view">
+                <div class="audit-gateway-card">
+                    <div class="card-header">
+                        <h2>Topological Forensic Ingestion</h2>
+                        <p>Paste target wallets or batch payloads for GMRF manifold sealing.</p>
+                    </div>
+
+                    <div class="input-group">
+                        <textarea id="walletInput" placeholder='[
+  {"sender": "0xTargetA", "receiver": "0xTargetB", "value": 1500000}
+]'></textarea>
+                    </div>
+
+                    <button id="executeBtn" class="primary-btn" onclick="runForensicAudit()">
+                        <span class="btn-text">Execute Invariant Seal</span>
+                        <span class="btn-loader"></span>
+                    </button>
+
+                    <div id="resultContainer" class="result-container" style="display: none;">
+                        <div class="result-header">
+                            <h3>STATE_INVARIANT_VALID</h3>
+                        </div>
+                        <div class="data-grid">
+                            <div class="data-item full-width seal-item">
+                                <span class="label">SHA-256 Cryptographic Seal</span>
+                                <span class="value mono" id="sealOutput">---</span>
+                            </div>
+                            <div class="data-item">
+                                <span class="label">Assigned Tier</span>
+                                <span class="value highlight" id="tierOutput">---</span>
+                            </div>
+                            <div class="data-item">
+                                <span class="label">Settlement Price</span>
+                                <span class="value" id="priceOutput">---</span>
+                            </div>
+                            <div class="data-item">
+                                <span class="label">Manifold Dimension</span>
+                                <span class="value" id="dimensionOutput">---</span>
+                            </div>
+                            <div class="data-item">
+                                <span class="label">Topological Friction (κ)</span>
+                                <span class="value" id="kappaOutput">---</span>
+                            </div>
+                        </div>
+                        <div class="action-prompt">
+                            <p>Routing to: <strong>QT_ANALYTICS_PAIROQ_SETTLEMENT_SECURE</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. 5D Hypersphere Visualizer -->
+            <section id="view-hypersphere" class="view-panel hidden">
+                <div class="visualizer-card">
+                    <h2>5D Hypersphere Topology</h2>
+                    <p>Live projection of transaction manifold distortions in 5-dimensional space.</p>
+                    <div class="scene3d">
+                        <div class="cube-wrapper">
+                            <div class="cube">
+                                <div class="face front">QT</div>
+                                <div class="face back">4D</div>
+                                <div class="face right">MAP</div>
+                                <div class="face left">SEAL</div>
+                                <div class="face top">INVARIANT</div>
+                                <div class="face bottom">GMRF</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="metrics-overlay mono">
+                        <p>Z-Tension: 0.89234</p>
+                        <p>Vector Binding: Active</p>
+                        <p>Dimensional Drift: -0.001</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. VST3 Physics Engine -->
+            <section id="view-vst3" class="view-panel hidden">
+                <div class="vst3-card">
+                    <h2>VST3 Dynamics Engine</h2>
+                    <p>Strings & Springs physics morphing parameters.</p>
+                    <div class="knob-container">
+                        <div class="knob-module">
+                            <div class="knob"></div>
+                            <span>Kappa Friction</span>
+                        </div>
+                        <div class="knob-module">
+                            <div class="knob"></div>
+                            <span>Mass Attractor</span>
+                        </div>
+                        <div class="knob-module">
+                            <div class="knob"></div>
+                            <span>Resonance</span>
+                        </div>
+                    </div>
+                    <div class="audio-wave">
+                        <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                        <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                        <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Desk Telemetry -->
+            <section id="view-telemetry" class="view-panel hidden">
+                <div class="telemetry-card">
+                    <h2>Chi Key Team Desk Telemetry</h2>
+                    <p>Live throughput of desk operations and agent payloads.</p>
+                    <div class="data-grid">
+                        <div class="data-item">
+                            <span class="label">Ingestion Rate</span>
+                            <span class="value mono" id="ingestionRate">842 tx/s</span>
+                        </div>
+                        <div class="data-item">
+                            <span class="label">Manifold Collisions</span>
+                            <span class="value highlight mono">0.00%</span>
+                        </div>
+                        <div class="data-item full-width terminal-box">
+                            <span class="label">Live Desk Logs</span>
+                            <div class="terminal mono" id="terminalLog">
+                                [SYS] Desk initialized.<br>
+                                [AGENT-1] Executing outreach batch 1...<br>
+                                [MOIRA] Tension matrix stabilized.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Agent Operations -->
+            <section id="view-agents" class="view-panel hidden">
+                <div class="agents-card">
+                    <h2>Autonomous Agent Orchestration</h2>
+                    <p>Active multi-agent protocol routing and outreach.</p>
+                    <div class="agent-list">
+                        <div class="agent-row running">
+                            <span class="agent-name">Agent 1: Tech Architect</span>
+                            <span class="agent-status">DISPATCHING (22/50 targets)</span>
+                        </div>
+                        <div class="agent-row running">
+                            <span class="agent-name">Agent 2: Commercial Settler</span>
+                            <span class="agent-status">LISTENING ON GATEWAY</span>
+                        </div>
+                        <div class="agent-row idle">
+                            <span class="agent-name">Agent 3: AI Studios Interop</span>
+                            <span class="agent-status">AWAITING API KEYS</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
