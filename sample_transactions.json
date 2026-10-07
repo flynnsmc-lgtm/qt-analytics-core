@@ -1,0 +1,7 @@
+[
+  {"fromAddress":"Whale_Alpha", "toAddress":"Exchange_Binance_Hot_1", "valueUSD":15000000.0},
+  {"fromAddress":"Exchange_Binance_Hot_1", "toAddress":"DeFi_Liquidity_Pool_X", "valueUSD":2000000.0},
+  {"fromAddress":"DeFi_Liquidity_Pool_X", "toAddress":"Retail_User_Set", "valueUSD":500000.0},
+  {"fromAddress":"Whale_Alpha", "toAddress":"Cold_Storage_Vault", "valueUSD":50000000.0},
+  {"fromAddress":"Retail_User_Set", "toAddress":"Exchange_Coinbase_Hot", "valueUSD":100000.0}
+]

@@ -4,7 +4,7 @@
 **Affiliation:** Primary Framework Architect, QT Analytics / Antigravity Research (Scotland)  
 **Classification:** Mathematical Physics, Non-Linear Partial Differential Equations, Fluid Dynamics, Differential Geometry (AMS Subject Classification: 35Q30, 76D05, 58J05, 76F02; PACS: 47.10.ad, 47.27.Ak)  
 **Target Repository:** Academia.edu / Mathematical Physics Preprint Archives  
-**Document Series:** *Foundations of Unified Chi Dynamics — Paper 3 of 5*  
+**Document Series:** *Foundations of Unified Chi Dynamics — Paper 3 of 6*  
 **Date:** October 2026  
 
 ---
@@ -17,6 +17,7 @@ We prove that the quadratic non-linear convective acceleration $(u \cdot \nabla)
 Crucially, we prove that the scale-symmetric inversion map $\mathcal{R}(X) = \frac{r_0^2}{\|X\|^2} X$ establishes a dynamical "return arm" across the invariant shell. When turbulent kinetic energy cascades down the Richardson-Kolmogorov hierarchy toward the dissipation scale, it is continuously recirculated through the invariant shell rather than accumulating in localized point singularities. This topological recirculation imparts a quadratic damping term $-\kappa \Omega(t)^2$ into the enstrophy rate equation, establishing a strict, time-independent a priori upper bound on the enstrophy $\sup_{t \ge 0} \Omega(t) \le \Omega_{\max} < \infty$. By the Beale-Kato-Majda theorem, this uniform bound precludes any blowup of the vorticity $\|\omega(\cdot, t)\|_{L^\infty}$, rigorously guaranteeing that all solutions remain globally smooth ($C^\infty$) for all $t \in [0, \infty)$ for all smooth, finite-energy initial data.
 
 ---
+
 
 ## 1. Introduction: The Millennium Problem and the Singularity Barrier
 
@@ -104,6 +105,8 @@ Therefore, to resolve the Millennium Problem, it suffices to prove that the peak
 
 ---
 
+\pagebreak
+
 ## 2. Geometric Formulation: Lifting Flow to the Invariant Shell $S^5(r_0 = 1/2)$
 
 ### Definition 2.1 (The Scale-Symmetric Manifold)
@@ -133,7 +136,7 @@ The physical three-dimensional velocity field $u(x,t)$ lifts to a smooth 1-form 
 \mathbf{u}(X, t) = u_i(x, t) dx^i.
 \end{equation}
 
-### Lemma 2.1 (Hodge Decomposition of Incompressible Flow on $S^5$)
+### Lemma 2.1 (Hodge Decomposition of Incompressible Flow on the 5-Sphere)
 Let $\Omega^k(S^5)$ denote the space of smooth differential $k$-forms on $S^5(r_0)$. The Hodge decomposition theorem states:
 \begin{equation}
 \Omega^1(S^5) = d \Omega^0(S^5) \oplus \delta \Omega^2(S^5) \oplus \mathcal{H}^1(S^5),
@@ -152,6 +155,8 @@ Consequently, every divergence-free vector field ($\delta \mathbf{u} = 0$) on $S
 The 2-form $\mathbf{\Psi}$ acts as the generalized **stream tensor** of the flow.
 
 ---
+
+\pagebreak
 
 ## 3. The Hodge-Laplacian and Intrinsic Curvature Dissipation
 
@@ -213,6 +218,8 @@ Therefore:
 Unlike in Euclidean $\mathbb{R}^3$, where dissipation can vanish asymptotically for large-scale modes ($k \to 0$), the compact geometry of $S^5(r_0)$ imposes an absolute geometric dissipation floor: energy cannot linger in arbitrarily low frequencies without experiencing viscous attenuation at rate $\ge 20\nu$. $\blacksquare$
 
 ---
+
+\pagebreak
 
 ## 4. Dynamic Zero Recirculation and the Enstrophy Ceiling
 
@@ -338,6 +345,8 @@ Hence $\Omega(t)$ is trapped within the invariant compact set $[0, \Omega_{\max}
 
 ---
 
+\pagebreak
+
 ## 5. Global $C^\infty$ Regularity and Proof of Non-Blowup
 
 We now use the uniform enstrophy bound to prove that the velocity field $u(x,t)$ remains in the smooth class $C^\infty(\mathbb{R}^3 \times [0, \infty))$ for all time.
@@ -409,6 +418,8 @@ to the three-dimensional incompressible Navier-Stokes equations for all $t \in [
 
 ---
 
+\pagebreak
+
 ## 6. Pressure Regularity and Poisson Equation Solvability
 
 To complete the resolution of the Fefferman formulation, we must verify the global existence and smoothness of the kinematic pressure field $p(x,t)$.
@@ -456,6 +467,8 @@ Hence the pressure is globally smooth and satisfies the physical decay condition
 
 ---
 
+\pagebreak
+
 ## 7. Physical Validation: Turbulent Energy Spectra and the Recirculation Bottleneck
 
 ### 7.1 The Kolmogorov $-5/3$ Inertial Spectrum
@@ -498,6 +511,8 @@ Standard phenomenology attributes this bump to an incomplete triad interaction a
 
 ---
 
+\pagebreak
+
 ## 8. Conclusion: Formal Resolution of the Clay Millennium Problem
 
 Through the geometric and topological formulation developed in this paper, we establish the complete and unconditional resolution of the **Navier-Stokes Existence and Smoothness Problem**:
@@ -530,5 +545,5 @@ The author acknowledges foundational literature in fluid mechanics, partial diff
 7. **Kolmogorov, A. N.** (1941). *The Local Structure of Turbulence in Incompressible Viscous Fluid for Very Large Reynolds Numbers*. Proceedings of the USSR Academy of Sciences, 30, 301–305.
 8. **Donzis, D. A., & Sreenivasan, K. R.** (2010). *The Bottleneck Effect and the Kolmogorov Constant in Isotropic Turbulence*. Journal of Fluid Mechanics, 657, 171–188.
 9. **Gilbarg, D., & Trudinger, N. S.** (2001). *Elliptic Partial Differential Equations of Second Order*. Springer-Verlag, Berlin.
-10. **Fitzpatrick, S.** (2026). *The Equatorial Manifold: Resolving the Riemann Hypothesis via 5D Hypersphere Stereographic Projection*. Foundations of Unified Chi Dynamics, Paper 1 of 5.
-11. **Fitzpatrick, S.** (2026). *Geometric Confinement and Mass Gap Generation in Yang-Mills Theory via Scale-Symmetric Manifolds*. Foundations of Unified Chi Dynamics, Paper 2 of 5.
+10. **Fitzpatrick, S.** (2026). *The Equatorial Manifold: Resolving the Riemann Hypothesis via 5D Hypersphere Stereographic Projection*. Foundations of Unified Chi Dynamics, Paper 1 of 6.
+11. **Fitzpatrick, S.** (2026). *Geometric Confinement and Mass Gap Generation in Yang-Mills Theory via Scale-Symmetric Manifolds*. Foundations of Unified Chi Dynamics, Paper 2 of 6.

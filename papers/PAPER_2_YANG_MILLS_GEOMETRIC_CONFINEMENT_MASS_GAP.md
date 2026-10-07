@@ -1,10 +1,10 @@
-# Geometric Confinement and Mass Gap Generation in Yang-Mills Theory via Scale-Symmetric Manifolds
+# Geometric Confinement and Mass Gap in Yang-Mills Theory via Scale-Symmetric Manifolds
 
 **Author:** Stephen Fitzpatrick  
 **Affiliation:** Primary Framework Architect, QT Analytics / Antigravity Research (Scotland)  
 **Classification:** High Energy Theoretical Physics, Non-Perturbative Quantum Field Theory, Gauge Theory, Differential Geometry (PACS: 11.15.Tk, 12.38.Aw; AMS Subject Classification: 53C07, 58J50, 81T13)  
 **Target Repository:** Academia.edu / High Energy Physics & Mathematical Physics Preprint Archives  
-**Document Series:** *Foundations of Unified Chi Dynamics — Paper 2 of 5*  
+**Document Series:** *Foundations of Unified Chi Dynamics — Paper 2 of 6*  
 **Date:** October 2026  
 
 ---
@@ -61,6 +61,8 @@ We demonstrate that when gauge fields are lifted to this compact geometry:
 - The scale-symmetric return arm of the recirculating zero manifold dynamically recycles infrared modes back into ultraviolet duals, eliminating the Landau pole and Gribov ambiguities without modifying the local Yang-Mills Lagrangian.
 
 ---
+
+\pagebreak
 
 ## 2. Geometric Formulation: The Invariant Shell $S^5(r_0 = 1/2)$ and Gauge Field Embedding
 
@@ -129,6 +131,8 @@ where $\star$ denotes the Hodge dual with respect to the Lorentzian metric $g_{M
 \end{equation}
 
 ---
+
+\pagebreak
 
 ## 3. Exact Derivation of the Mass Gap $\Delta > 0$ via the Laplace-Beltrami Spectral Gap
 
@@ -278,6 +282,8 @@ There exist no continuous or massless gauge excitations above the vacuum $|0\ran
 
 ---
 
+\pagebreak
+
 ## 4. Topological Quark Confinement and the Wilson Loop Area Law
 
 ### 4.1 The Wilson Loop as a Gauge-Invariant Order Parameter
@@ -389,6 +395,8 @@ In the geometric framework:
 
 ---
 
+\pagebreak
+
 ## 5. Elimination of Infrared Divergences via Dynamic Zero Recirculation
 
 ### 5.1 The Infrared Catastrophe of Standard QCD
@@ -454,6 +462,8 @@ Soft gluon modes with $k \to 0$ are topologically recirculated through the retur
 
 ---
 
+\pagebreak
+
 ## 6. Chromoelectric Flux Tubes, String Tension, and the Glueball Mass Spectrum
 
 ### 6.1 The Squeezed Chromoelectric Flux Tube Profile
@@ -516,6 +526,8 @@ The extraordinary agreement between our analytical formula and extensive lattice
 
 ---
 
+\pagebreak
+
 ## 7. Axiomatic Verification: Satisfaction of the Jaffe-Witten Criteria
 
 To formally resolve the Clay Millennium Prize problem, we verify that our geometric formulation satisfies all foundational axioms of constructive quantum field theory:
@@ -552,6 +564,8 @@ Unconfined isolated quarks are forbidden by the compactness of the manifold ($\p
 
 ---
 
+\pagebreak
+
 ## 8. Physical, Hadronic, and Cosmological Implications
 
 ### 8.1 Resolution of the Strong CP Problem without Axions
@@ -586,6 +600,8 @@ The stability of the proton and the existence of a massive, stable material univ
 
 ---
 
+\pagebreak
+
 ## 9. Conclusion & Formal Summary
 
 In this work, we have provided a non-perturbative, geometric proof of the existence of a strictly positive mass gap $\Delta > 0$ and topological quark confinement in non-Abelian quantum Yang-Mills theory:
@@ -612,4 +628,4 @@ The author acknowledges foundational insights from non-perturbative quantum fiel
 6. **Morningstar, C. J., & Peardon, M.** (1999). *The Glueball Spectrum from an Anisotropic Lattice Study*. Physical Review D, 60(3), 034509.
 7. **Gribov, V. N.** (1978). *Quantization of Non-Abelian Gauge Theories*. Nuclear Physics B, 139(1–2), 1–19.
 8. **Cembranos, J. A. R., et al.** (2024). *Scale Holography and Invariant Boundaries in Quantum Gravity*. Physical Review Letters / arXiv preprints.
-9. **Fitzpatrick, S.** (2026). *The Equatorial Manifold: Resolving the Riemann Hypothesis via 5D Hypersphere Stereographic Projection*. Foundations of Unified Chi Dynamics, Paper 1 of 5.
+9. **Fitzpatrick, S.** (2026). *The Equatorial Manifold: Resolving the Riemann Hypothesis via 5D Hypersphere Stereographic Projection*. Foundations of Unified Chi Dynamics, Paper 1 of 6.

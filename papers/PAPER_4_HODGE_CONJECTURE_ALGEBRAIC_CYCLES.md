@@ -1,10 +1,10 @@
-﻿# Algebraic Cycles, Quartic Loci, and 4pi Monodromy on the Invariant Hypersphere
+# Algebraic Cycles, Quartic Loci, and 4pi Monodromy on the Invariant Hypersphere
 
 **Author:** Stephen Fitzpatrick  
 **Affiliation:** Primary Framework Architect, QT Analytics / Antigravity Research (Scotland)  
 **Classification:** Pure Mathematics, Algebraic Geometry, Differential Topology (AMS Subject Classification: 14C30, 14J35, 55R55, 58A14)  
 **Target Repository:** Academia.edu / Mathematical Physics Preprint Archives  
-**Document Series:** *Foundations of Unified Chi Dynamics — Paper 4 of 5*  
+**Document Series:** *Foundations of Unified Chi Dynamics — Paper 4 of 6*  
 **Date:** October 2026  
 
 ---
@@ -38,6 +38,9 @@ The conjecture faces a structural gap: the Hodge decomposition is a *topological
 The key insight of this paper is that both languages are shadows of a single underlying structure: **closed orbits on the invariant hypersphere $S^5(r_0)$**. Hodge classes are the topological image of these orbits in cohomology; algebraic cycles are their geometric image in the projective variety. The manifold provides the bridge.
 
 ---
+
+
+\pagebreak
 
 ## 2. The Manifold Framework: Harmonic Forms and Geodesic Orbits
 
@@ -77,6 +80,8 @@ Under $\iota_X$, the complex dimension of $X$ maps to the real angular coordinat
 
 ---
 
+\pagebreak
+
 ## 3. Hodge Classes as Equatorial Orbits
 
 ### 3.1 The Antipodal Identification
@@ -106,6 +111,9 @@ The degree-4 choice is not arbitrary: it corresponds to the first non-trivial ha
 *Proof sketch.* The harmonic degree-4 polynomial $P_4$ defines a section of the fourth symmetric power of the cotangent bundle of $S^5$. Its zero locus $Q$ is a compact oriented submanifold, and its fundamental class $[Q]$ represents an integral cohomology class. By the equatorial restriction theorem (Theorem 2.1), $[Q]$ is a harmonic $(2,2)$-class on $M^4_{eq}$, hence a Hodge class on $X$ via $\iota_X$. Rationality follows from the integrality of the geodesic orbit lengths on $S^5$ (multiples of $\pi r_0 = \pi/2$). $\square$
 
 ---
+
+
+\pagebreak
 
 ## 4. The $4\pi$ Monodromy Group
 
@@ -143,6 +151,8 @@ The same modulo-24 prime lattice that structures the Riemann zeros (Paper 1) app
 
 ---
 
+\pagebreak
+
 ## 5. The Resolution: Every Hodge Class is Algebraic
 
 ### 5.1 Main Theorem
@@ -166,6 +176,8 @@ The difficulty in the classical setting arises because the projective variety $X
 
 ---
 
+\pagebreak
+
 ## 6. Connection to the Unified Framework
 
 | Property | Role in Hodge Conjecture |
@@ -179,6 +191,8 @@ The difficulty in the classical setting arises because the projective variety $X
 The same $R = 80$ that sets the Yang-Mills mass gap (Paper 2), bounds the Navier-Stokes enstrophy (Paper 3), and confines the Riemann zeros (Paper 1) here limits the dimension of the space of quartic loci — making the Hodge Conjecture finitely resolved rather than requiring an infinite-dimensional argument.
 
 ---
+
+\pagebreak
 
 ## 7. Conclusion
 
@@ -194,7 +208,11 @@ The $4\pi$ monodromy is the topological price of working on a 5-sphere rather th
 
 The fog of the Hodge Conjecture, like the fog of all seven Millennium Problems, clears when we admit the full geometry of the closed, compact, scale-symmetric manifold. The sphere does not merely *contain* the answer. The sphere *is* the answer.
 
+The Hodge Conjecture asks: "Does every invisible pattern come from a visible shape?" the observer see's... "On the closed, recirculating manifold — the pattern is the shape. They were never two things."
+
 ---
+
+\pagebreak
 
 ## References
 

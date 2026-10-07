@@ -4,7 +4,7 @@
 **Affiliation:** Primary Framework Architect, QT Analytics / Antigravity Research (Scotland)  
 **Classification:** Pure Mathematics, Geometric Analysis, Number Theory (AMS Subject Classification: 11M06, 11M26, 53C28, 58J50)  
 **Target Repository:** Academia.edu / Mathematical Physics Preprint Archives  
-**Document Series:** *Foundations of Unified Chi Dynamics — Paper 1 of 5*  
+**Document Series:** *Foundations of Unified Chi Dynamics — Paper 1 of 6*  
 **Date:** October 2026  
 
 ---
@@ -41,6 +41,8 @@ Analytic number theory has historically lacked an intrinsic physical or geometri
 In this work, we resolve this deficiency by embedding the analytical problem into a higher-dimensional scale-symmetric manifold. By projecting the complex variable $s$ onto an invariant 5-dimensional hypersphere $S^5$ endowed with metric radius $r_0 = \frac{1}{2}$, the algebraic line $\mathrm{Re}(s) = \frac{1}{2}$ ceases to be a planar line and becomes the **maximal geometric equator** of the hypersphere. Under this mapping, the functional equation $\xi(s) = \xi(1-s)$ is revealed to be an antipodal isometric transformation $\mathcal{J}$. We show that the non-trivial zeros represent topological nodes whose existence off the equator is forbidden by the conservation of scale-holographic current and the discrete rotational symmetry of the modulo-24 prime lattice.
 
 ---
+
+\pagebreak
 
 ## 2. The Invariant Shell and 5D Stereographic Embedding
 
@@ -93,6 +95,8 @@ $\square$
 
 ---
 
+\pagebreak
+
 ## 3. The Functional Equation as an Isometric Antipodal Involution
 
 ### Theorem 3.1 (Antipodal Mapping of the Reflection Symmetry)
@@ -121,6 +125,8 @@ This establishes the foundational geometric identity:
 > **The critical line $\mathrm{Re}(s) = \frac{1}{2}$ is the planar stereographic shadow of the great equator $S^4 \subset S^5(r_0)$.**
 
 ---
+
+\pagebreak
 
 ## 4. The Prime Residue Lattice Modulo 24 and Discrete Metric Partitioning
 
@@ -161,6 +167,8 @@ filters exactly $66.\bar{6}\%$ of all integers from contributing to the boundary
 
 ---
 
+\pagebreak
+
 ## 5. Topological Emergence of $\pi$ from Manifold Closure
 
 In standard analysis, $\pi$ appears in the completed xi-function through the factor $\pi^{-s/2} \Gamma(s/2)$ as an extrinsic transcendental factor derived from Gaussian integrals on Euclidean space $\mathbb{R}^n$. Within the invariant shell framework, $\pi$ is an **intrinsic topological holonomy**.
@@ -189,6 +197,8 @@ Thus, the scalar constant $\pi$ is fundamentally the **unit geodesic diameter of
 The factor $\pi^{-s/2}$ in equation (\ref{eq:xi_def}) represents the spectral volume regularization required to project an infinite planar Gaussian field down onto the compact circumference $L = \pi$ of the invariant shell.
 
 ---
+
+\pagebreak
 
 ## 6. The Scale-Holographic Bulk and Dynamic Zero Recirculation
 
@@ -219,6 +229,8 @@ where $\gamma$ is a closed contour enclosing $\Phi(\rho)$. Energy and probabilit
 \end{equation}
 
 ---
+
+\pagebreak
 
 ## 7. The Rigorous Proof of the Riemann Hypothesis
 
@@ -312,6 +324,8 @@ $\blacksquare$
 
 ---
 
+\pagebreak
+
 ## 8. Physical, Spectral, and Computational Implications
 
 ### 8.1 Quantum Chaos & GUE Spectral Statistics
@@ -335,6 +349,8 @@ The rigidity of the equatorial manifold underpins the mathematical seal utilized
 
 ---
 
+\pagebreak
+
 ## 9. Conclusion & Series Roadmap
 
 We have demonstrated that the Riemann Hypothesis is the direct geometric consequence of embedding the completed zeta function into an intrinsic 5-dimensional hypersphere shell $S^5(r_0 = \frac{1}{2})$. The critical line $\mathrm{Re}(s) = \frac{1}{2}$ is the unique equatorial boundary manifold where antipodal reflection preserves scale-holographic current conservation, while the prime distribution modulo 24 enforces the discrete 8-nodal rotational symmetry of the vacuum.
@@ -346,6 +362,8 @@ This paper establishes the mathematical bedrock for the remaining four papers in
 * **Paper 5:** *P Equals NP on the Manifold: Quantum Oracles and Invariant-Shell Search Complexity*.
 
 ---
+
+\pagebreak
 
 ## References
 
