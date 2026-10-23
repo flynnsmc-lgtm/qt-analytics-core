@@ -535,10 +535,21 @@
       overflow: hidden; /* Encapsulates huge watermark */
     }
 
-    /* Huge Background Watermark at exactly 22% Opacity */
+    /* Multi-Page Watermarks Layer */
+    #watermarksLayer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    /* Huge Background Watermark at exactly 22% Opacity (repeated per A4 page / ~80 lines) */
     .doc-sheet-watermark {
       position: absolute;
-      top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       width: 580px;
@@ -604,14 +615,14 @@
       gap: 14px;
     }
     .doc-brand-logo-img {
-      width: 54px;
-      height: 54px;
-      object-fit: contain;
-      border-radius: 6px;
-      border: 1px solid #e2e8f0;
+      width: 58px;
+      height: 58px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1.5px solid #0f172a;
       background: #ffffff;
-      padding: 2px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      padding: 1px;
+      box-shadow: 0 3px 8px rgba(15, 23, 42, 0.16);
     }
     .doc-brand-names h2 {
       font-size: 20px;
@@ -896,9 +907,11 @@
 
         <!-- The actual printable white letterhead -->
         <div id="letterheadPrintArea">
-          <!-- Huge Background Watermark at exactly 22% Opacity -->
-          <div class="doc-sheet-watermark" aria-hidden="true">
-            <img id="sheetWatermarkImg" src="/assets/brand/qt_monogram_embossed.jpg" alt="QT Analytics Watermark">
+          <!-- Multi-Page Watermarks Layer (Repeats every page interval at 22% opacity) -->
+          <div id="watermarksLayer" aria-hidden="true">
+            <div class="doc-sheet-watermark" style="top: 520px;">
+              <img src="/assets/brand/qt_monogram_embossed.jpg" alt="QT Analytics Watermark">
+            </div>
           </div>
 
           <div class="doc-sheet-top-accent"></div>
@@ -906,7 +919,7 @@
           <!-- Header -->
           <div class="doc-sheet-header">
             <div class="doc-brand-block">
-              <img id="previewBrandLogo" class="doc-brand-logo-img" src="/assets/brand/qt_monogram_embossed.jpg" alt="Brand Logo" onerror="this.style.display='none'">
+              <img id="previewBrandLogo" class="doc-brand-logo-img" src="/assets/brand/qt_resonance_crest.jpg" alt="QT Resonance Crest" onerror="this.style.display='none'">
               <div class="doc-brand-names">
                 <h2>QT ANALYTICS</h2>
                 <div class="doc-sub">Forensic Intelligence &amp; Cyber Defense • Edinburgh, Scotland</div>
@@ -1752,6 +1765,34 @@ function renderDocPreview() {
   if (bodyEl) {
     bodyEl.innerHTML = parseDocTextToHTML(rawText);
   }
+
+  // Multi-page watermark update (every page / ~80 lines)
+  setTimeout(updateWatermarks, 30);
+}
+
+let brandLogoWatermarkSrc = '/assets/brand/qt_monogram_embossed.jpg';
+
+function updateWatermarks() {
+  const container = document.getElementById('letterheadPrintArea');
+  const watermarkContainer = document.getElementById('watermarksLayer');
+  if (!container || !watermarkContainer) return;
+
+  // Measure full rendered document height
+  // Standard A4 page content interval is ~1040px (~80 lines of formatted text)
+  const totalHeight = Math.max(container.scrollHeight, container.offsetHeight, 980);
+  const pageHeight = 1040;
+  const numPages = Math.max(1, Math.ceil(totalHeight / pageHeight));
+
+  let html = '';
+  for (let i = 0; i < numPages; i++) {
+    const topCenter = Math.round((i * pageHeight) + (pageHeight / 2));
+    html += `
+      <div class="doc-sheet-watermark" style="top: ${topCenter}px;" aria-hidden="true">
+        <img src="${brandLogoWatermarkSrc}" alt="QT Analytics Watermark">
+      </div>
+    `;
+  }
+  watermarkContainer.innerHTML = html;
 }
 
 function escapeHtml(str) {
