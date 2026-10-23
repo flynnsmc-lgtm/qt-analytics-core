@@ -532,6 +532,41 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
       font-family: var(--font-sans);
       position: relative;
+      overflow: hidden; /* Encapsulates huge watermark */
+    }
+
+    /* Huge Background Watermark at exactly 22% Opacity */
+    .doc-sheet-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 580px;
+      height: 580px;
+      max-width: 82%;
+      max-height: 82%;
+      opacity: 0.22 !important;
+      pointer-events: none;
+      z-index: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+    .doc-sheet-watermark img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* Ensure text and headers sit cleanly above the 22% watermark */
+    .doc-sheet-top-accent,
+    .doc-sheet-header,
+    .doc-sheet-body,
+    .doc-sheet-footer,
+    #previewDocTitle {
+      position: relative;
+      z-index: 1;
     }
     
     /* Top Accent Line (Dark Navy #0f172a with subtle cyan/blue line) */
@@ -731,6 +766,11 @@
         margin: -12mm -15mm 20mm -15mm !important;
         border-radius: 0 !important;
       }
+      .doc-sheet-watermark {
+        opacity: 0.22 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
     }
   </style>
 </head>
@@ -845,19 +885,28 @@
             <span>📄</span> Live White Letterhead Preview (Print &amp; PDF Exact)
           </div>
           <div style="display: flex; gap: 8px; align-items: center;">
-            <span style="font-size: 11px; color: #64748b;">A4 Sheet Aspect</span>
+            <label class="btn-secondary" style="padding: 2px 8px; font-size: 11px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;" title="Select a new logo image for the top-left corner">
+              <span>🖼️</span> New Top-Left Logo
+              <input type="file" id="logoUploadInput" accept="image/*" style="display: none;" onchange="handleLogoUpload(this)">
+            </label>
+            <span style="font-size: 11px; color: #64748b;">A4 Sheet</span>
             <button class="btn-secondary" style="padding: 2px 8px; font-size: 11px;" onclick="convertDocToPDF()">📥 Download PDF</button>
           </div>
         </div>
 
         <!-- The actual printable white letterhead -->
         <div id="letterheadPrintArea">
+          <!-- Huge Background Watermark at exactly 22% Opacity -->
+          <div class="doc-sheet-watermark" aria-hidden="true">
+            <img id="sheetWatermarkImg" src="/assets/brand/qt_monogram_embossed.jpg" alt="QT Analytics Watermark">
+          </div>
+
           <div class="doc-sheet-top-accent"></div>
 
           <!-- Header -->
           <div class="doc-sheet-header">
             <div class="doc-brand-block">
-              <img id="previewBrandLogo" class="doc-brand-logo-img" src="/assets/brand/qt_monogram_embossed.jpg" alt="QT Analytics Monogram" onerror="this.style.display='none'">
+              <img id="previewBrandLogo" class="doc-brand-logo-img" src="/assets/brand/qt_monogram_embossed.jpg" alt="Brand Logo" onerror="this.style.display='none'">
               <div class="doc-brand-names">
                 <h2>QT ANALYTICS</h2>
                 <div class="doc-sub">Forensic Intelligence &amp; Cyber Defense • Edinburgh, Scotland</div>
@@ -1875,6 +1924,21 @@ function resetDocText() {
     document.getElementById('docClassInput').value = "OFFICIAL / CIVIC DEFENSE ADVISORY";
     renderDocPreview();
     showToast("Advisory text reset to default.");
+  }
+}
+
+function handleLogoUpload(input) {
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const topLogo = document.getElementById('previewBrandLogo');
+      if (topLogo) {
+        topLogo.src = e.target.result;
+        topLogo.style.display = 'block';
+      }
+      showToast("✅ Top-left logo updated successfully!");
+    };
+    reader.readAsDataURL(input.files[0]);
   }
 }
 
