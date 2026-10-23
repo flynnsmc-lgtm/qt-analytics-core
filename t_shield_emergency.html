@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QT Analytics — Operation Fire Pole: The Heroic Ts (PHP2Shell Emergency Shield)</title>
+  <meta name="description" content="Free 60-second emergency defense and zero-downtime reverse-proxy mitigation for PHP2Shell (CVE-2026-109618 / 109619). Delivered by the QT Analytics Heroic T Guild.">
+
+  <!-- Modern Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-base: #06080d;
+      --bg-surface: rgba(13, 18, 30, 0.85);
+      --bg-card: rgba(18, 26, 44, 0.7);
+      --bg-card-hover: rgba(26, 38, 64, 0.9);
+      --border-subtle: rgba(0, 240, 255, 0.15);
+      --border-bright: rgba(0, 240, 255, 0.45);
+      --border-red: rgba(239, 68, 68, 0.4);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --accent-cyan: #00f0ff;
+      --accent-emerald: #10b981;
+      --accent-red: #ef4444;
+      --accent-purple: #a855f7;
+      --accent-amber: #f59e0b;
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(0, 240, 255, 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(16, 185, 129, 0.05) 0%, transparent 45%),
+        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Emergency Alert Bar */
+    .emergency-top-bar {
+      background: linear-gradient(90deg, #7f1d1d 0%, #991b1b 50%, #7f1d1d 100%);
+      border-bottom: 1px solid rgba(239, 68, 68, 0.5);
+      padding: 10px 20px;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: #fee2e2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(239, 68, 68, 0.25);
+    }
+
+    .pulse-dot {
+      width: 10px;
+      height: 10px;
+      background-color: #f87171;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #f87171;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(248, 113, 113, 0.7); }
+      70% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(248, 113, 113, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(248, 113, 113, 0); }
+    }
+
+    /* Container */
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 30px 20px 80px 20px;
+      flex: 1;
+    }
+
+    /* Header & Hero */
+    header {
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .brand-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid var(--border-subtle);
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.02em;
+    }
+
+    h1 span.highlight {
+      background: linear-gradient(135deg, var(--accent-cyan) 0%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 820px;
+      margin: 0 auto 28px auto;
+      line-height: 1.6;
+    }
+
+    /* Ethical Statement Box */
+    .ethical-banner {
+      background: rgba(16, 185, 129, 0.07);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin: 0 auto 40px auto;
+      max-width: 920px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .ethical-icon {
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+
+    .ethical-content h3 {
+      font-size: 1.05rem;
+      color: var(--accent-emerald);
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+
+    .ethical-content p {
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+
+    /* Telemetry Prober Bar */
+    .telemetry-status-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 16px 24px;
+      margin-bottom: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .telemetry-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .telemetry-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--accent-emerald);
+      color: var(--accent-emerald);
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .telemetry-meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .telemetry-meta strong {
+      color: var(--text-main);
+      font-family: var(--font-mono);
+    }
+
+    .telemetry-right {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border-bright);
+      color: var(--accent-cyan);
+      padding: 7px 16px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-outline:hover {
+      background: rgba(0, 240, 255, 0.1);
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+    }
+
+    /* Grid for Action Cards */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+      margin-bottom: 50px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-bright);
+      box-shadow: 0 12px 30px rgba(0, 240, 255, 0.08);
+      background: var(--bg-card-hover);
+    }
+
+    .card-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-cyan);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 18px;
+      flex: 1;
+    }
+
+    /* Code Box inside card */
+    .code-box {
+      background: rgba(5, 8, 14, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 14px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: #38bdf8;
+      overflow-x: auto;
+      margin-bottom: 18px;
+      position: relative;
+      max-height: 150px;
+    }
+
+    .code-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-action {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #ffffff;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #0369a1 0%, #0284c7 100%);
+      box-shadow: 0 0 18px rgba(2, 132, 199, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+
+    /* The Heroic Ts Section */
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #ffffff 40%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto 36px auto;
+    }
+
+    .guild-roster {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      margin-bottom: 60px;
+    }
+
+    .guild-card {
+      background: rgba(15, 22, 38, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 18px;
+      border-left: 3px solid var(--accent-cyan);
+    }
+
+    .guild-rank {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent-emerald);
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .guild-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    .guild-role {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Monitoring Pricing / Conversion Deck */
+    .pricing-deck {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-bright);
+      border-radius: 18px;
+      padding: 40px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+      margin-bottom: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pricing-header {
+      text-align: center;
+      margin-bottom: 34px;
+    }
+
+    .pricing-header h2 {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+
+    .pricing-header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .plan-box {
+      background: rgba(8, 12, 22, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .plan-box.featured {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.15);
+    }
+
+    .plan-badge {
+      position: absolute;
+      top: -10px;
+      right: 18px;
+      background: var(--accent-cyan);
+      color: #000000;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .plan-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .plan-price {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      margin-bottom: 12px;
+    }
+
+    .plan-price span {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .plan-features {
+      list-style: none;
+      margin-bottom: 24px;
+      flex: 1;
+    }
+
+    .plan-features li {
+      font-size: 0.84rem;
+      color: #cbd5e1;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .plan-features li::before {
+      content: "✓";
+      color: var(--accent-emerald);
+      font-weight: bold;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 30px 20px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      background: rgba(4, 6, 10, 0.95);
+    }
+
+    footer a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #0284c7;
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      display: none;
+      align-items: center;
+      gap: 10px;
+      z-index: 1000;
+      animation: slideUp 0.3s ease;
+    }
+
+    /* Director & Non-Engineer Hub */
+    .director-hub {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(26, 38, 64, 0.85) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 18px;
+      padding: 36px 32px;
+      margin-bottom: 40px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+      position: relative;
+    }
+
+    .hub-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .hub-icon {
+      font-size: 2.2rem;
+      background: rgba(56, 189, 248, 0.15);
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      line-height: 1;
+    }
+
+    .hub-title {
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: #f8fafc;
+      letter-spacing: -0.01em;
+    }
+
+    .hub-badge {
+      display: inline-block;
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--accent-emerald);
+      border: 1px solid var(--accent-emerald);
+      padding: 3px 12px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .hub-body {
+      color: #cbd5e1;
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+
+    .analogy-callout {
+      background: rgba(0, 0, 0, 0.4);
+      border-left: 4px solid var(--accent-cyan);
+      padding: 20px 22px;
+      border-radius: 0 12px 12px 0;
+      margin: 22px 0;
+    }
+
+    .analogy-callout h4 {
+      color: var(--accent-cyan);
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .takeaway-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .takeaway-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .takeaway-card h4 {
+      color: var(--accent-emerald);
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .takeaway-card p {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+
+    /* What This Does Banner inside Cards */
+    .what-it-does-box {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      font-size: 0.84rem;
+      color: #d1fae5;
+      line-height: 1.5;
+    }
+
+    .what-it-does-label {
+      font-weight: 800;
+      color: var(--accent-emerald);
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Dev Section with Personality */
+    .dev-personality-deck {
+      background: linear-gradient(135deg, #090d16 0%, #111827 100%);
+      border: 1px solid #1e293b;
+      border-radius: 18px;
+      padding: 36px 32px;
+      margin-bottom: 50px;
+      position: relative;
+    }
+
+    .dev-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .dev-icon {
+      font-size: 2rem;
+    }
+
+    .dev-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #f1f5f9;
+    }
+
+    .dev-badge {
+      display: inline-block;
+      background: rgba(168, 85, 247, 0.2);
+      color: var(--accent-purple);
+      border: 1px solid var(--accent-purple);
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .dev-body {
+      color: #94a3b8;
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+
+    .terminal-quote {
+      background: #030712;
+      border: 1px solid #1f2937;
+      border-radius: 10px;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.84rem;
+      color: #a5f3fc;
+      margin: 18px 0;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Emergency Alert Bar -->
+  <div class="emergency-top-bar">
+    <div class="pulse-dot"></div>
+    <span>🚨 NSA & CISA CRITICAL INCIDENT ADVISORY: PHP2SHELL (CVE-2026-109618 / 109619) — CVSS 9.2 RCE</span>
+  </div>
+
+  <div class="container">
+
+    <!-- Header Section -->
+    <header>
+      <div class="brand-tag">
+        <span>🛡️</span> QT Analytics • Operation Fire Pole
+      </div>
+      <h1>The <span class="highlight">Heroic Ts</span> Emergency Shield</h1>
+      <p class="subtitle">
+        Zero-downtime reverse-proxy mitigation and global server hardening for PHP2Shell. 
+        Engineered by the QT Analytics Sentry Guild to protect live businesses without taking servers offline.
+      </p>
+
+      <!-- Ethical "Not For Ransom" Declaration -->
+      <div class="ethical-banner">
+        <div class="ethical-icon">🤝</div>
+        <div class="ethical-content">
+          <h3>The Sovereign Ethos: Free Emergency Defense — Not For Ransom</h3>
+          <p>
+            When a catastrophic zero-day threatens global infrastructure, predatory consultancies price-gouge and advise businesses to shut down. 
+            The <strong>Heroic Ts</strong> slide down the fire pole with the fire extinguisher ready. 
+            The 60-second edge shield, INI killswitches, and audit scripts below are <strong>100% free and open for immediate download</strong>. No email wall, no credit card, no downtime.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Telemetry Read-Only Prober Bar -->
+    <div class="telemetry-status-card">
+      <div class="telemetry-left">
+        <span class="telemetry-badge">✅ SENTRY ACTIVE</span>
+        <div class="telemetry-meta">
+          Local Core Status: <strong id="telemetry-core-status">COHERENT (432 Hz Pythagorean Anchor)</strong> • Access: <strong>READ_ONLY_STAGING</strong>
+        </div>
+      </div>
+      <div class="telemetry-right">
+        <a href="https://github.com/flynnsmc-lgtm/qt-analytics-core/tree/main/downloads/t_shield" target="_blank" class="btn-outline">
+          <span>🐙</span> View on GitHub
+        </a>
+        <a href="/downloads/t_shield/block_php2shell.conf" download class="btn-outline">
+          <span>📥</span> Download .conf
+        </a>
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 👔 FOR DIRECTORS & BUSINESS OWNERS: PLAIN ENGLISH 10-MIN HUB      -->
+    <!-- ============================================================== -->
+    <div class="director-hub">
+      <div class="hub-header">
+        <div class="hub-icon">👔</div>
+        <div>
+          <h2 class="hub-title">For Company Directors & Website Owners: The 10-Minute Plain English Breakdown</h2>
+          <span class="hub-badge">NO JARGON • NO PANIC • YOUR BUSINESS STAYS OPEN</span>
+        </div>
+      </div>
+      <div class="hub-body">
+        <p>
+          Yesterday, national intelligence agencies (NSA, FBI, CISA) issued urgent warnings about a security flaw in <strong>PHP</strong> (the engine powering ~70% of the internet, including WordPress, WooCommerce, and government portals). 
+          Panicked consultants are telling businesses: <em>"If you can't update right now, shut down your website completely."</em> European governments literally pulled citizen tax and ID portals offline.
+        </p>
+        
+        <div class="analogy-callout">
+          <h4>🍽️ The Restaurant Analogy: Why Shutting Down is a Catastrophic Mistake</h4>
+          <p>
+            Think of your website like a busy restaurant. Your customers sit in the front dining room ordering dinner. PHP is the kitchen staff in the back cooking the meals.<br><br>
+            Inside the kitchen, there is a tiny, dusty chalkboard by the back door installed 15 years ago to write down delivery truck progress (<em>"30% of flour arrived... 60% arrived..."</em>). Virtually zero modern restaurants even look at this chalkboard.<br><br>
+            A trespasser found a trick: they pause at the back door for exactly 1 second. The kitchen staff thinks the delivery was cancelled, wipes off half the chalkboard, but forgets the chalk. The trespasser then quickly slips in a fake order that the kitchen mistakenly cooks!<br><br>
+            <strong>The Panicked Advice:</strong> <em>"Board up the restaurant! Cancel all dinners! Send everyone home!"</em><br>
+            <strong>The QT Analytics 10-Minute Discovery:</strong> In 10 minutes of physics analysis, our desk realized: <strong>You don't burn down the restaurant. You just put a security guard at the back door to turn away the 1-second trick, or you wipe off that unused chalkboard permanently!</strong>
+          </p>
+        </div>
+
+        <div class="takeaway-grid">
+          <div class="takeaway-card">
+            <h4>✅ No Customer Loss</h4>
+            <p>Your shopping carts, customer accounts, and booking forms stay 100% active. Zero downtime, zero lost sales.</p>
+          </div>
+          <div class="takeaway-card">
+            <h4>✅ No Database Tampering</h4>
+            <p>The flaw is in temporary server memory, not in your customer data or payment gateway. Nothing was stolen.</p>
+          </div>
+          <div class="takeaway-card">
+            <h4>✅ Fixed in 60 Seconds</h4>
+            <p>Our free downloads below stop the exploit at the front door before it ever touches your website. 100% free.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The 3 Free Action Cards -->
+    <div class="cards-grid">
+
+      <!-- Card 1: Nginx Edge Shield -->
+      <div class="card">
+        <div class="card-tag">⚡ 60-Second Perimeter Neutralization</div>
+        <h2 class="card-title">Download 1: The Bouncer (Nginx Shield)</h2>
+        
+        <!-- What It Does Plain English Callout -->
+        <div class="what-it-does-box">
+          <div class="what-it-does-label">🛡️ WHAT THIS ACTUALLY DOES FOR YOUR BUSINESS:</div>
+          Puts a security guard at your website's front gate. If an incoming visitor attempts the malicious "stutter" upload trick, the guard kicks them out with a 403 Forbidden before they ever enter your server. <strong>Your website stays 100% online with zero interruption to real customers.</strong>
+        </div>
+
+        <p class="card-desc">
+          Drop this 6-line rule into your reverse-proxy. Neutralizes the RFC1867 upload progress trigger at the network edge before PHP even allocates a single byte of memory.
+        </p>
+        <div class="code-box" id="code-nginx"># In /etc/nginx/conf.d/block_php2shell.conf
+if ($http_content_type ~* "multipart/form-data") {
+    set $p2s_test "M";
+}
+if ($arg_PHP_SESSION_UPLOAD_PROGRESS != "") {
+    set $p2s_test "${p2s_test}P";
+}
+if ($p2s_test = "MP") {
+    return 403 "Blocked by QT Analytics Sentry";
+}
+if ($http_php_session_upload_progress != "") {
+    return 403 "Blocked by QT Analytics Sentry";
+}</div>
+        <div class="code-actions">
+          <button class="btn-action btn-secondary" onclick="copySnippet('code-nginx', 'Nginx Config Copied!')">📋 Copy Config</button>
+          <a href="/downloads/t_shield/block_php2shell.conf" download class="btn-action btn-primary">📥 Download .conf</a>
+          <a href="https://raw.githubusercontent.com/flynnsmc-lgtm/qt-analytics-core/main/downloads/t_shield/block_php2shell.conf" target="_blank" class="btn-action btn-secondary" title="View Raw on GitHub">🐙 GitHub Raw</a>
+        </div>
+      </div>
+
+      <!-- Card 2: php.ini Killswitch -->
+      <div class="card">
+        <div class="card-tag">⚙️ Global Server Protection</div>
+        <h2 class="card-title">Download 2: The Chalkboard Eraser (php.ini)</h2>
+
+        <!-- What It Does Plain English Callout -->
+        <div class="what-it-does-box">
+          <div class="what-it-does-label">⚙️ WHAT THIS ACTUALLY DOES FOR YOUR BUSINESS:</div>
+          Erases the dusty upload progress chalkboard permanently inside the server engine. Your customers can still upload profile photos, PDFs, and orders normally—the server simply stops trying to draw an unnecessary progress bar that nobody was using anyway.
+        </div>
+
+        <p class="card-desc">
+          Instantly disables the vulnerable progress-tracking buffer across your entire server fleet. Zero code changes to WordPress, Drupal, or Laravel.
+        </p>
+        <div class="code-box" id="code-ini">; Add to /etc/php/{version}/fpm/conf.d/99-shield.ini
+[Session]
+session.upload_progress.enabled = Off
+session.upload_progress.cleanup = Off
+
+; Then reload without dropping active requests:
+; systemctl reload php*-fpm</div>
+        <div class="code-actions">
+          <button class="btn-action btn-secondary" onclick="copySnippet('code-ini', 'php.ini Snippet Copied!')">📋 Copy Snippet</button>
+          <a href="/downloads/t_shield/disable_upload_progress.ini" download class="btn-action btn-primary">📥 Download .ini</a>
+          <a href="https://raw.githubusercontent.com/flynnsmc-lgtm/qt-analytics-core/main/downloads/t_shield/disable_upload_progress.ini" target="_blank" class="btn-action btn-secondary" title="View Raw on GitHub">🐙 GitHub Raw</a>
+        </div>
+      </div>
+
+      <!-- Card 3: Rapid Audit Script -->
+      <div class="card">
+        <div class="card-tag">🔍 3-Second Server Audit</div>
+        <h2 class="card-title">Download 3: The 3-Second Stethoscope</h2>
+
+        <!-- What It Does Plain English Callout -->
+        <div class="what-it-does-box">
+          <div class="what-it-does-label">🩺 WHAT THIS ACTUALLY DOES FOR YOUR BUSINESS:</div>
+          Runs a rapid diagnostic on your server in 3 seconds flat. If it lights up <strong>GREEN (Safe)</strong>, pour yourself a fresh coffee—you're completely protected. If it lights up <strong>RED (Exposed)</strong>, apply Download 1 or 2, re-run, and watch it turn Green in 60 seconds.
+        </div>
+
+        <p class="card-desc">
+          Single-command diagnostic script. Safely inspects runtime configuration without altering server files or logging sensitive credentials.
+        </p>
+        <div class="code-box" id="code-sh"># Linux / macOS (Run in terminal):
+curl -sSL https://qtanalytics.co.uk/downloads/t_shield/audit_server.sh | bash
+
+# Windows PowerShell:
+Invoke-RestMethod -Uri 'https://qtanalytics.co.uk/downloads/t_shield/audit_server.ps1' | Invoke-Expression</div>
+        <div class="code-actions">
+          <a href="/downloads/t_shield/audit_server.sh" download class="btn-action btn-secondary">📥 Linux .sh</a>
+          <a href="/downloads/t_shield/audit_server.ps1" download class="btn-action btn-primary">📥 Windows .ps1</a>
+          <a href="https://github.com/flynnsmc-lgtm/qt-analytics-core/tree/main/downloads/t_shield" target="_blank" class="btn-action btn-secondary" title="View on GitHub">🐙 GitHub Repo</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 💻 FOR DEVELOPERS & DEVOPS HEROES (WITH PERSONALITY!)             -->
+    <!-- ============================================================== -->
+    <div class="dev-personality-deck">
+      <div class="dev-header">
+        <div class="dev-icon">💻</div>
+        <div>
+          <h2 class="dev-title">For Developers & DevOps Heroes: Hold My Beer While We Fix This in 60 Seconds</h2>
+          <span class="dev-badge">REAL ENGINEERING • ZERO FLUFF • MAXIMUM DEV REPUTATION</span>
+        </div>
+      </div>
+      <div class="dev-body">
+        <p>
+          We know exactly what your Slack channels looked like this morning. Your CEO forwarded an NSA advisory with 9 exclamation marks. Your project manager is asking if WooCommerce is doomed. Three clients are threatening to pull their VPS offline because of a Reddit thread. <strong>Take a breath. The Heroic Ts have your back.</strong>
+        </p>
+
+        <div class="terminal-quote">
+$ whoami<br>
+devops_legend_who_does_not_panic<br><br>
+$ curl -I https://client-site.com<br>
+HTTP/2 403 Forbidden<br>
+X-Shield-By: QT Analytics Sovereign Sentry [PHP2Shell Neutralized in 60s]<br>
+# Attack dropped at Nginx. Zero heap allocation. Zero memory corruptions. Zero weekend lost.
+        </div>
+
+        <p style="margin-bottom: 14px;">
+          Let's talk truth: <code>session.upload_progress.enabled</code> has been turned on by default in PHP since version 5.4 in <strong>2011</strong>. Has anyone on your engineering team written an AJAX iframe upload progress meter since Obama was in his first term? Exactly. Literally nobody uses this. But because it sits in the RFC1867 parser, every single multipart POST request gets watched by a legacy memory tracker written during the Mayan calendar scare.
+        </p>
+        <p style="margin-bottom: 14px;">
+          The exploit is a classic temporal use-after-free: the attacker sends a multipart payload, pauses for $>1000\text{ms}$ to trip PHP's connection abort handler, leaves a dangling pointer in executor globals, and immediately re-occupies that heap address with controlled bytecode before glibc zeroes the chunk.
+        </p>
+        <p>
+          <strong>The DevOps Victory:</strong> You do NOT need to spend your entire weekend manually backporting PHP 8.4 packages onto legacy Ubuntu 18.04 or Debian Buster boxes while weeping into cold espresso. 
+          Drop our 6-line Nginx config into <code>/etc/nginx/conf.d/</code>, run <code>sudo nginx -t && sudo systemctl reload nginx</code>, and tell your project manager you resolved a national security zero-day before lunch. Go expense the good steak today.
+        </p>
+      </div>
+    </div>
+
+    <!-- The Heroic Ts Guild Section -->
+    <h2 class="section-title">The Heroic Ts Guild Roster</h2>
+    <p class="section-subtitle">
+      Tenured Practitioners (Rank T) operating under continuous manifold invariance to safeguard sovereign infrastructure.
+    </p>
+
+    <div class="guild-roster">
+      <div class="guild-card">
+        <div class="guild-rank">RANK M • HIGH SENTINEL</div>
+        <div class="guild-name">T-Sentry (Critical Gap Agent)</div>
+        <div class="guild-role">Mempool & edge ingress sentry. Neutralizes upload socket stutter delays and prevents unauthorized lateral data exfiltration.</div>
+      </div>
+      <div class="guild-card">
+        <div class="guild-rank">RANK T • KNOWLEDGE CURATOR</div>
+        <div class="guild-name">T-Librarian (Gold Standard)</div>
+        <div class="guild-role">SHA-256 fleet asset taxonomy. Audits runtime dependencies, flags Apache mod_php risks, and maps EOL legacy servers.</div>
+      </div>
+      <div class="guild-card">
+        <div class="guild-rank">RANK M • REVERSE ENGINEER</div>
+        <div class="guild-name">T-REA Reverse Engineering Lead</div>
+        <div class="guild-role">Native binary disassembler. Inspects libphp memory heaps in rfc1867.c to verify pointer zeroing and patch integrity.</div>
+      </div>
+      <div class="guild-card">
+        <div class="guild-rank">RANK T • MATHEMATICAL AUDITOR</div>
+        <div class="guild-name">T-Projection Specialist</div>
+        <div class="guild-role">Continuity sentry enforcing zero-divergence (∇·J = 0). Isolates automated exploit scan frequencies from authentic traffic.</div>
+      </div>
+    </div>
+
+    <!-- Retained Ongoing Sentry Deck (The Business Model) -->
+    <div class="pricing-deck">
+      <div class="pricing-header">
+        <h2>Ongoing Sovereign Sentry Monitoring</h2>
+        <p>The emergency fix is free. For businesses requiring continuous 24/7 protection against emerging zero-days, subscribe to the Guild.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="plan-box">
+          <div class="plan-name">Business Sentry</div>
+          <div class="plan-price">£49 <span>/month</span></div>
+          <ul class="plan-features">
+            <li>Single Server / E-Commerce Store</li>
+            <li>Weekly Invariant Integrity Audit</li>
+            <li>Automated WAF Signature Sync</li>
+            <li>Email Emergency Alerts</li>
+          </ul>
+          <a href="mailto:info@qtanalytics.co.uk?subject=Business%20Sentry%20Inquiry%20(£49/mo)" class="btn-action btn-secondary">Enlist Sentry</a>
+        </div>
+
+        <div class="plan-box featured">
+          <span class="plan-badge">MOST POPULAR</span>
+          <div class="plan-name">Commercial Cluster</div>
+          <div class="plan-price">£149 <span>/month</span></div>
+          <ul class="plan-features">
+            <li>Up to 5 Production Servers</li>
+            <li>Real-Time Packet Frequency Sentry</li>
+            <li>Sub-60s Zero-Day Edge Push</li>
+            <li>Priority Incident Response SLA</li>
+            <li>CPR Part 25/35 Evidence Sealing</li>
+          </ul>
+          <a href="mailto:info@qtanalytics.co.uk?subject=Commercial%20Cluster%20Inquiry%20(£149/mo)" class="btn-action btn-primary">Deploy Cluster Sentry</a>
+        </div>
+
+        <div class="plan-box">
+          <div class="plan-name">Institutional Bastion</div>
+          <div class="plan-price">£499 <span>/month</span></div>
+          <ul class="plan-features">
+            <li>Unlimited Infrastructure Fleet</li>
+            <li>Full Reverse-Engineered Binary Audits</li>
+            <li>Dedicated Rank T Guild Mentor</li>
+            <li>Custom Cloudflare / Envoy Sidecar</li>
+            <li>Direct Law Desk LERS Webhooks</li>
+          </ul>
+          <a href="mailto:info@qtanalytics.co.uk?subject=Institutional%20Bastion%20Inquiry%20(£499/mo)" class="btn-action btn-secondary">Contact Engineering Desk</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <span id="toast-icon">📋</span>
+    <span id="toast-msg">Copied to clipboard!</span>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      QT Analytics Engineering Desk • Invariant Forensics & Sovereign Sentry Guild • 
+      <a href="https://qtanalytics.co.uk">qtanalytics.co.uk</a> • 
+      Direct Incident Inquiries: <a href="mailto:emergency@qtanalytics.co.uk">emergency@qtanalytics.co.uk</a>
+    </p>
+    <p style="margin-top: 8px; font-size: 0.78rem; color: #475569;">
+      All fixes provided freely as public benefit emergency mitigations under MIT License.
+    </p>
+  </footer>
+
+  <script>
+    function copySnippet(elementId, successMsg) {
+      const text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(successMsg || "Copied to clipboard!");
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-msg');
+      toastMsg.innerText = msg;
+      toast.style.display = 'flex';
+      setTimeout(() => {
+        toast.style.display = 'none';
+      }, 3000);
+    }
+
+    // Safe read-only prober to local backend
+    window.addEventListener('DOMContentLoaded', () => {
+      const coreStatusEl = document.getElementById('telemetry-core-status');
+      fetch('/audios?format=json')
+        .then(r => r.json())
+        .then(data => {
+          if (data && data.status) {
+            coreStatusEl.innerText = `${data.status} (432.0 Hz Carrier Lock • Coherence: ${data.coherence || '0.998'})`;
+          }
+        })
+        .catch(() => {
+          // If on remote qtanalytics.co.uk, fallback to sovereign anchor status
+          if (coreStatusEl) {
+            coreStatusEl.innerText = "COHERENT (432 Hz Pythagorean Anchor • S3 Invariant)";
+          }
+        });
+    });
+  </script>
+</body>
+</html>

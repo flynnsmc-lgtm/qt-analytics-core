@@ -13,10 +13,16 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Serve the frontend UI
+// Serve the specific frontend UI on root
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-const KAPPA_FRICTION = 0.25;
+// Serve the ENTIRE parent directory as a fallback so absolute links (like /about_us.html) work flawlessly!
+app.use(express.static(path.join(__dirname, '../../')));
+
+// Explicit redirect for /globe to ensure relative CSS/JS load correctly
+app.get('/globe', (req, res) => {
+    res.redirect('/visuals/hypersphere-ui/index.html');
+});
 
 app.post('/api/v1/seal-forensic-state', (req, res) => {
     try {
@@ -90,7 +96,7 @@ app.post('/api/v1/seal-forensic-state', (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
     console.log(`QT Analytics Invariant Engine active on port ${PORT}`);
 });
