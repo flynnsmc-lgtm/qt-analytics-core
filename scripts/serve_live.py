@@ -31,8 +31,13 @@ class LivePortalHandler(SimpleHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
-        if self.path in ('/', ''):
+        clean_path = self.path.split('?')[0].rstrip('/')
+        if clean_path in ('', '/'):
             self.path = '/visuals/qt_whiteout_portal.html'
+        elif clean_path in ('/emergency', '/shield', '/t-shield', '/t_shield', '/php', '/php2shell'):
+            self.path = '/t_shield_emergency.html'
+        elif clean_path in ('/qt', '/qtanalytics', '/qt-analytics'):
+            self.path = '/qt_analytics.html'
         super().do_GET()
 
     def do_POST(self):

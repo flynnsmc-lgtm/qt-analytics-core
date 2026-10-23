@@ -1,0 +1,10 @@
+{
+  "name": "qt-analytics-core",
+  "version": "1.0.0",
+  "description": "QT Analytics & Chi Core Live Portal",
+  "main": "scripts/serve_live.py",
+  "scripts": {
+    "build": "echo 'Root build completed'",
+    "start": "python scripts/serve_live.py"
+  }
+}
