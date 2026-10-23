@@ -1,19 +1,17 @@
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.ArrayList;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.io.IOException;
 
 /**
  * SpectralEngineAdvanced — Extended computational engine
  * Includes Laplace domain resonance, GMRF precision matrix assembly,
- * SHA-256 cryptographic state verification, and live Dynamic Coupling (Arkham Integration).
+ * Arkham on-chain flow lattice mapping, and SHA-256 cryptographic state verification.
  */
 public class SpectralEngineAdvanced {
 
@@ -36,6 +34,7 @@ public class SpectralEngineAdvanced {
         }
         public Complex inverse() {
             double scale = real * real + imag * imag;
+            if (scale == 0.0) throw new ArithmeticException("Division by zero in complex inverse");
             return new Complex(real / scale, -imag / scale);
         }
         @Override
@@ -43,7 +42,7 @@ public class SpectralEngineAdvanced {
     }
 
     /**
-     * Evaluates a 2nd-order resonant transfer function H(s) = ω_n^2 / (s^2 + 2ζω_n s + ω_n^2)
+     * Evaluates a 2nd-order resonant transfer function H(s) = omega_n^2 / (s^2 + 2*zeta*omega_n*s + omega_n^2)
      * Models the breathing/pulsing origin in the unified Laplace plane.
      */
     public Complex resonantTransferFunction(Complex s, double zeta, double omegaN) {
@@ -69,15 +68,97 @@ public class SpectralEngineAdvanced {
         double diagonalWeight = 2.0 + (kappa * kappa);
 
         for (int i = 0; i < size; i++) {
-            Q[i][i] = diagonalWeight;      // Node self-energy / degree
-            if (i > 0) Q[i][i - 1] = -1.0; // Left coupling
+            Q[i][i] = diagonalWeight;            // Node self-energy / degree
+            if (i > 0) Q[i][i - 1] = -1.0;       // Left coupling
             if (i < size - 1) Q[i][i + 1] = -1.0; // Right coupling
         }
         return Q;
     }
 
     // ============================================================
-    // 3. Verifiable Cryptography Layer
+    // 3. Arkham API Flow Graph -> GMRF Precision Mapping
+    // ============================================================
+    public static class ArkhamTransfer {
+        public final String from;
+        public final String to;
+        public final double amount;
+        public final String txHash;
+
+        public ArkhamTransfer(String from, String to, double amount, String txHash) {
+            this.from = from;
+            this.to = to;
+            this.amount = amount;
+            this.txHash = txHash;
+        }
+    }
+
+    public static class ArkhamGMRFResult {
+        public final List<String> addressIndex;
+        public final double[][] precisionMatrixQ;
+        public final String cryptographicHash;
+        public final double kappa;
+
+        public ArkhamGMRFResult(List<String> addressIndex, double[][] precisionMatrixQ, String cryptographicHash, double kappa) {
+            this.addressIndex = addressIndex;
+            this.precisionMatrixQ = precisionMatrixQ;
+            this.cryptographicHash = cryptographicHash;
+            this.kappa = kappa;
+        }
+    }
+
+    /**
+     * Maps an arbitrary list of Arkham transaction flow edges into a GMRF Precision Matrix Q.
+     * Nodes = Wallet addresses.
+     * Conductance A_{ij} = Total flow volume between wallet i and j.
+     * Degree D_{ii} = Sum of incident flow conductances.
+     * Q = D - A + kappa^2 * I.
+     */
+    public ArkhamGMRFResult assembleArkhamFlowGMRF(List<ArkhamTransfer> transfers, double kappa) {
+        List<String> addresses = new ArrayList<>();
+        Map<String, Integer> addrMap = new HashMap<>();
+
+        for (ArkhamTransfer tx : transfers) {
+            if (!addrMap.containsKey(tx.from)) {
+                addrMap.put(tx.from, addresses.size());
+                addresses.add(tx.from);
+            }
+            if (!addrMap.containsKey(tx.to)) {
+                addrMap.put(tx.to, addresses.size());
+                addresses.add(tx.to);
+            }
+        }
+
+        int n = addresses.size();
+        double[][] A = new double[n][n];
+
+        for (ArkhamTransfer tx : transfers) {
+            int u = addrMap.get(tx.from);
+            int v = addrMap.get(tx.to);
+            // Symmetrized coupling / conductance
+            A[u][v] += tx.amount;
+            A[v][u] += tx.amount;
+        }
+
+        double[][] Q = new double[n][n];
+        double kappaSq = kappa * kappa;
+
+        for (int i = 0; i < n; i++) {
+            double degree = 0.0;
+            for (int j = 0; j < n; j++) {
+                if (i != j) {
+                    degree += A[i][j];
+                    Q[i][j] = -A[i][j];
+                }
+            }
+            Q[i][i] = degree + kappaSq;
+        }
+
+        String hash = signMatrixState(Q);
+        return new ArkhamGMRFResult(addresses, Q, hash, kappa);
+    }
+
+    // ============================================================
+    // 4. Verifiable Cryptography Layer
     // ============================================================
     /**
      * Generates a deterministic cryptographic hash for a computed matrix state.
@@ -93,7 +174,7 @@ public class SpectralEngineAdvanced {
         return generateSHA256(stateString.toString());
     }
 
-    private String generateSHA256(String data) {
+    public String generateSHA256(String data) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(data.getBytes(StandardCharsets.UTF_8));
@@ -110,120 +191,27 @@ public class SpectralEngineAdvanced {
     }
 
     // ============================================================
-    // 4. Arkham Dynamic Coupling (JSON Ingestion -> GMRF)
-    // ============================================================
-    
-    /**
-     * Mock representation of an Arkham API Transaction JSON payload.
-     */
-    public static class ArkhamTx {
-        public String fromAddress;
-        public String toAddress;
-        public double valueUSD;
-
-        public ArkhamTx(String from, String to, double value) {
-            this.fromAddress = from;
-            this.toAddress = to;
-            this.valueUSD = value;
-        }
-    }
-
-    /**
-     * Dynamically builds a GMRF precision matrix based on actual transactional flow.
-     * Replaces the static 1D grid with a live topological graph where:
-     * - Off-diagonals = Normalized Transfer Volume
-     * - Diagonals = Total Interaction + Base Friction (kappa)
-     */
-    public double[][] assembleDynamicCouplingMatrix(List<ArkhamTx> flows, double kappa) {
-        // Step 1: Map unique addresses to matrix indices
-        Map<String, Integer> addressIndex = new HashMap<>();
-        int index = 0;
-        for (ArkhamTx tx : flows) {
-            if (!addressIndex.containsKey(tx.fromAddress)) addressIndex.put(tx.fromAddress, index++);
-            if (!addressIndex.containsKey(tx.toAddress)) addressIndex.put(tx.toAddress, index++);
-        }
-        
-        int size = addressIndex.size();
-        double[][] Q = new double[size][size];
-        
-        // Step 2: Calculate maximum flow to normalize between 0 and 1
-        double maxFlow = 0;
-        for (ArkhamTx tx : flows) {
-            if (tx.valueUSD > maxFlow) maxFlow = tx.valueUSD;
-        }
-
-        // Step 3: Populate coupling matrix (Graph Laplacian approach)
-        double friction = kappa * kappa;
-        for (ArkhamTx tx : flows) {
-            int i = addressIndex.get(tx.fromAddress);
-            int j = addressIndex.get(tx.toAddress);
-            
-            // Normalized flow strength acts as the negative off-diagonal coupling
-            double normalizedCoupling = tx.valueUSD / maxFlow;
-            
-            // Symmetric interaction (A pulls B, B pulls A)
-            Q[i][j] -= normalizedCoupling;
-            Q[j][i] -= normalizedCoupling;
-            
-            // Add to the diagonal (degree/energy of the node)
-            Q[i][i] += normalizedCoupling;
-            Q[j][j] += normalizedCoupling;
-        }
-        
-        // Step 4: Apply base spatial friction (kappa) to all nodes
-        for (int i = 0; i < size; i++) {
-            Q[i][i] += friction;
-        }
-        
-        return Q;
-    }
-
-    /**
-     * Ingests a JSON payload from the Arkham API and deserializes it into the tracking objects.
-     * Uses native string parsing to ensure 100% compatibility without external dependencies.
-     */
-    public List<ArkhamTx> ingestArkhamFlows(String jsonPayload) {
-        List<ArkhamTx> flows = new ArrayList<>();
-        
-        // Very simple, robust parsing to extract the values without needing external libraries like Gson
-        String[] objects = jsonPayload.split("\\}");
-        for (String obj : objects) {
-            if (!obj.contains("fromAddress")) continue;
-            
-            try {
-                String from = obj.split("\"fromAddress\"\\s*:\\s*\"")[1].split("\"")[0];
-                String to = obj.split("\"toAddress\"\\s*:\\s*\"")[1].split("\"")[0];
-                String valStr = obj.split("\"valueUSD\"\\s*:\\s*")[1].replaceAll("[^0-9.]", "");
-                double value = Double.parseDouble(valStr);
-                
-                flows.add(new ArkhamTx(from, to, value));
-            } catch (Exception e) {
-                // Skip malformed entries
-            }
-        }
-        return flows;
-    }
-
-    // ============================================================
     // Engine Demonstration & Proof
     // ============================================================
     public static void main(String[] args) {
         SpectralEngineAdvanced engine = new SpectralEngineAdvanced();
-        System.out.println("=== SpectralEngineAdvanced — Core Modules Initialized ===\n");
+        System.out.println("=================================================================");
+        System.out.println("🔬 SpectralEngineAdvanced — Core Modules Initialized");
+        System.out.println("=================================================================\n");
 
         // 1. Laplace Execution
-        Complex s = new Complex(0.0, 1.0); // Pure imaginary rotation (ω=1)
+        Complex s = new Complex(0.0, 1.0); // Pure imaginary rotation (omega = 1.0)
         Complex response = engine.resonantTransferFunction(s, 0.1, 1.0);
-        System.out.println("[Laplace Domain]");
-        System.out.println("  Input s-plane vector : " + s);
+        System.out.println("[1. Laplace Domain]");
+        System.out.println("  Input s-plane vector  : " + s);
         System.out.println("  Transfer Function H(s): " + response + "\n");
 
-        // 2. GMRF Execution
+        // 2. GMRF 1D Lattice Execution
         int gridSize = 5;
         double kappa = 0.5; // Spatial correlation scale
         double[][] gmrfMatrix = engine.assembleGMRFPrecision1D(gridSize, kappa);
         
-        System.out.println("[GMRF Lattice Assembly]");
+        System.out.println("[2. GMRF 1D Lattice Assembly]");
         System.out.println("  Precision Matrix Q (kappa=" + kappa + "):");
         for (int i = 0; i < gridSize; i++) {
             System.out.print("  [ ");
@@ -233,38 +221,41 @@ public class SpectralEngineAdvanced {
             System.out.println("]");
         }
 
-        // 3. Dynamic Coupling (Arkham Integration via JSON)
-        System.out.println("\n[Local JSON Dynamic Coupling]");
-        
-        double[][] dynamicMatrix = null;
-        try {
-            // Read from the local JSON file instead of hardcoded strings or internet APIs
-            String jsonFilePath = "sample_transactions.json";
-            System.out.println("  Reading Local JSON File: " + jsonFilePath);
-            String jsonContent = new String(Files.readAllBytes(Paths.get(jsonFilePath)));
-            
-            System.out.println("  Ingesting JSON Payload into Memory...");
-            List<ArkhamTx> liveFlows = engine.ingestArkhamFlows(jsonContent);
-            
-            dynamicMatrix = engine.assembleDynamicCouplingMatrix(liveFlows, 0.1);
-            System.out.println("  Assembled " + dynamicMatrix.length + "x" + dynamicMatrix.length + " Topological Force Matrix.");
-            for (int i = 0; i < dynamicMatrix.length; i++) {
-                System.out.print("  [ ");
-                for (int j = 0; j < dynamicMatrix.length; j++) {
-                    System.out.printf("%6.3f ", dynamicMatrix[i][j]);
-                }
-                System.out.println("]");
-            }
-        } catch (IOException e) {
-            System.out.println("  Error reading JSON file: " + e.getMessage());
-            return;
+        // 3. Cryptographic Verification
+        String signature = engine.signMatrixState(gmrfMatrix);
+        System.out.println("\n[3. Cryptographic Verification]");
+        System.out.println("  Matrix State Hash (SHA-256):");
+        System.out.println("  " + signature);
+
+        // 4. Arkham Flow Graph -> GMRF Mapping
+        System.out.println("\n[4. Arkham On-Chain Flow Mapping -> GMRF Matrix Q]");
+        List<ArkhamTransfer> arkhamHops = Arrays.asList(
+            new ArkhamTransfer("0xVictimDrain", "0xMixerHop_1", 12.50, "0xabc1..."),
+            new ArkhamTransfer("0xMixerHop_1", "0xMixerHop_2", 8.20, "0xabc2..."),
+            new ArkhamTransfer("0xMixerHop_1", "0xEscrowVault", 4.30, "0xabc3..."),
+            new ArkhamTransfer("0xMixerHop_2", "0xCEX_BinanceDeposit", 8.20, "0xabc4..."),
+            new ArkhamTransfer("0xEscrowVault", "0xCEX_KrakenDeposit", 4.30, "0xabc5...")
+        );
+
+        ArkhamGMRFResult arkhamResult = engine.assembleArkhamFlowGMRF(arkhamHops, 0.25);
+        System.out.println("  Mapped Addresses (" + arkhamResult.addressIndex.size() + " nodes):");
+        for (int i = 0; i < arkhamResult.addressIndex.size(); i++) {
+            System.out.printf("    [%d] %s\n", i, arkhamResult.addressIndex.get(i));
         }
 
-        // 4. Cryptographic Verification
-        String signature = engine.signMatrixState(dynamicMatrix);
-        System.out.println("\n[Cryptographic Verification]");
-        System.out.println("  Topological State Hash (SHA-256):");
-        System.out.println("  " + signature);
-        System.out.println("\n=== State mathematically bound and verified ===");
+        System.out.println("  Arkham Flow Precision Matrix Q (kappa=0.25):");
+        for (int i = 0; i < arkhamResult.precisionMatrixQ.length; i++) {
+            System.out.print("    [ ");
+            for (int j = 0; j < arkhamResult.precisionMatrixQ[i].length; j++) {
+                System.out.printf("%6.2f ", arkhamResult.precisionMatrixQ[i][j]);
+            }
+            System.out.println("]");
+        }
+        System.out.println("  Arkham State Forensic Proof Hash (SHA-256):");
+        System.out.println("  " + arkhamResult.cryptographicHash);
+
+        System.out.println("\n=================================================================");
+        System.out.println("=== State mathematically bound and cryptographically sealed ===");
+        System.out.println("=================================================================");
     }
 }

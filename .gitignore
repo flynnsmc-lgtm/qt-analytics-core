@@ -21,6 +21,7 @@ ENV/
 env/
 
 # IDE & OS
+.gradle/
 .vscode/
 .zed/
 .DS_Store

@@ -56,3 +56,24 @@ When scanning `Academia.edu_Bundle_-_*`:
 - Group satellite papers (`more_papers_by_*`, `most_similar_papers_to_this_one`, `papers_cited_by_this_one`) into structured domain folders.
 - Propose clean filenames formatted as:
   `[Domain]_[Title_Snippet]_[Year]_[Source].pdf`
+
+## Librarian Desk & Wisdom Ledger (Agentic Provenance)
+The Librarian Desk manages agent provenance, ranks, and SHA-256 sealed Wisdom Briefs:
+
+```bash
+# 1. View Agent Guild Roster & Provenance Portal
+python scripts/librarian_desk.py --portal
+
+# 2. Enlist an Apprentice under a Rank T Mentor
+python scripts/librarian_desk.py --enlist "Critical Gap Agent (Truth Sentinel)" "Junior Sentry Alpha" "Mempool Forensic Tracing"
+
+# 3. Ingest and Organize Apprentice [SHADOW_DIFF] Artifacts
+python scripts/librarian_desk.py --ingest-shadow
+
+# 4. Display Apprentice Shadow Review & Graduation Streak Audit
+python scripts/librarian_desk.py --shadow-review
+
+# 5. Graduate an Apprentice to Rank T (promotes Mentor to Master)
+python scripts/librarian_desk.py --graduate "Junior Sentry Alpha"
+```
+

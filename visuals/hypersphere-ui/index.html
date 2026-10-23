@@ -31,11 +31,14 @@
         <span id="hud-status-text">LOCKED • ONLINE</span>
       </div>
       <div class="badge badge-norm">
-        <span>TARGET NORM: 100.00</span>
+        <span id="hud-dsp-title">🎛️ DSP BRIDGE ACTIVE (QUAD I)</span>
       </div>
-      <div class="badge badge-lock">
-        <span>QUIZ AGENT GATE</span>
+      <div class="badge badge-lock" style="border-color: #00f0ff; color: #00f0ff; background: rgba(0, 240, 255, 0.12);">
+        <span id="hud-spectrum-mode">🛡️ GREEN + BLUE (RED PRONG LOCKED)</span>
       </div>
+      <a href="/sanctuary" class="badge" style="text-decoration: none; color: #f8fafc; background: rgba(192, 132, 252, 0.2); border: 1px solid #c084fc;">
+        <span>🏛️ 21 PILLARS SANCTUARY</span>
+      </a>
     </div>
   </header>
 
@@ -47,7 +50,7 @@
       </div>
       <span class="workflow-arrow">→</span>
       <div class="workflow-step complete">
-        <span>⚡ STEP 2: FIX & RESTART (AUDI 8080)</span>
+        <span>⚡ STEP 2: FIX & RESTART (AUDIOS 8080)</span>
       </div>
       <span class="workflow-arrow">→</span>
       <div class="workflow-step active">
@@ -65,10 +68,37 @@
     </div>
   </div>
 
+  <!-- Live Multi-API Telemetry Matrix -->
+  <div class="api-telemetry-bar" id="api-telemetry-bar">
+    <div class="api-telemetry-title">
+      <span>📡</span> <span>ACTIVE TELEMETRY APIS:</span>
+    </div>
+    <a href="http://localhost:8080/audios" target="_blank" class="api-badge connected" id="api-status-8080" title="Local Invariant Core Telemetry (:8080/audios)">
+      <span class="api-icon">✅</span>
+      <span class="api-name">Hypersphere Audios Core (:8080)</span>
+    </a>
+    <a href="http://localhost:3001" target="_blank" class="api-badge connected" id="api-status-3001" title="Alpha Locate GPS Telematics (:3001)">
+      <span class="api-icon">✅</span>
+      <span class="api-name">GeoNav GPS (:3001)</span>
+    </a>
+    <a href="http://localhost:3002" target="_blank" class="api-badge connected" id="api-status-3002" title="Arkham On-Chain Flow Intelligence (:3002)">
+      <span class="api-icon">✅</span>
+      <span class="api-name">Arkham Tracer (:3002)</span>
+    </a>
+    <a href="http://localhost:4000" target="_blank" class="api-badge connected" id="api-status-4000" title="QT Analytics Flow Geometry Backend (:4000)">
+      <span class="api-icon">✅</span>
+      <span class="api-name">QT Analytics (:4000)</span>
+    </a>
+    <a href="http://localhost:8085/desk" target="_blank" class="api-badge connected" id="api-status-8085" title="Sovereign Forensic Desk & Webflow Gateway (:8085/desk)">
+      <span class="api-icon">✅</span>
+      <span class="api-name">Desk Bridge (:8085)</span>
+    </a>
+  </div>
+
   <!-- Context Switcher Toolbar -->
   <nav class="context-switcher-bar">
     <div class="switcher-heading">
-      <span>🎛️ CONTEXT VIEW:</span>
+      <span>🎛️ DOMAIN CONTEXT:</span>
     </div>
     <div class="context-button-group" id="context-switcher-buttons">
       <button class="btn-context active" data-context="original" id="btn-ctx-original" title="Pure S³ 7D-projected manifold geometry (Canonical Baseline)">
@@ -86,10 +116,10 @@
         <span class="ctx-name">Comms / Network</span>
         <span class="ctx-tag">24 Docs Up For Grabs</span>
       </button>
-      <button class="btn-context" data-context="knowledge" id="btn-ctx-knowledge" title="220 research papers & competency mirror bridges">
+      <button class="btn-context" data-context="knowledge" id="btn-ctx-knowledge" title="1,142 curated papers across 6 domains & 5,089 in Gold Standard Library">
         <span class="ctx-icon">📚</span>
         <span class="ctx-name">Knowledge / Data Map</span>
-        <span class="ctx-tag">220 Papers</span>
+        <span class="ctx-tag">1,142 Papers</span>
       </button>
       <button class="btn-context" data-context="quiz" id="btn-ctx-quiz" title="Continuous manifold vs discrete gates & candidate status">
         <span class="ctx-icon">🧠</span>
@@ -117,7 +147,7 @@
     </div>
     <div class="context-banner-status">
       <span class="pulse-ring"></span>
-      <span id="ctx-status-text">SYNC'D TO LOCALHOST:8080/AUDI</span>
+      <span id="ctx-status-text">SYNC'D TO LOCALHOST:8080/AUDIOS</span>
     </div>
   </div>
 
@@ -128,12 +158,21 @@
       <div class="stage-header">
         <div class="stage-title-wrap">
           <h2 class="stage-title" id="viewport-stage-title">Hyperspheric Geometry Viewport</h2>
-          <span class="stage-subtitle" id="viewport-stage-subtitle">HOPF FIBRATION • STEREOGRAPHIC TORUS RINGS</span>
+          <span class="stage-subtitle" id="viewport-stage-subtitle">CONFORMAL HYPERBOLIC VORTEX • DUAL LOGARITHMIC SPIRALS (ACTIVE)</span>
         </div>
         <div class="stage-actions">
-          <button id="btn-toggle-mode" class="btn-pill active" title="Switch geometric projection">
-            🌐 View: 4D Hopf Rings
-          </button>
+          <!-- Segmented Visual Core Mode Selector -->
+          <div class="segmented-mode-bar" id="visual-mode-bar">
+            <button class="seg-btn active" data-mode="vortex" id="btn-mode-vortex" title="Conformal Hyperbolic Vortex Grid with Inward/Outward Geodesic Swarm">
+              🌀 Conformal Vortex <span class="badge-active-dot">●</span>
+            </button>
+            <button class="seg-btn" data-mode="particles" id="btn-mode-particles" title="High-Velocity 4D Quantum Fiber Particle Flow">
+              ✨ Fiber Particle Flow
+            </button>
+            <button class="seg-btn" data-mode="hopf" id="btn-mode-hopf" title="Pure 4D Clifford Tori Mathematical Wireframe">
+              🌐 4D Hopf Rings
+            </button>
+          </div>
           <button id="btn-toggle-rotation" class="btn-pill active" title="Pause or resume auto orbit">
             ⏸️ Pause Orbit
           </button>
@@ -143,33 +182,9 @@
         </div>
       </div>
 
-      <!-- Canvas Box with Floating HUD -->
+      <!-- Canvas Box with Floating HUD (Unobstructed, Hovering Box Removed) -->
       <div class="canvas-container">
         <canvas id="hypersphere-canvas"></canvas>
-
-        <!-- 🎛️ HYPERSPHERE CONTEXT SWITCHER — DROPDOWN CONTROL -->
-        <div id="hypersphere-context-dropdown-widget" class="ui-panel context-switcher">
-          <label for="contextSelector" style="color: #fff; font-size: 13.5px; font-weight: 600; margin-right: 6px; text-shadow: 0 0 8px rgba(0,0,0,0.5);">
-            🌐 View:
-          </label>
-          <select id="contextSelector" aria-label="Select View Context">
-            <option value="original">✅ Original Hypersphere</option>
-            <option value="physics">⚛️ Physics / Field Dynamics</option>
-            <option value="comms">🛰️ Comms / Satellite Network</option>
-            <option value="knowledge">📚 Knowledge / Data Map</option>
-            <option value="quiz">🧠 Quiz / Assessment Mode</option>
-          </select>
-          <span id="contextStatus">✅ Connected to /audi</span>
-          <div id="viewStatus" style="
-            margin-top: 4px;
-            font-size: 11.5px;
-            color: #a0e0ff;
-            text-shadow: 0 0 4px rgba(0,150,255,0.6);
-            width: 100%;
-          ">
-            Current: Original Geometry View
-          </div>
-        </div>
 
         <!-- Floating HUD Top Left -->
         <div class="canvas-hud-top-left">
@@ -237,11 +252,11 @@
         </div>
 
         <div class="footer-controls">
-          <button id="btn-toggle-json" class="btn-pill" title="Inspect raw JSON state from localhost:8080/audi">
+          <button id="btn-toggle-json" class="btn-pill" title="Inspect raw JSON state from localhost:8080/audios">
             📊 Toggle Raw JSON
           </button>
-          <a href="http://localhost:8080/audi?format=json" target="_blank" class="btn-pill" style="text-decoration: none;">
-            🔗 Direct JSON Endpoint
+          <a href="/audios?format=json&raw=1" target="_blank" class="btn-pill" style="text-decoration: none;" title="Open raw JSON stream">
+            ⚡ Raw JSON Feed
           </a>
         </div>
       </div>
@@ -264,6 +279,14 @@
           <div class="telemetry-cell">
             <div class="cell-label">Schumann Lock</div>
             <div class="cell-value highlight-green" id="tel-schumann">7.83 Hz</div>
+          </div>
+          <div class="telemetry-cell">
+            <div class="cell-label">DSP Bridge State</div>
+            <div class="cell-value highlight-cyan" id="tel-dsp">Active (Quad I • 0° - 90°)</div>
+          </div>
+          <div class="telemetry-cell">
+            <div class="cell-label">Spectrum Frequency Mode</div>
+            <div class="cell-value highlight-green" id="tel-spectrum" style="font-size: 0.76rem;">Green + Blue (Red Locked)</div>
           </div>
           <div class="telemetry-cell">
             <div class="cell-label">Geomagnetic Field</div>
@@ -316,11 +339,11 @@
       <!-- Collapsible Raw JSON Card -->
       <div class="hud-panel raw-json-panel" id="raw-json-card" style="display: none;">
         <div class="panel-header">
-          <h3 class="panel-title"><span>📟</span> Live JSON Stream (/audi)</h3>
+          <h3 class="panel-title"><span>📟</span> Live JSON Stream (/audios)</h3>
           <span class="panel-title-badge">AUTO-REFRESH</span>
         </div>
         <div class="json-pre-wrap">
-          <pre id="json-stream-output">Connecting to http://localhost:8080/audi...</pre>
+          <pre id="json-stream-output">Connecting to http://localhost:8080/audios...</pre>
         </div>
       </div>
     </aside>
@@ -340,35 +363,35 @@
         mode: "geometry",
         theme: "cyan-lavender",
         overlays: [],
-        backend: (window.location.port === "8080" ? "/audi" : "http://localhost:8080/audi")
+        backend: (window.location.port === "8080" ? "/audios" : "http://localhost:8080/audios")
       },
       physics: {
         label: "Physics / Field Dynamics",
         mode: "field",
         theme: "energy-heatmap",
         overlays: ["curvature", "flux", "tensor-gates", "schumann-anchor"],
-        backend: (window.location.port === "8080" ? "/audi" : "http://localhost:8080/audi")
+        backend: (window.location.port === "8080" ? "/audios" : "http://localhost:8080/audios")
       },
       comms: {
         label: "Comms / Satellite Network",
         mode: "network",
         theme: "signal-security",
         overlays: ["sat-constellations", "geotags", "non-spoof-zones", "endpoints"],
-        backend: (window.location.port === "8080" ? "/audi" : "http://localhost:8080/audi")
+        backend: (window.location.port === "8080" ? "/audios" : "http://localhost:8080/audios")
       },
       knowledge: {
         label: "Knowledge / Data Map",
         mode: "data",
         theme: "domain-colors",
         overlays: ["agent-bridges", "physics-set", "comms-set", "data-flow"],
-        backend: (window.location.port === "8080" ? "/audi" : "http://localhost:8080/audi")
+        backend: (window.location.port === "8080" ? "/audios" : "http://localhost:8080/audios")
       },
       quiz: {
         label: "Quiz / Assessment Mode",
         mode: "evaluation",
         theme: "status-highlight",
         overlays: ["invariants", "boundaries", "access-locks", "coherence-markers"],
-        backend: (window.location.port === "8080" ? "/audi" : "http://localhost:8080/audi")
+        backend: (window.location.port === "8080" ? "/audios" : "http://localhost:8080/audios")
       }
     };
 
@@ -387,7 +410,7 @@
 
       const contextStatus = document.getElementById("contextStatus");
       if (contextStatus) {
-        contextStatus.textContent = "✅ Connected to /audi";
+        contextStatus.textContent = "✅ Connected to /audios";
       }
 
       // ✅ THIS IS WHERE YOU UPDATE YOUR HYPERSPHERE RENDER:

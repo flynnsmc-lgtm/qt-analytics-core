@@ -90,6 +90,9 @@
           <a href="/visuals/" class="btn btn-sm" style="background: linear-gradient(135deg, rgba(0, 240, 255, 0.25), rgba(192, 132, 252, 0.25)); border: 1px solid var(--accent-cyan, #00f2fe); color: #fff; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;" title="Open Visuals Hub & Observatories">
             <span>🔭</span> Visuals Hub
           </a>
+          <a href="/sanctuary" class="btn btn-sm" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(129, 140, 248, 0.25)); border: 1px solid #f59e0b; color: #fff; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;" title="Open 21-Pillar Physics Sanctuary & Geometric Bridges">
+            <span>🏛️</span> Physics Sanctuary
+          </a>
           <button class="btn btn-sm btn-ghost" id="btn-download-all" title="Download all PDFs sequentially">
             <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
             Download All (5)
@@ -515,6 +518,9 @@
               <div class="adv-card-desc">
                 Trust &amp; Differentiation: Independent-grade proof for investors, enterprise clients, and crypto/security buyers who demand mathematical rigour, absolute transparency, and zero hidden risk.
               </div>
+              <button class="btn-adv-popout" onclick="openAdvModal(1)">
+                <span>🔍</span> Features, Benefits &amp; Script &rarr;
+              </button>
             </div>
 
             <div class="adv-card">
@@ -523,6 +529,9 @@
               <div class="adv-card-desc">
                 Highlight what no one else possesses: $N_1 \times N_2 \approx N_3$ continuum geometry, live holographic projection, and 432 Hz coherent lock. Not discrete approximations — continuous manifold intelligence.
               </div>
+              <button class="btn-adv-popout" onclick="openAdvModal(2)">
+                <span>🔍</span> Features, Benefits &amp; Script &rarr;
+              </button>
             </div>
 
             <div class="adv-card">
@@ -531,6 +540,9 @@
               <div class="adv-card-desc">
                 Gumroad badges, LinkedIn technical whitepapers, and institutional pitch decks. Lead with: <em>"Validated by continuous telemetry — 12 engines, 21 pillars, zero drift."</em>
               </div>
+              <button class="btn-adv-popout" onclick="openAdvModal(3)">
+                <span>🔍</span> Features, Benefits &amp; Script &rarr;
+              </button>
             </div>
 
             <div class="adv-card">
@@ -539,6 +551,9 @@
               <div class="adv-card-desc">
                 Defeat <em>"Is this just another model?"</em> with verified invariants. Justify premium pricing through grounded physics, live streaming receipts, and zero speculative hype.
               </div>
+              <button class="btn-adv-popout" onclick="openAdvModal(4)">
+                <span>🔍</span> Features, Benefits &amp; Script &rarr;
+              </button>
             </div>
 
             <div class="adv-card">
@@ -547,6 +562,9 @@
               <div class="adv-card-desc">
                 A permanent, verifiable receipt minted in real time across Antigravity agents. Operates as an unforgeable compliance record across forensic investigations and smart contract audits.
               </div>
+              <button class="btn-adv-popout" onclick="openAdvModal(5)">
+                <span>🔍</span> Features, Benefits &amp; Script &rarr;
+              </button>
             </div>
 
             <div class="adv-card">
@@ -554,6 +572,25 @@
               <div class="adv-card-title">6. 24-Hr Monetization SLA</div>
               <div class="adv-card-desc">
                 Every on-chain forensic and invariant proof pack under &pound;500 is delivered within 24 hours guaranteed, converting institutional queries into instant transactional revenue.
+              </div>
+              <button class="btn-adv-popout" onclick="openAdvModal(6)">
+                <span>🔍</span> Features, Benefits &amp; Script &rarr;
+              </button>
+            </div>
+          </div>
+
+          <!-- 💎 Commercial Moat Detailed Pop-out Modal Overlay -->
+          <div id="advModalOverlay" class="adv-modal-overlay" onclick="handleAdvOverlayClick(event)">
+            <div class="adv-modal-container" role="dialog" aria-modal="true" aria-labelledby="advModalTitle">
+              <div class="adv-modal-header">
+                <div class="adv-modal-title-group">
+                  <span class="adv-modal-pill" id="advModalPill">Commercial Moat Strategy</span>
+                  <h3 class="adv-modal-title" id="advModalTitle">Unmatched Credibility</h3>
+                </div>
+                <button class="adv-modal-close" onclick="closeAdvModal()" aria-label="Close Modal">&times;</button>
+              </div>
+              <div class="adv-modal-body" id="advModalBody">
+                <!-- Dynamically rendered via openAdvModal(index) -->
               </div>
             </div>
           </div>
@@ -3037,6 +3074,45 @@
             </div>
           </div>
 
+          <!-- Section 4: Agent Achievements Inbox (Flow Stages & Input Briefs) -->
+          <div class="achievements-inbox-container" id="achievements-inbox-container">
+            <div class="achievements-inbox-header">
+              <div class="achievements-title-group">
+                <span class="achievements-trophy">🏆</span>
+                <div>
+                  <h4>AGENT ACHIEVEMENTS INBOX</h4>
+                  <span class="achievements-subtitle">Live Agent Input Briefs at Flow Stages (Intake ➔ Permission ➔ Keys ➔ VST3 ➔ Tension ➔ Presentation &amp; PDF Synthesis)</span>
+                </div>
+              </div>
+              <div class="achievements-header-actions">
+                <div class="stat-pill-inbox">
+                  <span class="pulse-dot-green"></span>
+                  <span id="achievements-badge-count">6 ACHIEVEMENTS</span>
+                </div>
+                <button class="btn btn-xs btn-outline-cyan" id="btn-filter-achieve-all">All Stages</button>
+                <button class="btn btn-xs btn-outline-amber" id="btn-filter-achieve-gaps">⚠️ 85% Intelligence Needed</button>
+                <button class="btn btn-xs btn-ghost" id="btn-clear-achievements">Reset Inbox</button>
+              </div>
+            </div>
+
+            <!-- Achievements Stage Filter Strip -->
+            <div class="achievements-stage-strip" id="achievements-stage-strip">
+              <button class="stage-chip active" data-stage="all">🌐 All Stages (<span id="count-all-achieve">6</span>)</button>
+              <button class="stage-chip" data-stage="intake">📥 Stage 1: Intake</button>
+              <button class="stage-chip" data-stage="permission">🛡️ Stage 2: Permission</button>
+              <button class="stage-chip" data-stage="keys">🔑 Stage 3: Keys</button>
+              <button class="stage-chip" data-stage="vst3">🎛️ Stage 4: VST3 (432Hz)</button>
+              <button class="stage-chip" data-stage="tension">📐 Stage 5: Tension</button>
+              <button class="stage-chip" data-stage="presentation">✨ Stage 6: Presentation</button>
+              <button class="stage-chip" data-stage="pdf">📄 PDF Synthesis</button>
+            </div>
+
+            <!-- Achievements Feed / Input Briefs -->
+            <div class="achievements-feed" id="achievements-feed">
+              <!-- Dynamically populated cards via JS -->
+            </div>
+          </div>
+
         </div>
 
       </section>
@@ -3484,9 +3560,13 @@
               <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
               Download preset_library.h
             </a>
-            <a href="/audi?format=json" target="_blank" class="btn btn-outline btn-sm">
+            <a href="/visual" target="_blank" class="btn btn-outline btn-sm" title="Launch 3D/7D Visual Core with DSP Bridge and Live Audio">
+              <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+              🌐 3D Visual Core (/visual)
+            </a>
+            <a href="/audi?format=json" target="_blank" class="btn btn-ghost btn-sm" title="Live Telemetry State">
               <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-              Live Telemetry State (/audi)
+              Telemetry (/audi)
             </a>
             <button class="btn btn-ghost btn-sm" id="btn-jump-to-teamdesk-vst3">
               ⚡ Jump to Team Desk VST3 Coupler
@@ -3932,10 +4012,10 @@ static inline float applyHeadroomSaturation(float in, float db, float kappa) {
       <div class="syn-addresses-test-deck">
         <h4 class="deck-title">Live Localhost Address Direct Test Bench:</h4>
         <div class="deck-grid">
-          <a href="http://localhost:8080/audi?format=json" target="_blank" class="test-bench-card">
+          <a href="http://localhost:8080/visual" target="_blank" class="test-bench-card">
             <span class="tb-tag">QUAD I / CORE</span>
-            <strong>localhost:8080/audi</strong>
-            <span class="tb-desc">Hypersphere 7D Norm & VST3 Quantum Bridge</span>
+            <strong>localhost:8080/visual</strong>
+            <span class="tb-desc">Hypersphere 3D/7D Visual Core & DSP Bridge</span>
           </a>
           <a href="http://localhost:8080/daw-session-main/ch-1" target="_blank" class="test-bench-card">
             <span class="tb-tag">QUAD II / WARMTH</span>

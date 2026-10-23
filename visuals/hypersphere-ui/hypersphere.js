@@ -163,10 +163,10 @@
   }
 
   /**
-   * Telemetry Client: Fetches localhost:8080/audi
+   * Telemetry Client: Fetches localhost:8080/audios
    */
   class HypersphereTelemetryClient {
-    constructor(endpointUrl = 'http://localhost:8080/audi') {
+    constructor(endpointUrl = 'http://localhost:8080/audios') {
       this.endpointUrl = endpointUrl;
       this.listeners = [];
       this.lastData = null;
@@ -298,10 +298,9 @@
         name: "Knowledge & Data Map",
         mode: "data",
         overlay: "domains+flows",
-        colors: "topics",
-        badge: "220 CATALOGED PAPERS",
+        badge: "1,142 CURATED PAPERS • 5,089 IN LIBRARY",
         title: "Research Domains & Competency Mirror Bridges",
-        description: "Maps the 196 physics corpus papers into 5 major subject domains, highlights citation flow, and shows active agent bridges (N1 × N2 ≈ N3).",
+        description: "Maps 1,142 core physics papers across 6 major domains (including new Quantum Chromodynamics & SU(3)), highlights citation flow, and shows active agent bridges (N1 × N2 ≈ N3).",
         palette: {
           primary: "#a855f7",
           secondary: "#ec4899",
@@ -350,7 +349,7 @@
       if (typeof window !== 'undefined' && window.RendererEngine && window.RendererEngine.applyContext) {
         window.RendererEngine.applyContext(this.contexts[name]);
       }
-      console.log(`✅ Context: ${name.toUpperCase()} | Backend: localhost:8080/audi`);
+      console.log(`✅ Context: ${name.toUpperCase()} | Backend: localhost:8080/audios`);
       return this.contexts[name];
     }
   };

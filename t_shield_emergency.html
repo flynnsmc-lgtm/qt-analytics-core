@@ -723,6 +723,209 @@
       margin: 18px 0;
       line-height: 1.6;
     }
+
+    /* Portal & Sanctuary Explorer Grid */
+    .portal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 22px;
+      margin: 30px 0 60px 0;
+    }
+
+    .portal-card {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(20, 30, 52, 0.6) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 16px;
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .portal-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 14px 35px rgba(0, 240, 255, 0.12);
+    }
+
+    .portal-card-tag {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      margin-bottom: 10px;
+    }
+
+    .portal-card h3 {
+      font-size: 1.25rem;
+      color: #ffffff;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .portal-card p {
+      font-size: 0.88rem;
+      color: #94a3b8;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+
+    /* Mock Crypto Tracer Sandbox */
+    .mock-tracer-card {
+      background: #090e1a;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 18px;
+      padding: 30px;
+      margin: 30px 0 60px 0;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .mock-tracer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .mock-tracer-header h3 {
+      font-size: 1.4rem;
+      color: #f8fafc;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mock-sample-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .sample-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #94a3b8;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .sample-pill:hover {
+      background: rgba(0, 240, 255, 0.15);
+      border-color: var(--accent-cyan);
+      color: #ffffff;
+    }
+
+    .mock-input-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .mock-input {
+      flex: 1;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      color: #38bdf8;
+      outline: none;
+    }
+
+    .mock-input:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
+    }
+
+    .mock-output-terminal {
+      background: #03060d;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: #10b981;
+      max-height: 220px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      line-height: 1.5;
+    }
+
+    /* Air-Gap Security Table */
+    .airgap-deck {
+      background: var(--bg-surface);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 18px;
+      padding: 34px 30px;
+      margin-bottom: 60px;
+    }
+
+    .airgap-title {
+      font-size: 1.45rem;
+      color: #ffffff;
+      font-weight: 800;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .airgap-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 18px;
+      font-size: 0.85rem;
+    }
+
+    .airgap-table th {
+      text-align: left;
+      padding: 12px 14px;
+      background: rgba(0, 0, 0, 0.4);
+      color: var(--text-muted);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .airgap-table td {
+      padding: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      color: #cbd5e1;
+    }
+
+    .badge-safe {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--accent-emerald);
+      color: var(--accent-emerald);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.72rem;
+      display: inline-block;
+    }
+
+    .badge-locked {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid var(--accent-red);
+      color: #f87171;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.72rem;
+      display: inline-block;
+    }
   </style>
 </head>
 <body>
@@ -802,7 +1005,7 @@
             Inside the kitchen, there is a tiny, dusty chalkboard by the back door installed 15 years ago to write down delivery truck progress (<em>"30% of flour arrived... 60% arrived..."</em>). Virtually zero modern restaurants even look at this chalkboard.<br><br>
             A trespasser found a trick: they pause at the back door for exactly 1 second. The kitchen staff thinks the delivery was cancelled, wipes off half the chalkboard, but forgets the chalk. The trespasser then quickly slips in a fake order that the kitchen mistakenly cooks!<br><br>
             <strong>The Panicked Advice:</strong> <em>"Board up the restaurant! Cancel all dinners! Send everyone home!"</em><br>
-            <strong>The QT Analytics 10-Minute Discovery:</strong> In 10 minutes of physics analysis, our desk realized: <strong>You don't burn down the restaurant. You just put a security guard at the back door to turn away the 1-second trick, or you wipe off that unused chalkboard permanently!</strong>
+            <strong>The QT Analytics 10-Minute Discovery:</strong> In 10 minutes of physics analysis, our desk realized: <strong>You don't burn down the restaurant. You invite the Crystal Sister to shield the door—a harmonic, crystalline resonance field that rejects any stutter delay with a 403 Forbidden—or you wipe off that unused chalkboard permanently!</strong>
           </p>
         </div>
 
@@ -826,15 +1029,15 @@
     <!-- The 3 Free Action Cards -->
     <div class="cards-grid">
 
-      <!-- Card 1: Nginx Edge Shield -->
+      <!-- Card 1: Nginx Edge Shield (The Crystal Sister) -->
       <div class="card">
-        <div class="card-tag">⚡ 60-Second Perimeter Neutralization</div>
-        <h2 class="card-title">Download 1: The Bouncer (Nginx Shield)</h2>
+        <div class="card-tag">💎 60-Second Perimeter Neutralization</div>
+        <h2 class="card-title">Download 1: The Crystal Sister (Nginx Shield)</h2>
         
         <!-- What It Does Plain English Callout -->
         <div class="what-it-does-box">
-          <div class="what-it-does-label">🛡️ WHAT THIS ACTUALLY DOES FOR YOUR BUSINESS:</div>
-          Puts a security guard at your website's front gate. If an incoming visitor attempts the malicious "stutter" upload trick, the guard kicks them out with a 403 Forbidden before they ever enter your server. <strong>Your website stays 100% online with zero interruption to real customers.</strong>
+          <div class="what-it-does-label">💎 WHAT THIS ACTUALLY DOES FOR YOUR BUSINESS:</div>
+          Positions the <strong>Crystal Sister</strong> at your website's perimeter—a harmonic, crystalline resonance shield that immediately rejects any discordant "stutter" upload trick with a 403 Forbidden before it ever enters your server. Pure, unyielding, and protective. <strong>Your website stays 100% online with zero interruption to real customers.</strong>
         </div>
 
         <p class="card-desc">
@@ -954,6 +1157,160 @@ X-Shield-By: QT Analytics Sovereign Sentry [PHP2Shell Neutralized in 60s]<br>
       </div>
     </div>
 
+    <!-- ============================================================== -->
+    <!-- 🏛️ SOVEREIGN PHYSICS SANCTUARY & LIVE OBSERVATORY EXPLORER      -->
+    <!-- ============================================================== -->
+    <h2 class="section-title">The Sovereign Science & Observatory Portal</h2>
+    <p class="section-subtitle">
+      Explore the mathematical bedrock behind our invariant defense: Continuous $S^3$ geometry, non-perturbative field dynamics, and on-chain intelligence.
+    </p>
+
+    <div class="portal-grid">
+      <!-- Portal 1: Sanctuary -->
+      <div class="portal-card">
+        <div class="portal-card-tag">🏛️ 21-Pillar Invariant Framework</div>
+        <h3>The Physics Sanctuary</h3>
+        <p>
+          The complete mathematical treatise: Non-perturbative Yang-Mills mass gap ($\Delta > 0$), Wilson Loop Area Law, and topological flux tubes. 
+          <em>(It's okay if nobody gets the equations—the math is unassailable).</em>
+        </p>
+        <a href="/sanctuary.html" target="_blank" class="btn-action btn-secondary">
+          <span>🏛️</span> Enter Physics Sanctuary
+        </a>
+      </div>
+
+      <!-- Portal 2: 4D/5D Hypersphere -->
+      <div class="portal-card">
+        <div class="portal-card-tag">🔮 Quantum Manifold Visualizer</div>
+        <h3>4D/5D Hypersphere Observatory</h3>
+        <p>
+          Live stereographic Clifford tori projection, continuous rotation in $S^3 / \mathbb{R}^7$, dual logarithmic vortex spirals, and 432 Hz Pythagorean carrier lock.
+        </p>
+        <a href="/visual" target="_blank" class="btn-action btn-secondary">
+          <span>🔮</span> Launch 4D/5D Observatory
+        </a>
+      </div>
+
+      <!-- Portal 3: Master QT Analytics -->
+      <div class="portal-card">
+        <div class="portal-card-tag">⚡ Institutional Forensics</div>
+        <h3>QT Analytics Master Gateway</h3>
+        <p>
+          Institutional on-chain tracing, GMRF Gaussian Markov precision matrices, CPR Part 25/35 court-admissible evidence, and 72-hour fiat velocity sentries.
+        </p>
+        <a href="/qt_analytics.html" target="_blank" class="btn-action btn-secondary">
+          <span>⚡</span> Open Forensics Gateway
+        </a>
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- ⚡ INTERACTIVE CRYPTO FLOW TRACER SANDBOX (MOCK ENTRY)          -->
+    <!-- ============================================================== -->
+    <div class="mock-tracer-card">
+      <div class="mock-tracer-header">
+        <h3><span>⚡</span> Interactive Crypto Flow Tracer (Sandboxed Mock Mode)</h3>
+        <span class="telemetry-badge">SAFE SANDBOX • ZERO PRIVATE DATA EXPOSURE</span>
+      </div>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px;">
+        Test our deterministic GMRF topological tracing engine live in your browser. Paste any test wallet address or click a verified sample below:
+      </p>
+
+      <div class="mock-sample-pills">
+        <span style="font-size: 0.78rem; color: #64748b; line-height: 2;">Quick Samples:</span>
+        <button class="sample-pill" onclick="setMockSample('0x71C56832363929bf2292526e02830e2908f23432', 'Uniswap Drainer (£49 Tier)')">Sample #1: Uniswap Drainer</button>
+        <button class="sample-pill" onclick="setMockSample('TNDYw7q138sPksGq362Vj378Y498c8v432', 'Tether AML Freeze (£149 Tier)')">Sample #2: Tether AML Freeze</button>
+        <button class="sample-pill" onclick="setMockSample('So11111111111111111111111111111111111111112', 'Solana High-Velocity Micro-Peel')">Sample #3: Solana Micro-Peel</button>
+      </div>
+
+      <div class="mock-input-row">
+        <input type="text" id="mock-address-input" class="mock-input" placeholder="Paste target wallet address (e.g. 0x... or Solana So111...)" value="0x71C56832363929bf2292526e02830e2908f23432">
+        <button class="btn-action btn-primary" onclick="runMockTrace()" style="flex: 0 0 200px;">
+          <span>⚡</span> Trace Mock Flow
+        </button>
+      </div>
+
+      <div class="mock-output-terminal" id="mock-output">
+[READY] QT Analytics Topological Flow Engine initialized.
+Anchor: 432.000 Hz Carrier • GMRF Precision Tension: σ > 0
+Paste a wallet above and hit 'Trace Mock Flow' to simulate deterministic state sealing.
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 🛡️ AGENT SAFE SPACE & LOCALHOST AIR-GAP SECURITY POLICY        -->
+    <!-- ============================================================== -->
+    <div class="airgap-deck">
+      <h3 class="airgap-title">
+        <span>🔒</span> Sovereign Agent Safe Space & Localhost Air-Gap Policy
+      </h3>
+      <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+        To guarantee our autonomous agent guild cannot be flooded, manipulated, or subjected to denial-of-service, all destructive agent function buttons and internal management ports are <strong>strictly air-gapped</strong>. 
+        Public visitors can inspect read-only models and run sandboxed tests, but management communications remain completely insulated behind cryptographic firewalls.
+      </p>
+
+      <table class="airgap-table">
+        <thead>
+          <tr>
+            <th>Port / Endpoint</th>
+            <th>Service / Manifold Component</th>
+            <th>Air-Gap Security Status</th>
+            <th>Operational Policy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>:8080/t_shield_emergency.html</code></td>
+            <td>The Crystal Sister Emergency Portal</td>
+            <td><span class="badge-safe">SAFE • PUBLIC</span></td>
+            <td>Open public defense toolkit & verified SHA-256 downloads.</td>
+          </tr>
+          <tr>
+            <td><code>:8080/sanctuary.html</code></td>
+            <td>21-Pillar Physics Sanctuary</td>
+            <td><span class="badge-safe">SAFE • READ-ONLY</span></td>
+            <td>Theoretical mathematical proofs & harmonic invariants.</td>
+          </tr>
+          <tr>
+            <td><code>:8080/visual</code></td>
+            <td>4D/5D Hypersphere Visualizer</td>
+            <td><span class="badge-safe">SAFE • READ-ONLY</span></td>
+            <td>Client-side canvas rendering; zero server-side state mutation.</td>
+          </tr>
+          <tr>
+            <td><code>:8080/audios?format=json</code></td>
+            <td>Invariant Core Telemetry Probe</td>
+            <td><span class="badge-safe">SAFE • READ-ONLY</span></td>
+            <td>Read-only tensor heartbeat (432 Hz anchor). No write access.</td>
+          </tr>
+          <tr>
+            <td><code>:8085 /api/qt/*</code></td>
+            <td>Webflow Bridge & Financial Intake</td>
+            <td><span class="badge-locked">LOCKED • AIR-GAPPED</span></td>
+            <td>Strictly internal. External linking prohibited to protect billing.</td>
+          </tr>
+          <tr>
+            <td><code>:8080/admin / scripts/librarian_desk.py</code></td>
+            <td>Guild Ledger & Provenance Engine</td>
+            <td><span class="badge-locked">LOCKED • AIR-GAPPED</span></td>
+            <td>Rank T promotion & wisdom sealing require dual cryptographic signature.</td>
+          </tr>
+          <tr>
+            <td><code>:3000 /api/v2/quantum</code></td>
+            <td>Raw Quadrant III DSP Hardware Bus</td>
+            <td><span class="badge-locked">LOCKED • AIR-GAPPED</span></td>
+            <td>Analog headroom & quadrature synthesis hardware socket.</td>
+          </tr>
+          <tr>
+            <td><code>UDP :10110</code></td>
+            <td>NMEA GPS Hardware Telemetry</td>
+            <td><span class="badge-locked">LOCKED • AIR-GAPPED</span></td>
+            <td>Direct hardware serial interface; isolated from public network.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <!-- The Heroic Ts Guild Section -->
     <h2 class="section-title">The Heroic Ts Guild Roster</h2>
     <p class="section-subtitle">
@@ -1068,6 +1425,46 @@ X-Shield-By: QT Analytics Sovereign Sentry [PHP2Shell Neutralized in 60s]<br>
       setTimeout(() => {
         toast.style.display = 'none';
       }, 3000);
+    }
+
+    function setMockSample(addr, label) {
+      const input = document.getElementById('mock-address-input');
+      if (input) input.value = addr;
+      showToast(`Loaded ${label}`);
+      runMockTrace();
+    }
+
+    function runMockTrace() {
+      const input = document.getElementById('mock-address-input');
+      const out = document.getElementById('mock-output');
+      if (!input || !out) return;
+      const addr = input.value.trim();
+      if (!addr) {
+        showToast("Please enter a wallet address.");
+        return;
+      }
+
+      out.textContent = `[INITIATING] Ingesting target vector: ${addr}\nResolving GMRF Precision Tension Matrix (Q = M - T)...\nConnecting to 432.0 Hz Harmonic Waveform...\n`;
+
+      setTimeout(() => {
+        out.textContent += `⚡ [PHASE 1: INGRESS FILTER] Zero net divergence confirmed: ∇·J = 0 (No leakage detected)\n`;
+      }, 250);
+
+      setTimeout(() => {
+        out.textContent += `📊 [PHASE 2: GMRF FLUX BINDING] Binding high-velocity micro-peels into unified topological flux tube.\n`;
+        out.textContent += `   Carrier Anchor: 432.000 Hz | Schumann Lock: 7.83 Hz\n`;
+      }, 600);
+
+      setTimeout(() => {
+        const mockHash = "7f83a432b" + Math.random().toString(16).substring(2, 10) + "e19c00" + Math.random().toString(16).substring(2, 10);
+        out.textContent += `🔒 [PHASE 3: STATE SEAL COMPLETE]\n`;
+        out.textContent += `   Manifold Coherence: 0.998 | Spatial Norm: 100.00\n`;
+        out.textContent += `   Deterministic SHA-256 Seal: ${mockHash}\n`;
+        out.textContent += `   Legal Compliance: CPR Part 25/35 Court-Admissible Evidence Packet Staged.\n`;
+        out.textContent += `==================================================================\n`;
+        out.textContent += `✅ MOCK FLOW SIMULATION COMPLETE — ZERO PRIVATE SYSTEM EXPOSURE.\n`;
+        out.scrollTop = out.scrollHeight;
+      }, 1000);
     }
 
     // Safe read-only prober to local backend

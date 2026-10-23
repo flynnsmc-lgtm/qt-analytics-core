@@ -21,8 +21,8 @@ from typing import Dict, List, Any, Optional, Tuple
 # Ensure utf-8 output on Windows consoles
 if sys.platform == "win32":
     try:
-        sys.stdout.reconfigure(encoding="utf-8")
-        sys.stderr.reconfigure(encoding="utf-8")
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
     except Exception:
         pass
 
@@ -105,12 +105,14 @@ TAXONOMY_TREE = {
         "keywords": [
             "harmonic", "fourier", "multiplier", "semigroup", "holder", "hardy",
             "hilbert", "banach", "sobolev", "operator", "cauchy", "eigenmode",
-            "triebel", "dirac", "quaternion", "differential geometry"
+            "triebel", "dirac", "quaternion", "differential geometry",
+            "knot", "homology", "riemann", "autopoiesis", "eigenform", "iterant", "braid"
         ],
         "subbranches": {
             "Fourier_Multipliers_and_Sobolev": ["fourier", "multiplier", "holder", "hardy", "sobolev", "trace inequality"],
             "Operator_Semigroups_and_Spectral": ["semigroup", "operator", "eigenmode", "spectral", "resolvent", "hyperbolicity"],
-            "Differential_Geometry_and_Quaternions": ["geometry", "quaternion", "curvature", "dirac", "manifold", "para_complex"]
+            "Differential_Geometry_and_Quaternions": ["geometry", "quaternion", "curvature", "dirac", "manifold", "para_complex"],
+            "Topological_Physics_Knots_and_Eigenforms": ["knot", "homology", "riemann", "autopoiesis", "eigenform", "iterant", "kauffman", "fermion", "braid", "laws of form"]
         }
     },
     "02_Particle_and_Muon_Physics": {
@@ -127,11 +129,16 @@ TAXONOMY_TREE = {
     "03_Acoustics_and_Sonoluminescence": {
         "keywords": [
             "sonoluminescence", "acoustic cavitation", "bubble dynamics",
-            "ultrasound", "luminescence", "standing wave", "telluric", "acoustic"
+            "ultrasound", "luminescence", "standing wave", "telluric", "acoustic",
+            "cymatic", "chladni", "diffuser", "nodal", "vibrating plate", "vibroequilibria",
+            "microgravity", "faraday", "scalar wave", "lbt"
         ],
         "subbranches": {
             "Acoustic_Cavitation_and_Bubble_Dynamics": ["sonoluminescence", "bubble dynamics", "cavitation", "luminescence"],
-            "Telluric_Resonance_and_Harmonics": ["telluric", "standing wave", "ultrasound", "resonance"]
+            "Telluric_Resonance_and_Harmonics": ["telluric", "standing wave", "ultrasound", "resonance"],
+            "Cymatics_Chladni_Figures_and_Diffusers": ["cymatic", "chladni", "diffuser", "nodal", "polycentrism"],
+            "Fluid_Vibroequilibria_and_Plate_Acoustics": ["vibroequilibria", "vibrating plate", "microgravity", "fluid loaded", "faraday wave", "slosh"],
+            "Scalar_Acoustics_and_Bio_Resonance": ["scalar wave", "lbt", "dna", "meyl", "schumann", "mycelium"]
         }
     },
     "04_Communications_and_Network_Optimization": {
@@ -179,11 +186,55 @@ TAXONOMY_TREE = {
     "08_Commerce_and_Operations": {
         "keywords": [
             "marketing", "crm", "cpq", "sales", "analytics", "welfare effects",
-            "vertical integration", "business planning", "invoice", "finance", "commercialization"
+            "vertical integration", "business planning", "invoice", "finance", "commercialization",
+            "earth credits", "wealth", "natural capital", "commons", "kyosei", "symbiocene"
         ],
         "subbranches": {
             "Commercialization_and_Pricing": ["marketing", "crm", "cpq", "sales", "pricing", "apttus"],
-            "Strategic_Management_and_Economics": ["welfare effects", "vertical integration", "business planning", "invoice finance"]
+            "Strategic_Management_and_Economics": ["welfare effects", "vertical integration", "business planning", "invoice finance"],
+            "Regenerative_Finance_and_Natural_Wealth": ["earth credits", "wealth", "natural capital", "commons", "kyosei", "symbiocene", "accumulation", "money creation"]
+        }
+    },
+    "09_Quantum_Chromodynamics_and_Gauge_Fields": {
+        "keywords": [
+            "chromodynamics", "qcd", "quark", "gluon", "confinement", "hadron", "pion",
+            "wilson", "dirac", "lattice", "su(3)", "su3", "axial chromodynamics", "di-higgs",
+            "higgs", "coupling constant", "cavity", "photonic quantum", "electroweak", "asymptotic freedom"
+        ],
+        "subbranches": {
+            "Confinement_Hadrons_and_Light_Front_Holography": ["confinement", "thooft", "holographic", "light front", "pion", "string tension", "hadron", "concrete quarks"],
+            "Lattice_QCD_and_Wilson_Dirac": ["lattice", "wilson", "dirac", "numa", "supercomputing", "chiral"],
+            "Higgs_Couplings_and_Electroweak_Symmetry": ["higgs", "di-higgs", "flavor violating", "self-coupling", "electroweak", "dark matter"],
+            "SU3_Harmonic_Symmetries_and_Gauge_Fields": ["su3", "su(3)", "harmonic oscillator", "unitary", "casimir", "coupling constant", "axial chromodynamics"],
+            "Cavity_and_Photonic_Chromodynamics": ["cavity", "photonic", "color spin", "beyond standard", "bag model"]
+        }
+    },
+    "10_Master_Reference_and_Physics_Foundations": {
+        "keywords": [
+            "reference", "constant", "fundamental constant", "schumann", "bedrock",
+            "resistivity", "magnetotelluric", "telluric", "compendium", "dossier",
+            "codata", "cavity eigenmode", "impedance", "piezoelectric", "q-factor"
+        ],
+        "subbranches": {
+            "Master_24_Sources_Dossier": ["24 sources", "claimable", "reference dossier", "foundational works"],
+            "Physical_Constants_and_Invariant_Tables": ["fundamental constant", "codata", "invariant table", "speed of light", "planck"],
+            "Geological_and_Telluric_Bedrock_Surveys": ["bedrock", "dolomite", "seceda", "resistivity", "magnetotelluric", "piezoelectric"],
+            "Schumann_and_Ionospheric_Cavity_Data": ["schumann", "cavity", "eigenmode", "ionospheric", "7.83 hz", "earth-ionosphere"],
+            "New_Physics_Collation_Queue": ["collation", "new physics", "ingest queue", "preprint", "unvetted"]
+        }
+    },
+    "11_Team_Original_Creations_and_Inventions": {
+        "keywords": [
+            "21 pillar", "21-pillar", "lithotheca", "chi key", "stephen fitzpatrick",
+            "topological sentry", "velocity asymmetry", "lers", "vst3", "quantum module",
+            "mass gap proof", "baryon color dynamics", "team desk overdrive", "audi-hypersphere"
+        ],
+        "subbranches": {
+            "The_21_Pillar_Unified_Master_Framework": ["21 pillar", "21-pillar", "ck-2026-phy-01", "unified master framework"],
+            "Lithotheca_and_Telluric_Matrix": ["lithotheca", "seceda", "hydroquartzite", "mineral acoustic", "telluric matrix"],
+            "Topological_Sentry_and_Critical_Gap": ["topological sentry", "critical gap", "borsuk-ulam", "stolen necklace", "velocity asymmetry", "lers"],
+            "Cymatics_VST3_and_Resonance_Engines": ["vst3", "cymatic", "team desk overdrive", "phase coupler", "sonoluminescence roadmap"],
+            "Chromodynamics_and_Mass_Gap_Proofs": ["mass gap", "baryon color", "vector spaces", "paley-hardy", "chromodynamics synthesis"]
         }
     }
 }
@@ -529,6 +580,141 @@ class LibrarianAgent:
         print(f"[LIBRARIAN] Scan Complete! Scanned: {scanned_count} files. Excluded Personal: {excluded_personal_count}. Duplicate Clusters: {len(self.duplicates)}.")
         return summary
 
+    def load_manifest_if_exists(self) -> bool:
+        """Loads cached manifest from disk if available to avoid redundant rescanning."""
+        candidates = [
+            os.path.join(BASE_WORKSPACE, "downloads", "librarian_catalog_manifest.json"),
+            os.path.join(self.primary_root, "Agent_Journal_Workspace", "librarian_catalog_manifest.json")
+        ]
+        for p in candidates:
+            if os.path.exists(p):
+                try:
+                    with open(p, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+                    self.manifest = data.get("records", [])
+                    hash_registry = {}
+                    for r in self.manifest:
+                        h = r.get("sha256")
+                        if h:
+                            hash_registry.setdefault(h, []).append(r)
+                    self.duplicates = {h: r for h, r in hash_registry.items() if len(r) > 1}
+                    print(f"[LIBRARIAN] Loaded indexed manifest ({len(self.manifest)} records, {len(self.duplicates)} duplicate clusters) from: {p}")
+                    return True
+                except Exception as e:
+                    print(f"[LIBRARIAN] Error reading cached manifest: {e}")
+        return False
+
+    def incremental_scan(self) -> int:
+        """Scan sources for newly added or unindexed files and append them to manifest."""
+        existing_paths = {os.path.normpath(r.get("path", "")) for r in self.manifest}
+        hash_registry = {}
+        for r in self.manifest:
+            h = r.get("sha256")
+            if h:
+                hash_registry.setdefault(h, []).append(r)
+
+        added_count = 0
+        for src in self.sources:
+            src_path = src["path"]
+            src_name = src["name"]
+            filter_personal = src.get("filter_personal", False)
+
+            if not os.path.exists(src_path):
+                continue
+
+            for dirpath, _, filenames in os.walk(src_path):
+                if "Unified_Subject_Tree" in dirpath:
+                    continue
+
+                for f in filenames:
+                    ext = os.path.splitext(f)[1].lower()
+                    if ext not in [".pdf", ".docx", ".md", ".json", ".txt"]:
+                        continue
+
+                    full_path = os.path.join(dirpath, f)
+                    norm_p = os.path.normpath(full_path)
+                    if norm_p in existing_paths:
+                        continue
+
+                    if filter_personal or is_personal_or_private(full_path):
+                        continue
+
+                    try:
+                        f_stat = os.stat(full_path)
+                        f_size = f_stat.st_size
+                        f_mtime = datetime.fromtimestamp(f_stat.st_mtime).isoformat()
+                    except Exception:
+                        continue
+
+                    file_hash = compute_sha256(full_path)
+
+                    if ext == ".pdf":
+                        extracted = extract_pdf_metadata(full_path)
+                    elif ext == ".docx":
+                        extracted = extract_docx_metadata(full_path)
+                    else:
+                        extracted = {
+                            "title": os.path.splitext(f)[0],
+                            "author": "",
+                            "subject": "",
+                            "page_count": 1,
+                            "abstract_snippet": ""
+                        }
+
+                    branch, subbranch = classify_detailed_taxonomy(
+                        extracted.get("title", ""),
+                        extracted.get("abstract_snippet", ""),
+                        f
+                    )
+
+                    is_bundle = "Academia.edu_Bundle" in dirpath or "more_papers_by" in dirpath or "most_similar_papers" in dirpath or "papers_cited" in dirpath
+                    bundle_role = "standalone"
+                    if "more_papers_by" in dirpath:
+                        bundle_role = "author_related"
+                    elif "most_similar_papers" in dirpath:
+                        bundle_role = "topic_similar"
+                    elif "papers_cited" in dirpath:
+                        bundle_role = "citations"
+                    elif is_bundle:
+                        bundle_role = "anchor_paper"
+
+                    clean_title_slug = re.sub(r'[^a-zA-Z0-9_-]', '_', extracted.get("title", f)[:50]).strip('_')
+                    clean_proposed_name = f"{subbranch[:25]}_{clean_title_slug}{ext}"
+
+                    record = {
+                        "id": f"DOC-{file_hash[:8]}",
+                        "filename": f,
+                        "path": full_path,
+                        "extension": ext,
+                        "size_bytes": f_size,
+                        "modified_at": f_mtime,
+                        "sha256": file_hash,
+                        "title": extracted.get("title", f),
+                        "author": extracted.get("author", ""),
+                        "pages": extracted.get("page_count", 0),
+                        "abstract_snippet": extracted.get("abstract_snippet", ""),
+                        "doi": extracted.get("doi", ""),
+                        "identified_domain": branch,
+                        "subbranch": subbranch,
+                        "is_academia_bundle": is_bundle,
+                        "bundle_role": bundle_role,
+                        "proposed_clean_name": clean_proposed_name,
+                        "unified_tree_dest": f"Unified_Subject_Tree/{branch}/{subbranch}/{f}"
+                    }
+
+                    self.manifest.append(record)
+                    existing_paths.add(norm_p)
+                    hash_registry.setdefault(file_hash, []).append(record)
+                    added_count += 1
+
+        if added_count > 0:
+            self.duplicates = {h: r for h, r in hash_registry.items() if len(r) > 1}
+            print(f"[LIBRARIAN] Incremental Scan added {added_count} newly discovered files to manifest.")
+            self.save_catalog()
+        else:
+            print("[LIBRARIAN] Incremental Scan: Manifest is up-to-date (no new files).")
+        return added_count
+
     def organize_library(self, dry_run: bool = True) -> Dict[str, Any]:
         """
         Organize library:
@@ -539,9 +725,14 @@ class LibrarianAgent:
         mode_str = "[DRY-RUN SIMULATION]" if dry_run else "[LIVE EXECUTION]"
         print(f"\n=== LIBRARIAN AGENT: ORGANIZING UNIFIED LIBRARY {mode_str} ===")
 
-        # Ensure scan is up to date
+        # Ensure scan is up to date (load cached manifest + incremental scan)
         if not self.manifest:
-            self.scan_ecosystem()
+            if self.load_manifest_if_exists():
+                self.incremental_scan()
+            else:
+                self.scan_ecosystem()
+        else:
+            self.incremental_scan()
 
         stats = {
             "renamed_folders": [],
@@ -826,14 +1017,17 @@ def main():
             f.write(report_md)
         print(f"[LIBRARIAN] Organization report written to: {report_file}")
         if not args.dry_run:
-            agent.scan_ecosystem()
+            agent.incremental_scan()
             agent.save_catalog()
         return
 
     # If no flags provided or --scan / --propose
     if len(sys.argv) == 1 or args.scan or args.propose:
-        summary = agent.scan_ecosystem()
-        agent.save_catalog()
+        if agent.load_manifest_if_exists():
+            agent.incremental_scan()
+        else:
+            summary = agent.scan_ecosystem()
+            agent.save_catalog()
         proposal_md = agent.generate_proposal_report()
 
         proposal_file = args.export_proposal or os.path.join(BASE_WORKSPACE, "LIBRARY_CLEANUP_PROPOSAL.md")
@@ -843,12 +1037,16 @@ def main():
 
     if args.dedup:
         if not agent.manifest:
-            agent.scan_ecosystem()
+            if not agent.load_manifest_if_exists():
+                agent.scan_ecosystem()
         print(f"\n=== DUPLICATE CLUSTERS DETECTED ({len(agent.duplicates)}) ===")
-        for idx, (h, cluster) in enumerate(agent.duplicates.items(), 1):
-            print(f"Cluster #{idx} | Hash: {h[:12]} | Copies: {len(cluster)}")
+        # Print top 30 duplicate clusters cleanly to avoid terminal overflow
+        for idx, (h, cluster) in enumerate(list(agent.duplicates.items())[:30], 1):
+            print(f"Cluster #{idx} | Hash: {h[:12]}... | Copies: {len(cluster)}")
             for c in cluster:
                 print(f"  -> {c['path']}")
+        if len(agent.duplicates) > 30:
+            print(f"\n... and {len(agent.duplicates) - 30} more duplicate clusters documented in librarian_catalog_manifest.json.")
 
     if args.search:
         if not agent.manifest:

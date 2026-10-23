@@ -25,12 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Active Context View State (Default: 'original')
   let activeContext = HypersphereViews.contexts[HypersphereViews.current] || HypersphereViews.contexts.original;
 
-  // Render State
+  // Render State (Default to Conformal Vortex)
   let rotAngleXW = 0.0;
   let rotAngleYZ = 0.0;
   let autoRotate = true;
   let rotationSpeed = 1.0;
-  let renderMode = 'hopf'; // 'hopf' | 'vortex' | 'particles'
+  let renderMode = 'vortex'; // 'vortex' (default) | 'particles' | 'hopf'
   let isDragging = false;
   let dragLastX = 0;
   let dragLastY = 0;
@@ -103,16 +103,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener('touchend', () => { isDragging = false; });
 
-  // Floating Particles along continuous fibers
-  const particles = [];
-  const numParticles = 72;
-  for (let i = 0; i < numParticles; i++) {
-    particles.push({
+  // 1. Kinetic Quantum Particles along 4D Hopf fibers (320 particles with velocity trails)
+  const hopfParticles = [];
+  const numHopfParticles = 320;
+  for (let i = 0; i < numHopfParticles; i++) {
+    hopfParticles.push({
       toriIndex: i % manifold.rings.length,
       xi: Math.random() * Math.PI * 2,
-      speed: 0.015 + Math.random() * 0.02,
-      size: 1.5 + Math.random() * 2.0,
-      glow: Math.random()
+      speed: 0.012 + Math.random() * 0.025,
+      size: 1.2 + Math.random() * 2.2,
+      trail: []
+    });
+  }
+
+  // 2. Conformal Vortex Geodesic Swarm Particles (140 particles spiraling in & out)
+  const vortexParticles = [];
+  const numVortexParticles = 140;
+  for (let i = 0; i < numVortexParticles; i++) {
+    vortexParticles.push({
+      rFactor: 0.15 + Math.random() * 1.35,
+      arm: Math.floor(Math.random() * 8),
+      direction: Math.random() > 0.5 ? 1 : -1, // 1 = inward, -1 = outward
+      speed: 0.003 + Math.random() * 0.007,
+      size: 1.3 + Math.random() * 2.2,
+      phase: Math.random() * Math.PI * 2
     });
   }
 
@@ -173,14 +187,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const near180 = Math.abs(angleModPi - Math.PI) < 0.18;
     updateAntipodeStatus(near180);
 
-    // Render Base Geometry
+    // Render Base Geometry based on active visual mode
     if (renderMode === 'vortex') {
       renderConformalVortex(ctx, cx, cy, baseRadius, time);
-    } else {
+    } else if (renderMode === 'hopf') {
       renderHopfFibration(ctx, cx, cy, baseRadius, qFinal, rotAngleXW, rotAngleYZ);
-      if (renderMode === 'particles' || renderMode === 'hopf') {
-        renderFlowParticles(ctx, cx, cy, baseRadius, qFinal, rotAngleXW, rotAngleYZ);
-      }
+    } else if (renderMode === 'particles') {
+      renderHopfGhostFibers(ctx, cx, cy, baseRadius, qFinal, rotAngleXW, rotAngleYZ);
+      renderFlowParticles(ctx, cx, cy, baseRadius, qFinal, rotAngleXW, rotAngleYZ, time);
     }
 
     // 4. Render Active Context Overlay
@@ -206,22 +220,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // -------------------------------------------------------------
-  // Render Hopf Fibration Rings (Base Manifold)
+  // Visual Mode 1: 4D Hopf Rings (Pure Mathematical Wireframe Cage)
+  // ZERO particle clutter. Pure sacred Clifford tori & orthogonal meridians.
   // -------------------------------------------------------------
   function renderHopfFibration(ctx, cx, cy, radius, qFinal, angleXW, angleYZ) {
     const pal = activeContext.palette;
 
+    // 1. Longitudinal Clifford Tori Fibers
     manifold.rings.forEach((ring, rIdx) => {
       ctx.beginPath();
       const numPts = ring.length;
 
       for (let p = 0; p <= numPts; p++) {
         const pt = ring[p % numPts];
-        // 4D Rotation in XW and YZ planes
         const pt4D = manifold.rotate4D(pt, angleXW, angleYZ);
-        // Stereographic Projection to 3D with target norm 100.0
         const proj = manifold.stereographicProject(pt4D, 2.5);
-        // 3D Quaternion Rotation via Rodrigues Formula
         const vRot = qFinal.rotateVector([proj.x, proj.y, proj.z]);
 
         const scrX = cx + (vRot[0] / 100.0) * radius;
@@ -231,8 +244,8 @@ document.addEventListener('DOMContentLoaded', () => {
         else ctx.lineTo(scrX, scrY);
       }
 
-      // Color coding along 4D latitude
-      const alpha = 0.28 + 0.35 * Math.sin(rIdx / manifold.rings.length * Math.PI);
+      // Color coding along 4D latitude with high contrast holographic luminescence
+      const alpha = 0.35 + 0.45 * Math.sin(rIdx / manifold.rings.length * Math.PI);
       if (rIdx % 3 === 0) {
         ctx.strokeStyle = hexToRgba(pal.primary, alpha);
       } else if (rIdx % 3 === 1) {
@@ -240,30 +253,90 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         ctx.strokeStyle = hexToRgba(pal.tertiary || pal.primary, alpha);
       }
-      ctx.lineWidth = 1.25;
+      ctx.lineWidth = 1.35;
       ctx.stroke();
+
+      // 2. Orthogonal Cross-Sectional Meridian Circles (Every 4th ring)
+      if (rIdx % 2 === 0) {
+        const numMeridians = 8;
+        for (let m = 0; m < numMeridians; m++) {
+          const mIdx = Math.floor((m / numMeridians) * numPts);
+          const ptCore = ring[mIdx];
+          const eta = (rIdx / manifold.rings.length) * (Math.PI / 2);
+          const tubeR = 0.18 * Math.sin(eta) * 100.0;
+
+          ctx.beginPath();
+          for (let ma = 0; ma <= 16; ma++) {
+            const mAngle = (ma / 16) * Math.PI * 2;
+            const ptTube = {
+              x: ptCore.x + Math.cos(mAngle) * tubeR * 0.01,
+              y: ptCore.y + Math.sin(mAngle) * tubeR * 0.01,
+              z: ptCore.z + Math.sin(mAngle) * 0.005,
+              w: ptCore.w + Math.cos(mAngle) * 0.005
+            };
+            const ptTube4D = manifold.rotate4D(ptTube, angleXW, angleYZ);
+            const projTube = manifold.stereographicProject(ptTube4D, 2.5);
+            const vRotTube = qFinal.rotateVector([projTube.x, projTube.y, projTube.z]);
+            const sx = cx + (vRotTube[0] / 100.0) * radius;
+            const sy = cy + (vRotTube[1] / 100.0) * radius;
+            if (ma === 0) ctx.moveTo(sx, sy);
+            else ctx.lineTo(sx, sy);
+          }
+          ctx.strokeStyle = hexToRgba(pal.primary, 0.16);
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
     });
 
     // Outer Target Norm Invariant Boundary Circle (||x|| = 100.0)
     ctx.beginPath();
     ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-    ctx.strokeStyle = hexToRgba(pal.primary, 0.45);
-    ctx.setLineDash([4, 6]);
-    ctx.lineWidth = 1.0;
+    ctx.strokeStyle = hexToRgba(pal.primary, 0.60);
+    ctx.setLineDash([5, 7]);
+    ctx.lineWidth = 1.25;
     ctx.stroke();
     ctx.setLineDash([]);
   }
 
   // -------------------------------------------------------------
-  // Render Continuous Flow Particles along Fibers
+  // Faint Ghost Guide Tracks (Used behind Fiber Particle Flow)
   // -------------------------------------------------------------
-  function renderFlowParticles(ctx, cx, cy, radius, qFinal, angleXW, angleYZ) {
+  function renderHopfGhostFibers(ctx, cx, cy, radius, qFinal, angleXW, angleYZ) {
     const pal = activeContext.palette;
-    particles.forEach(p => {
-      p.xi += p.speed;
+    manifold.rings.forEach((ring, rIdx) => {
+      if (rIdx % 2 !== 0) return; // Half density for ethereal backdrop
+      ctx.beginPath();
+      const numPts = ring.length;
+      for (let p = 0; p <= numPts; p++) {
+        const pt = ring[p % numPts];
+        const pt4D = manifold.rotate4D(pt, angleXW, angleYZ);
+        const proj = manifold.stereographicProject(pt4D, 2.5);
+        const vRot = qFinal.rotateVector([proj.x, proj.y, proj.z]);
+        const scrX = cx + (vRot[0] / 100.0) * radius;
+        const scrY = cy + (vRot[1] / 100.0) * radius;
+        if (p === 0) ctx.moveTo(scrX, scrY);
+        else ctx.lineTo(scrX, scrY);
+      }
+      ctx.strokeStyle = hexToRgba(pal.primary, 0.07);
+      ctx.lineWidth = 0.75;
+      ctx.stroke();
+    });
+  }
+
+  // -------------------------------------------------------------
+  // Visual Mode 2: Kinetic Fiber Particle Flow (High-Velocity 4D Photon Accelerator)
+  // 320 photon packets with 5-segment glowing velocity comet trails
+  // -------------------------------------------------------------
+  function renderFlowParticles(ctx, cx, cy, radius, qFinal, angleXW, angleYZ, time) {
+    const pal = activeContext.palette;
+    const pulseOsc = 1.0 + 0.15 * Math.sin(time * 0.007);
+
+    hopfParticles.forEach(p => {
+      // Dynamic velocity acceleration along fiber tube
+      p.xi += p.speed * (1.0 + 0.45 * Math.sin(2.0 * p.xi));
       if (p.xi > Math.PI * 2) p.xi -= Math.PI * 2;
 
-      const ring = manifold.rings[p.toriIndex];
       const eta = (p.toriIndex / manifold.rings.length) * (Math.PI / 2);
       const x = Math.sin(eta) * Math.cos(p.xi);
       const y = Math.sin(eta) * Math.sin(p.xi);
@@ -277,33 +350,63 @@ document.addEventListener('DOMContentLoaded', () => {
       const scrX = cx + (vRot[0] / 100.0) * radius;
       const scrY = cy + (vRot[1] / 100.0) * radius;
 
+      // Update comet history trail (up to 5 positions)
+      p.trail.unshift({ x: scrX, y: scrY });
+      if (p.trail.length > 5) p.trail.pop();
+
+      // Draw Glowing Comet Tail
+      if (p.trail.length > 1) {
+        ctx.beginPath();
+        ctx.moveTo(p.trail[p.trail.length - 1].x, p.trail[p.trail.length - 1].y);
+        for (let tIdx = p.trail.length - 2; tIdx >= 0; tIdx--) {
+          ctx.lineTo(p.trail[tIdx].x, p.trail[tIdx].y);
+        }
+        const tailColor = (w > 0.15) ? 'rgba(0, 240, 255, 0.55)' : (w < -0.15 ? 'rgba(192, 132, 252, 0.55)' : 'rgba(52, 211, 153, 0.55)');
+        ctx.strokeStyle = tailColor;
+        ctx.lineWidth = p.size * 0.9;
+        ctx.stroke();
+      }
+
+      // Draw Glowing Photon Head
       ctx.beginPath();
-      ctx.arc(scrX, scrY, p.size, 0, Math.PI * 2);
-      ctx.fillStyle = (p.toriIndex % 2 === 0) ? pal.primary : pal.secondary;
-      ctx.shadowColor = ctx.fillStyle;
-      ctx.shadowBlur = 8;
+      ctx.arc(scrX, scrY, p.size * pulseOsc, 0, Math.PI * 2);
+      const headColor = (w > 0.15) ? '#00f0ff' : (w < -0.15 ? '#c084fc' : '#34d399');
+      ctx.fillStyle = headColor;
+      ctx.shadowColor = headColor;
+      ctx.shadowBlur = 9;
       ctx.fill();
       ctx.shadowBlur = 0;
     });
+
+    // Invariant Boundary Ring
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(0, 240, 255, 0.35)';
+    ctx.setLineDash([4, 6]);
+    ctx.lineWidth = 1.0;
+    ctx.stroke();
+    ctx.setLineDash([]);
   }
 
   // -------------------------------------------------------------
-  // Render Conformal Hyperbolic Vortex Grid
+  // Visual Mode 3: Conformal Hyperbolic Vortex Grid (DEFAULT & ACTIVE)
+  // Dual logarithmic spirals with 140 spiraling inflow/outflow swarm particles
   // -------------------------------------------------------------
   function renderConformalVortex(ctx, cx, cy, radius, time) {
     const pal = activeContext.palette;
 
-    // Glowing core
-    const coreGrad = ctx.createRadialGradient(cx, cy, 3, cx, cy, radius * 0.35);
-    coreGrad.addColorStop(0, hexToRgba(pal.primary, 0.45));
-    coreGrad.addColorStop(0.6, hexToRgba(pal.secondary, 0.20));
+    // Glowing core with Throat Ratio 10/27 = 0.370370 Accretion Disk
+    const throatPulse = 1.0 + 0.06 * Math.sin(time * 0.005);
+    const coreGrad = ctx.createRadialGradient(cx, cy, 3, cx, cy, radius * 0.37 * throatPulse);
+    coreGrad.addColorStop(0, hexToRgba(pal.primary, 0.65));
+    coreGrad.addColorStop(0.37, hexToRgba(pal.secondary, 0.35));
     coreGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
     ctx.fillStyle = coreGrad;
     ctx.beginPath();
-    ctx.arc(cx, cy, radius * 0.35, 0, Math.PI * 2);
+    ctx.arc(cx, cy, radius * 0.37 * throatPulse, 0, Math.PI * 2);
     ctx.fill();
 
-    // Concentric Hyperbolic Rings
+    // Concentric Hyperbolic Boundary Rings
     const ringRadii = [0.15, 0.3, 0.48, 0.68, 0.9, 1.15, 1.45];
     ringRadii.forEach((factor, idx) => {
       ctx.beginPath();
@@ -313,7 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.stroke();
     });
 
-    // 16 Symmetrical Converging Rays
+    // 16 Symmetrical Converging Conformal Rays
     const numRays = 16;
     for (let i = 0; i < numRays; i++) {
       const theta = (i / numRays) * Math.PI * 2;
@@ -328,7 +431,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Dual Logarithmic Spirals
     const spiralArms = 8;
     for (let arm = 0; arm < spiralArms; arm++) {
-      const armOffset = (arm / spiralArms) * Math.PI * 2 + (time * 0.0003);
+      const armOffset = (arm / spiralArms) * Math.PI * 2 + (time * 0.00035);
+
+      // Counter-Clockwise Spiral (Primary Cyan)
       ctx.beginPath();
       for (let s = 10; s <= radius * 1.5; s += 3) {
         const spiralTheta = armOffset + (s / (radius * 0.35)) * 0.95;
@@ -337,11 +442,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (s === 10) ctx.moveTo(sx, sy);
         else ctx.lineTo(sx, sy);
       }
-      ctx.strokeStyle = hexToRgba(pal.primary, 0.40);
-      ctx.lineWidth = 1.1;
+      ctx.strokeStyle = hexToRgba(pal.primary, 0.45);
+      ctx.lineWidth = 1.25;
       ctx.stroke();
 
-      // Orthogonal Counter-Clockwise Spiral
+      // Clockwise Orthogonal Spiral (Secondary Lavender)
       ctx.beginPath();
       for (let s = 10; s <= radius * 1.5; s += 3) {
         const spiralTheta = armOffset - (s / (radius * 0.35)) * 0.95;
@@ -350,16 +455,47 @@ document.addEventListener('DOMContentLoaded', () => {
         if (s === 10) ctx.moveTo(sx, sy);
         else ctx.lineTo(sx, sy);
       }
-      ctx.strokeStyle = hexToRgba(pal.secondary, 0.35);
-      ctx.lineWidth = 1.1;
+      ctx.strokeStyle = hexToRgba(pal.secondary, 0.40);
+      ctx.lineWidth = 1.25;
       ctx.stroke();
     }
 
-    // Poles
+    // 140 Conformal Vortex Swarm Particles (Streaming along spiral arms)
+    vortexParticles.forEach(vp => {
+      // Advance radius
+      if (vp.direction === 1) {
+        // Inward flow: accelerates hyperbolically as r -> 0
+        vp.rFactor -= vp.speed * (1.3 / Math.max(vp.rFactor, 0.22));
+        if (vp.rFactor < 0.10) vp.rFactor = 1.45;
+      } else {
+        // Outward radiating flow
+        vp.rFactor += vp.speed * 0.85;
+        if (vp.rFactor > 1.45) vp.rFactor = 0.14;
+      }
+
+      const s = radius * vp.rFactor;
+      const armOffset = (vp.arm / 8) * Math.PI * 2 + (time * 0.00035);
+      const spiralTheta = armOffset + (s / (radius * 0.35)) * 0.95 * vp.direction;
+
+      const px = cx + Math.cos(spiralTheta) * s;
+      const py = cy + Math.sin(spiralTheta) * s;
+
+      // Draw Glowing Vortex Particle Head
+      ctx.beginPath();
+      ctx.arc(px, py, vp.size, 0, Math.PI * 2);
+      const pColor = vp.direction === 1 ? '#00f0ff' : '#c084fc';
+      ctx.fillStyle = pColor;
+      ctx.shadowColor = pColor;
+      ctx.shadowBlur = 8;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    });
+
+    // Complex 4D Singularity Poles
     drawPole(ctx, cx - radius * 0.85, cy, '-1', '#38bdf8');
     drawPole(ctx, cx, cy + radius * 0.75, '-i', '#c084fc');
     drawPole(ctx, cx - radius * 0.6, cy + radius * 0.5, '-j', '#34d399');
-    drawPole(ctx, cx, cy, 'q=1', pal.primary);
+    drawPole(ctx, cx, cy, 'q=1 (10/27)', pal.primary);
   }
 
   // =============================================================
@@ -497,18 +633,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =============================================================
-  // CONTEXT OVERLAY 3: KNOWLEDGE / DATA MAP VIEW (220 Papers)
+  // CONTEXT OVERLAY 3: KNOWLEDGE / DATA MAP VIEW (1,142 Curated Papers • 5,089 Gold Standard)
   // =============================================================
   function renderKnowledgeOverlay(ctx, cx, cy, radius, time, qFinal) {
     const t = time * 0.0015;
 
-    // 5 Major Physics Domains + 1 Comms Cluster
+    // Major Research Domains in Gold Standard Library
     const domains = [
-      { name: 'Harmonic Analysis', count: 149, angle: 0.0, color: '#c084fc' },
-      { name: 'Neutrino / LAr Detectors', count: 29, angle: 1.25, color: '#38bdf8' },
-      { name: 'Cosmic Rays / Muons', count: 18, angle: 2.50, color: '#facc15' },
-      { name: 'Muon Beam Cooling', count: 11, angle: 3.75, color: '#4ade80' },
-      { name: 'Particle DL & Computing', count: 9, angle: 5.00, color: '#f87171' }
+      { name: 'Harmonic Analysis & Waves', count: 484, angle: 0.0, color: '#c084fc' },
+      { name: 'Quantum Chromodynamics & SU(3)', count: 567, angle: 1.05, color: '#ec4899' },
+      { name: 'Neutrino / LAr Detectors', count: 29, angle: 2.10, color: '#38bdf8' },
+      { name: 'Cosmic Rays / Muons', count: 29, angle: 3.14, color: '#facc15' },
+      { name: 'Comms & Satellite Networks', count: 24, angle: 4.19, color: '#10b981' },
+      { name: 'Particle DL & Computing', count: 9, angle: 5.24, color: '#f87171' }
     ];
 
     // Draw Domain Nodes around the manifold
@@ -518,7 +655,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const ny = cy + Math.sin(orbAngle) * radius * 1.35;
 
       // Node Circle
-      const nodeSize = 8 + Math.sqrt(dom.count) * 1.4;
+      const nodeSize = 8 + Math.sqrt(dom.count) * 1.0;
       ctx.beginPath();
       ctx.arc(nx, ny, nodeSize, 0, Math.PI * 2);
       ctx.fillStyle = hexToRgba(dom.color, 0.85);
@@ -554,7 +691,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Competency Mirror Central Invariant: N1 x N2 ≈ N3
     drawOverlayBadge(ctx, cx, cy, 'COMPETENCY MIRROR: N₁ × N₂ ≈ N₃', '#a855f7');
-    drawOverlayBadge(ctx, cx, cy + 24, 'TOTAL: 220 RESEARCH DOCUMENTS', '#ec4899');
+    drawOverlayBadge(ctx, cx, cy + 24, 'TOTAL: 1,142 CURATED PAPERS (5,089 IN LIBRARY)', '#ec4899');
   }
 
   // =============================================================
@@ -924,26 +1061,88 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // -------------------------------------------------------------
-  // UI Controls Wire-up
+  // UI Controls: Visual Core Segmented Mode Bar
   // -------------------------------------------------------------
+  function setVisualMode(mode) {
+    renderMode = mode;
+    const modeButtons = document.querySelectorAll('#visual-mode-bar .seg-btn');
+    modeButtons.forEach(btn => {
+      const isActive = btn.getAttribute('data-mode') === mode;
+      btn.classList.toggle('active', isActive);
+      const dot = btn.querySelector('.badge-active-dot');
+      if (dot) dot.remove();
+      if (isActive) {
+        btn.insertAdjacentHTML('beforeend', ' <span class="badge-active-dot">●</span>');
+      }
+    });
+
+    const elSub = document.getElementById('viewport-stage-subtitle');
+    if (mode === 'vortex') {
+      if (elSub) elSub.textContent = 'CONFORMAL HYPERBOLIC VORTEX • DUAL LOGARITHMIC SPIRALS (ACTIVE)';
+      showToast('Visual Mode: Conformal Hyperbolic Vortex Active');
+    } else if (mode === 'particles') {
+      if (elSub) elSub.textContent = 'FIBER PARTICLE FLOW • 4D QUANTUM GEODESIC ACCELERATOR';
+      showToast('Visual Mode: High-Velocity Fiber Particle Flow');
+    } else if (mode === 'hopf') {
+      if (elSub) elSub.textContent = '4D HOPF FIBRATION • STEREOGRAPHIC CLIFFORD TORI WIREFRAME';
+      showToast('Visual Mode: 4D Hopf Rings Pure Wireframe');
+    }
+  }
+
+  const modeButtons = document.querySelectorAll('#visual-mode-bar .seg-btn');
+  modeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const mode = btn.getAttribute('data-mode');
+      if (mode) setVisualMode(mode);
+    });
+  });
+
+  // Support legacy btn-toggle-mode if present
   const btnToggleMode = document.getElementById('btn-toggle-mode');
   if (btnToggleMode) {
     btnToggleMode.addEventListener('click', () => {
-      if (renderMode === 'hopf') {
-        renderMode = 'vortex';
-        btnToggleMode.textContent = '🌀 View: Conformal Vortex';
-        showToast('Mode: Conformal Hyperbolic Vortex Grid');
-      } else if (renderMode === 'vortex') {
-        renderMode = 'particles';
-        btnToggleMode.textContent = '✨ View: Fiber Particle Flow';
-        showToast('Mode: Continuous S³ Manifold Fiber Flow');
-      } else {
-        renderMode = 'hopf';
-        btnToggleMode.textContent = '🌐 View: 4D Hopf Rings';
-        showToast('Mode: 4D Hopf Fibration Tori Projection');
-      }
+      if (renderMode === 'hopf') setVisualMode('vortex');
+      else if (renderMode === 'vortex') setVisualMode('particles');
+      else setVisualMode('hopf');
     });
   }
+
+  // -------------------------------------------------------------
+  // Multi-API Live Telemetry Prober (Tick Box ✅ / Red ❌)
+  // -------------------------------------------------------------
+  const API_ENDPOINTS = [
+    { id: 'api-status-8080', url: (window.location.port === '8080' ? '/audios?format=json' : 'http://localhost:8080/audios?format=json'), name: 'Hypersphere Audios Core (:8080)' },
+    { id: 'api-status-3001', url: 'http://localhost:3001', name: 'GeoNav GPS (:3001)' },
+    { id: 'api-status-3002', url: 'http://localhost:3002/api/health', name: 'Arkham Tracer (:3002)' },
+    { id: 'api-status-4000', url: 'http://localhost:4000', name: 'QT Analytics (:4000)' },
+    { id: 'api-status-8085', url: 'http://localhost:8085/api/qt/health', name: 'Desk Bridge (:8085)' }
+  ];
+
+  async function checkApi(endpoint) {
+    const el = document.getElementById(endpoint.id);
+    if (!el) return;
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 2200);
+      await fetch(endpoint.url, { mode: 'no-cors', signal: controller.signal });
+      clearTimeout(timeoutId);
+      el.classList.add('connected');
+      el.classList.remove('disconnected');
+      el.innerHTML = `<span class="api-icon">✅</span> <span class="api-name">${endpoint.name}</span>`;
+    } catch (err) {
+      el.classList.remove('connected');
+      el.classList.add('disconnected');
+      el.innerHTML = `<span class="api-icon">❌</span> <span class="api-name">${endpoint.name}</span>`;
+    }
+  }
+
+  function probeAllApis() {
+    API_ENDPOINTS.forEach(checkApi);
+  }
+
+  // Initial check and recurring pulse
+  setTimeout(probeAllApis, 150);
+  setInterval(probeAllApis, 6000);
 
   const btnToggleRot = document.getElementById('btn-toggle-rotation');
   if (btnToggleRot) {
@@ -988,9 +1187,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // -------------------------------------------------------------
-  // Live Telemetry Sync with localhost:8080/audi
+  // Live Telemetry Sync with localhost:8080/audios
   // -------------------------------------------------------------
-  const backendUrl = window.location.port === '8080' ? '/audi' : 'http://localhost:8080/audi';
+  const backendUrl = window.location.port === '8080' ? '/audios' : 'http://localhost:8080/audios';
   const client = new HypersphereTelemetryClient(backendUrl);
 
   client.onData((data, err) => {
@@ -1004,11 +1203,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const telField = document.getElementById('tel-field');
     const telGate = document.getElementById('tel-gate');
     const telPolicy = document.getElementById('tel-policy');
+    const telDsp = document.getElementById('tel-dsp');
+    const telSpectrum = document.getElementById('tel-spectrum');
+    const hudDspTitle = document.getElementById('hud-dsp-title');
+    const hudSpectrumMode = document.getElementById('hud-spectrum-mode');
     const jsonOutput = document.getElementById('json-stream-output');
 
     if (data) {
       if (statusDot) statusDot.style.backgroundColor = 'var(--accent-green)';
-      if (statusText) statusText.textContent = `${data.status} • ONLINE`;
+      if (statusText) statusText.textContent = `${data.status || 'LOCKED'} • ONLINE`;
       if (telNorm) telNorm.textContent = `${data.norm.toFixed(1)} / ${data.target_norm.toFixed(1)}`;
       if (telPhase) telPhase.textContent = `${data.phase.toFixed(2)}° (0.00 Drift)`;
       if (telCoherence) telCoherence.textContent = data.coherence.toFixed(3);
@@ -1017,6 +1220,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (telField) telField.textContent = data.geomagnetic_field;
       if (telGate) telGate.textContent = `[${data.tensor_gate.join(', ')}]`;
       if (telPolicy) telPolicy.textContent = data.access_policy;
+      if (telDsp) telDsp.textContent = `${data.title || 'DSP Bridge Active'} (${data.quadrant || 'Quad I'})`;
+      if (telSpectrum) telSpectrum.textContent = data.spectrumMode || data.spectrum_mode || 'Green + Blue (Red Locked)';
+      if (hudDspTitle) hudDspTitle.textContent = `🎛️ ${data.title || 'DSP BRIDGE ACTIVE'} (${data.quadrant || 'QUAD I'})`;
+      if (hudSpectrumMode && (data.spectrumMode || data.spectrum_mode)) {
+        hudSpectrumMode.textContent = `🛡️ SPECTRUM: ${data.spectrumMode || data.spectrum_mode}`.toUpperCase();
+      }
       if (jsonOutput) jsonOutput.textContent = JSON.stringify(data, null, 2);
     } else {
       if (statusDot) statusDot.style.backgroundColor = 'var(--accent-red)';

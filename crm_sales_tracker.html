@@ -415,58 +415,81 @@
   <!-- Header -->
   <header>
     <div class="brand-title">
-      <div class="logo-badge">QT</div>
+      <div class="logo-badge" style="background: linear-gradient(135deg, #059669, #0284c7);">📒</div>
       <div>
-        <h1>QT Analytics — Sales Pipeline & CRM Desk</h1>
-        <div class="tagline">50 Curated High-Grade Institutional & Legal Targets • Stephen Fitzpatrick</div>
+        <h1>QT Analytics — Client Filofax &amp; Phone Calling Desk</h1>
+        <div class="tagline">Simple Contact Book • Company, Location, Phone, Email &amp; Instant Notes • Stephen Fitzpatrick (Direct: <strong>07538162246</strong>)</div>
       </div>
     </div>
     <div class="header-actions">
-      <button class="btn-secondary" onclick="exportToCSV()">📥 Export CSV</button>
-      <button class="btn-secondary" onclick="resetToDefaults()">🔄 Reset CRM</button>
-      <button class="btn-primary" onclick="openReportSamples()">📄 View Sample Reports</button>
+      <button class="btn-primary" style="background: #0284c7;" onclick="openAddLeadModal()">➕ Add New Contact to Filofax</button>
+      <button class="btn-primary" style="background: #10b981; border-color: #10b981;" onclick="openPaymentModal()">💳 My Bank / Monzo Details</button>
+      <a href="http://localhost:8085/plan.pdf" target="_blank" class="btn-secondary" style="text-decoration: none; border-color: #38bdf8; color: #38bdf8;">📄 72-Hour Plan (PDF)</a>
+      <a href="http://localhost:8085/desk" target="_blank" class="btn-secondary" style="text-decoration: none;">📤 Open Desk Mail (:8085)</a>
+      <button class="btn-secondary" onclick="exportToCSV()">📥 Export</button>
+      <button class="btn-secondary" onclick="resetToDefaults()">🔄 Reset</button>
     </div>
   </header>
+
+  <!-- Stephen's 30-Second Phone Pitch Banner -->
+  <div style="background: linear-gradient(90deg, rgba(16, 185, 129, 0.12), rgba(2, 132, 199, 0.12)); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 10px; padding: 16px 20px; margin-bottom: 20px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+      <div style="font-weight: 700; font-size: 14px; color: #10b981; display: flex; align-items: center; gap: 8px;">
+        <span>📞</span> Stephen's 30-Second Phone Pitch (Read this while dialling)
+      </div>
+      <button class="btn-secondary" style="padding: 4px 10px; font-size: 11px;" onclick="copyText(document.getElementById('scriptText').innerText, 'Phone pitch copied!')">📋 Copy Script</button>
+    </div>
+    <div id="scriptText" style="font-size: 13.5px; line-height: 1.6; color: #f1f5f9;">
+      "Hi, my name is <strong>Stephen Fitzpatrick</strong> from <strong>QT Analytics</strong> here in Scotland. We deliver fast-turnaround crypto forensic tracing and court-ready disclosure reports (CPR Part 25/35) for dispute and recovery solicitors. When your clients lose crypto to theft or fraud, we locate the funds through mixers within 24 hours, starting at just <strong>£49</strong>. Can I email a sample case report over to your team today so you have us on file?"
+    </div>
+    <div style="margin-top: 10px; font-size: 12px; color: #94a3b8; display: flex; gap: 16px; flex-wrap: wrap;">
+      <span>📱 Your Mobile: <strong style="color: #fff;">07538162246</strong></span>
+      <span>⚡ Single Wallet Trace: <strong style="color: #10b981;">£49</strong></span>
+      <span>⚡ Full Multi-Chain Case Pack: <strong style="color: #38bdf8;">£149</strong></span>
+      <span>🏦 Monzo: <strong style="color: #fff;">04-00-05 / 98270319</strong></span>
+    </div>
+  </div>
 
   <!-- KPI Cards -->
   <div class="kpi-grid">
     <div class="kpi-card">
-      <div class="kpi-label">Total Target Pipeline</div>
+      <div class="kpi-label">Total Filofax Contacts</div>
       <div class="kpi-value" id="kpi-total">50</div>
-      <div class="kpi-sub">3 Batches (Gov / Legal / Forensics)</div>
+      <div class="kpi-sub">Scottish &amp; UK Law Firms, Gov &amp; Desks</div>
     </div>
     <div class="kpi-card">
-      <div class="kpi-label">Emails Dispatched</div>
+      <div class="kpi-label">Contacted / Called</div>
       <div class="kpi-value" id="kpi-sent" style="color: #38bdf8;">0</div>
-      <div class="kpi-sub" id="kpi-sent-sub">Goal: 10 per day (5 days)</div>
+      <div class="kpi-sub" id="kpi-sent-sub">Goal: 10 calls today</div>
     </div>
     <div class="kpi-card">
-      <div class="kpi-label">Awaiting Follow-Up</div>
+      <div class="kpi-label">Follow-Ups Needed</div>
       <div class="kpi-value" id="kpi-followup" style="color: #f59e0b;">0</div>
-      <div class="kpi-sub">Rule: Follow up in 7 days</div>
+      <div class="kpi-sub">Rule: Call back in 2-3 days</div>
     </div>
     <div class="kpi-card">
-      <div class="kpi-label">Active Responses / Calls</div>
+      <div class="kpi-label">Interested / Demo Sent</div>
       <div class="kpi-value" id="kpi-replied" style="color: #10b981;">0</div>
-      <div class="kpi-sub" id="kpi-conversion">Target: 5 replies (10%)</div>
+      <div class="kpi-sub" id="kpi-conversion">Target: 3-5 today</div>
     </div>
     <div class="kpi-card">
-      <div class="kpi-label">Projected Pipeline Val</div>
+      <div class="kpi-label">Potential Cash Flow</div>
       <div class="kpi-value" id="kpi-val" style="color: #818cf8;">£4,500</div>
-      <div class="kpi-sub">£49 Trace · £149 Scan · Retainers</div>
+      <div class="kpi-sub">£49 - £149 instant paid orders</div>
     </div>
   </div>
 
-  <!-- Controls -->
+  <!-- Controls Bar -->
   <div class="controls-bar">
     <div class="filter-group">
-      <button class="filter-btn active" onclick="setFilter('ALL')">All Targets (50)</button>
-      <button class="filter-btn" onclick="setFilter('Batch 1')">Batch 1: Law & Gov (15)</button>
-      <button class="filter-btn" onclick="setFilter('Batch 2')">Batch 2: Scottish Law (20)</button>
-      <button class="filter-btn" onclick="setFilter('Batch 3')">Batch 3: Crypto Forensics (15)</button>
+      <button class="filter-btn active" onclick="setFilter('ALL')">All Contacts</button>
+      <button class="filter-btn" onclick="setFilter('Batch 2')">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scottish Law Firms</button>
+      <button class="filter-btn" onclick="setFilter('Batch 3')">🔍 Crypto &amp; Asset Recovery</button>
+      <button class="filter-btn" onclick="setFilter('Batch 1')">🏛️ Law &amp; Government</button>
     </div>
-    <div>
-      <input type="text" id="searchInput" class="search-input" placeholder="Search by name, email, department..." oninput="renderTable()">
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search company, city, contact, phone..." oninput="renderTable()">
+      <button class="btn-primary" style="background: #0284c7; white-space: nowrap;" onclick="openAddLeadModal()">➕ Add Contact</button>
     </div>
   </div>
 
@@ -475,15 +498,15 @@
     <table>
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Batch</th>
-          <th>Organisation</th>
-          <th>Department / Key Contact</th>
+          <th style="width: 60px;">ID</th>
+          <th>Company / Organisation</th>
+          <th>Location</th>
+          <th>Contact Person / Role</th>
+          <th>Phone Number (Click to Call)</th>
           <th>Contact Email</th>
-          <th>Recommended Sample</th>
           <th>Status</th>
-          <th>Notes / Outcome</th>
-          <th>Actions</th>
+          <th>Quick Notes (Auto-Saves)</th>
+          <th style="text-align: right;">Actions</th>
         </tr>
       </thead>
       <tbody id="leadsTableBody">
@@ -493,21 +516,136 @@
   </div>
 </div>
 
-<!-- Email Modal -->
+<!-- Add New Contact Modal -->
+<div class="modal-overlay" id="addContactModal">
+  <div class="modal-card" style="max-width: 520px;">
+    <div class="modal-header">
+      <div class="modal-title" style="color: #38bdf8; display: flex; align-items: center; gap: 8px;">
+        <span>➕</span> Add New Contact to Filofax
+      </div>
+      <button class="close-btn" onclick="closeAddLeadModal()">&times;</button>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px;">
+      <div>
+        <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Company / Firm Name *</label>
+        <input type="text" id="newOrg" class="search-input" style="width: 100%; margin-top: 4px;" placeholder="e.g. Brodies LLP or Peters &amp; Peters">
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div>
+          <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Location / City</label>
+          <input type="text" id="newLocation" class="search-input" style="width: 100%; margin-top: 4px;" placeholder="e.g. Edinburgh / London">
+        </div>
+        <div>
+          <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Contact Person</label>
+          <input type="text" id="newContact" class="search-input" style="width: 100%; margin-top: 4px;" placeholder="e.g. Head of Dispute Resolution">
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div>
+          <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Phone Number</label>
+          <input type="text" id="newPhone" class="search-input" style="width: 100%; margin-top: 4px;" placeholder="e.g. 0131 228 3777">
+        </div>
+        <div>
+          <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Email Address</label>
+          <input type="text" id="newEmail" class="search-input" style="width: 100%; margin-top: 4px;" placeholder="e.g. partner@firm.com">
+        </div>
+      </div>
+      <div>
+        <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Initial Call Note</label>
+        <textarea id="newNotes" class="search-input" style="width: 100%; margin-top: 4px; height: 60px; font-family: inherit; resize: vertical;" placeholder="e.g. Reception said partner is back at 2pm..."></textarea>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: flex-end; gap: 10px;">
+      <button class="btn-secondary" onclick="closeAddLeadModal()">Cancel</button>
+      <button class="btn-primary" style="background: #10b981; border-color: #10b981;" onclick="saveNewContact()">💾 Save to Filofax</button>
+    </div>
+  </div>
+</div>
+
+<!-- Email & Webform Outreach Modal -->
 <div class="modal-overlay" id="emailModal">
-  <div class="modal-card">
+  <div class="modal-card" style="max-width: 640px;">
     <div class="modal-header">
       <div class="modal-title" id="modalTargetOrg">Personalised Pitch Generator</div>
       <button class="close-btn" onclick="closeModal()">&times;</button>
     </div>
-    <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">
-      This pitch is pre-tailored for <strong id="modalDeptName" style="color: #fff;"></strong>. Click below to copy or open directly in your mail app.
+    
+    <div style="display: flex; gap: 8px; margin-bottom: 14px;">
+      <button id="btnTabEmail" class="btn-primary" style="padding: 6px 12px; font-size: 12px;" onclick="switchPitchTab('email')">📧 Full Email Pitch (with Phone &amp; Pairoq)</button>
+      <button id="btnTabWebform" class="btn-secondary" style="padding: 6px 12px; font-size: 12px;" onclick="switchPitchTab('webform')">🌐 "Contact Us" Webform Note</button>
+    </div>
+
+    <p id="pitchHelperText" style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 12px;">
+      Pre-tailored for <strong id="modalDeptName" style="color: #fff;"></strong>. Includes Stephen's mobile (<strong>07538162246</strong>) and instant Pairoq / Monzo settlement.
     </p>
-    <div class="email-preview-box" id="emailContent"></div>
-    <div style="display: flex; justify-content: flex-end; gap: 10px;">
+
+    <div class="email-preview-box" id="emailContent" style="white-space: pre-wrap; font-family: var(--font-sans); font-size: 13px; line-height: 1.5; max-height: 340px; overflow-y: auto;"></div>
+
+    <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 14px; flex-wrap: wrap;">
       <button class="btn-secondary" onclick="closeModal()">Close</button>
-      <button class="btn-primary" onclick="copyModalPitch()">📋 Copy Pitch to Clipboard</button>
+      <button class="btn-primary" id="btnCopyPitch" onclick="copyCurrentPitch()">📋 Copy Pitch to Clipboard</button>
       <a id="modalMailto" href="#" class="btn-success" style="text-decoration: none;">🚀 Open in Mail App</a>
+    </div>
+  </div>
+</div>
+
+<!-- Verified Pairoq / Monzo Account Details Modal -->
+<div class="modal-overlay" id="paymentModal">
+  <div class="modal-card" style="max-width: 580px;">
+    <div class="modal-header">
+      <div class="modal-title" style="color: #10b981; display: flex; align-items: center; gap: 8px;">
+        <span>💳</span> Verified UK Business Settlement Desk (Pairoq / Monzo)
+      </div>
+      <button class="close-btn" onclick="closePaymentModal()">&times;</button>
+    </div>
+    <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+      Official UK banking coordinates and instant card payment portal for client retainers, £49 single-wallet traces, and £149 multi-chain court evidence packs.
+    </p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+      <div style="background: rgba(255,255,255,0.04); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+        <div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase;">Beneficiary / Account Name</div>
+        <div style="color: #fff; font-weight: 700; font-size: 13px; margin-top: 2px;">Stephen G Fitzpatrick</div>
+        <div style="font-size: 11px; color: var(--cyan-bright);">(Pairoq)</div>
+      </div>
+
+      <div style="background: rgba(255,255,255,0.04); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+        <div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase;">Bank Institution</div>
+        <div style="color: #fff; font-weight: 700; font-size: 13px; margin-top: 2px;">Monzo Bank Ltd</div>
+        <div style="font-size: 11px; color: var(--text-muted);">Business Current Account</div>
+      </div>
+
+      <div style="background: rgba(255,255,255,0.04); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase;">Sort Code</div>
+          <div style="color: var(--cyan-bright); font-family: var(--font-mono); font-size: 15px; font-weight: 700;">04-00-05</div>
+        </div>
+        <button class="btn-secondary" style="padding: 4px 8px; font-size: 11px;" onclick="copyText('04-00-05', 'Sort Code copied: 04-00-05')">Copy</button>
+      </div>
+
+      <div style="background: rgba(255,255,255,0.04); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase;">Account Number</div>
+          <div style="color: var(--cyan-bright); font-family: var(--font-mono); font-size: 15px; font-weight: 700;">98270319</div>
+        </div>
+        <button class="btn-secondary" style="padding: 4px 8px; font-size: 11px;" onclick="copyText('98270319', 'Account Number copied: 98270319')">Copy</button>
+      </div>
+    </div>
+
+    <!-- Direct Stripe Card Link -->
+    <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; padding: 14px; margin-bottom: 16px;">
+      <div style="font-size: 11px; text-transform: uppercase; color: var(--cyan-bright); font-weight: 700; margin-bottom: 4px;">⚡ Instant Credit / Debit Card Checkout (Stripe)</div>
+      <div style="font-size: 12px; color: #cbd5e1; margin-bottom: 8px;">Zero 30-day procurement delay. Instant corporate card settlement with automated VAT receipt:</div>
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <input type="text" readonly value="https://buy.stripe.com/6oU4gyfBydKagjQ0G8dIA00" style="flex:1; background:#090d16; border:1px solid #1e293b; color:#fff; padding:6px 10px; font-size:12px; border-radius:4px; font-family:var(--font-mono);">
+        <button class="btn-primary" style="padding:6px 12px; font-size:12px;" onclick="copyText('https://buy.stripe.com/6oU4gyfBydKagjQ0G8dIA00', 'Stripe payment link copied!')">Copy Link</button>
+        <a href="https://buy.stripe.com/6oU4gyfBydKagjQ0G8dIA00" target="_blank" class="btn-success" style="padding:6px 12px; font-size:12px; text-decoration:none;">Open Stripe</a>
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <div style="font-size: 12px; color: var(--text-muted);">Direct Mobile: <strong style="color: #fff;">07538162246</strong></div>
+      <button class="btn-secondary" onclick="closePaymentModal()">Done</button>
     </div>
   </div>
 </div>
@@ -516,56 +654,58 @@
 
 <script>
 const INITIAL_LEADS = [
-  {"id":"LEAD-01","batch":"Batch 1","cat":"Law Enforcement & Government","org":"Police Scotland — Economic Crime Unit","dept":"Economic & Cyber Crime Team","contact":"","email":"OrganisedCrimeUnit@gov.scot","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-02","batch":"Batch 1","cat":"Law Enforcement & Government","org":"Police Scotland — Cybercrime","dept":"Cybercrime Investigation Team","contact":"","email":"cybercrime@scotland.police.uk","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-03","batch":"Batch 1","cat":"Law Enforcement & Government","org":"COPFS — Proceeds of Crime Unit (POCU)","dept":"Financial Investigation / POCA","contact":"","email":"pocu@copfs.gov.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-04","batch":"Batch 1","cat":"Law Enforcement & Government","org":"National Crime Agency (NCA)","dept":"Financial Crime & Crypto Unit","contact":"","email":"report@nca.gov.uk","sample":"Sample #3 FBI Ransomware (£149)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-05","batch":"Batch 1","cat":"Law Enforcement & Government","org":"NCA — Regional Scotland Office","dept":"Scottish Hub — Economic Crime","contact":"Mark for Scotland Desk","email":"enquiries@nca.gov.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-06","batch":"Batch 1","cat":"Law Enforcement & Government","org":"Crown Office & Procurator Fiscal Service","dept":"Specialist Casework Unit","contact":"","email":"enquiries@copfs.gov.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-07","batch":"Batch 1","cat":"Law Enforcement & Government","org":"Cyber & Fraud Centre Scotland","dept":"Industry Partnerships","contact":"","email":"enquiries@cyberfraudcentre.com","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-08","batch":"Batch 1","cat":"Law Enforcement & Government","org":"Scottish Government — Economic Crime","dept":"Financial Intelligence Unit","contact":"","email":"economic.crime@gov.scot","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-09","batch":"Batch 1","cat":"Law Enforcement & Government","org":"Financial Conduct Authority (FCA) — Crypto","dept":"Cryptoassets & Investigations","contact":"","email":"crypto@fca.org.uk","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-10","batch":"Batch 1","cat":"Law Enforcement & Government","org":"FCA — Enforcement","dept":"Asset Recovery Team","contact":"","email":"enforcement@fca.org.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-11","batch":"Batch 1","cat":"Law Enforcement & Government","org":"National Cyber Security Centre (NCSC)","dept":"Cyber Incident Response","contact":"","email":"enquiries@ncsc.gov.uk","sample":"Sample #3 FBI Ransomware (£149)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-12","batch":"Batch 1","cat":"Law Enforcement & Government","org":"Insolvency Service — Crypto Specialist","dept":"Official Receiver / Crypto Asset Tracing","contact":"","email":"enquiries@insolvency.gov.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-13","batch":"Batch 1","cat":"Law Enforcement & Government","org":"Crown Prosecution Service (CPS) — Economic Crime","dept":"Proceeds of Crime Unit","contact":"","email":"enquiries@cps.gov.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-14","batch":"Batch 1","cat":"Law Enforcement & Government","org":"Serious Fraud Office (SFO)","dept":"Case Intake / Financial Tracing","contact":"","email":"enquiries@sfo.gov.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-15","batch":"Batch 1","cat":"Law Enforcement & Government","org":"Home Office — Cyber Crime Policy","dept":"Supplier & Innovation Engagement","contact":"","email":"cyber.policy@homeoffice.gov.uk","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-16","batch":"Batch 2","cat":"Scottish Law Firms","org":"Harper Macleod","dept":"Commercial Dispute Resolution / Asset Recovery","contact":"Head of Asset Recovery","email":"enquiries@harpermacleod.co.uk","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-17","batch":"Batch 2","cat":"Scottish Law Firms","org":"Brodies LLP","dept":"Fraud & Asset Recovery","contact":"Head of Fraud & Asset Recovery","email":"enquiries@brodies.com","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-18","batch":"Batch 2","cat":"Scottish Law Firms","org":"Burness Paull LLP","dept":"Commercial Litigation & Financial Crime","contact":"","email":"info@burnesspaull.com","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-19","batch":"Batch 2","cat":"Scottish Law Firms","org":"Morton Fraser LLP","dept":"Dispute Resolution","contact":"Dispute Resolution Team","email":"info@mortonfraser.com","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-20","batch":"Batch 2","cat":"Scottish Law Firms","org":"Shepherd & Wedderburn","dept":"Commercial Litigation","contact":"","email":"enquiries@shepwedd.com","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-21","batch":"Batch 2","cat":"Scottish Law Firms","org":"Livingstone Brown","dept":"Economic Crime & Proceeds of Crime","contact":"Stuart Munro (Head of Financial Crime)","email":"mail@livingstonebrown.co.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-22","batch":"Batch 2","cat":"Scottish Law Firms","org":"Scullion LAW","dept":"Fraud & Financial Crime","contact":"","email":"mail@scullionlaw.com","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-23","batch":"Batch 2","cat":"Scottish Law Firms","org":"Fleming & Reid","dept":"Cyber & Economic Crime","contact":"","email":"enquiries@flemingandreid.co.uk","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-24","batch":"Batch 2","cat":"Scottish Law Firms","org":"MacRoberts LLP","dept":"Commercial Disputes","contact":"","email":"mail@macroberts.com","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-25","batch":"Batch 2","cat":"Scottish Law Firms","org":"Dentons Scotland","dept":"Asset Recovery & Civil Fraud","contact":"","email":"edinburgh@dentons.com","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-26","batch":"Batch 2","cat":"Scottish Law Firms","org":"Addleshaw Goddard","dept":"Financial Crime","contact":"","email":"edinburgh@addleshawgoddard.com","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-27","batch":"Batch 2","cat":"Scottish Law Firms","org":"Anderson Strathern","dept":"Dispute Resolution","contact":"","email":"info@andersonstrathern.co.uk","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-28","batch":"Batch 2","cat":"Scottish Law Firms","org":"Balfour+Manson","dept":"Commercial Litigation","contact":"","email":"enquiries@balfour-manson.co.uk","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-29","batch":"Batch 2","cat":"Scottish Law Firms","org":"Gillespie Macandrew","dept":"Asset Recovery","contact":"","email":"enquiries@gillespiemacandrew.co.uk","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-30","batch":"Batch 2","cat":"Scottish Law Firms","org":"Lindsays","dept":"Dispute Resolution","contact":"","email":"enquiries@lindsayslaw.com","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-31","batch":"Batch 2","cat":"Scottish Law Firms","org":"MBM Commercial","dept":"Fintech & Commercial","contact":"","email":"info@mbmcommercial.co.uk","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-32","batch":"Batch 2","cat":"Scottish Law Firms","org":"Gilson Gray","dept":"Commercial Disputes","contact":"","email":"info@gilsongray.co.uk","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-33","batch":"Batch 2","cat":"Scottish Law Firms","org":"Thorntons Law","dept":"Financial Crime","contact":"","email":"enquiries@thorntons-law.co.uk","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-34","batch":"Batch 2","cat":"Scottish Law Firms","org":"Blackadders","dept":"Asset Recovery","contact":"","email":"enquiries@blackadders.co.uk","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-35","batch":"Batch 2","cat":"Scottish Law Firms","org":"Miller Samuel","dept":"Commercial Litigation","contact":"","email":"info@millersamuel.com","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-36","batch":"Batch 3","cat":"Specialist Forensics & UK-Wide","org":"Crypto Legal UK","dept":"Crypto Asset Recovery","contact":"","email":"info@cryptolegal.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-37","batch":"Batch 3","cat":"Specialist Forensics & UK-Wide","org":"CYFOR","dept":"Digital Forensics — Blockchain","contact":"","email":"contact@cyfor.co.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-38","batch":"Batch 3","cat":"Specialist Forensics & UK-Wide","org":"Zeus Crypto Recovery","dept":"Edinburgh-based Crypto Recovery","contact":"Edinburgh Team (39 Thistle St)","email":"support@zeusrecoveryservices.com","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-39","batch":"Batch 3","cat":"Specialist Forensics & UK-Wide","org":"Crypto Support Edinburgh","dept":"Local Crypto Forensics","contact":"Paul (CEO - Direct Line)","email":"paul@cryptosupportedinburgh.com","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-40","batch":"Batch 3","cat":"Specialist Forensics & UK-Wide","org":"Asset Reality","dept":"Crypto Asset Recovery Platform","contact":"","email":"hello@assetreality.com","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-41","batch":"Batch 3","cat":"Specialist Forensics & UK-Wide","org":"Global Asset Recovery","dept":"International Tracing","contact":"","email":"info@globalassetrecovery.co.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-42","batch":"Batch 3","cat":"Specialist Forensics & UK-Wide","org":"Kroll — Scotland","dept":"Financial Investigations","contact":"","email":"edinburgh@kroll.com","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-43","batch":"Batch 3","cat":"Specialist Forensics & UK-Wide","org":"Alvarez & Marsal","dept":"Forensic Accounting","contact":"","email":"enquiries@alvarezandmarsal.com","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-44","batch":"Batch 3","cat":"Specialist Forensics & UK-Wide","org":"FTI Consulting","dept":"Blockchain & Digital Forensics","contact":"","email":"scotland@fticonsulting.com","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-45","batch":"Batch 3","cat":"Specialist Forensics & UK-Wide","org":"Grant Thornton","dept":"Forensic & Asset Recovery","contact":"","email":"edinburgh@uk.gt.com","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-46","batch":"Batch 3","cat":"Specialist Forensics & UK-Wide","org":"PwC Scotland","dept":"Blockchain Forensics","contact":"","email":"edinburgh.pwc@pwc.com","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-47","batch":"Batch 3","cat":"Specialist Forensics & UK-Wide","org":"Deloitte Scotland","dept":"Digital Assets & Forensics","contact":"","email":"edinburgh@deloitte.co.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-48","batch":"Batch 3","cat":"Specialist Forensics & UK-Wide","org":"EY Scotland","dept":"Blockchain Investigations","contact":"","email":"edinburgh.ey@ey.com","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-49","batch":"Batch 3","cat":"Specialist Forensics & UK-Wide","org":"BDO Scotland","dept":"Forensic Technology","contact":"","email":"edinburgh@bdo.co.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
-  {"id":"LEAD-50","batch":"Batch 3","cat":"Specialist Forensics & UK-Wide","org":"RSM Scotland","dept":"Fraud & Forensic Services","contact":"","email":"enquiries@rsmuk.com","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""}
+  {"id":"LEAD-01","batch":"Batch 1","cat":"Law & Gov","org":"Police Scotland — Economic Crime Unit","location":"Stirling / National","dept":"Economic & Cyber Crime Team","contact":"Duty Fraud Officer","phone":"01786 896000","email":"OrganisedCrimeUnit@gov.scot","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-02","batch":"Batch 1","cat":"Law & Gov","org":"Police Scotland — Cybercrime","location":"Glasgow / National","dept":"Cybercrime Investigation Team","contact":"Cyber Duty Desk","phone":"101","email":"cybercrime@scotland.police.uk","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-03","batch":"Batch 1","cat":"Law & Gov","org":"COPFS — Proceeds of Crime Unit (POCU)","location":"Edinburgh","dept":"Financial Investigation / POCA","contact":"Casework Officer","phone":"0131 226 5911","email":"pocu@copfs.gov.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-04","batch":"Batch 1","cat":"Law & Gov","org":"National Crime Agency (NCA)","location":"London / UK-wide","dept":"Financial Crime & Crypto Unit","contact":"Intake Officer","phone":"0370 496 7622","email":"report@nca.gov.uk","sample":"Sample #3 FBI Ransomware (£149)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-05","batch":"Batch 1","cat":"Law & Gov","org":"NCA — Regional Scotland Office","location":"Gartcosh / Scotland","dept":"Scottish Hub — Economic Crime","contact":"Mark (Scotland Desk)","phone":"0141 585 6000","email":"enquiries@nca.gov.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-06","batch":"Batch 1","cat":"Law & Gov","org":"Crown Office & Procurator Fiscal Service","location":"Edinburgh","dept":"Specialist Casework Unit","contact":"Case Intake Desk","phone":"0131 226 5911","email":"enquiries@copfs.gov.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-07","batch":"Batch 1","cat":"Law & Gov","org":"Cyber & Fraud Centre Scotland","location":"Stirling","dept":"Industry Partnerships","contact":"Partnership Lead","phone":"01786 437472","email":"enquiries@cyberfraudcentre.com","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-08","batch":"Batch 1","cat":"Law & Gov","org":"Scottish Government — Economic Crime","location":"Edinburgh","dept":"Financial Intelligence Unit","contact":"Policy Team","phone":"0300 244 4000","email":"economic.crime@gov.scot","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-09","batch":"Batch 1","cat":"Law & Gov","org":"Financial Conduct Authority (FCA) — Crypto","location":"London / Edinburgh","dept":"Cryptoassets & Investigations","contact":"Enforcement Intake","phone":"0800 111 6768","email":"crypto@fca.org.uk","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-10","batch":"Batch 1","cat":"Law & Gov","org":"FCA — Enforcement","location":"London","dept":"Asset Recovery Team","contact":"Asset Recovery Desk","phone":"0800 111 6768","email":"enforcement@fca.org.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-11","batch":"Batch 1","cat":"Law & Gov","org":"National Cyber Security Centre (NCSC)","location":"London","dept":"Cyber Incident Response","contact":"Incident Response","phone":"03000 200 973","email":"enquiries@ncsc.gov.uk","sample":"Sample #3 FBI Ransomware (£149)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-12","batch":"Batch 1","cat":"Law & Gov","org":"Insolvency Service — Crypto Specialist","location":"Edinburgh / London","dept":"Official Receiver / Crypto Asset Tracing","contact":"Asset Tracing Officer","phone":"0300 678 0015","email":"enquiries@insolvency.gov.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-13","batch":"Batch 1","cat":"Law & Gov","org":"Crown Prosecution Service (CPS)","location":"London","dept":"Proceeds of Crime Unit","contact":"POCU Caseworker","phone":"020 3357 0000","email":"enquiries@cps.gov.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-14","batch":"Batch 1","cat":"Law & Gov","org":"Serious Fraud Office (SFO)","location":"London","dept":"Case Intake / Financial Tracing","contact":"Intelligence Section","phone":"020 7239 7272","email":"enquiries@sfo.gov.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-15","batch":"Batch 1","cat":"Law & Gov","org":"Home Office — Cyber Crime Policy","location":"London","dept":"Supplier & Innovation Engagement","contact":"Innovation Desk","phone":"020 7035 4848","email":"cyber.policy@homeoffice.gov.uk","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
+  
+  {"id":"LEAD-16","batch":"Batch 2","cat":"Scottish Law Firms","org":"Harper Macleod LLP","location":"Glasgow / Edinburgh","dept":"Commercial Dispute Resolution","contact":"Head of Asset Recovery","phone":"0141 221 8888","email":"enquiries@harpermacleod.co.uk","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-17","batch":"Batch 2","cat":"Scottish Law Firms","org":"Brodies LLP","location":"Edinburgh / Glasgow","dept":"Fraud & Asset Recovery","contact":"Head of Fraud & Asset Recovery","phone":"0131 228 3777","email":"enquiries@brodies.com","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-18","batch":"Batch 2","cat":"Scottish Law Firms","org":"Burness Paull LLP","location":"Edinburgh / Aberdeen","dept":"Commercial Litigation & Financial Crime","contact":"Litigation Partner","phone":"0131 473 6000","email":"info@burnesspaull.com","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-19","batch":"Batch 2","cat":"Scottish Law Firms","org":"Morton Fraser MacRoberts","location":"Edinburgh / Glasgow","dept":"Dispute Resolution","contact":"Dispute Resolution Team","phone":"0131 247 1000","email":"info@mortonfraser.com","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-20","batch":"Batch 2","cat":"Scottish Law Firms","org":"Shepherd & Wedderburn","location":"Edinburgh","dept":"Commercial Litigation","contact":"Litigation Desk","phone":"0131 228 9900","email":"enquiries@shepwedd.com","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-21","batch":"Batch 2","cat":"Scottish Law Firms","org":"Livingstone Brown","location":"Glasgow","dept":"Economic Crime & Proceeds of Crime","contact":"Stuart Munro (Head of Financial Crime)","phone":"0141 429 8166","email":"mail@livingstonebrown.co.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-22","batch":"Batch 2","cat":"Scottish Law Firms","org":"Scullion LAW","location":"Hamilton / Glasgow","dept":"Fraud & Financial Crime","contact":"Dispute Partner","phone":"01698 283265","email":"mail@scullionlaw.com","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-23","batch":"Batch 2","cat":"Scottish Law Firms","org":"Fleming & Reid","location":"Glasgow","dept":"Cyber & Economic Crime","contact":"Litigation Partner","phone":"0141 778 7777","email":"enquiries@flemingandreid.co.uk","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-24","batch":"Batch 2","cat":"Scottish Law Firms","org":"MacRoberts LLP","location":"Glasgow / Edinburgh","dept":"Commercial Disputes","contact":"Commercial Partner","phone":"0141 303 1100","email":"mail@macroberts.com","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-25","batch":"Batch 2","cat":"Scottish Law Firms","org":"Dentons Scotland","location":"Edinburgh","dept":"Asset Recovery & Civil Fraud","contact":"Civil Fraud Partner","phone":"0131 271 5000","email":"edinburgh@dentons.com","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-26","batch":"Batch 2","cat":"Scottish Law Firms","org":"Addleshaw Goddard","location":"Edinburgh","dept":"Financial Crime & Disputes","contact":"Financial Crime Partner","phone":"0131 222 9800","email":"edinburgh@addleshawgoddard.com","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-27","batch":"Batch 2","cat":"Scottish Law Firms","org":"Anderson Strathern","location":"Edinburgh","dept":"Dispute Resolution","contact":"Dispute Partner","phone":"0131 220 7660","email":"info@andersonstrathern.co.uk","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-28","batch":"Batch 2","cat":"Scottish Law Firms","org":"Balfour+Manson","location":"Edinburgh / Aberdeen","dept":"Commercial Litigation","contact":"Litigation Partner","phone":"0131 200 1200","email":"enquiries@balfour-manson.co.uk","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-29","batch":"Batch 2","cat":"Scottish Law Firms","org":"Gillespie Macandrew","location":"Edinburgh / Perth","dept":"Asset Recovery","contact":"Asset Recovery Lead","phone":"0131 225 1677","email":"enquiries@gillespiemacandrew.co.uk","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-30","batch":"Batch 2","cat":"Scottish Law Firms","org":"Lindsays","location":"Edinburgh / Glasgow","dept":"Dispute Resolution","contact":"Litigation Team","phone":"0131 656 5758","email":"enquiries@lindsayslaw.com","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-31","batch":"Batch 2","cat":"Scottish Law Firms","org":"MBM Commercial","location":"Edinburgh","dept":"Fintech & Commercial","contact":"Fintech Partner","phone":"0131 226 8200","email":"info@mbmcommercial.co.uk","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-32","batch":"Batch 2","cat":"Scottish Law Firms","org":"Gilson Gray","location":"Edinburgh / Glasgow","dept":"Commercial Disputes","contact":"Disputes Team","phone":"0131 516 5354","email":"info@gilsongray.co.uk","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-33","batch":"Batch 2","cat":"Scottish Law Firms","org":"Thorntons Law","location":"Dundee / Edinburgh","dept":"Financial Crime","contact":"Disputes Lead","phone":"03330 430150","email":"enquiries@thorntons-law.co.uk","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-34","batch":"Batch 2","cat":"Scottish Law Firms","org":"Blackadders","location":"Dundee / Aberdeen","dept":"Asset Recovery","contact":"Commercial Partner","phone":"01382 342222","email":"enquiries@blackadders.co.uk","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-35","batch":"Batch 2","cat":"Scottish Law Firms","org":"Miller Samuel","location":"Glasgow","dept":"Commercial Litigation","contact":"Litigation Team","phone":"0141 221 1919","email":"info@millersamuel.com","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
+  
+  {"id":"LEAD-36","batch":"Batch 3","cat":"Specialist Forensics","org":"Crypto Legal UK","location":"London / UK-wide","dept":"Crypto Asset Recovery","contact":"Intake Team","phone":"020 3983 8100","email":"info@cryptolegal.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-37","batch":"Batch 3","cat":"Specialist Forensics","org":"CYFOR","location":"Manchester / UK-wide","dept":"Digital Forensics — Blockchain","contact":"Corporate Case Intake","phone":"0161 797 8123","email":"contact@cyfor.co.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-38","batch":"Batch 3","cat":"Specialist Forensics","org":"Zeus Crypto Recovery","location":"Edinburgh (39 Thistle St)","dept":"Edinburgh-based Crypto Recovery","contact":"Edinburgh Team","phone":"0131 510 7400","email":"support@zeusrecoveryservices.com","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-39","batch":"Batch 3","cat":"Specialist Forensics","org":"Crypto Support Edinburgh","location":"Edinburgh","dept":"Local Crypto Forensics","contact":"Paul (CEO - Direct Line)","phone":"0131 285 5400","email":"paul@cryptosupportedinburgh.com","sample":"Sample #1 Uniswap Drainer (£49)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-40","batch":"Batch 3","cat":"Specialist Forensics","org":"Asset Reality","location":"London / Global","dept":"Crypto Asset Recovery Platform","contact":"Intake Team","phone":"020 8050 4886","email":"hello@assetreality.com","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-41","batch":"Batch 3","cat":"Specialist Forensics","org":"Global Asset Recovery","location":"London","dept":"International Tracing","contact":"Case Officer","phone":"020 7183 2933","email":"info@globalassetrecovery.co.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-42","batch":"Batch 3","cat":"Specialist Forensics","org":"Kroll — Scotland","location":"Edinburgh","dept":"Financial Investigations","contact":"Edinburgh Lead","phone":"0131 222 8900","email":"edinburgh@kroll.com","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-43","batch":"Batch 3","cat":"Specialist Forensics","org":"Alvarez & Marsal","location":"London / UK","dept":"Forensic Accounting","contact":"Investigations Team","phone":"020 7715 5200","email":"enquiries@alvarezandmarsal.com","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-44","batch":"Batch 3","cat":"Specialist Forensics","org":"FTI Consulting","location":"London / Scotland","dept":"Blockchain & Digital Forensics","contact":"Scotland Lead","phone":"020 3727 1000","email":"scotland@fticonsulting.com","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-45","batch":"Batch 3","cat":"Specialist Forensics","org":"Grant Thornton","location":"Edinburgh","dept":"Forensic & Asset Recovery","contact":"Forensic Lead","phone":"0131 659 8500","email":"edinburgh@uk.gt.com","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-46","batch":"Batch 3","cat":"Specialist Forensics","org":"PwC Scotland","location":"Edinburgh","dept":"Blockchain Forensics","contact":"Dispute Services","phone":"0131 257 4000","email":"edinburgh.pwc@pwc.com","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-47","batch":"Batch 3","cat":"Specialist Forensics","org":"Deloitte Scotland","location":"Edinburgh","dept":"Digital Assets & Forensics","contact":"Forensics Lead","phone":"0131 535 7000","email":"edinburgh@deloitte.co.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-48","batch":"Batch 3","cat":"Specialist Forensics","org":"EY Scotland","location":"Edinburgh","dept":"Blockchain Investigations","contact":"Fraud Investigations","phone":"0131 777 2000","email":"edinburgh.ey@ey.com","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-49","batch":"Batch 3","cat":"Specialist Forensics","org":"BDO Scotland","location":"Edinburgh","dept":"Forensic Technology","contact":"Forensic Tech Team","phone":"0131 347 0340","email":"edinburgh@bdo.co.uk","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""},
+  {"id":"LEAD-50","batch":"Batch 3","cat":"Specialist Forensics","org":"RSM Scotland","location":"Edinburgh","dept":"Fraud & Forensic Services","contact":"Fraud Partner","phone":"0131 659 8300","email":"enquiries@rsmuk.com","sample":"Sample #2 Tether Freeze (£149)","status":"Not Contacted","notes":""}
 ];
 
 let leads = [];
@@ -573,37 +713,50 @@ let currentFilter = 'ALL';
 let activeModalLead = null;
 
 function init() {
-  const saved = localStorage.getItem('qt_leads_crm_v1');
+  const saved = localStorage.getItem('qt_leads_crm_v2') || localStorage.getItem('qt_leads_crm_v1');
   if (saved) {
     try {
-      leads = JSON.parse(saved);
+      const parsed = JSON.parse(saved);
+      // Merge with default phone numbers & locations if missing
+      leads = parsed.map(l => {
+        const defaultMatch = INITIAL_LEADS.find(initL => initL.id === l.id);
+        if (defaultMatch) {
+          return {
+            ...defaultMatch,
+            ...l,
+            phone: l.phone || defaultMatch.phone || "07538162246",
+            location: l.location || defaultMatch.location || "Scotland / UK"
+          };
+        }
+        return l;
+      });
     } catch(e) {
       leads = JSON.parse(JSON.stringify(INITIAL_LEADS));
     }
   } else {
     leads = JSON.parse(JSON.stringify(INITIAL_LEADS));
-    save();
   }
+  save();
   renderTable();
   updateKPIs();
 }
 
 function save() {
-  localStorage.setItem('qt_leads_crm_v1', JSON.stringify(leads));
+  localStorage.setItem('qt_leads_crm_v2', JSON.stringify(leads));
 }
 
 function updateKPIs() {
   const total = leads.length;
-  const sent = leads.filter(l => l.status === 'Email Sent' || l.status === 'Follow-up Due' || l.status === 'Replied - Interested' || l.status === 'Demo Dispatched' || l.status === 'Closed Won').length;
-  const followup = leads.filter(l => l.status === 'Follow-up Due').length;
-  const replied = leads.filter(l => l.status === 'Replied - Interested' || l.status === 'Demo Dispatched' || l.status === 'Closed Won').length;
+  const sent = leads.filter(l => l.status && l.status !== 'Not Contacted').length;
+  const followup = leads.filter(l => l.status && l.status.includes('Follow-up') || l.status.includes('Message')).length;
+  const replied = leads.filter(l => l.status && (l.status.includes('Interested') || l.status.includes('Won') || l.status.includes('Conversation'))).length;
 
   document.getElementById('kpi-total').textContent = total;
   document.getElementById('kpi-sent').textContent = sent;
-  document.getElementById('kpi-sent-sub').textContent = `${50 - sent} remaining (${Math.round((sent/50)*100)}% done)`;
+  document.getElementById('kpi-sent-sub').textContent = `${total - sent} remaining (${Math.round((sent/Math.max(1, total))*100)}% done)`;
   document.getElementById('kpi-followup').textContent = followup;
   document.getElementById('kpi-replied').textContent = replied;
-  document.getElementById('kpi-conversion').textContent = sent > 0 ? `${Math.round((replied/sent)*100)}% reply rate` : 'Target: 5 replies (10%)';
+  document.getElementById('kpi-conversion').textContent = sent > 0 ? `${Math.round((replied/sent)*100)}% positive response` : 'Target: 5 calls today';
 }
 
 function setFilter(filter) {
@@ -615,16 +768,18 @@ function setFilter(filter) {
 }
 
 function renderTable() {
-  const query = document.getElementById('searchInput').value.toLowerCase();
+  const query = (document.getElementById('searchInput').value || '').toLowerCase();
   const tbody = document.getElementById('leadsTableBody');
   tbody.innerHTML = '';
 
   const filtered = leads.filter(lead => {
-    const matchesFilter = (currentFilter === 'ALL') || lead.batch.includes(currentFilter);
+    const matchesFilter = (currentFilter === 'ALL') || (lead.batch && lead.batch.includes(currentFilter)) || (lead.cat && lead.cat.includes(currentFilter));
     const matchesQuery = !query || 
       lead.org.toLowerCase().includes(query) ||
-      lead.dept.toLowerCase().includes(query) ||
-      lead.email.toLowerCase().includes(query) ||
+      (lead.location && lead.location.toLowerCase().includes(query)) ||
+      (lead.dept && lead.dept.toLowerCase().includes(query)) ||
+      (lead.phone && lead.phone.toLowerCase().includes(query)) ||
+      (lead.email && lead.email.toLowerCase().includes(query)) ||
       (lead.contact && lead.contact.toLowerCase().includes(query)) ||
       (lead.notes && lead.notes.toLowerCase().includes(query));
     return matchesFilter && matchesQuery;
@@ -637,36 +792,56 @@ function renderTable() {
     if (lead.batch === 'Batch 2') batchBadge = 'badge-b2';
     if (lead.batch === 'Batch 3') batchBadge = 'badge-b3';
 
+    const phoneClean = (lead.phone || '').replace(/[^0-9+]/g, '');
+
     tr.innerHTML = `
       <td style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">${lead.id}</td>
-      <td><span class="badge ${batchBadge}">${lead.batch}</span></td>
-      <td><strong>${lead.org}</strong></td>
       <td>
-        <div style="font-size: 12px; color: #e2e8f0;">${lead.dept}</div>
-        ${lead.contact ? `<div style="font-size: 11px; color: var(--cyan-bright);">Attn: ${lead.contact}</div>` : ''}
+        <strong style="font-size: 13.5px; color: #fff;">${lead.org}</strong>
+        <div style="margin-top: 2px;"><span class="badge ${batchBadge}">${lead.cat || lead.batch}</span></div>
       </td>
       <td>
-        <a class="email-link" href="mailto:${lead.email}">${lead.email}</a>
+        <div style="font-size: 12px; color: #38bdf8; font-weight: 600;">📍 ${lead.location || 'UK'}</div>
       </td>
-      <td style="font-size: 12px; color: #cbd5e1;">${lead.sample}</td>
+      <td>
+        <div style="font-size: 12px; color: #e2e8f0; font-weight: 500;">${lead.contact || lead.dept || 'Reception'}</div>
+        <div style="font-size: 11px; color: var(--text-muted);">${lead.dept && lead.dept !== lead.contact ? lead.dept : ''}</div>
+      </td>
+      <td>
+        ${lead.phone ? `
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <a href="tel:${phoneClean}" class="action-btn" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border-color: rgba(16, 185, 129, 0.3); text-decoration: none; font-weight: 700; font-size: 12px; padding: 5px 8px;">
+              📞 ${lead.phone}
+            </a>
+            <button class="action-btn" title="Copy Phone Number" onclick="copyText('${lead.phone}', 'Phone copied!')">📋</button>
+          </div>
+        ` : `<span style="color: var(--text-muted); font-size: 11px;">No direct phone</span>`}
+      </td>
+      <td>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <a class="email-link" href="mailto:${lead.email}">${lead.email}</a>
+          <button class="action-btn" title="Copy Email" onclick="copyText('${lead.email}', 'Email copied!')" style="padding: 2px 6px; font-size: 10px;">📋</button>
+        </div>
+      </td>
       <td>
         <select class="status-select" onchange="updateStatus('${lead.id}', this.value)">
-          <option value="Not Contacted" ${lead.status === 'Not Contacted' ? 'selected' : ''}>Not Contacted</option>
-          <option value="Email Sent" ${lead.status === 'Email Sent' ? 'selected' : ''}>Email Sent</option>
-          <option value="Follow-up Due" ${lead.status === 'Follow-up Due' ? 'selected' : ''}>Follow-up Due</option>
-          <option value="Replied - Interested" ${lead.status === 'Replied - Interested' ? 'selected' : ''}>Replied - Interested</option>
-          <option value="Demo Dispatched" ${lead.status === 'Demo Dispatched' ? 'selected' : ''}>Demo Dispatched</option>
-          <option value="Closed Won" ${lead.status === 'Closed Won' ? 'selected' : ''}>Closed Won</option>
-          <option value="Nurture / Hold" ${lead.status === 'Nurture / Hold' ? 'selected' : ''}>Nurture / Hold</option>
+          <option value="Not Contacted" ${lead.status === 'Not Contacted' ? 'selected' : ''}>⏳ Not Contacted</option>
+          <option value="Called — Spoke with Reception" ${lead.status === 'Called — Spoke with Reception' ? 'selected' : ''}>📞 Spoke with Reception</option>
+          <option value="Called — Left Message for Partner" ${lead.status === 'Called — Left Message for Partner' ? 'selected' : ''}>📝 Left Message for Partner</option>
+          <option value="Called — In Conversation" ${lead.status === 'Called — In Conversation' ? 'selected' : ''}>💬 In Conversation</option>
+          <option value="Email Sent" ${lead.status === 'Email Sent' ? 'selected' : ''}>📧 Email Sent</option>
+          <option value="Follow-up Due" ${lead.status === 'Follow-up Due' ? 'selected' : ''}>⏰ Follow-up Due</option>
+          <option value="Replied - Interested" ${lead.status === 'Replied - Interested' ? 'selected' : ''}>⭐ Interested / Needs Sample</option>
+          <option value="Closed Won — Paid Retainer" ${lead.status === 'Closed Won — Paid Retainer' ? 'selected' : ''}>🎉 Closed Won / Paid</option>
         </select>
       </td>
       <td>
-        <input type="text" class="notes-input" placeholder="Add note / call date..." value="${lead.notes || ''}" onchange="updateNotes('${lead.id}', this.value)">
+        <input type="text" class="notes-input" placeholder="Type call notes here..." value="${lead.notes || ''}" oninput="updateNotes('${lead.id}', this.value)">
       </td>
-      <td>
-        <div style="display: flex; gap: 6px;">
-          <button class="action-btn" title="Open Custom Pitch Generator" onclick="openPitchModal('${lead.id}')">✉️ Pitch</button>
-          <button class="action-btn" title="Copy Email Address" onclick="copyText('${lead.email}', 'Email copied!')">📋</button>
+      <td style="text-align: right;">
+        <div style="display: flex; gap: 6px; justify-content: flex-end;">
+          <button class="action-btn" style="background:#0284c7; color:#fff;" title="Open Email / Webform Pitch" onclick="openPitchModal('${lead.id}')">✉️ Pitch</button>
+          ${lead.isCustom ? `<button class="action-btn" style="color:#ef4444;" title="Delete Custom Contact" onclick="deleteContact('${lead.id}')">🗑️</button>` : ''}
         </div>
       </td>
     `;
@@ -680,6 +855,7 @@ function updateStatus(id, newStatus) {
     item.status = newStatus;
     save();
     updateKPIs();
+    showToast("Status updated ✓");
   }
 }
 
@@ -691,38 +867,141 @@ function updateNotes(id, text) {
   }
 }
 
+function openAddLeadModal() {
+  document.getElementById('addContactModal').classList.add('active');
+  document.getElementById('newOrg').focus();
+}
+
+function closeAddLeadModal() {
+  document.getElementById('addContactModal').classList.remove('active');
+}
+
+function saveNewContact() {
+  const org = document.getElementById('newOrg').value.trim();
+  if (!org) {
+    alert("Please enter a company or firm name.");
+    return;
+  }
+  const location = document.getElementById('newLocation').value.trim() || 'UK';
+  const contact = document.getElementById('newContact').value.trim() || 'Partner / Team';
+  const phone = document.getElementById('newPhone').value.trim() || '';
+  const email = document.getElementById('newEmail').value.trim() || '';
+  const notes = document.getElementById('newNotes').value.trim() || '';
+
+  const newId = `FILO-${String(leads.length + 1).padStart(2, '0')}`;
+  const newLead = {
+    id: newId,
+    batch: "Custom Added",
+    cat: "Custom Lead",
+    org: org,
+    location: location,
+    dept: contact,
+    contact: contact,
+    phone: phone,
+    email: email,
+    sample: "Sample #1 Uniswap Drainer (£49)",
+    status: "Not Contacted",
+    notes: notes,
+    isCustom: true
+  };
+
+  leads.unshift(newLead);
+  save();
+  renderTable();
+  updateKPIs();
+  closeAddLeadModal();
+
+  // Clear inputs
+  document.getElementById('newOrg').value = '';
+  document.getElementById('newLocation').value = '';
+  document.getElementById('newContact').value = '';
+  document.getElementById('newPhone').value = '';
+  document.getElementById('newEmail').value = '';
+  document.getElementById('newNotes').value = '';
+
+  showToast(`Added ${org} to your Filofax!`);
+}
+
+function deleteContact(id) {
+  if (confirm("Delete this contact from your Filofax?")) {
+    leads = leads.filter(l => l.id !== id);
+    save();
+    renderTable();
+    updateKPIs();
+    showToast("Contact removed");
+  }
+}
+
+let currentPitchTab = 'email';
+
 function getPitchText(lead) {
   const contactName = lead.contact ? lead.contact : (lead.dept ? lead.dept : 'Team');
   const orgName = lead.org;
 
-  let body = `Subject: Crypto Forensic Tracing — Sample Report · QT Analytics\n\n`;
-  body += `Hi ${contactName},\n\n`;
-  body += `I’m Stephen Fitzpatrick, founder of QT Analytics in Scotland.\n\n`;
-  body += `We produce court-ready crypto forensic reports where standard tracing tools like Chainalysis hit a dead end. Our invariant-locked engine follows the trail through mixers and cross-chain hops that others miss. Every report carries a tamper-proof mathematical seal — verifiable instantly, without requiring expensive expert witness hours.\n\n`;
-  body += `I’ve attached a sample report (${lead.sample}) so you can see exactly what we deliver:\n\n`;
-  body += `• Standard single-wallet trace: £49 (24-hr turnaround)\n`;
-  body += `• Full network / multi-chain scan: £149 (court-ready evidence pack)\n\n`;
-  body += `Would this capability be useful for your casework at ${orgName}? I’d welcome a brief 5-minute chat.\n\n`;
-  body += `Best regards,\n\n`;
+  let body = `Subject: Forensic Crypto Asset Tracing & 24/7 Automated Fraud Intake — QT Analytics\n\n`;
+  body += `Dear ${contactName},\n\n`;
+  body += `I am writing to introduce QT Analytics, a Scotland-based forensic blockchain intelligence desk specialising in rapid-turnaround crypto asset tracing, court-ready disclosure packs, and automated fraud intercept.\n\n`;
+  body += `⚡ Addressing The "Critical Gap" (72-Hour Settlement Delay):\n`;
+  body += `In crypto theft matters, time is the single most critical factor. While blockchain transactions occur in seconds, perpetrators face a mandatory 72-hour international fiat clearing delay when attempting to withdraw cash from exchanges (such as Binance, Kraken, or Coinbase).\n\n`;
+  body += `This 72-hour window is the "Critical Gap". To ensure victims and solicitors never miss this recovery window due to human response delays, QT Analytics operates an automated, 24/7 incident intake protocol. Our engine begins tracing and generating emergency preservation notices (CPR Part 25 pre-action holds) within seconds of an enquiry being received.\n\n`;
+  body += `Three Transparent Service Tiers:\n`;
+  body += `• Tier 1: 24-Hour Incident Trace (£49 - £499)\n`;
+  body += `  3-hop forensic audit identifying the destination exchange deposit account, accompanied by a verified police / Action Fraud disclosure pack delivered within 24 hours.\n\n`;
+  body += `• Tier 2: Court-Ready Forensic Dossier (£149 - £1,500)\n`;
+  body += `  Comprehensive multi-chain & mixer unravelling, complete with an Expert Witness Statement of Truth compliant with UK CPR Part 35, cryptographic SHA-256 seal, and Norwich Pharmacal / Bankers Trust disclosure ready.\n\n`;
+  body += `• Tier 3: Corporate Retainer & Multi-RPC Surveillance (£2,500+/mo)\n`;
+  body += `  Continuous 24/7 live wallet monitoring, automated alert webhooks, and priority forensic turnaround across Ethereum, Solana, Bitcoin, and Tron for litigation funders and insolvency practitioners.\n\n`;
+  body += `Whether you have an active matter requiring an urgent CEX freeze today, or simply wish to hold our fee sheet and sample disclosure reports on file, I would welcome a brief 5-minute introductory call.\n\n`;
+  body += `Kind regards,\n\n`;
   body += `Stephen Fitzpatrick\n`;
-  body += `Founder, QT Analytics\n`;
-  body += `Web: https://qt-analytics.co.uk\n`;
+  body += `Founder & Lead Investigator, QT Analytics\n`;
+  body += `Direct Mobile: 07538162246 (+44 7538 162246)\n`;
   body += `Email: stephen@qtanalytics.co.uk\n`;
+  body += `Web: https://qt-analytics.co.uk\n\n`;
+  body += `Payment Coordinates:\n`;
+  body += `- Monzo Bank Ltd | Business Account: 98270319 | Sort Code: 04-00-05\n`;
+  body += `- Instant Card Checkout (Stripe): https://buy.stripe.com/6oU4gyfBydKagjQ0G8dIA00\n`;
   return body;
+}
+
+function getWebformText(lead) {
+  return `Hi ${lead.org} Team,\n\nI’m Stephen Fitzpatrick, founder of QT Analytics in Scotland (07538162246 / stephen@qtanalytics.co.uk).\n\nWe provide 24/7 automated crypto forensic tracing and court-ready disclosure packs (CPR Part 25/35). In crypto theft, criminals face a 72-hour fiat clearing delay (the Critical Gap) before off-ramping to bank accounts. Our intake engine intercepts and traces transactions within seconds to prevent fund dissipation.\n\nService Tiers: Tier 1 Single-Wallet (£49-£499), Tier 2 CPR Part 35 Court Dossier (£149-£1,500), Tier 3 Corporate Retainer (£2,500+/mo).\n\nCould I send a sample case dossier over to your fraud dispute team, or have a brief 5-minute call today?\n\nBest regards,\nStephen Fitzpatrick\nTel: 07538162246\nEmail: stephen@qtanalytics.co.uk\nWeb: https://qt-analytics.co.uk`;
+}
+
+function switchPitchTab(tab) {
+  currentPitchTab = tab;
+  const btnEmail = document.getElementById('btnTabEmail');
+  const btnWebform = document.getElementById('btnTabWebform');
+  const helper = document.getElementById('pitchHelperText');
+
+  if (tab === 'webform') {
+    btnWebform.className = 'btn-primary';
+    btnEmail.className = 'btn-secondary';
+    helper.innerHTML = `Short webform text for corporate "Contact Us" portals. Includes Stephen's mobile (<strong>07538162246</strong>).`;
+    document.getElementById('emailContent').textContent = getWebformText(activeModalLead);
+    document.getElementById('modalMailto').style.display = 'none';
+  } else {
+    btnEmail.className = 'btn-primary';
+    btnWebform.className = 'btn-secondary';
+    helper.innerHTML = `Pre-tailored full email pitch for <strong style="color:#fff;">${activeModalLead.dept}</strong> with Tiers 1-3 & Critical Gap. Includes phone (<strong>07538162246</strong>) and Monzo wire coordinates.`;
+    document.getElementById('emailContent').textContent = getPitchText(activeModalLead);
+    document.getElementById('modalMailto').style.display = 'inline-flex';
+  }
 }
 
 function openPitchModal(id) {
   const lead = leads.find(l => l.id === id);
   if (!lead) return;
   activeModalLead = lead;
+  currentPitchTab = 'email';
   
   document.getElementById('modalTargetOrg').textContent = `Outreach: ${lead.org}`;
   document.getElementById('modalDeptName').textContent = `${lead.dept} (${lead.email})`;
   
-  const pitch = getPitchText(lead);
-  document.getElementById('emailContent').textContent = pitch;
+  switchPitchTab('email');
 
-  const subject = encodeURIComponent("Crypto Forensic Tracing — Sample Report · QT Analytics");
+  const pitch = getPitchText(lead);
+  const subject = encodeURIComponent("Forensic Crypto Asset Tracing & 24/7 Automated Fraud Intake — QT Analytics");
   const body = encodeURIComponent(pitch.replace(/^Subject:.*\n\n/, ''));
   document.getElementById('modalMailto').href = `mailto:${lead.email}?subject=${subject}&body=${body}`;
 
@@ -734,17 +1013,24 @@ function closeModal() {
   activeModalLead = null;
 }
 
-function copyModalPitch() {
+function copyCurrentPitch() {
   if (!activeModalLead) return;
-  const pitch = getPitchText(activeModalLead);
-  copyText(pitch, "Pitch copied! Paste into your email.");
-  // Mark as sent optionally
+  const txt = currentPitchTab === 'webform' ? getWebformText(activeModalLead) : getPitchText(activeModalLead);
+  copyText(txt, currentPitchTab === 'webform' ? "Webform note copied! Paste into contact portal." : "Full email pitch copied!");
   if (activeModalLead.status === 'Not Contacted') {
     activeModalLead.status = 'Email Sent';
     save();
     renderTable();
     updateKPIs();
   }
+}
+
+function openPaymentModal() {
+  document.getElementById('paymentModal').classList.add('active');
+}
+
+function closePaymentModal() {
+  document.getElementById('paymentModal').classList.remove('active');
 }
 
 function copyText(text, message) {

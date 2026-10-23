@@ -25,7 +25,7 @@ Yang–Mills non-Abelian gauge theory revealed the exact opposite of what the en
 1. **At extremely short distances (high energy scales $Q^2 \to \infty$)**, the effective coupling constant $g(Q^2) \to 0$. Quarks behave as essentially free, non-interacting particles (**Asymptotic Freedom**).
 2. **At long distances (low energy scales $Q^2 \to \Lambda_{\text{QCD}}^2$)**, the force intensifies drastically, pulling field lines into impenetrable, unbreakable flux tubes (**Topological Confinement**).
 
-Concurrently and independently, David Politzer at Harvard reached the identical mathematical conclusion. Their matching papers were published back-to-back in *Physical Review Letters* in 1973, culminating in the 2004 Nobel Prize in Physics.
+Concurrently and independently, David Politzer at Harvard reached the identical mathematical conclusion. Their matching papers were published back-to-back in *Physical Review Letters* in 1973, culminating in the 2004 Nobel  in Physics.
 
 ```
                           ASYMPTOTIC FREEDOM vs. CONFINEMENT
