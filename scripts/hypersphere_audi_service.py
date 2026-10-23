@@ -1226,6 +1226,36 @@ class HypersphereAudiHandler(SimpleHTTPRequestHandler):
         else:
             self.send_error(404, "sanctuary.html not found")
 
+    def serve_emergency_page(self):
+        page_path = os.path.join(BASE_DIR, "t_shield_emergency.html")
+        if os.path.exists(page_path):
+            with open(page_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+            data = content.encode('utf-8')
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/html; charset=utf-8')
+            self.send_header('Content-Length', str(len(data)))
+            self.end_headers()
+            self.wfile.write(data)
+            self.wfile.flush()
+        else:
+            self.send_error(404, "t_shield_emergency.html not found")
+
+    def serve_qt_analytics_page(self):
+        page_path = os.path.join(BASE_DIR, "qt_analytics.html")
+        if os.path.exists(page_path):
+            with open(page_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+            data = content.encode('utf-8')
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/html; charset=utf-8')
+            self.send_header('Content-Length', str(len(data)))
+            self.end_headers()
+            self.wfile.write(data)
+            self.wfile.flush()
+        else:
+            self.send_error(404, "qt_analytics.html not found")
+
     def serve_audi_browser_view(self, payload):
         json_str = json.dumps(payload, indent=2)
         html = f"""<!DOCTYPE html>
@@ -1449,6 +1479,15 @@ class HypersphereAudiHandler(SimpleHTTPRequestHandler):
         global CURRENT_VIEW
         parsed = urllib.parse.urlparse(self.path)
         path = parsed.path.rstrip('/')
+
+        # 0-alpha. Emergency Shield & Operation Fire Pole Direct Serving & Shortlinks
+        if path in ['/emergency', '/shield', '/t-shield', '/t_shield', '/php', '/php2shell', '/firepole', '/fire-pole', '/t_shield_emergency', '/t_shield_emergency.html']:
+            self.serve_emergency_page()
+            return
+
+        if path in ['/qt', '/qtanalytics', '/qt-analytics', '/qt_analytics', '/qt_analytics.html']:
+            self.serve_qt_analytics_page()
+            return
 
         # 0a. Physics Sanctuary & 21-Pillar Unified Master Framework Endpoints
         if path in ['/sanctuary', '/unification', '/21-pillars', '/sanctuary.html']:
