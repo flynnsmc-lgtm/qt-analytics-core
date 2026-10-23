@@ -7,6 +7,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- KaTeX for optional LaTeX math formatting -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <!-- html2pdf.js for client-side PDF export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
     :root {
       --bg-dark: #090d16;
@@ -407,6 +412,326 @@
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* ============================================================
+       QT ANALYTICS BRANDED DOCUMENT CREATOR & PRINT STUDIO
+       White Paper Layout with Dark Blue Accents (#090d16 / #0f172a / #1e3a8a)
+       ============================================================ */
+    .doc-studio-panel {
+      display: none;
+      background: #0b1120;
+      border: 1px solid #1e3a8a;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 20px rgba(30, 58, 138, 0.2);
+      animation: fadeIn 0.25s ease;
+    }
+    .doc-studio-panel.active {
+      display: block;
+    }
+    .doc-studio-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #1e293b;
+      margin-bottom: 20px;
+    }
+    .doc-studio-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 17px;
+      font-weight: 700;
+      color: #38bdf8;
+    }
+    .doc-studio-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 24px;
+    }
+    @media (max-width: 1080px) {
+      .doc-studio-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+    .editor-column {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .doc-meta-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .editor-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #94a3b8;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+      display: block;
+    }
+    .doc-textarea {
+      width: 100%;
+      height: 520px;
+      background: #070b14;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      color: #f8fafc;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      line-height: 1.6;
+      padding: 16px;
+      resize: vertical;
+      box-sizing: border-box;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .doc-textarea:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+    }
+    
+    /* White Letterhead Preview Container */
+    .preview-column {
+      background: #090e1a;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: auto;
+    }
+    .preview-toolbar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #1e293b;
+    }
+    
+    /* THE PRINT / EXPORT SHEET: Pure white with dark blue accents */
+    #letterheadPrintArea {
+      width: 100%;
+      max-width: 780px;
+      min-height: 980px;
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+      padding: 38px 42px;
+      box-sizing: border-box;
+      border-radius: 4px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      font-family: var(--font-sans);
+      position: relative;
+    }
+    
+    /* Top Accent Line (Dark Navy #0f172a with subtle cyan/blue line) */
+    .doc-sheet-top-accent {
+      height: 5px;
+      background: #0f172a; /* Deep backend navy */
+      margin: -38px -42px 28px -42px;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      position: relative;
+    }
+    .doc-sheet-top-accent::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 1.5px;
+      background: #1e3a8a;
+    }
+    
+    /* Letterhead Top Header */
+    .doc-sheet-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #0f172a;
+      margin-bottom: 22px;
+    }
+    .doc-brand-block {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .doc-brand-logo-img {
+      width: 54px;
+      height: 54px;
+      object-fit: contain;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+      padding: 2px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .doc-brand-names h2 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #090d16;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 3px;
+    }
+    .doc-brand-names .doc-sub {
+      font-size: 11px;
+      font-weight: 700;
+      color: #1e3a8a;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .doc-meta-badge-block {
+      text-align: right;
+      font-size: 11px;
+      color: #334155;
+    }
+    .doc-classification-pill {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 3px;
+      border: 1.5px solid #0f172a;
+      color: #0f172a;
+      background: #f8fafc;
+      margin-bottom: 6px;
+    }
+    
+    /* Letterhead Body Content */
+    .doc-sheet-body {
+      font-size: 13.5px;
+      line-height: 1.68;
+      color: #1e293b;
+    }
+    .doc-sheet-body p {
+      margin-bottom: 14px;
+    }
+    .doc-sheet-body h3 {
+      font-size: 14px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: 0.02em;
+      margin: 22px 0 10px 0;
+      padding: 6px 12px;
+      background: #f8fafc;
+      border-left: 3px solid #1e3a8a;
+      border-radius: 0 4px 4px 0;
+    }
+    .doc-sheet-body hr {
+      border: none;
+      border-top: 1px solid #cbd5e1;
+      margin: 18px 0;
+    }
+    .doc-bullet-list {
+      margin: 10px 0 16px 20px;
+    }
+    .doc-bullet-list li {
+      margin-bottom: 8px;
+      padding-left: 4px;
+    }
+    .doc-code-block {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      padding: 8px 12px;
+      margin: 8px 0;
+      color: #0f172a;
+      word-break: break-all;
+    }
+    .doc-sha-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      background: #f1f5f9;
+      border: 1px solid #94a3b8;
+      border-radius: 3px;
+      padding: 1px 6px;
+      color: #0f172a;
+      font-weight: 600;
+    }
+    .doc-link {
+      color: #0369a1;
+      text-decoration: underline;
+      font-weight: 500;
+      word-break: break-all;
+    }
+    .doc-callout-banner {
+      background: #f0f7ff;
+      border: 1px solid #93c5fd;
+      border-left: 4px solid #1e3a8a;
+      padding: 12px 14px;
+      border-radius: 4px;
+      margin: 14px 0;
+      font-weight: 700;
+      color: #0f172a;
+      font-size: 13px;
+    }
+    
+    /* Letterhead Footer */
+    .doc-sheet-footer {
+      margin-top: 36px;
+      padding-top: 14px;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      color: #64748b;
+    }
+    .doc-sheet-footer .footer-left {
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    /* Print Media Query */
+    @media print {
+      body {
+        background-color: #ffffff !important;
+        color: #0f172a !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      body * {
+        visibility: hidden;
+      }
+      #letterheadPrintArea, #letterheadPrintArea * {
+        visibility: visible;
+      }
+      #letterheadPrintArea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 12mm 15mm !important;
+        margin: 0 !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        background: #ffffff !important;
+      }
+      .doc-sheet-top-accent {
+        margin: -12mm -15mm 20mm -15mm !important;
+        border-radius: 0 !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -422,6 +747,7 @@
       </div>
     </div>
     <div class="header-actions">
+      <button class="btn-primary" style="background: linear-gradient(135deg, #0f172a, #1e3a8a); border: 1px solid #38bdf8; box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);" onclick="toggleDocCreator()">📝 Branded Document &amp; PDF Creator</button>
       <button class="btn-primary" style="background: #0284c7;" onclick="openAddLeadModal()">➕ Add New Contact to Filofax</button>
       <button class="btn-primary" style="background: #10b981; border-color: #10b981;" onclick="openPaymentModal()">💳 My Bank / Monzo Details</button>
       <a href="http://localhost:8085/plan.pdf" target="_blank" class="btn-secondary" style="text-decoration: none; border-color: #38bdf8; color: #38bdf8;">📄 72-Hour Plan (PDF)</a>
@@ -430,6 +756,147 @@
       <button class="btn-secondary" onclick="resetToDefaults()">🔄 Reset</button>
     </div>
   </header>
+
+  <!-- QT ANALYTICS BRANDED DOCUMENT CREATOR & PDF EXPORT STUDIO -->
+  <div class="doc-studio-panel" id="docCreatorStudio">
+    <div class="doc-studio-header">
+      <div class="doc-studio-title">
+        <span style="font-size: 22px;">📝</span>
+        <div>
+          <div>QT Analytics — Branded Document Creator &amp; PDF Studio</div>
+          <div style="font-size: 12px; color: #94a3b8; font-weight: 400;">
+            Pure White Paper layout with Dark Blue Accents for Print / Email Attachments • Supports Live Markdown &amp; LaTeX
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+        <button class="btn-primary" style="background: #10b981; border-color: #10b981;" onclick="convertDocToPDF()">
+          <span>📥</span> Convert &amp; Download PDF
+        </button>
+        <button class="btn-primary" style="background: #0284c7;" onclick="printDocument()">
+          <span>🖨️</span> Direct Print / System PDF
+        </button>
+        <button class="btn-secondary" onclick="copyDocText()">
+          <span>📋</span> Copy Text
+        </button>
+        <button class="btn-secondary" onclick="resetDocText()">
+          <span>🔄</span> Reset to Advisory
+        </button>
+        <button class="btn-secondary" style="color: #f43f5e; border-color: #f43f5e;" onclick="toggleDocCreator()">
+          <span>✖</span> Close Studio
+        </button>
+      </div>
+    </div>
+
+    <!-- 2-Column Split Layout -->
+    <div class="doc-studio-layout">
+      <!-- Left Column: Document Settings & Live Text Input -->
+      <div class="editor-column">
+        <div>
+          <label class="editor-label">Document Title / Header</label>
+          <input type="text" id="docTitleInput" class="search-input" style="width: 100%;" value="SECURITY ADVISORY: PHP2SHELL (CVE-2026-109618 / 109619)" oninput="renderDocPreview()">
+        </div>
+
+        <div class="doc-meta-row">
+          <div>
+            <label class="editor-label">Reference ID / Case Code</label>
+            <input type="text" id="docRefInput" class="search-input" style="width: 100%;" value="QT-ADV-2026-PHP2SHELL" oninput="renderDocPreview()">
+          </div>
+          <div>
+            <label class="editor-label">Classification / Notice Type</label>
+            <select id="docClassInput" class="search-input" style="width: 100%;" onchange="renderDocPreview()">
+              <option value="OFFICIAL / CIVIC DEFENSE ADVISORY" selected>OFFICIAL / CIVIC DEFENSE ADVISORY</option>
+              <option value="CONFIDENTIAL / PRIVILEGED ADVISORY">CONFIDENTIAL / PRIVILEGED ADVISORY</option>
+              <option value="CPR PART 25/35 EXPERT DISCLOSURE">CPR PART 25/35 EXPERT DISCLOSURE</option>
+              <option value="COMMERCIAL FORENSIC PROPOSAL">COMMERCIAL FORENSIC PROPOSAL</option>
+              <option value="TECHNICAL BULLETIN">TECHNICAL BULLETIN</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="doc-meta-row">
+          <div>
+            <label class="editor-label">Document Date</label>
+            <input type="text" id="docDateInput" class="search-input" style="width: 100%;" value="23 October 2026" oninput="renderDocPreview()">
+          </div>
+          <div>
+            <label class="editor-label">Emergency Direct Line</label>
+            <input type="text" id="docPhoneInput" class="search-input" style="width: 100%;" value="+44 7538 162246" oninput="renderDocPreview()">
+          </div>
+        </div>
+
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <label class="editor-label" style="margin-bottom: 0;">Editable Document Text (Paste Email / Advisory / LaTeX Here)</label>
+            <span style="font-size: 11px; color: #38bdf8; font-family: var(--font-mono);" id="charWordCount">0 words</span>
+          </div>
+          <textarea id="docInputText" class="doc-textarea" placeholder="Paste your text or email draft here..." oninput="renderDocPreview()"></textarea>
+        </div>
+
+        <div style="font-size: 12px; color: #94a3b8; background: #070b14; padding: 10px 14px; border-radius: 6px; border: 1px solid #1e293b;">
+          💡 <strong>Pro-Tip:</strong> Type or paste freely. Supports headings (<code>1. TITLE</code> or <code># Title</code>), bullet points (<code>•</code> or <code>-</code>), dividers (<code>---</code>), code / hashes, URLs, and LaTeX math like <code>$\nabla \cdot \mathbf{J} = 0$</code>.
+        </div>
+      </div>
+
+      <!-- Right Column: Live Printable White Letterhead Preview -->
+      <div class="preview-column">
+        <div class="preview-toolbar">
+          <div style="font-size: 12px; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+            <span>📄</span> Live White Letterhead Preview (Print &amp; PDF Exact)
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <span style="font-size: 11px; color: #64748b;">A4 Sheet Aspect</span>
+            <button class="btn-secondary" style="padding: 2px 8px; font-size: 11px;" onclick="convertDocToPDF()">📥 Download PDF</button>
+          </div>
+        </div>
+
+        <!-- The actual printable white letterhead -->
+        <div id="letterheadPrintArea">
+          <div class="doc-sheet-top-accent"></div>
+
+          <!-- Header -->
+          <div class="doc-sheet-header">
+            <div class="doc-brand-block">
+              <img id="previewBrandLogo" class="doc-brand-logo-img" src="/assets/brand/qt_monogram_embossed.jpg" alt="QT Analytics Monogram" onerror="this.style.display='none'">
+              <div class="doc-brand-names">
+                <h2>QT ANALYTICS</h2>
+                <div class="doc-sub">Forensic Intelligence &amp; Cyber Defense • Edinburgh, Scotland</div>
+              </div>
+            </div>
+            <div class="doc-meta-badge-block">
+              <div id="previewClassification" class="doc-classification-pill">OFFICIAL / CIVIC DEFENSE ADVISORY</div>
+              <div style="font-weight: 700; color: #0f172a;" id="previewRefId">REF: QT-ADV-2026-PHP2SHELL</div>
+              <div style="color: #64748b;" id="previewDate">Date: 23 October 2026</div>
+              <div style="color: #0369a1; font-weight: 600;" id="previewPhone">Direct: +44 7538 162246</div>
+            </div>
+          </div>
+
+          <!-- Document Title in Letterhead -->
+          <div style="margin-bottom: 20px;">
+            <h1 id="previewDocTitle" style="font-size: 17px; font-weight: 800; color: #090d16; letter-spacing: -0.01em; line-height: 1.3;">
+              SECURITY ADVISORY: PHP2SHELL (CVE-2026-109618 / 109619) - EDGE DEFENSE
+            </h1>
+            <div style="height: 2px; width: 48px; background: #1e3a8a; margin-top: 6px;"></div>
+          </div>
+
+          <!-- Rendered Body -->
+          <div id="previewDocBody" class="doc-sheet-body">
+            <!-- Dynamic parsed content inserted here -->
+          </div>
+
+          <!-- Official Document Footer -->
+          <div class="doc-sheet-footer">
+            <div class="footer-left">
+              QT Analytics Desk • Stephen Fitzpatrick, Lead Investigator &amp; Founder
+            </div>
+            <div style="text-align: right;">
+              https://qtanalytics.co.uk • stephen@qtanalytics.co.uk • Page 1 of 1
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Stephen's 30-Second Phone Pitch Banner -->
   <div style="background: linear-gradient(90deg, rgba(16, 185, 129, 0.12), rgba(2, 132, 199, 0.12)); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 10px; padding: 16px 20px; margin-bottom: 20px;">
@@ -739,6 +1206,7 @@ function init() {
   save();
   renderTable();
   updateKPIs();
+  initDocCreator();
 }
 
 function save() {
@@ -1096,6 +1564,318 @@ function resetToDefaults() {
 
 function openReportSamples() {
   alert("Sample Report PDFs have been generated in your downloads folder:\n\n1. downloads/QT_Analytics_Sample_Report_49_Uniswap_Drainer.pdf\n2. downloads/QT_Analytics_Sample_Report_149_Tether_Freeze.pdf\n\nAttach these to your cold emails!");
+}
+
+/* ============================================================
+   QT ANALYTICS BRANDED DOCUMENT CREATOR & PDF CONVERTER
+   ============================================================ */
+
+const DEFAULT_ADVISORY_TEXT = `From: Stephen Fitzpatrick, Lead Investigator & Founder, QT Analytics (Edinburgh, Scotland)
+Contact: 07538162246 (+44 7538 162246) | stephen@qtanalytics.co.uk | https://qtanalytics.co.uk
+
+Dear IT Director, Managing Partner, & Technical Infrastructure Lead,
+
+I am writing with an immediate security advisory regarding the active global Remote Code Execution (RCE) vulnerability known as PHP2Shell (CVE-2026-109618 / CVE-2026-109619, CVSS 9.2).
+
+Across the UK and Europe, public agencies and commercial businesses are mistakenly taking critical web portals, e-commerce stores, and booking engines completely offline out of panic.
+
+AT QT ANALYTICS, OUR CIVIC ETHOS IS SIMPLE: THIS IS NOT FOR RANSOM. EMERGENCY DEFENSE MUST BE ACCESSIBLE TO ALL.
+
+You do NOT need to take your customer portals or payment gateways offline. Our intelligence desk has open-sourced an immediate, zero-downtime edge defense that neutralizes this attack vector in under 60 seconds without altering your application code.
+
+----------------------------------------------------------------------
+1. THE THREAT IN PLAIN ENGLISH (10-MINUTE DISCOVERY)
+----------------------------------------------------------------------
+PHP2Shell exploits an asynchronous temporal desynchronization inside PHP's legacy upload progress tracker (session.upload_progress).
+
+Think of your web server like a restaurant kitchen. The attacker doesn't try to kick in the front door or guess passwords. Instead, they hand your waiter a massive menu order, wait until the kitchen writes it on a scratch chalkboard, pause the communication for exactly one second, and then shout an impossible burst of new instructions. The kitchen gets confused, leaves stale memory on the counter, and mistakenly executes the attacker's script as if it were trusted system code.
+
+Because this memory flaw triggers BEFORE your WordPress, Magento, Laravel, or custom business application even starts executing, typical application-level firewalls and login protections are bypassed completely.
+
+----------------------------------------------------------------------
+2. THE 60-SECOND ZERO-DOWNTIME FIX (100% FREE & OPEN SOURCE)
+----------------------------------------------------------------------
+Because the exploit relies entirely on PHP's optional upload progress tracking feature, dropping this parameter at your reverse proxy (or turning it off in php.ini) renders the exploit 100% inert with ZERO impact on legitimate file uploads.
+
+We have published the complete, verified toolkit to GitHub under the permissive MIT Open License:
+
+• Full GitHub Toolkit Directory:
+https://github.com/flynnsmc-lgtm/qt-analytics-core/tree/main/downloads/t_shield
+
+• 1. The Crystal Sister (Nginx Edge Shield - Drops attack at the perimeter):
+https://github.com/flynnsmc-lgtm/qt-analytics-core/blob/main/downloads/t_shield/block_php2shell.conf
+SHA-256: ac9d45c5c6a26f34078726c890fa90b5541c85a5812b4774d446c604bee12ad2
+
+• 2. Global php.ini Hardening Killswitch (Instantly disables vulnerable handler):
+https://github.com/flynnsmc-lgtm/qt-analytics-core/blob/main/downloads/t_shield/disable_upload_progress.ini
+SHA-256: c0aba8f5166540a0f3f6117fec2e5188c224e4fbbbfe8d0caaf54927402c5617
+
+• 3. Linux / macOS Fleet Audit Scanner (Automated inspection script):
+https://github.com/flynnsmc-lgtm/qt-analytics-core/blob/main/downloads/t_shield/audit_server.sh
+SHA-256: 596b0c42425dbd284e874af880743ad6e729be9eacf1374241ffe518dc9ff614
+
+• 4. Windows Server PowerShell Audit Scanner:
+https://github.com/flynnsmc-lgtm/qt-analytics-core/blob/main/downloads/t_shield/audit_server.ps1
+SHA-256: 501f69f19543a45826884274b3f8333fb92d3d5370fabb41faa3f07a6fd3eee9
+
+• 5. Technical Documentation & Deployment Guide:
+https://github.com/flynnsmc-lgtm/qt-analytics-core/blob/main/downloads/t_shield/README.md
+
+----------------------------------------------------------------------
+3. FREE EMERGENCY TRIAGE VS. ONGOING 24/7 SURVEILLANCE
+----------------------------------------------------------------------
+• FREE EMERGENCY TOOLKIT: Download, audit, and deploy the scripts above across your servers immediately at zero cost.
+• ASSISTED EMERGENCY TRIAGE FUTURES (£49 - £499): If your internal team needs our forensic engineers to remotely audit your fleet, verify hash integrity, or harden EOL PHP 7.x/8.x legacy servers.
+• 24/7 VELOCITY SENTRY & FRAUD INTERCEPT (£499 - £2,500/mo): Continuous sovereign monitoring of high-frequency attack vectors, automated mempool tracking, and UK CPR Part 25 asset freezing protection.
+
+----------------------------------------------------------------------
+4. EMERGENCY DESK ASSISTANCE & DIRECT CONTACT
+----------------------------------------------------------------------
+Best regards,
+Stephen
+
+If your systems are exhibiting anomalous memory load, unusual upload traffic spikes, or if you require immediate technical confirmation:
+
+Stephen Fitzpatrick
+Lead Investigator & Founder, QT Analytics
+Direct Mobile: 07538162246 (+44 7538 162246)
+Email: stephen@qtanalytics.co.uk
+Web: https://qtanalytics.co.uk
+Emergency Observatory Portal: https://qtanalytics.co.uk/t_shield_emergency.html`;
+
+function initDocCreator() {
+  const textarea = document.getElementById('docInputText');
+  if (textarea && !textarea.value.trim()) {
+    textarea.value = DEFAULT_ADVISORY_TEXT;
+  }
+  renderDocPreview();
+}
+
+function toggleDocCreator(forceOpen) {
+  const panel = document.getElementById('docCreatorStudio');
+  if (!panel) return;
+  const isCurrentlyOpen = panel.classList.contains('active');
+  const shouldOpen = forceOpen !== undefined ? forceOpen : !isCurrentlyOpen;
+  
+  if (shouldOpen) {
+    panel.classList.add('active');
+    const textarea = document.getElementById('docInputText');
+    if (textarea && !textarea.value.trim()) {
+      textarea.value = DEFAULT_ADVISORY_TEXT;
+    }
+    renderDocPreview();
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+    panel.classList.remove('active');
+  }
+}
+
+function renderDocPreview() {
+  const title = (document.getElementById('docTitleInput') && document.getElementById('docTitleInput').value) || 'QT Analytics Official Notice';
+  const ref = (document.getElementById('docRefInput') && document.getElementById('docRefInput').value) || 'QT-ADV-2026';
+  const docClass = (document.getElementById('docClassInput') && document.getElementById('docClassInput').value) || 'OFFICIAL / CIVIC DEFENSE ADVISORY';
+  const dateStr = (document.getElementById('docDateInput') && document.getElementById('docDateInput').value) || new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  const phone = (document.getElementById('docPhoneInput') && document.getElementById('docPhoneInput').value) || '+44 7538 162246';
+  const rawText = (document.getElementById('docInputText') && document.getElementById('docInputText').value) || '';
+
+  // Update Header Badges
+  const titleEl = document.getElementById('previewDocTitle');
+  const refEl = document.getElementById('previewRefId');
+  const classEl = document.getElementById('previewClassification');
+  const dateEl = document.getElementById('previewDate');
+  const phoneEl = document.getElementById('previewPhone');
+
+  if (titleEl) titleEl.textContent = title;
+  if (refEl) refEl.textContent = 'REF: ' + ref;
+  if (classEl) classEl.textContent = docClass;
+  if (dateEl) dateEl.textContent = 'Date: ' + dateStr;
+  if (phoneEl) phoneEl.textContent = 'Direct: ' + phone;
+
+  // Counter
+  const countEl = document.getElementById('charWordCount');
+  if (countEl) {
+    const words = rawText.trim() ? rawText.trim().split(/\s+/).length : 0;
+    countEl.textContent = `${words} words • ${rawText.length} characters`;
+  }
+
+  // Parse Body
+  const bodyEl = document.getElementById('previewDocBody');
+  if (bodyEl) {
+    bodyEl.innerHTML = parseDocTextToHTML(rawText);
+  }
+}
+
+function escapeHtml(str) {
+  return str.replace(/[&<>'"]/g, tag => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    "'": '&#39;',
+    '"': '&quot;'
+  }[tag] || tag));
+}
+
+function parseDocTextToHTML(rawText) {
+  if (!rawText) return '<p style="color:#94a3b8; font-style:italic;">No content entered.</p>';
+  
+  // 1. Math block handler (KaTeX)
+  function renderLatex(mathCode, isBlock) {
+    if (window.katex) {
+      try {
+        return window.katex.renderToString(mathCode, {
+          displayMode: isBlock,
+          throwOnError: false
+        });
+      } catch (e) {
+        return `<span style="font-style: italic; color: #1e3a8a;">${escapeHtml(mathCode)}</span>`;
+      }
+    }
+    return `<code style="font-style: italic; color: #1e3a8a;">${escapeHtml(mathCode)}</code>`;
+  }
+
+  // Pre-process math placeholders to protect them from regex splitting
+  const mathPlaceholders = [];
+  let processed = rawText.replace(/\$\$([^$]+)\$\$/g, (m, code) => {
+    const key = `@@MATH_BLOCK_${mathPlaceholders.length}@@`;
+    mathPlaceholders.push({ key, html: `<div style="margin: 12px 0; text-align: center;">${renderLatex(code, true)}</div>` });
+    return key;
+  });
+
+  processed = processed.replace(/\$([^$\n]+)\$/g, (m, code) => {
+    const key = `@@MATH_INLINE_${mathPlaceholders.length}@@`;
+    mathPlaceholders.push({ key, html: renderLatex(code, false) });
+    return key;
+  });
+
+  const lines = processed.split(/\r?\n/);
+  let html = '';
+  let inList = false;
+
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i].trim();
+
+    // Dividers
+    if (/^[-=_]{4,}$/.test(line)) {
+      if (inList) { html += '</ul>'; inList = false; }
+      html += '<hr>';
+      continue;
+    }
+
+    // Civic Ethos Highlight
+    if (line.includes('AT QT ANALYTICS, OUR CIVIC ETHOS IS SIMPLE')) {
+      if (inList) { html += '</ul>'; inList = false; }
+      html += `<div class="doc-callout-banner">${escapeHtml(line)}</div>`;
+      continue;
+    }
+
+    // Numbered or Markdown Headings
+    const isHeading = /^(\d+\.\s+[A-Z0-9\s\(\)\-\&]+|#+\s+.+)$/.test(line);
+    if (isHeading) {
+      if (inList) { html += '</ul>'; inList = false; }
+      const cleanH = line.replace(/^#+\s*/, '');
+      html += `<h3>${escapeHtml(cleanH)}</h3>`;
+      continue;
+    }
+
+    // SHA-256 lines
+    const shaMatch = line.match(/^SHA-256:\s*([a-fA-F0-9]{64})/i);
+    if (shaMatch) {
+      if (inList) { html += '</ul>'; inList = false; }
+      html += `<div class="doc-code-block"><strong style="color: #0f172a;">SHA-256:</strong> <span class="doc-sha-badge">${shaMatch[1]}</span></div>`;
+      continue;
+    }
+
+    // Bullets
+    if (/^[•\-\*]\s+/.test(line)) {
+      if (!inList) { html += '<ul class="doc-bullet-list">'; inList = true; }
+      let bulletContent = line.replace(/^[•\-\*]\s+/, '');
+      bulletContent = formatInlineContent(bulletContent);
+      html += `<li>${bulletContent}</li>`;
+      continue;
+    }
+
+    // Close list if non-bullet line
+    if (inList) {
+      html += '</ul>';
+      inList = false;
+    }
+
+    if (!line) {
+      continue; // empty spacing
+    }
+
+    // Regular paragraph
+    html += `<p>${formatInlineContent(line)}</p>`;
+  }
+
+  if (inList) {
+    html += '</ul>';
+  }
+
+  // Restore math placeholders
+  mathPlaceholders.forEach(item => {
+    html = html.replace(item.key, item.html);
+  });
+
+  return html;
+}
+
+function formatInlineContent(str) {
+  // URLs to clickable links
+  str = str.replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" class="doc-link">$1</a>');
+  // Bold **text**
+  str = str.replace(/\*\*([^*]+)\*\*/g, '<strong style="color: #0f172a;">$1</strong>');
+  return str;
+}
+
+function convertDocToPDF() {
+  const element = document.getElementById('letterheadPrintArea');
+  if (!element) return;
+  const docTitle = (document.getElementById('docTitleInput') && document.getElementById('docTitleInput').value) || 'QT_Analytics_Document';
+  const cleanFilename = docTitle.replace(/[^a-zA-Z0-9_\-]/g, '_').substring(0, 50) + '.pdf';
+
+  showToast("Synthesizing official PDF... Please wait a moment.");
+
+  if (typeof html2pdf !== 'undefined') {
+    const opt = {
+      margin: [10, 10, 10, 10],
+      filename: cleanFilename,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true, logging: false },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+
+    html2pdf().set(opt).from(element).save().then(() => {
+      showToast("✅ PDF successfully downloaded: " + cleanFilename);
+    }).catch(err => {
+      console.warn("html2pdf encountered an error, falling back to window.print():", err);
+      window.print();
+    });
+  } else {
+    window.print();
+  }
+}
+
+function printDocument() {
+  window.print();
+}
+
+function copyDocText() {
+  const textarea = document.getElementById('docInputText');
+  if (textarea) {
+    copyText(textarea.value, "Document text copied to clipboard!");
+  }
+}
+
+function resetDocText() {
+  if (confirm("Reset document to default PHP2Shell Emergency Advisory email?")) {
+    document.getElementById('docInputText').value = DEFAULT_ADVISORY_TEXT;
+    document.getElementById('docTitleInput').value = "SECURITY ADVISORY: PHP2SHELL (CVE-2026-109618 / 109619)";
+    document.getElementById('docRefInput').value = "QT-ADV-2026-PHP2SHELL";
+    document.getElementById('docClassInput').value = "OFFICIAL / CIVIC DEFENSE ADVISORY";
+    renderDocPreview();
+    showToast("Advisory text reset to default.");
+  }
 }
 
 window.onload = init;

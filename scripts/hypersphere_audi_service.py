@@ -1503,6 +1503,36 @@ class HypersphereAudiHandler(SimpleHTTPRequestHandler):
                 self.wfile.flush()
                 return
 
+        # Static Assets (Images, Logos, Brand Assets)
+        if path.startswith('/assets/'):
+            asset_subpath = path.lstrip('/')
+            local_asset_path = os.path.join(BASE_DIR, asset_subpath.replace('/', os.sep))
+            if os.path.exists(local_asset_path) and os.path.isfile(local_asset_path):
+                content_type = 'application/octet-stream'
+                lower_p = local_asset_path.lower()
+                if lower_p.endswith('.jpg') or lower_p.endswith('.jpeg'):
+                    content_type = 'image/jpeg'
+                elif lower_p.endswith('.png'):
+                    content_type = 'image/png'
+                elif lower_p.endswith('.svg'):
+                    content_type = 'image/svg+xml'
+                elif lower_p.endswith('.webp'):
+                    content_type = 'image/webp'
+                elif lower_p.endswith('.css'):
+                    content_type = 'text/css'
+                elif lower_p.endswith('.js'):
+                    content_type = 'application/javascript'
+                with open(local_asset_path, 'rb') as f:
+                    data = f.read()
+                self.send_response(200)
+                self.send_header('Content-Type', content_type)
+                self.send_header('Content-Length', str(len(data)))
+                self.send_header('Cache-Control', 'public, max-age=86400')
+                self.end_headers()
+                self.wfile.write(data)
+                self.wfile.flush()
+                return
+
         # 0a. Physics Sanctuary & 21-Pillar Unified Master Framework Endpoints
         if path in ['/sanctuary', '/unification', '/21-pillars', '/sanctuary.html']:
             self.serve_sanctuary_page()
