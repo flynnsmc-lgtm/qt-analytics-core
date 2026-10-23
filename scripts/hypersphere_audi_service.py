@@ -1489,6 +1489,20 @@ class HypersphereAudiHandler(SimpleHTTPRequestHandler):
             self.serve_qt_analytics_page()
             return
 
+        if path in ['/crm', '/tracker', '/sales', '/crm_sales_tracker', '/crm_sales_tracker.html']:
+            crm_path = os.path.join(BASE_DIR, "crm_sales_tracker.html")
+            if os.path.exists(crm_path):
+                with open(crm_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                data = content.encode('utf-8')
+                self.send_response(200)
+                self.send_header('Content-Type', 'text/html; charset=utf-8')
+                self.send_header('Content-Length', str(len(data)))
+                self.end_headers()
+                self.wfile.write(data)
+                self.wfile.flush()
+                return
+
         # 0a. Physics Sanctuary & 21-Pillar Unified Master Framework Endpoints
         if path in ['/sanctuary', '/unification', '/21-pillars', '/sanctuary.html']:
             self.serve_sanctuary_page()

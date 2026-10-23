@@ -38,6 +38,8 @@ class LivePortalHandler(SimpleHTTPRequestHandler):
             self.path = '/t_shield_emergency.html'
         elif clean_path in ('/qt', '/qtanalytics', '/qt-analytics'):
             self.path = '/qt_analytics.html'
+        elif clean_path in ('/crm', '/tracker', '/sales'):
+            self.path = '/crm_sales_tracker.html'
         super().do_GET()
 
     def do_POST(self):
